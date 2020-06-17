@@ -5,10 +5,11 @@ const mongoose = require('mongoose');
 // DB config
 const db = require('./config/keys').mongoURI;
 
+
 // connect to MongoDb
 mongoose.connect(db)
-  .then(() => console.log('MongoDb connected.'))
-  .catch(err => console.log(err));
+.then(() => console.log('MongoDb connected.'))
+.catch(err => console.log(err));
 
 // Homepage route
 app.get('/', (req, res) => res.send('Aperture'));

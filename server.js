@@ -1,17 +1,16 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+const users = require('./routes/user.route');
+const bodyparser = require('body-parser');
+const port = require('./config/keys').port;
 
-// DB config
-const db = require('./config/keys').mongoURI;
-
-// connect to MongoDb
-mongoose.connect(db)
-  .then(() => console.log('MongoDb connected.'))
-  .catch(err => console.log(err));
+require('./config/database');
+app.use(bodyparser.urlencoded({extended : false}));
+app.use(bodyparser.json());
 
 // Homepage route
 app.get('/', (req, res) => res.send('Aperture'));
 
-const port = 7500;
-app.listen(port, () => console.log(`Server is running on port ${port}.`));
+app.listen(port, () => console.log(`Server has started on http://localhost:${port}`));
+
+app.use('/api/users' , users);

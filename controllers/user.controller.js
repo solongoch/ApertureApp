@@ -5,7 +5,6 @@ module.exports = {
   register: (req, res) => {
     User.findOne({ email: req.body.email })
       .then((user) => {
-        console.log("Chk DB");
         processRequest(user, req, res)
       })
       .catch((err) => {
@@ -33,8 +32,7 @@ module.exports = {
 
 function processRequest(user, req, res) {
   if (user) {
-    console.log("processRequest1");
-    return res.status(400)
+      return res.status(400)
       .json({ Success: false, Message: "Registered Email already exists" });
   }
   createUser(req, res);

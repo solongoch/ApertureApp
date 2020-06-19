@@ -26,10 +26,6 @@ function processRequest(user, req, res) {
     return res.status(400)
       .json({ Success: false, Message: "Registered Email already exists" });
   }
-  createUser(req, res);
-}
-
-function createUser(req, res) {
   const avatar = gravatar.url(req.body.email,
     {
       s: '100', r: 'pg', d: 'mm', protocol: 'http'
@@ -42,19 +38,14 @@ function createUser(req, res) {
     mobile: req.body.mobile,
     avatar
   });
-  saveUserDocument(newUser, res);
-}
-
-//saves user document  to mongoDB
-function saveUserDocument(newUser, res) {
-
-  //Generte salt
-  bcrypt.genSalt(10, (err, salt) => {
+   //Generte salt
+   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
     //generating hash
     bcrypt.hash(newUser.password, salt, (err, hash) => {
       if (err) throw err;
       newUser.password = hash;
+      //save the document in MongoDB
       newUser.save()
         .then((user) => {
           res.json({ success: true, user: user, message: 'User Successfullu Registered!' });
@@ -66,7 +57,6 @@ function saveUserDocument(newUser, res) {
     });
   });
 }
-
 
 // @route   POST http://localhost:7500/api/users/login
 // @desc    Login User

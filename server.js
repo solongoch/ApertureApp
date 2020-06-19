@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-const users = require('./routes/api/users')
-const profile = require('./routes/api/profile')
-const posts = require('./routes/api/posts')
+const users = require('./routes/api/users');
+const profile = require('./routes/api/profile');
+const posts = require('./routes/api/posts');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 

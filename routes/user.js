@@ -12,7 +12,40 @@ const passport = require('passport');
 router.post('/register', (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
-      processRequest(user, req, res)
+      if (user) {
+        return res.status(400)
+          .json({ Success: false, Message: "Registered Email already exists" });
+      }
+      const avatar = gravatar.url(req.body.email,
+        {
+          s: '100', r: 'pg', d: 'mm', protocol: 'http'
+        });
+      const newUser = new User({
+        name: req.body.name,
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        mobile: req.body.mobile,
+        avatar
+      });
+       //Generte salt
+       bcrypt.genSalt(10, (err, salt) => {
+        if (err) throw err;
+        //generating hash
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          //save the document in MongoDB
+          newUser.save()
+            .then((user) => {
+              res.json({ success: true, user: user, message: 'User Successfullu Registered!' });
+            })
+            .catch(err => {
+              res.status(500).send(
+                { message: err.message || "Some error occurred while creating the User." });
+            });
+        });
+      });
     })
     .catch((err) => {
       res.status(500).json({
@@ -20,43 +53,6 @@ router.post('/register', (req, res) => {
       })
     });
 });
-
-function processRequest(user, req, res) {
-  if (user) {
-    return res.status(400)
-      .json({ Success: false, Message: "Registered Email already exists" });
-  }
-  const avatar = gravatar.url(req.body.email,
-    {
-      s: '100', r: 'pg', d: 'mm', protocol: 'http'
-    });
-  const newUser = new User({
-    name: req.body.name,
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-    mobile: req.body.mobile,
-    avatar
-  });
-   //Generte salt
-   bcrypt.genSalt(10, (err, salt) => {
-    if (err) throw err;
-    //generating hash
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if (err) throw err;
-      newUser.password = hash;
-      //save the document in MongoDB
-      newUser.save()
-        .then((user) => {
-          res.json({ success: true, user: user, message: 'User Successfullu Registered!' });
-        })
-        .catch(err => {
-          res.status(500).send(
-            { message: err.message || "Some error occurred while creating the User." });
-        });
-    });
-  });
-}
 
 // @route   POST http://localhost:7500/api/users/login
 // @desc    Login User

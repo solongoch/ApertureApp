@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const users = require('./routes/user');
+const users = require('./routes/api/user');
 const bodyparser = require('body-parser');
 const port = require('./config/keys').port;
 const passport = require('passport');

@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const User = require('../models/User');
+const User = require('../../models/User');
 const gravatar = require('gravatar');//import gravatar
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const keys = require('../config/keys').secretOrKey;
+const keys = require('../../config/keys').secretOrKey;
 const passport = require('passport');
 
 // @route   POST  http://localhost:7500/api/users/register

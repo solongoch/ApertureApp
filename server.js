@@ -5,10 +5,19 @@ const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
+const passport = require('passport');
 
 // Body parser configuration
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
+
+//Body parser configuration
+app.use(bodyparser.urlencoded({extended: false}));
+app.use(bodyparser.json());
+
+//Passport configuration
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 // DB config
 const db = require('./config/keys').mongoURI;
@@ -21,6 +30,11 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 // Routes
 app.get('/', (req, res) => res.send('Aperture')); // homepage
 app.use('/api/users', users); 
+app.use('/api/profile', profile);
+app.use('/api/posts', posts);
+
+//Use routes
+app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 

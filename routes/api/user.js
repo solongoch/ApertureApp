@@ -16,7 +16,7 @@ router.post('/register', (req, res) => {
         return res.status(400).json(
           { 
             success: false, 
-            Message: "Registered Email already exists" 
+            message: "Registered Email already exists" 
           });
       }
       const avatar = gravatar.url(req.body.email,

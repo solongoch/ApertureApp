@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
+
+//connection String
 const conStr = require('./keys').mongoURI;
 
+//connect mongoDB
 const db = mongoose.connect(conStr, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(() => { console.log("Successfully connected to the database"); })
   .catch((err) => {

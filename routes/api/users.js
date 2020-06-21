@@ -107,7 +107,7 @@ router.post('/login', (req, res) => {
 });
 
 // @route   Get http://localhost:7500/api/users/current
-// @desc    Return c  urrent user
+// @desc    Return current user
 // @access  Private
 
 router.get('/current',

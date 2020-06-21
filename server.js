@@ -2,7 +2,7 @@ const express = require('express');
 // Create the Express application
 const app = express();
 
-const users = require('./routes/api/user');
+const users = require('./routes/api/users');
 const bodyparser = require('body-parser');
 const port = require('./config/keys').port;
 const passport = require('passport');

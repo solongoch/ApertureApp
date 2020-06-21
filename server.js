@@ -2,7 +2,9 @@ const express = require('express');
 // Create the Express application
 const app = express();
 
-const users = require('./routes/api/user');
+const users = require('./routes/api/users');
+const profile = require('./routes/api/profile');
+const posts = require('./routes/api/posts');
 const bodyparser = require('body-parser');
 const port = require('./config/keys').port;
 const passport = require('passport');
@@ -19,11 +21,13 @@ app.use(passport.initialize());
 
 require('./config/passport')(passport);
 
-// Homepage route
-app.get('/', (req, res) => res.send('Aperture'));
+// homepage route
+app.get('/', (req, res) => res.send('Aperture')); 
+
+// Imports all of the routes
+app.use('/api/users', users);
+app.use('/api/profile', profile);
+app.use('/api/posts', posts);
 
 // Server listens on http://localhost:7500
 app.listen(port, () => console.log(`Server has started on http://localhost:${port}`));
-
-// Imports all of the routes
-app.use('/api/users' , users);

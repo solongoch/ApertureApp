@@ -11,12 +11,12 @@ const passport = require('passport');
 // @access  public
 router.post('/register', (req, res) => {
   User.findOne({ email: req.body.email })
-    .then( user => {
-      if(user) {
+    .then(user => {
+      if (user) {
         return res.status(400).json(
-          { 
-            success: false, 
-            message: "Registered Email already exists" 
+          {
+            success: false,
+            message: "Registered Email already exists"
           });
       }
       const avatar = gravatar.url(req.body.email,
@@ -38,27 +38,26 @@ router.post('/register', (req, res) => {
           newUser.password = hash;
           //save the document in MongoDB
           newUser.save()
-            .then( user => {
+            .then(user => {
               res.json({ success: true, user: user, message: 'User Successfully Registered!' });
             })
-            .catch( err => {
+            .catch(err => {
               res.status(500).json(
-                {  
-                  success: false, 
+                {
+                  success: false,
                   message: err.message
                 });
             });
         });
       });
     })
-    .catch( err => {
+    .catch(err => {
       res.status(404).json({
         success: false,
         message: err.message
       })
     });
 });
-
 
 // @route   POST http://localhost:7500/api/users/login
 // @desc    Login User
@@ -67,16 +66,16 @@ router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   User.findOne({ email })
-    .then( user => {
-      if(!user) {
-        return res.status(404).json({ 
-          success: false ,
-          message: "User not found" 
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found"
         });
       }
       bcrypt.compare(password, user.password)
         .then(isMatch => {
-          if(isMatch){
+          if (isMatch) {
             //payload json object
             const payload = {
               id: user.id,
@@ -87,23 +86,26 @@ router.post('/login', (req, res) => {
             //Create or sign Bearer token
             jwt.sign(payload, keys, { expiresIn: 3600 }, (err, token) => {
               if (err) throw err;
-              return res.json({ 
-                success: true, 
+              return res.json({
+                success: true,
                 message: 'Token Created',
-                token: 'Bearer ' + token });
+                token: 'Bearer ' + token
+              });
             });
           }
-          else{
-            return res.status(401).json({ 
-              success: false , message: 'Incorrect Password' });
+          else {
+            return res.status(401).json({
+              success: false, message: 'Incorrect Password'
+            });
           }
         })
         .catch(err => {
-          return res.status(404).json({  
-            success: false , message: err.message });
+          return res.status(404).json({
+            success: false, message: err.message
+          });
         });
     })
-    .catch(err => res.status(404).json({ success: false , message: err.message }));
+    .catch(err => res.status(404).json({ success: false, message: err.message }));
 });
 
 // @route   Get http://localhost:7500/api/users/current
@@ -114,9 +116,8 @@ router.get('/current',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
 
-    return res.json({ success: true , message: 'User Authrozied' })
+    return res.json({ success: true, message: 'User Authrozied' })
 
   });
-
 
 module.exports = router;

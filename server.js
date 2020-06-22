@@ -1,42 +1,34 @@
 const express = require('express');
+// Create the Express application
 const app = express();
+
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
-const mongoose = require('mongoose');
+
 const bodyparser = require('body-parser');
+const port = require('./config/keys').port;
 const passport = require('passport');
 
-// Body parser configuration
-app.use(bodyparser.urlencoded({extended: false}));
+// Configures the database and opens a global connection
+const db = require('./config/database');
+
+// Configure body parser
+app.use(bodyparser.urlencoded({extended : false}));
 app.use(bodyparser.json());
 
-//Body parser configuration
-app.use(bodyparser.urlencoded({extended: false}));
-app.use(bodyparser.json());
-
-//Passport configuration
+//This will initialize the passport object on every request
 app.use(passport.initialize());
+
 require('./config/passport')(passport);
 
-// DB config
-const db = require('./config/keys').mongoURI;
+// homepage route
+app.get('/', (req, res) => res.send('Aperture')); 
 
-// connect to MongoDb
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDb connected.'))
-  .catch(err => console.log(err));
-
-// Routes
-app.get('/', (req, res) => res.send('Aperture')); // homepage
-app.use('/api/users', users); 
-app.use('/api/profile', profile);
-app.use('/api/posts', posts);
-
-//Use routes
+// Imports all of the routes
 app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 
-const port = 7500;
-app.listen(port, () => console.log(`Server is running on port ${port}.`));
+// Server listens on http://localhost:7500
+app.listen(port, () => console.log(`Server has started on http://localhost:${port}`));

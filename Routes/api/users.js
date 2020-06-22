@@ -8,11 +8,22 @@ const user = require('../../models/User');
 const User = require('../../models/User');
 const keys = require('../../config/keys');
 const { session } = require('passport');
+const validateLoginInput = require("../../validation/login");
 
 // @route POST api/users/register
 // @desc Register user
 // @access Public 
 router.post('/register', (req,res) => {
+      //Validation
+  const {errors, isValid} = validateLoginInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const email = req.body.email;
+  const password = req.body.password;
+  
     User.findOne({email: req.body.email})
         .then(user => {
             if (user){

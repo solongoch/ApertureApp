@@ -23,4 +23,5 @@ module.exports = passport =>{
         })
         .catch( err => done(err, null)); //return err
     }));
+
 }

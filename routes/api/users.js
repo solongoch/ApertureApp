@@ -17,6 +17,7 @@ router.post('/register', (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
+
   const avatar = gravatar.url(req.body.email,
     { s: '100', r: 'pg', d: 'mm', protocol: 'http' });
 
@@ -79,7 +80,8 @@ router.post('/login', (req, res) => {
           message: "User not found"
         });
       }
-      bcrypt.compare(password, user.password)
+      bcrypt
+        .compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
             //payload json object
@@ -94,36 +96,40 @@ router.post('/login', (req, res) => {
               if (err) throw err;
               return res.json({
                 success: true,
-                message: 'Token Created',
-                token: 'Bearer ' + token
+                message: "Token Created",
+                token: "Bearer " + token
               });
             });
-          }
-          else {
+          } else {
             return res.status(401).json({
-              success: false, message: 'Incorrect Password'
+              success: false,
+              message: "Incorrect Password"
             });
           }
         })
         .catch(err => {
           return res.status(404).json({
-            success: false, message: err.message
+            success: false,
+            message: err.message
           });
         });
     })
-    .catch(err => res.status(404).json({ success: false, message: err.message }));
+    .catch(err =>
+      res.status(404).json({ success: false, message: err.message })
+    );
 });
 
 // @route   Get http://localhost:7500/api/users/current
 // @desc    Return current user
 // @access  Private
 
-router.get('/current',
-  passport.authenticate('jwt', { session: false }),
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     return res.json({
       success: true,
-      message: 'You are successfully authenticated to this route!',
+      message: 'You are Authorized!',
       user: req.user
     });
   });

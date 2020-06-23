@@ -20,10 +20,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique : true
-  },
-  mobile: {
-    type: Number,
-    required: true
   }, 
   avatar: {
     type: String,

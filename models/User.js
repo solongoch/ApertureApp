@@ -10,6 +10,7 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
+    unique : true,
     lowercase: true
   },
   password: {
@@ -19,12 +20,9 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique : true
+    unique : true,
+    lowercase: true
   },
-  mobile: {
-    type: Number,
-    required: true
-  }, 
   avatar: {
     type: String,
     required: false

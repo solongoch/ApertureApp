@@ -4,6 +4,8 @@ const isEmpty = require("./is-empty");
 module.export = function vaildateLoginInput(data) {
  let errors = {};   
 
+
+//validation 
 if (!validator.isLength(data.username, {min:2, max: 30})) {
     errors.username = "Username must be between 2 and 30 characters";
 }

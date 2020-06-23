@@ -1,54 +1,55 @@
 const validator = require('validator');
-const isEmpty = require('./is-Empty');
+const isEmpty = require('./is-empty');
 
 module.exports = function validateRegisterInput(data) {
+
   let errors = {};
-
-  // validate name
+  //Name validaiton
+  if (!validator.isLength(data.name, { min: 3, max: 30 })) {
+    errors.name = 'Name must be between 3 to 30 characters';
+  }
   if (isEmpty(data.name)) {
-    errors.name = 'Name field is required';
+    errors.name = 'Name is required';
   }
 
-  if (!validator.isLength(data.name, {min: 2, max: 30})) {
-    errors.name = 'Name must be between 2 and 30 characters';
+  //Username validaiton
+  if (!validator.isLength(data.username, { min: 3, max: 30 })) {
+    errors.username = 'Username must be between 3 to 30 characters';
+  }
+  if (isEmpty(data.username)) {
+    errors.username = 'Username is required';
   }
 
-  // validate username
-    if (isEmpty(data.username)) {
-    errors.username = 'Username field is required';
-  }
-  if (!validator.isLength(data.username, {min: 6, max: 30})) {
-    errors.username = 'Username must be between 6 and 30 characters';
-  }
-
-  // validate email
-  if (isEmpty(data.email)) {
-    errors.email = 'Email field is required';
-  }
-
+  //Email validaiton
   if (!validator.isEmail(data.email)) {
-    errors.email = 'This email is invalid';
+    errors.email = 'Invalid email address';
+  }
+  if (isEmpty(data.email)) {
+    errors.email = 'Email is required';
   }
 
-  // validate password
+  //Password Validation
+  if (validator.isAlphanumeric(data.password)) {
+    errors.password = "Password must include at least one characters, numbers and special characters";
+  }
+  if (!validator.isLength(data.password, { min: 6, max: 30 })) {
+    errors.password = 'Password must have at least 6 characters';
+  }
   if (isEmpty(data.password)) {
-    errors.password = 'Password field is required';
+    errors.password = 'Password should not be empty';
   }
 
-  if (!validator.isLength(data.password, {min: 6, max: 30})) {
-    errors.password = 'Password must be between 6 and 30 characters';
+  //Password2 Validation
+  if (!validator.equals(data.password, data.password2)) {
+    errors.password2 = "Password and Confirmation password do not match";
   }
-
   if (isEmpty(data.password2)) {
-    errors.password2 = 'Please confirm your password';
-  }
-
-  if (validator.equals(data.password, data.password2)) {
-    errors.password2 = 'Password must match'
+    errors.password2 = 'Confirm Password should not be empty';
   }
 
   return {
     errors,
     isValid: isEmpty(errors)
-  }
+  };
+
 }

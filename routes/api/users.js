@@ -72,7 +72,7 @@ router.post('/login', (req, res) => {
   const password = req.body.password;
   // find a user based on  username=loginId or email = loginId
   // var criteria = { $or: [{ username: loginId }, { email: loginId }] };
-  User.findOne(email)
+  User.findOne({email})
     .then(user => {
       if (!user) {
         return res.status(404).json({

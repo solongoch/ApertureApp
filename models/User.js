@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// create Schema
+// create User's Schema
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -27,11 +27,20 @@ const UserSchema = new Schema({
     type: String,
     required: false
   },
-  website: { type: String },
-  bio: { type: String },
-  mobile: { type: Number },
-  //enum: This states that the string can only have the value specified in the enum array.
-  gender: { type: String, enum: ['male', 'female', 'other'] },
+  website: { 
+    type: String 
+  },
+  bio: { 
+    type: String 
+  },
+  mobile: { 
+    type: String 
+  },
+  gender: { 
+    type: String, 
+    //enum: This states that the string can only have the value specified in the enum array.
+    enum: ["male", "female", "other"] 
+  },
   date: {
     type: Date,
     default: Date.now

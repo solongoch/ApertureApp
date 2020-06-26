@@ -41,6 +41,10 @@ const UserSchema = new Schema({
     //enum: This states that the string can only have the value specified in the enum array.
     enum: ["male", "female", "other"] 
   },
+  isPublic: {
+    type: Boolean,
+    default: true
+  },
   date: {
     type: Date,
     default: Date.now

@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const Profile = require("../../models/Profile");
+const Follows = require("../../models/Follows");
 const User = require("../../models/User");
 
 // load Validations
-const validateProfileInput = require('../../validation/profile');
+const validateProfileInput = require("../../validation/profile");
 
 // test route
 router.get("/test", (req, res) => res.json({ msg: "Profile works!" }));
@@ -48,6 +48,7 @@ router.post(
 
     // get fields
     const userFields = {};
+    userFields.user = req.user.id;
     userFields.name = req.body.name;
     userFields.username = req.body.username;
     userFields.email = req.body.email;
@@ -55,46 +56,45 @@ router.post(
     if (req.body.bio) userFields.bio = req.body.bio;
     if (req.body.mobile) userFields.mobile = req.body.mobile;
     if (req.body.gender) userFields.gender = req.body.gender;
+    if (req.body.isPublic) userFields.isPublic = req.body.isPublic;
+    console.log(userFields);
 
-    User.findOne({ user: req.user.id })
-      .then((user) => {
+    //const userId = '5ef391e07121fd0428da6c6a';
+    User.findById(req.user.id)
+      .then(user => {
+        User.findOne({ email: userFields.email }).then(email => {
+          if (email) {
+            errors.email = "Email already exists";
+          }
+        });
+        User.findOne({ username: userFields.username }).then(email => {
+          if (username) {
+            errors.username = "Username already exists";
+          }
+        });
         if (user) {
           // update profile
           User.findOneAndUpdate(
-            { user: req.user.id },
+            { email: req.user.email },
             { $set: userFields },
-            { new: true}
-          ).then((user) => res.json(user));
-        } else {
-          // create profile
-          User.findOne({ username: userFields.username})
-            .then((user) => {
-              if (user) {
-                errors.username = 'Username already exists';
-              }
-              // save user
-              new User(userFields)
-                .save()
-                .then((user) => res.json(user));
-            });
+            { new: true }
+          ).then(updatedUser => res.json(updatedUser));
         }
+        // else {
+        //   // create profile
+        //   User.findOne({ username: userFields.username})
+        //     .then((user) => {
+        //       if (user) {
+        //         errors.username = 'Username already exists';
+        //       }
+        //       // save user
+        //       new User(userFields)
+        //         .save()
+        //         .then(( user) => res.json(user));
+        //     });
+        //   }
       })
-      .catch(err => res.status(400).json({err: ''}));
-  }
-);
-
-// @route   DELETE api/profile
-// @desc    Delete user and profile
-// @access  Private
-router.delete(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-      User.findOneAndRemove({ _id: req.user.id }).then(() =>
-        res.json({ success: true })
-      );
-    });
+      .catch(err => res.status(400).json({ err: "findOne method failed" }));
   }
 );
 

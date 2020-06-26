@@ -28,20 +28,17 @@ module.exports = function validateProfileInput(data) {
     errors.email = "Invalid email address";
   }
   // validate website
-  if (isEmpty(data.website)) {
-    errors.website = "Please enter a website url";
+  if (!isEmpty(data.website)) {
+    if (!validator.isURL(data.website)) {
+      errors.website = "Invalid website url";
+    }
   }
 
-  if (!validator.isURL(data.website)) {
-    errors.website = "Invalid website url";
-  }
   // validate phone number
-  if (isEmpty(data.mobile)) {
-    errors.mobile = "Please enter a phone number";
-  }
-
-  if (validator.isMobilePhone(data.mobile)) {
-    errors.mobile = "Invalid phone number";
+  if (!isEmpty(data.mobile)) {
+    if (validator.isMobilePhone(data.mobile)) {
+      errors.mobile = "Invalid phone number";
+    }
   }
 
   // validate gender

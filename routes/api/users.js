@@ -38,7 +38,13 @@ router.post('/register', (req, res) => {
       //save the document in MongoDB
       newUser.save()
         .then(user => {
-          res.json({ success: true, user: user, message: 'User Successfully Registered!' });
+          userDisplay = {
+              name : user.name,
+              username : user.username,
+              email: user.email,
+              avatar : user.avatar
+          }
+          res.json({ success: true, user: userDisplay, message: 'User Successfully Registered!' });
         })
         .catch(err => {
           if (err.message.includes('username_1 dup key:')) {

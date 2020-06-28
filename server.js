@@ -4,6 +4,7 @@ const app = express();
 
 const authRoutes = require('./routes/api/auth');
 const users = require('./routes/api/users');
+const follows = require('./routes/api/follows');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
@@ -29,6 +30,7 @@ app.get('/', (req, res) => res.send('Aperture'));
 // Imports all of the routes
 app.use('/api/users', users);
 app.use('/api', authRoutes)
+app.use('/api', follows)
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 

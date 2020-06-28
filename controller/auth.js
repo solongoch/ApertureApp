@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+const Post = require('../models/Posts');
 //Imported for ChanagePassword Logic
 const changePasswordInput = require('../validation/changepassword');
 const bcrypt = require('bcryptjs');
@@ -26,23 +26,22 @@ module.exports = {
         res.status(500).json({ success: false, message: err.message }));//User check ends here
   },  // changepassword logic ends
   removeAccount: (req, res) => { //removeAccount
-    User.findByIdAndRemove(req.user.id)
-       .then(user => {
-          //TODO: Delete all references
-          if (!user) {
-            return res.status(404).json({ success: false, message: 'User not found' })
-          }
-          return res.json({ success: true, message: 'Account deleted' });
-      })
-      .catch(err =>{
-        return res.status(500).json({ success: false, message: err.message })
-      }
-      );
-  } //removeAccount ends here
-}
+    User.findById(req.user.id, (err, user, next) => {
+      if (err) return next(err.message);
+      //delete Posts comments etc of the user
+      Post.deleteOne({ postedBy: { $in: user.id }}, (err,follow)=>{ 
+        if (err) return next(err.message);
+        //delete User account,follower,following
+        User.deleteOne({ _id: req.user.id }, function (err, row) {
+          if (row) 
+            res.json({ success: true, message: 'Your Account deleted' });
+        });
+      });
+    });
+  }//removeaccount ends
+}//module.exports ends
 
 function validateOldPassword(req, res, user) {
-
   const oldpassInput = req.body.oldpassword; //get old password from req.body
   const newpassword = req.body.newpassword; //get new password from req.body
   const existingDbpass = req.user.password; // get existing password from req.user
@@ -50,7 +49,7 @@ function validateOldPassword(req, res, user) {
   //Check Old password is valid or not 
   bcrypt.compare(oldpassInput, existingDbpass)
     .then(isMatch => {
-      if (isMatch) {
+      if (isMatch) {//If correct old
         hashAndUpdatePassword(newpassword, res, user);
       }
       else { //old password doesnot match
@@ -75,7 +74,7 @@ function hashAndUpdatePassword(newpassword, res, user) {
   //auto-gen a salt and hash
   bcrypt.hash(newpassword, saltRounds, (err, hash) => {
     if (err) throw err;
-    user.password = hash;
+    user.password = hash; //assign new hashed pwd to user 
     //update password in db
     user.save()
       .then(user => {

@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const Follows = require("../../models/Follows");
 const User = require("../../models/User");
 
 // load Validations
@@ -62,16 +61,6 @@ router.post(
     //const userId = '5ef391e07121fd0428da6c6a';
     User.findById(req.user.id)
       .then(user => {
-        User.findOne({ email: userFields.email }).then(email => {
-          if (email) {
-            errors.email = "Email already exists";
-          }
-        });
-        User.findOne({ username: userFields.username }).then(email => {
-          if (username) {
-            errors.username = "Username already exists";
-          }
-        });
         if (user) {
           // update profile
           User.findOneAndUpdate(

@@ -2,7 +2,13 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const Post = require('../../models/Posts');
-const User = require('../../models/User');
+const accessRouteWithOrWithoutToken = require('../../controller/accessRouteWithWithoutToken');
+
+// remove fields from display
+function removeField(displayObject, field) {
+  displayObject = displayObject.toObject();
+  delete displayObject.field;
+}
 
 router.get('/test', (req,res) => res.json({msg: 'Posts works!'}))
 
@@ -19,13 +25,40 @@ router.get("/", (req, res) => {
 // @route   GET api/posts/:id
 // @desc    Get post by id
 // @access  Public
-router.get("/:id", (req, res) => {
-  Post.findById(req.params.id)
-    .then((post) => res.json(post))
-    .catch((err) =>
-      res.status(404).json({ nopostfound: "No post found with that ID" })
-    );
-});
+router.get('/:id', 
+  accessRouteWithOrWithoutToken,
+  (req, res) => {
+    Post.findById(req.params.id)
+    .populate('postedBy', ['_id', 'isPublic', 'followers'])
+      .then((post) => {
+        // if post author's account is public, show post
+        if (post.postedBy.isPublic) {
+          // remove isPublic and followers from display
+          post = post.toObject();
+          delete post.postedBy.isPublic;
+          delete post.postedBy.followers;
+          // show post
+          res.json(post);
+        
+        // @usage   if user who posted this post has public account, anyone who logged in or not can see this post
+        // @access  Private
+        } else if (req.isAuthenticated()) {
+          if(!(post.postedBy.isPublic)) {
+            if (req.user.id || post.postedBy.followers.includes(`\{ user: ${req.user.id} \}`)) {
+              // remove isPublic and followers from display
+              post = post.toObject();
+              delete post.postedBy.isPublic;
+              delete post.postedBy.followers;
+              res.json(post);
+            } else {
+              res.json({msg:'This account is private. Do you want to follow?'});
+            }
+          }
+        } else {
+          res.send('This is a private account!');
+        }
+      })
+  });
 
 // @route   DELETE api/posts/:id
 // @desc    Delete post

@@ -3,8 +3,6 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
 
-// Load Profile Model
-const Profile = require("../../models/Profile");
 // Load User Model
 const User = require("../../models/User");
 // Load Validation
@@ -50,3 +48,5 @@ router.get("/all", (req, res) => {
     })
     .catch((err) => res.status(404).json({ profile: "There are no profiles" }));
 });
+
+module.exports = router;

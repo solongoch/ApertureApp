@@ -6,8 +6,8 @@ module.exports =  function validatePostInput(data) {
 
   const errors ={};
  // validate Caption
-  // if (!validator.isLength(data.caption, { min: 3, max: 300 })) {
-  //   errors.caption = "Caption must be between 3 and 300 characters";
+  // if (!validator.isLength(data.caption, { max: 2200 })) {
+  //   errors.caption = "Caption must be less than 2200 characters";
   // }
   // if(isEmpty(data.caption)){
   //   errors.caption = "Post caption is required"
@@ -21,3 +21,7 @@ module.exports =  function validatePostInput(data) {
     isValid: isEmpty(errors)
   };
 }
+
+
+
+

@@ -8,11 +8,11 @@ const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithW
 
 router.get("/test", (req, res) => res.json({ msg: "Posts works!" }));
 
-// @route   Post api/posts/:postId/likes
+// @route   Post api/posts/create
 // @desc    Create Post 
 // @input   Postid from request params
 // @access  Private
-router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
   // Check Validation
   const { errors, isValid } = validatePostInput(req.body);
   if (!isValid) {
@@ -70,20 +70,22 @@ router.put('/:postId', passport.authenticate('jwt', { session: false }), (req, r
 
 // @route   GET api/posts
 // @desc    Get posts
-// @access  Public
-router.get("/", (req, res) => {
-  Post.find()
-    .sort({ date: -1 })
-    .then(posts => res.json(posts))
-    .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
+// @access  Private
+router.get("/", 
+  passport.authenticate("jwt", { session: false }), 
+  (req, res) => {
+    Post.find()
+      .sort({ date: -1 })
+      .then(posts => res.json(posts))
+      .catch(err => res.status(404).json({ nopostsfound: "No post found" }));
 });
 
 // @route   GET api/posts/:id
 // @desc    Get post by id
-// @access  Public
+// @access  Public and Private
 router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
   Post.findById(req.params.id)
-    .populate("postedBy", ["_id", "isPublic", "followers"])
+    .populate("postedBy", ["_id", 'name', "isPublic", "followers"])
     .then(post => {
       // if post author's account is public, show post
       if (post.postedBy.isPublic) {
@@ -97,20 +99,23 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
 
       // @usage   if user who posted this post has public account, anyone who logged in or not can see this post
       // @access  Private
-      } else if (req.isAuthenticated()) {
-        if (!post.postedBy.isPublic) {
-          if (post.postedBy.followers.includes(`\{ user: ${req.user.id} \}`)) {
+      } else if (req.isAuthenticated()) { // user logged in
+        if (!post.postedBy.isPublic) { // private account
+          // req.user is following postedBy OR
+          if (post.postedBy.followers.includes(`\{ user: ${req.user.id} \}`) || 
+          // req.user is postedBy (user's own post)
+          (post.postedBy._id == req.user.id)) {
             // remove isPublic and followers from display
             post = post.toObject();
             delete post.postedBy.isPublic;
             delete post.postedBy.followers;
             res.json(post);
-          } else {
+          } else { // req.user is not following OR not own post
             res.json({ msg: "This account is private. Do you want to follow?" });
           }
         }
-      } else {
-        res.send("This is a private account!");
+      } else { // accessing post from private account and user not logged in
+        res.send("This is a private account! Please log in.");
       }
     });
 });
@@ -122,17 +127,17 @@ router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    User.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
-          // Check for post owner
-          if (post.user.toString() !== req.user.id) {
+          // check for post owner
+          if (post.postedBy.toString() !== req.user.id) {
             return res
               .status(401)
               .json({ notauthorized: "User not authorized" });
           }
 
-          // Delete
+          // delete ':id' post
           post.remove().then(() => res.json({ success: true }));
         })
         .catch(err => res.status(404).json({ postnotfound: "No post found" }));

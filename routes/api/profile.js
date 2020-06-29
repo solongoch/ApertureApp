@@ -48,17 +48,15 @@ router.post(
     // get fields
     const userFields = {};
     userFields.user = req.user.id;
-    userFields.name = req.body.name;
-    userFields.username = req.body.username;
-    userFields.email = req.body.email;
+    if (req.body.name) userFields.name = req.body.name;
+    if (req.body.username) userFields.username = req.body.username;
+    if (req.body.email) userFields.email = req.body.email;
     if (req.body.website) userFields.website = req.body.website;
     if (req.body.bio) userFields.bio = req.body.bio;
     if (req.body.mobile) userFields.mobile = req.body.mobile;
     if (req.body.gender) userFields.gender = req.body.gender;
     if (req.body.isPublic) userFields.isPublic = req.body.isPublic;
-    console.log(userFields);
 
-    //const userId = '5ef391e07121fd0428da6c6a';
     User.findById(req.user.id)
       .then(user => {
         if (user) {

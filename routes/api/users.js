@@ -66,7 +66,7 @@ router.post('/signup', (req, res) => {
 
 // @route   POST http://localhost:7500/api/users/login
 // @desc    Login User
-//@input    Username or email and password
+// @input   Username or email and password
 // @access  public
 router.post('/login', (req, res) => {
 

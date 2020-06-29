@@ -5,12 +5,13 @@ module.exports = function validateRegisterInput(data) {
 
   let errors = {};
   //Name validaiton
-  if (!validator.isLength(data.name, { min: 2, max: 30 })) {
-    errors.name = 'Name must be between 2 to 30 characters';
+  if (!validator.isLength(data.name, { min: 3, max: 30 })) {
+    errors.name = 'Name must be between 3 to 30 characters';
   }
   if (isEmpty(data.name)) {
     errors.name = 'Name is required';
   }
+  console.log(data.password);
 
   //Username validaiton
   if (!validator.isLength(data.username, { min: 3, max: 30 })) {

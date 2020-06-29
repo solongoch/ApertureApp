@@ -3,30 +3,30 @@ const isEmpty = require("./is-empty");
 
 module.exports = function validateProfileInput(data) {
   let errors = {};
-  // validate name
-  if (isEmpty(data.name)) {
-    errors.name = "Please enter your name";
-  }
 
-  if (!validator.isLength(data.name, { min: 2, max: 30 })) {
-    errors.name = "Name must be between 2 and 30 characters";
+  // validate name
+  if (!validator.isLength(data.name, { min: 3, max: 30 })) {
+    errors.name = "Name must be between 3 and 30 characters";
+  }
+  if (isEmpty(data.name)) {
+    errors.name = "Name should not be empty";
   }
   // validate username
+  if (!validator.isLength(data.username, { min: 3, max: 30 })) {
+    errors.username = "Username must be between 3 and 30 characters";
+  }
   if (isEmpty(data.username)) {
-    errors.username = "Please enter your name";
+    errors.username = "Username should not be empty";
   }
 
-  if (!validator.isLength(data.name, { min: 2, max: 30 })) {
-    errors.name = "Username must be between 2 and 30 characters";
-  }
   // validate email
+  if (!validator.isEmail(data.email)) {
+    errors.email = "Invalid email address";
+  }
   if (isEmpty(data.email)) {
     errors.email = "Email is required";
   }
 
-  if (!validator.isEmail(data.email)) {
-    errors.email = "Invalid email address";
-  }
   // validate website
   if (!isEmpty(data.website)) {
     if (!validator.isURL(data.website)) {
@@ -42,7 +42,7 @@ module.exports = function validateProfileInput(data) {
   }
 
   // validate gender
-  if (!validator.equals(data.gender, 'male' || 'female' || 'other')) {
+  if (!validator.equals(data.gender, "male" || "female" || "other")) {
     errors.gender = "Invalid gender value";
   }
 

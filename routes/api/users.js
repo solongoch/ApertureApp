@@ -7,10 +7,11 @@ const keys = require('../../config/keys').secretOrKey;
 const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
-// @route   POST  http://localhost:7500/api/users/register
+// @route   POST  http://localhost:7500/api/users/signup
 // @desc    Register User
+// @input   Name,Username, email, password from request body
 // @access  public
-router.post('/register', (req, res) => {
+router.post('/signup', (req, res) => {
 
   //Validations
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -47,10 +48,10 @@ router.post('/register', (req, res) => {
           res.json({ success: true, user: userDisplay, message: 'User Successfully Registered!' });
         })
         .catch(err => {
-          if (err.message.includes('username_1 dup key:')) {
+          if (err.message.includes('username_1 dup key:')) {//duplicate username
             err.message = "Username already exist"
           }
-          else if (err.message.includes('email_1 dup key:')) {
+          else if (err.message.includes('email_1 dup key:')) { //dupicate email id
             err.message = "Email already exists"
           }
           res.status(409).json(
@@ -65,6 +66,7 @@ router.post('/register', (req, res) => {
 
 // @route   POST http://localhost:7500/api/users/login
 // @desc    Login User
+//@input    Username or email and password
 // @access  public
 router.post('/login', (req, res) => {
 
@@ -74,11 +76,11 @@ router.post('/login', (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
+  const loginId = req.body.loginId.toLowerCase();
   const password = req.body.password;
   // find a user based on  username=loginId or email = loginId
-  // var criteria = { $or: [{ username: loginId }, { email: loginId }] };
-  User.findOne({email})
+  var criteria = { $or: [{ username: loginId }, { email: loginId }] };
+  User.findOne(criteria)
     .then(user => {
       if (!user) {
         return res.status(404).json({

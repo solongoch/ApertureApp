@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// create Schema
+// create User's Schema
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -34,23 +34,23 @@ const UserSchema = new Schema({
     type: String 
   },
   mobile: { 
-    type: Number 
+    type: String
   },
   gender: { 
     type: String, 
     //enum: This states that the string can only have the value specified in the enum array.
-    enum: ['male', 'female', 'other'] 
-  },
-  date: {
-    type: Date,
-    default: Date.now
+    enum: ["male", "female", "other"] 
   },
   isPublic: {
     type: Boolean,
     default: true
   },
-  followers: [{user: { type: Schema.Types.ObjectId, ref: 'users' } }],
-  following: [{user: { type: Schema.Types.ObjectId, ref: 'users' } }],
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  followers: [{ user: {type: Schema.Types.ObjectId, ref: 'users' }}],
+  following: [{ user: {type: Schema.Types.ObjectId, ref: 'users' }}]
 });
 
 module.exports = User = mongoose.model('users', UserSchema);

@@ -56,3 +56,5 @@ router.put('unfollow/:userId' ,passport.authenticate('jwt', {session: false} ), 
           return res.status(500).json({success:false , message: err.message});
         });
 }); 
+
+module.exports =router;

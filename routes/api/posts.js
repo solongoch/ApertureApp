@@ -30,9 +30,7 @@ router.post(
         .then((post) => {
           const newComment = {
             commentBody: req.body.commentBody,
-            username: req.body.username,
-            avatar: req.body.avatar,
-            user: req.user.id,
+            commentedBy: req.body.commentedBy
           };
   
           // Add to comments array

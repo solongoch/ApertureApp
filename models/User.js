@@ -27,15 +27,30 @@ const UserSchema = new Schema({
     type: String,
     required: false
   },
-  website: { type: String },
-  bio: { type: String },
-  mobile: { type: Number },
-  //enum: This states that the string can only have the value specified in the enum array.
-  gender: { type: String, enum: ['male', 'female', 'other'] },
+  website: { 
+    type: String 
+  },
+  bio: { 
+    type: String 
+  },
+  mobile: { 
+    type: Number 
+  },
+  gender: { 
+    type: String, 
+    //enum: This states that the string can only have the value specified in the enum array.
+    enum: ['male', 'female', 'other'] 
+  },
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  isPublic: {
+    type: Boolean,
+    default: true
+  },
+  followers: [{user: { type: Schema.Types.ObjectId, ref: 'users' } }],
+  following: [{user: { type: Schema.Types.ObjectId, ref: 'users' } }],
 });
 
 module.exports = User = mongoose.model('users', UserSchema);

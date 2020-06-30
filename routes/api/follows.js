@@ -56,8 +56,6 @@ router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }),
 // @input   Get Userid from req params of person whom user wants to unfollow.
 // @access  Private
 
-
-
 router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   // check if your id doesn't match the id of the user you want to follow
@@ -104,9 +102,12 @@ router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }
     });
 });
 
+// @route   put api/followers
+// @desc    Get Loggedin User's followers[] id, name,username and avatar
+// @input   Use id from JWT token req.user.id.
+// @access  Private
 
-
-router.get('/follower' , passport.authenticate('jwt', {session: false}), (req,res) =>{
+router.get('/followers' , passport.authenticate('jwt', {session: false}), (req,res) =>{
   User.findById(req.user.id, ('followers'))
       .populate( 'followers.user', ['name', 'username', 'avatar']).lean()
       .then(followers => {
@@ -122,6 +123,11 @@ router.get('/follower' , passport.authenticate('jwt', {session: false}), (req,re
       });
 });
 
+
+// @route   put api/following
+// @desc    Get Loggedin User's following[] id, name,username and avatar
+// @input   Use id from JWT token req.user.id.
+// @access  Private
 
 router.get('/following' , passport.authenticate('jwt', {session: false}), (req,res) =>{
   User.findById(req.user.id, ('following'))

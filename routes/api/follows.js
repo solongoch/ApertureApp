@@ -9,7 +9,7 @@ const User = require('../../models/User');
 // @access  Private
 
 
-router.put('/follow/:user_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   // check if your id doesn't match the id of the user you want to follow
   if (req.user.id === req.params.user_id) {
@@ -42,7 +42,7 @@ router.put('/follow/:user_id', passport.authenticate('jwt', { session: false }),
 
           })
           .catch(err => res.status(500).json({ message: err.msg }));
-      } else {//no user founf to follow
+      } else {//no user found
         return res.status(404).json({ success: false, message: 'There is no such profile' });
       }
     })
@@ -51,17 +51,15 @@ router.put('/follow/:user_id', passport.authenticate('jwt', { session: false }),
     });
 });
 
-
-
-
-
 // @route   put api/follow/:userId
 // @desc    Unfollow User
 // @input   Get Userid from req params of person whom user wants to unfollow.
 // @access  Private
 
 
-router.put('/unfollow/:user_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }), (req, res) => {
+
   // check if your id doesn't match the id of the user you want to follow
   if (req.user.id === req.params.user_id) {
     return res.status(400).json({ alreadyfollow: "You cannot unfollow follow yourself" })
@@ -72,7 +70,6 @@ router.put('/unfollow/:user_id', passport.authenticate('jwt', { session: false }
         // check if the requested user is already in follower list then remove 
         if (user.followers.filter(follower =>
           follower.user.toString() === req.user.id).length > 0) {
-
           const followerIndex = user.followers.map(follower => follower.user.toString().indexOf(req.userid));
           user.followers.splice(followerIndex, 1);
           user.save()
@@ -95,7 +92,7 @@ router.put('/unfollow/:user_id', passport.authenticate('jwt', { session: false }
                 })
             });
 
-        } else {
+        } else {     
           return res.status(400).json({ message: "You are not the following the user yet" });
         }
       } else {//no user founf to follow

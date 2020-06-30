@@ -9,7 +9,7 @@ const User = require('../../models/User');
 // @access  Private
 
 
-router.put('/follow/:user_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   // check if your id doesn't match the id of the user you want to follow
   if (req.user.id === req.params.user_id) {
@@ -110,4 +110,3 @@ router.put('/unfollow/:user_id', passport.authenticate('jwt', { session: false }
       
 });
 module.exports = router;
-

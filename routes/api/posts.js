@@ -5,8 +5,6 @@ const Post = require('../../models/Posts');
 const User = require('../../models/User');
 const validatePostInput = require('../../validation/posts');
 
-
-
 // @route   Post api/posts/:postId/likes
 // @desc    Create Post 
 // @input   Postid from request params
@@ -85,16 +83,20 @@ if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length 
   const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
   post.likes.splice(userIndex, 1);
   post.save()
-    .then(data => res.json({ success: true, message: "User disliked a Post" }))
+    .then(data => res.json({ success: true, message: "User disliked a Post", noOfUnLikes: post.likes.length }))
     .catch(err => res.status(500).json({ success: false, message: err.message }));
 }
 else {//add user to likes []
   post.likes.unshift({ likedBy: req.user.id });
   post.save()
-    .then(data => res.json({ success: true, message: "User liked a Post" }))
+    .then(data => res.json({ success: true, message: "User liked a Post" ,noOfLikes: post.likes.length }))
     .catch(err => res.status(500).json({ success: false, message: err.message }));
 }
 
 
 }
 module.exports = router;
+
+
+
+

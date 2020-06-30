@@ -34,14 +34,15 @@ router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }),
                   return res.status(400).json({ alreadyfollow: "You already following the user" })
                 }
                 user.following.unshift({ user: req.params.user_id });
-                user.save().then(user => res.json({ 
-                  success : true,
-                  message : "Followed"}));
+                user.save().then(user => res.json({
+                  success: true,
+                  message: "Followed"
+                }));
               });
 
           })
           .catch(err => res.status(500).json({ message: err.msg }));
-      } else {//no user founf to follow
+      } else {//no user found
         return res.status(404).json({ success: false, message: 'There is no such profile' });
       }
     })
@@ -50,10 +51,6 @@ router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }),
     });
 });
 
-
-
-
-
 // @route   put api/follow/:userId
 // @desc    Unfollow User
 // @input   Get Userid from req params of person whom user wants to unfollow.
@@ -61,8 +58,6 @@ router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }),
 
 
 router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }), (req, res) => {
-
- 
   // check if your id doesn't match the id of the user you want to follow
   if (req.user.id === req.params.user_id) {
     return res.status(400).json({ alreadyfollow: "You cannot unfollow follow yourself" })
@@ -88,15 +83,16 @@ router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }
                                 doc.following.splice(followingIndex, 1);
                                 doc.save();
                                 return res.json({
-                                  success : true,
-                                  message : "Unfollowed"});
-                        }else{
+                                  success: true,
+                                  message: "Unfollowed"
+                                });
+                        } else {
                           return res.status(400).json({ message: "You are not the following the user yet" });
                         }
                     })
               });
                 
-        }else{
+        } else{
           return res.status(400).json({ message: "You are not the following the user yet" });
         }
       }else {//no user founf to follow
@@ -110,3 +106,4 @@ router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }
       
 });
 module.exports = router;
+

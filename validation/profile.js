@@ -1,4 +1,3 @@
-
 const validator = require("validator");
 const isEmpty = require("./is-empty");
 
@@ -30,23 +29,21 @@ module.exports = function validateProfileInput(data) {
 
   // validate website
   if (!isEmpty(data.website)) {
-    if (!Validator.isURL(data.website)) {
-      errors.website = "Not a valid URL";
+    if (!validator.isURL(data.website)) {
+      errors.website = "Invalid website url";
     }
   }
 
   // validate phone number
-
   if (!isEmpty(data.mobile)) {
-    if (!Validator.isMobilePhone(data.mobile)) {
+    if (validator.isMobilePhone(data.mobile)) {
       errors.mobile = "Invalid phone number";
     }
   }
 
   // validate gender
-  if (!validator.equals(data.gender, 'male' || 'female' || 'other')) {
+  if ((!validator.isIn(data.gender, ['male', 'female', 'other']))) {
     errors.gender = "Invalid gender value";
-
   }
 
   return {
@@ -54,4 +51,3 @@ module.exports = function validateProfileInput(data) {
     isValid: isEmpty(errors)
   };
 };
-

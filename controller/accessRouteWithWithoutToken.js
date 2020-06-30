@@ -6,4 +6,5 @@ const optionalJwt = function(req, res, next) {
   }
   return next();
 };
+
 module.exports = optionalJwt;

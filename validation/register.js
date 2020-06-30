@@ -11,7 +11,6 @@ module.exports = function validateRegisterInput(data) {
   if (isEmpty(data.name)) {
     errors.name = 'Name is required';
   }
-  console.log(data.password);
 
   //Username validaiton
   if (!validator.isLength(data.username, { min: 3, max: 30 })) {

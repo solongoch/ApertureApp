@@ -1,21 +1,21 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const Post = require('../../models/Posts');
 const User = require('../../models/User');
-const validatePostInput = require('../../validation/posts');
+const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 // Validation
+const validatePostInput = require('../../validation/posts');
 const validateCommentInput = require("../../validation/comment");
 
-const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
-router.get("/test", (req, res) => res.json({ msg: "Posts works!" }));
-
-// @route   Post api/posts/create
+// @route   Post api/posts/:postId/likes
 // @desc    Create Post 
 // @input   Postid from request params
 // @access  Private
-router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+
   // Check Validation
   const { errors, isValid } = validatePostInput(req.body);
   if (!isValid) {
@@ -38,28 +38,32 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
           });
 });
 
-// @route   PUT api/posts/:postId/likes
-// @desc    Like and Dislike  post
+// @route   PUT api/posts/:postId/lu
+// @desc    Like and Dislike post
 // @input   Postid from request params
 // @access  Private
-router.put('/:postId', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Post.findOne({ _id: req.params.postId })//Chk post exists to like
+
+router.put('/lu/:postId', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+  //Chk post exists to like
+  Post.findOne({ _id: req.params.postId })
+      .populate("postedBy", ['isPublic'])
     .then(post => {
       if (post) { //Post found 
-        //Post already liked by user then remove the user from the likes []
-        if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
-          const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.userid));
-          post.likes.splice(userIndex, 1);
-          post.save()
-            .then(data => res.json({ success: true, message: "User disliked a Post" }))
-            .catch(err => res.status(500).json({ success: false, message: err.message }));
-        }
-        else {//ass user to likes []
-          post.likes.unshift({ likedBy: req.user.id });
-          post.save()
-            .then(data => res.json({ success: true, message: "User liked a Post" }))
-            .catch(err => res.status(500).json({ success: false, message: err.message }));
-        }
+          if(post.postedBy.isPublic){//Any one can like public account post
+            likeUnlikePost(post,req,res);
+          }
+          else{//Private Account User
+             if( req.user.following.filter( follow =>
+                 follow.user.toString() === post.postedBy._id.toString()).length>0 || 
+                  (post.postedBy._id == req.user.id))
+            {
+                    likeUnlikePost(post,req,res);
+            }else{
+
+              return res.status(401).json({message: "You cannot like private post"});
+            }
+          }        
       }
       else {//post not found
         return res.status(400)
@@ -70,6 +74,26 @@ router.put('/:postId', passport.authenticate('jwt', { session: false }), (req, r
       res.status(422).json({ success: false, message: err.message })
     })
 });
+
+
+//Like and unlike the post
+function likeUnlikePost(post,req,res){
+//Post already liked by user then remove the user from the likes []
+if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
+  const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
+  post.likes.splice(userIndex, 1);
+  post.save()
+    .then(data => res.json({ success: true, message: "User disliked a Post" }))
+    .catch(err => res.status(500).json({ success: false, message: err.message }));
+}
+else {//add user to likes []
+  post.likes.unshift({ likedBy: req.user.id });
+  post.save()
+    .then(data => res.json({ success: true, message: "User liked a Post" }))
+    .catch(err => res.status(500).json({ success: false, message: err.message }));
+}
+}//likeUnlikePost function ends
+
 
 // @route   GET api/posts
 // @desc    Get posts
@@ -215,3 +239,4 @@ router.post(
   );
   
   module.exports = router;
+

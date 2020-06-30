@@ -60,7 +60,7 @@ router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }),
 // @access  Private
 
 
-router.put('/unfollow/:user_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }), (req, res) => {
 
  
   // check if your id doesn't match the id of the user you want to follow

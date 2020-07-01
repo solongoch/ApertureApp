@@ -102,7 +102,7 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
       } else if (req.isAuthenticated()) { // user logged in
         if (!post.postedBy.isPublic) { // private account
           // req.user is following postedBy OR
-          if (post.postedBy.followers.includes(`\{ user: ${req.user.id} \}`) || 
+          if (post.postedBy.followers.some(obj => obj.user == req.user.id) || 
           // req.user is postedBy (user's own post)
           (post.postedBy._id == req.user.id)) {
             // remove isPublic and followers from display

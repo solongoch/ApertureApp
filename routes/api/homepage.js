@@ -7,8 +7,8 @@ const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithW
 // @route   GET api/posts
 // @desc    Get posts
 // @access  Private
-router.get('', 
-  accessRouteWithOrWithoutToken, 
+router.get('',
+  accessRouteWithOrWithoutToken,
   (req, res) => {
     User.find({user: req.user.following})
       // .sort({ date: -1 })

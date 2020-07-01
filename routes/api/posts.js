@@ -80,7 +80,7 @@ router.get("/",
     Post.find()
       .sort({ date: -1 })
       .then(posts => res.json(posts))
-      .catch(err => res.status(404).json({ nopostsfound: "No post found" }));
+      .catch(err => res.send(err));
 });
 
 // @route   GET api/posts/:id
@@ -144,7 +144,7 @@ router.delete(
           // delete ':id' post
           post.remove().then(() => res.json({ success: true }));
         })
-        .catch(err => res.status(404).json({ postnotfound: "No post found" }));
+        .catch(err => res.send(err));
     });
   }
 );

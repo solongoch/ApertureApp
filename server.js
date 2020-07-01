@@ -2,6 +2,7 @@ const express = require('express');
 // Create the Express application
 const app = express();
 
+const homepage = require('./routes/api/homepage');
 const authRoutes = require('./routes/api/auth');
 const users = require('./routes/api/users');
 const follows = require('./routes/api/follows');
@@ -25,7 +26,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 // homepage route
-app.get('/', (req, res) => res.send('Aperture')); 
+app.use('', homepage);
 
 // Imports all of the routes
 app.use('/api/users', users);

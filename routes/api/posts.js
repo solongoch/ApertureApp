@@ -8,7 +8,6 @@ const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithW
 const validatePostInput = require('../../validation/posts');
 const validateCommentInput = require("../../validation/comment");
 
-
 // @route   Post api/posts/:postId/likes
 // @desc    Create Post 
 // @input   Postid from request params
@@ -78,20 +77,21 @@ router.put('/lu/:postId', passport.authenticate('jwt', { session: false }), (req
 
 //Like and unlike the post
 function likeUnlikePost(post,req,res){
-//Post already liked by user then remove the user from the likes []
-if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
-  const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
-  post.likes.splice(userIndex, 1);
-  post.save()
-    .then(data => res.json({ success: true, message: "User disliked a Post" }))
-    .catch(err => res.status(500).json({ success: false, message: err.message }));
-}
-else {//add user to likes []
-  post.likes.unshift({ likedBy: req.user.id });
-  post.save()
-    .then(data => res.json({ success: true, message: "User liked a Post" }))
-    .catch(err => res.status(500).json({ success: false, message: err.message }));
-}
+  //Post already liked by user then remove the user from the likes []
+  if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
+    const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
+    post.likes.splice(userIndex, 1);
+    post.save()
+      .then(data => res.json({ success: true, message: "User disliked a Post", noOfUnLikes: post.likes.length }))
+      .catch(err => res.status(500).json({ success: false, message: err.message }));
+  }
+  else {//add user to likes []
+    post.likes.unshift({ likedBy: req.user.id });
+    post.save()
+      .then(data => res.json({ success: true, message: "User liked a Post" ,noOfLikes: post.likes.length }))
+      .catch(err => res.status(500).json({ success: false, message: err.message }));
+  }
+   
 }//likeUnlikePost function ends
 
 
@@ -239,4 +239,3 @@ router.post(
   );
   
   module.exports = router;
-

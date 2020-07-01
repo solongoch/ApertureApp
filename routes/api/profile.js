@@ -9,7 +9,8 @@ const validateProfileInput = require("../../validation/profile");
 
 
 // @route   Get http://localhost:7500/api/profile/:username
-// @desc    Return public user's data like name,username.avatar, following and follower count.
+// @desc    Return public user's data like name,username,bio,website, avatar, 
+//          following and follower count, no of posts.
 // @input   Username as request params
 // @access  Public
 

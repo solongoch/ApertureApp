@@ -127,19 +127,5 @@ router.post('/login', (req, res) => {
     );
 });
 
-// @route   Get http://localhost:7500/api/users/current
-// @desc    Return current user
-// @access  Private
-
-router.get(
-  "/current",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    return res.json({
-      success: true,
-      message: 'You are Authorized!',
-      user: req.user
-    });
-  });
 
 module.exports = router;

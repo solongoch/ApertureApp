@@ -3,7 +3,10 @@ const router = express.Router();
 const passport = require('passport');
 const Post = require('../../models/Posts');
 const User = require('../../models/User');
+// Validation
 const validatePostInput = require('../../validation/posts');
+const validateCommentInput = require("../../validation/comment");
+// Function
 const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
 router.get("/test", (req, res) => res.json({ msg: "Posts works!" }));

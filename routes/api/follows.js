@@ -57,8 +57,4 @@ router.put('unfollow/:userId' ,passport.authenticate('jwt', {session: false} ), 
         });
 }); 
 
-
 module.exports =router;
-
-
-

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+// Load User Model
 const User = require("../../models/User");
 
 // load Validations
@@ -67,19 +68,6 @@ router.post(
             { new: true }
           ).then(updatedUser => res.json(updatedUser));
         }
-        // else {
-        //   // create profile
-        //   User.findOne({ username: userFields.username})
-        //     .then((user) => {
-        //       if (user) {
-        //         errors.username = 'Username already exists';
-        //       }
-        //       // save user
-        //       new User(userFields)
-        //         .save()
-        //         .then(( user) => res.json(user));
-        //     });
-        //   }
       })
       .catch(err => res.status(400).json({ err: "findOne method failed" }));
   }

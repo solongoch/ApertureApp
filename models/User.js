@@ -34,7 +34,7 @@ const UserSchema = new Schema({
     type: String 
   },
   mobile: { 
-    type: String 
+    type: String
   },
   gender: { 
     type: String, 

@@ -1,20 +1,18 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const passport = require('passport');
 const Post = require('../../models/Posts');
 const User = require('../../models/User');
-const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
-// Validation
 const validatePostInput = require('../../validation/posts');
-const validateCommentInput = require("../../validation/comment");
+const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
-// @route   Post api/posts/:postId/likes
+router.get("/test", (req, res) => res.json({ msg: "Posts works!" }));
+
+// @route   Post api/posts/create
 // @desc    Create Post 
 // @input   Postid from request params
 // @access  Private
-
 router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
-
   // Check Validation
   const { errors, isValid } = validatePostInput(req.body);
   if (!isValid) {
@@ -37,32 +35,28 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
           });
 });
 
-// @route   PUT api/posts/:postId/lu
-// @desc    Like and Dislike post
+// @route   PUT api/posts/:postId/likes
+// @desc    Like and Dislike  post
 // @input   Postid from request params
 // @access  Private
-
-router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req, res) => {
-
-  //Chk post exists to like
-  Post.findOne({ _id: req.params.postId })
-      .populate("postedBy", ['isPublic'])
+router.put('/:postId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Post.findOne({ _id: req.params.postId })//Chk post exists to like
     .then(post => {
       if (post) { //Post found 
-          //Post already liked by user then remove the user from the likes []
-          if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
-            const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
-            post.likes.splice(userIndex, 1);
-            post.save()
-              .then(data => res.json({ success: true, message: "User disliked a Post", noOfUnLikes: post.likes.length }))
-              .catch(err => res.status(500).json({ success: false, message: err.message }));
-          }
-          else {//add user to likes []
-            post.likes.unshift({ likedBy: req.user.id });
-            post.save()
-              .then(data => res.json({ success: true, message: "User liked a Post" ,noOfLikes: post.likes.length }))
-              .catch(err => res.status(500).json({ success: false, message: err.message }));
-          }
+        //Post already liked by user then remove the user from the likes []
+        if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
+          const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.userid));
+          post.likes.splice(userIndex, 1);
+          post.save()
+            .then(data => res.json({ success: true, message: "User disliked a Post" }))
+            .catch(err => res.status(500).json({ success: false, message: err.message }));
+        }
+        else {//ass user to likes []
+          post.likes.unshift({ likedBy: req.user.id });
+          post.save()
+            .then(data => res.json({ success: true, message: "User liked a Post" }))
+            .catch(err => res.status(500).json({ success: false, message: err.message }));
+        }
       }
       else {//post not found
         return res.status(400)
@@ -108,7 +102,7 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
       } else if (req.isAuthenticated()) { // user logged in
         if (!post.postedBy.isPublic) { // private account
           // req.user is following postedBy OR
-          if (post.postedBy.followers.includes(`\{ user: ${req.user.id} \}`) || 
+          if (post.postedBy.followers.some(obj => obj.user == req.user.id) || 
           // req.user is postedBy (user's own post)
           (post.postedBy._id == req.user.id)) {
             // remove isPublic and followers from display

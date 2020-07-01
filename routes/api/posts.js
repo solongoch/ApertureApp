@@ -3,7 +3,10 @@ const router = express.Router();
 const passport = require('passport');
 const Post = require('../../models/Posts');
 const User = require('../../models/User');
+// Validation
 const validatePostInput = require('../../validation/posts');
+const validateCommentInput = require("../../validation/comment");
+// Function
 const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
 router.get("/test", (req, res) => res.json({ msg: "Posts works!" }));
@@ -77,7 +80,7 @@ router.get("/",
     Post.find()
       .sort({ date: -1 })
       .then(posts => res.json(posts))
-      .catch(err => res.status(404).json({ nopostsfound: "No post found" }));
+      .catch(err => res.send(err));
 });
 
 // @route   GET api/posts/:id
@@ -117,7 +120,8 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
       } else { // accessing post from private account and user not logged in
         res.send("This is a private account! Please log in.");
       }
-    });
+    })
+    .catch(err => res.send(err));
 });
 
 // @route   DELETE api/posts/:id
@@ -140,7 +144,7 @@ router.delete(
           // delete ':id' post
           post.remove().then(() => res.json({ success: true }));
         })
-        .catch(err => res.status(404).json({ postnotfound: "No post found" }));
+        .catch(err => res.send(err));
     });
   }
 );

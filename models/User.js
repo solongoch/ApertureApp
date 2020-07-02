@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Set `trim: true` on every string path by default
+// removes leading and trailing whitespace from the string automatically
+Schema.Types.String.set('trim', true);
+
 // create User's Schema
 const UserSchema = new Schema({
   name: {

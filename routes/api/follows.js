@@ -133,16 +133,9 @@ router.get('/following' , passport.authenticate('jwt', {session: false}), (req,r
   User.findById(req.user.id, ('following'))
       .populate( 'following.user', ['name', 'username', 'avatar']).lean()
       .then(following => {
-        if(following){
-       
-
-          console.log(following.following.map( follow => follow.user._id));
-          var userFollowing =[];
-          userFollowing = following.following.map( follow => follow.user._id);
-          console.log('userFollowing' ,userFollowing);
-            return res.json(following.following);
-        }
-        else{
+        if(following){      
+          return res.json(following.following);
+        }else{
           return res.status(404).json({ success: false, message: "you are not following Anyone"});
         }
       })

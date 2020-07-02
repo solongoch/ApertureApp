@@ -1,46 +1,49 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const passport = require('passport');
 const Post = require('../../models/Posts');
 const User = require('../../models/User');
 
-router.get('/homepage' , passport.authenticate('jwt', {session:false}), (req,res)=>{
-
+router.get('/homepage', passport.authenticate('jwt', { session: false }), (req, res) => {
+  var userFollowing = [];
+  var myPost = mongoose.Types.ObjectId(req.user.id);//get logged in user id to get post
+  
   User.findById(req.user.id, ('following'))
-  .populate( 'following.user').lean()
+  .populate('following.user').lean()
   .then(following => {
-    if(following){
-   
-
-      console.log(following.following.map( follow => follow.user._id));
-      var userFollowing =[];
-      userFollowing = following.following.map( follow => follow.user._id);
-
-      Post.find({ "postedBy": { "$in": userFollowing } } ).lean()
-          // .where('postedBy')         
-          // .in(userFollowing)
-          .populate('postedBy', ['name', 'username', 'avatar'])
-          .populate('likes.likedBy', ['name', 'username', 'avatar'])
-          .populate('comments.commentedBy', ['name', 'username', 'avatar'])
-
-          .limit(4)
-          .sort({timePosted: -1})
-          .exec((err, records) => {
-
-        // console.log('userFollowing' ,userFollowing);
-          return res.json(records);
-      });
-
-
-    }
-    else{
-      return res.status(404).json({ success: false, message: "you are not following Anyone"});
-    }
-  })
-  .catch(err =>{
-    return res.status(500).json({ success: false, message: err.message });
-  });
+    if (following) {
+      userFollowing = following.following.map(follow => follow.user._id);
+    } 
+    //Pushing userid of logged in user into userFollowing[] to fetch posts
+        userFollowing.push(myPost);
+        console.log(userFollowing); 
+        //
+        Post.find({ "postedBy": { "$in": userFollowing } } ).lean()
+            .populate('postedBy likes.likedBy comments.commentedBy ',
+              ['name', 'username', 'avatar'])
+            .sort({ timePosted: -1 })//for latest records            
+            .exec((err, records) => {
+              if(records) {
+                return res.json(records);
+              }
+              if(err) {
+                return res.status(400).json({ success: false, message: err.message });
+              }
+            });//Post find ends
+      
+      
+      })//then ends
+      .catch(err => {
+        return res.status(500).json({ success: false, message: err.message });
+      });//user findById catch ends 
 });
 
-  module.exports = router;
-  
+module.exports = router;
+
+
+/* //another way for where and in condition
+    .where('postedBy').in(userFollowing)
+    //another way to populate
+    .populate('likes.likedBy', ['name', 'username', 'avatar'])
+    .populate('comments.commentedBy', ['name', 'username', 'avatar']) */

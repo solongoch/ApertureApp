@@ -5,7 +5,7 @@ const passport = require('passport');
 const Post = require('../../models/Posts');
 const User = require('../../models/User');
 
-router.get('/homepage', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/home', passport.authenticate('jwt', { session: false }), (req, res) => {
   var userFollowing = [];
   var myPost = mongoose.Types.ObjectId(req.user.id);//get logged in user id to get post
   

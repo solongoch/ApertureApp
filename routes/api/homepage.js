@@ -1,5 +1,7 @@
 const router = require("express").Router();
+// Model
 const Post = require("../../models/Posts");
+// Function
 const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
 // @route   GET 'http://localhost:7500'

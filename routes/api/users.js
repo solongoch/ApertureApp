@@ -1,26 +1,31 @@
-const router = require('express').Router();
-const User = require('../../models/User');
-const gravatar = require('gravatar');//import gravatar
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys').secretOrKey;
-const passport = require('passport');
-const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
+const router = require("express").Router();
+const User = require("../../models/User");
+const gravatar = require("gravatar"); //import gravatar
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/keys").secretOrKey;
+const passport = require("passport");
+// Validation
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
+
 // @route   POST  http://localhost:7500/api/users/signup
 // @desc    Register User
 // @input   Name,Username, email, password from request body
 // @access  public
-router.post('/signup', (req, res) => {
-
+router.post("/signup", (req, res) => {
   //Validations
   const { errors, isValid } = validateRegisterInput(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  const avatar = gravatar.url(req.body.email,
-    { s: '100', r: 'pg', d: 'mm', protocol: 'http' });
+  const avatar = gravatar.url(req.body.email, {
+    s: "100",
+    r: "pg",
+    d: "mm",
+    protocol: "http"
+  });
 
   const newUser = new User({
     name: req.body.name,
@@ -29,7 +34,7 @@ router.post('/signup', (req, res) => {
     password: req.body.password,
     avatar
   });
-  //Generte salt
+  //Generate salt
   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
     //generating hash
@@ -37,28 +42,33 @@ router.post('/signup', (req, res) => {
       if (err) throw err;
       newUser.password = hash;
       //save the document in MongoDB
-      newUser.save()
+      newUser
+        .save()
         .then(user => {
           userDisplay = {
-              name : user.name,
-              username : user.username,
-              email: user.email,
-              avatar : user.avatar
-          }
-          res.json({ success: true, user: userDisplay, message: 'User Successfully Registered!' });
+            name: user.name,
+            username: user.username,
+            email: user.email,
+            avatar: user.avatar
+          };
+          res.json({
+            success: true,
+            user: userDisplay,
+            message: "User Successfully Registered!"
+          });
         })
         .catch(err => {
-          if (err.message.includes('username_1 dup key:')) {//duplicate username
-            err.message = "Username already exist"
+          if (err.message.includes("username_1 dup key:")) {
+            //duplicate username
+            err.message = "Username already exist";
+          } else if (err.message.includes("email_1 dup key:")) {
+            //dupicate email id
+            err.message = "Email already exists";
           }
-          else if (err.message.includes('email_1 dup key:')) { //dupicate email id
-            err.message = "Email already exists"
-          }
-          res.status(409).json(
-            {
-              success: false,
-              message: err.message
-            });
+          res.status(409).json({
+            success: false,
+            message: err.message
+          });
         });
     });
   });
@@ -68,8 +78,7 @@ router.post('/signup', (req, res) => {
 // @desc    Login User
 // @input   Username or email and password
 // @access  public
-router.post('/login', (req, res) => {
-
+router.post("/login", (req, res) => {
   //Validations
   const { errors, isValid } = validateLoginInput(req.body);
   if (!isValid) {
@@ -126,6 +135,5 @@ router.post('/login', (req, res) => {
       res.status(404).json({ success: false, message: err.message })
     );
 });
-
 
 module.exports = router;

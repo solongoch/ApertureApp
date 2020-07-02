@@ -1,7 +1,5 @@
 const router = require("express").Router();
-const passport = require("passport");
 const Post = require("../../models/Posts");
-const User = require("../../models/User");
 const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
 // @route   GET 'http://localhost:7500'
@@ -9,11 +7,11 @@ const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithW
 // @access  Public and Private
 router.get("", accessRouteWithOrWithoutToken, (req, res) => {
   if (!req.isAuthenticated()) {
-    res.json({ msg: "Do you want to log in?" });
+    return res.json({ msg: "Do you want to log in or sign up?" });
   } else {
     const following = req.user.following;
     if (following.length === 0) {
-      res.json({ msg: "Accounts suggestion to follow" });
+      return res.json({ msg: "Accounts suggestion to follow" });
     }
 
     Post.find({ postedBy: { $in: following.map(following => following.user) } })

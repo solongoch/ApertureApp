@@ -191,7 +191,9 @@ router.post(
         .then((post) => {
           const newComment = {
             commentBody: req.body.commentBody,
-            commentedBy: req.body.commentedBy
+            // commentedBy: req.body.commentedBy,
+            //CommentedBy from req.user.id not from req body
+            commentedBy: req.user.id
           };
   
           // Add to comments array

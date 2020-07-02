@@ -20,6 +20,9 @@ router.get('/homepage' , passport.authenticate('jwt', {session:false}), (req,res
           // .where('postedBy')         
           // .in(userFollowing)
           .populate('postedBy', ['name', 'username', 'avatar'])
+          .populate('likes.likedBy', ['name', 'username', 'avatar'])
+          .populate('comments.commentedBy', ['name', 'username', 'avatar'])
+
           .limit(4)
           .sort({timePosted: -1})
           .exec((err, records) => {

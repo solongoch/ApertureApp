@@ -20,14 +20,13 @@ router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }),
       if (user) {//user exists
         // check if the requested user is already in follower list of other user then 
 
-        if (user.followers.filter(follower =>
-          follower.user.toString() === req.user.id).length > 0) {
+        if (user.followers.some(follower => follower.user.toString() === req.user.id)) {
           return res.status(400).json({ alreadyfollow: "You already followed the user" });
         }
         user.followers.unshift({ user: req.user.id });
         user.save()
           .then(result => {
-            User.findOne({ email: req.user.email })
+            User.findOne({ email: req.user.email }) 
               .then(user => {
                 if (user.following.filter(following =>
                   following.user.toString() === req.params.userId).length > 0) {
@@ -68,7 +67,8 @@ router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }
         // check if the requested user is already in follower list then remove 
         if (user.followers.filter(follower =>
           follower.user.toString() === req.user.id).length > 0) {
-          const followerIndex = user.followers.map(follower => follower.user.toString().indexOf(req.userid));
+          const followerIndex = user.followers.map(follower => 
+            follower.user.toString().indexOf(req.userid));
           user.followers.splice(followerIndex, 1);
           user.save()
             .then(data => {
@@ -112,7 +112,7 @@ router.get('/followers' , passport.authenticate('jwt', {session: false}), (req,r
       .populate( 'followers.user', ['name', 'username', 'avatar']).lean()
       .then(followers => {
         if(followers){
-            return res.json(followers);
+           return res.json(followers.followers);
         }
         else{
           return res.status(404).json({ success: false, message: "No Followers"});
@@ -134,7 +134,13 @@ router.get('/following' , passport.authenticate('jwt', {session: false}), (req,r
       .populate( 'following.user', ['name', 'username', 'avatar']).lean()
       .then(following => {
         if(following){
-            return res.json(following);
+       
+
+          console.log(following.following.map( follow => follow.user._id));
+          var userFollowing =[];
+          userFollowing = following.following.map( follow => follow.user._id);
+          console.log('userFollowing' ,userFollowing);
+            return res.json(following.following);
         }
         else{
           return res.status(404).json({ success: false, message: "you are not following Anyone"});
@@ -144,6 +150,8 @@ router.get('/following' , passport.authenticate('jwt', {session: false}), (req,r
         return res.status(500).json({ success: false, message: err.message });
       });
 });
+
+
 
 
 module.exports = router;

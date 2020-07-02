@@ -13,7 +13,7 @@ const validateCommentInput = require("../../validation/comment");
 // @input   Postid from request params
 // @access  Private
 
-router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   // Check Validation
   const { errors, isValid } = validatePostInput(req.body);
@@ -42,7 +42,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 // @input   Postid from request params
 // @access  Private
 
-router.put('/lu/:postId', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   //Chk post exists to like
   Post.findOne({ _id: req.params.postId })
@@ -237,5 +237,5 @@ router.post(
         .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
     }
   );
-  
-  module.exports = router;
+
+module.exports = router;

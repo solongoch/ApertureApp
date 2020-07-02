@@ -78,7 +78,7 @@ router.get("/",
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     Post.find()
-      .sort({ date: -1 })
+      .sort({ timePosted: -1 })
       .then(posts => res.json(posts))
       .catch(err => res.send(err));
 });

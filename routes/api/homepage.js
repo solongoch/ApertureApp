@@ -1,30 +1,29 @@
-const router = require('express').Router();
-const passport = require('passport');
-const Post = require('../../models/Posts');
-const User = require('../../models/User');
+const router = require("express").Router();
+const passport = require("passport");
+const Post = require("../../models/Posts");
+const User = require("../../models/User");
 const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
-// @route   GET api/posts
-// @desc    Get posts
-// @access  Private
-router.get('',
-  accessRouteWithOrWithoutToken,
-  (req, res) => {
-    User.find({user: req.user.following})
-      // .sort({ date: -1 })
-      .then(following => {
-        // console.log(req.user.id)
-        // console.log(req.user.following)
-        // console.log(following)
-        if (!req.isAuthenticated()) {
-          res.send('msg: Do you want to log in?');
-        }
-        if (req.user.following.length == 0) {
-          res.json({'msg':'Accounts suggestion to follow'})
-        }
-        res.json(posts);
+// @route   GET 'http://localhost:7500'
+// @desc    Landing page
+// @access  Public and Private
+router.get("", accessRouteWithOrWithoutToken, (req, res) => {
+  if (!req.isAuthenticated()) {
+    res.json({ msg: "Do you want to log in?" });
+  } else {
+    const following = req.user.following;
+    if (following.length === 0) {
+      res.json({ msg: "Accounts suggestion to follow" });
+    }
+
+    Post.find({ postedBy: { $in: following.map(following => following.user) } })
+      .sort({ timePosted: -1 })
+      .limit(10)
+      .then(posts => {
+        return res.send(posts);
       })
-      .catch(err => res.json(err));
+      .catch(err => { return res.send(err) });
+  }
 });
 
 module.exports = router;

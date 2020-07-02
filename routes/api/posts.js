@@ -77,10 +77,10 @@ router.put('/:postId', passport.authenticate('jwt', { session: false }), (req, r
 router.get("/", 
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
-    Post.find()
-      .sort({ timePosted: -1 })
-      .then(posts => res.json(posts))
-      .catch(err => res.send(err));
+    Post.find() // find all posts in db
+      .sort({ timePosted: -1 }) // sort post date by descending order
+      .then(posts => {return res.json(posts)})
+      .catch(err => {return res.send(err)});
 });
 
 // @route   GET api/posts/:id
@@ -98,7 +98,7 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
         delete post.postedBy.followers;
 
         // show post
-        res.json(post);
+        return res.json(post);
 
       // @usage   if user who posted this post has public account, anyone who logged in or not can see this post
       // @access  Private
@@ -112,16 +112,16 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
             post = post.toObject();
             delete post.postedBy.isPublic;
             delete post.postedBy.followers;
-            res.json(post);
+            return res.json(post);
           } else { // req.user is not following OR not own post
-            res.json({ msg: "This account is private. Do you want to follow?" });
+            return res.json({ msg: "This account is private. Do you want to follow?" });
           }
         }
       } else { // accessing post from private account and user not logged in
-        res.send("This is a private account! Please log in.");
+        return res.send("This is a private account! Please log in.");
       }
     })
-    .catch(err => res.send(err));
+    .catch(err => {return res.send(err)});
 });
 
 // @route   DELETE api/posts/:id
@@ -142,9 +142,9 @@ router.delete(
           }
 
           // delete ':id' post
-          post.remove().then(() => res.json({ success: true }));
+          post.remove().then(() => {return res.json({ success: true })});
         })
-        .catch(err => res.send(err));
+        .catch(err => {return res.send(err)});
     });
   }
 );

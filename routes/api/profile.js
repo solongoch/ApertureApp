@@ -132,10 +132,10 @@ router.post(
             { email: req.user.email },
             { $set: userFields },
             { new: true }
-          ).then(updatedUser => res.json(updatedUser));
+          ).then(updatedUser => {return res.json(updatedUser)});
         }
       })
-      .catch(err => res.status(400).json({ err: "findOne method failed" }));
+      .catch(err => {return res.status(400).json({ err: "findOne method failed" })});
   }
 );
 

@@ -13,7 +13,7 @@ const validateCommentInput = require("../../validation/comment");
 // @input   Postid from request params
 // @access  Private
 
-router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   // Check Validation
   const { errors, isValid } = validatePostInput(req.body);
@@ -42,27 +42,27 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 // @input   Postid from request params
 // @access  Private
 
-router.put('/lu/:postId', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   //Chk post exists to like
   Post.findOne({ _id: req.params.postId })
       .populate("postedBy", ['isPublic'])
     .then(post => {
       if (post) { //Post found 
-          if(post.postedBy.isPublic){//Any one can like public account post
-            likeUnlikePost(post,req,res);
+          //Post already liked by user then remove the user from the likes []
+          if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
+            const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
+            post.likes.splice(userIndex, 1);
+            post.save()
+              .then(data => res.json({ success: true, message: "User disliked a Post", noOfUnLikes: post.likes.length }))
+              .catch(err => res.status(500).json({ success: false, message: err.message }));
           }
-          else{//Private Account User
-             if( req.user.following.filter( follow =>
-                 follow.user.toString() === post.postedBy._id.toString()).length>0 || 
-                  (post.postedBy._id == req.user.id))
-            {
-                    likeUnlikePost(post,req,res);
-            }else{
-
-              return res.status(401).json({message: "You cannot like private post"});
-            }
-          }        
+          else {//add user to likes []
+            post.likes.unshift({ likedBy: req.user.id });
+            post.save()
+              .then(data => res.json({ success: true, message: "User liked a Post" ,noOfLikes: post.likes.length }))
+              .catch(err => res.status(500).json({ success: false, message: err.message }));
+          }
       }
       else {//post not found
         return res.status(400)
@@ -73,27 +73,6 @@ router.put('/lu/:postId', passport.authenticate('jwt', { session: false }), (req
       res.status(422).json({ success: false, message: err.message })
     })
 });
-
-
-//Like and unlike the post
-function likeUnlikePost(post,req,res){
-  //Post already liked by user then remove the user from the likes []
-  if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
-    const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
-    post.likes.splice(userIndex, 1);
-    post.save()
-      .then(data => res.json({ success: true, message: "User disliked a Post", noOfUnLikes: post.likes.length }))
-      .catch(err => res.status(500).json({ success: false, message: err.message }));
-  }
-  else {//add user to likes []
-    post.likes.unshift({ likedBy: req.user.id });
-    post.save()
-      .then(data => res.json({ success: true, message: "User liked a Post" ,noOfLikes: post.likes.length }))
-      .catch(err => res.status(500).json({ success: false, message: err.message }));
-  }
-   
-}//likeUnlikePost function ends
-
 
 // @route   GET api/posts
 // @desc    Get posts
@@ -191,7 +170,9 @@ router.post(
         .then((post) => {
           const newComment = {
             commentBody: req.body.commentBody,
-            commentedBy: req.body.commentedBy
+            // commentedBy: req.body.commentedBy,
+            //CommentedBy from req.user.id not from req body
+            commentedBy: req.user.id
           };
   
           // Add to comments array
@@ -237,5 +218,5 @@ router.post(
         .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
     }
   );
-  
-  module.exports = router;
+
+module.exports = router;

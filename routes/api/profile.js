@@ -41,17 +41,16 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
               //If user has public account anyone can see posts
               if (user.isPublic) {
                  data.posts = posts;
-              } else {
+              } else {//private user
                 if (req.isAuthenticated()) {
                   // check logged in user(req.user) is following the user OR
-                  if (user.followers.filter(follower =>
-                    follower.user.toString() === req.user.id).length > 0 ||
-                    // req.user is postedBy (user's own post)
+                  if (user.followers.some(follower =>follower.user == req.user.id) ||
+                    // req.user can see his own post (user's own post)
                     (user._id == req.user.id)) {
                     data.posts = posts;
                   }
                   else { // req.user is not following OR not own post
-                    res.json({ msg: "This account is private. Do you want to follow?" });
+                   return  res.json({ msg: "This account is private. Do you want to follow?" });
                   }
                 }//For Private route ends
               }

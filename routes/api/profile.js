@@ -135,7 +135,7 @@ router.post(
           ).then(updatedUser => res.json(updatedUser));
         }
       })
-      .catch(err => res.status(400).json({ err: "findOne method failed" }));
+      .catch(err => res.status(500).json({ err: "findOne method failed" }));
   }
 );
 

@@ -5,7 +5,7 @@ const changePasswordInput = (data) => {
 
   const errors ={} ;
   //Old Password Validation
-  if(!validator.isLength(data.oldpassword , {min :6 , max: 30})){
+  if(!isEmpty(data.oldpassword) && !validator.isLength(data.oldpassword , {min :6 , max: 30})){
     errors.oldpassword = 'Old Password length must be at least 6 characters'
   }
   if(isEmpty(data.oldpassword)) {
@@ -13,13 +13,13 @@ const changePasswordInput = (data) => {
   }
 
   //New Password 
-  if(validator.equals(data.oldpassword, data.newpassword)) {
+  if(!isEmpty(data.newpassword) && validator.equals(data.oldpassword, data.newpassword)) {
     errors.newpassword = 'Old and New passwords must be different';
   }
-  if(validator.isAlphanumeric(data.newpassword)) {
+  if(!isEmpty(data.newpassword) && validator.isAlphanumeric(data.newpassword)) {
     errors.newpassword = "New Password must include at least one characters, numbers and special characters";
   }
-  if(!validator.isLength(data.newpassword , {min :6 , max: 30})){
+  if(!isEmpty(data.newpassword) && !validator.isLength(data.newpassword , {min :6 , max: 30})){
     errors.newpassword = 'New Password length must be at least 6 characters'
   }
   if(isEmpty(data.newpassword)) {
@@ -27,10 +27,10 @@ const changePasswordInput = (data) => {
   }
 
   //Confirm Password Validation
-  if(!validator.equals(data.newpassword, data.confirmpassword)) {
+  if(!isEmpty(data.newpassword) && !validator.equals(data.newpassword, data.confirmpassword)) {
     errors.confirmpassword = 'New Password and Confirm New Password do not match';
   }
-  if(!validator.isLength(data.confirmpassword , {min :6 , max: 30})){
+  if(!isEmpty(data.confirmpassword) && !validator.isLength(data.confirmpassword , {min :6 , max: 30})){
     errors.confirmpassword = 'Confirm New Password length must be at least 6 characters'
   } 
   if(isEmpty(data.confirmpassword)) {

@@ -13,7 +13,7 @@ const changePasswordInput = (data) => {
   }
 
   //New Password 
-  if(!isEmpty(data.newpassword) && validator.equals(data.oldpassword, data.newpassword)) {
+  if(!isEmpty(data.oldpassword) && !isEmpty(data.newpassword) && validator.equals(data.oldpassword, data.newpassword)) {
     errors.newpassword = 'Old and New passwords must be different';
   }
   if(!isEmpty(data.newpassword) && validator.isAlphanumeric(data.newpassword)) {
@@ -27,7 +27,7 @@ const changePasswordInput = (data) => {
   }
 
   //Confirm Password Validation
-  if(!isEmpty(data.newpassword) && !validator.equals(data.newpassword, data.confirmpassword)) {
+  if(!isEmpty(data.newpassword) && !isEmpty(data.confirmpassword) &&!validator.equals(data.newpassword, data.confirmpassword)) {
     errors.confirmpassword = 'New Password and Confirm New Password do not match';
   }
   if(!isEmpty(data.confirmpassword) && !validator.isLength(data.confirmpassword , {min :6 , max: 30})){

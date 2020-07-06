@@ -100,7 +100,7 @@ router.post('/login', (req, res) => {
               username: user.username
             };
             //Create or sign Bearer token
-            jwt.sign(payload, keys, { expiresIn: 3600 }, (err, token) => {
+            jwt.sign(payload, keys, { expiresIn: 60000 }, (err, token) => {
               if (err) throw err;
               return res.json({
                 success: true,

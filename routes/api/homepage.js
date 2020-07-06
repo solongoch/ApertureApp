@@ -7,7 +7,7 @@ const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithW
 // @route   GET 'http://localhost:7500'
 // @desc    Landing page
 // @access  Public and Private
-router.get("", accessRouteWithOrWithoutToken, (req, res) => {
+router.get('/home', accessRouteWithOrWithoutToken, (req, res) => {
   // if user not logged in
   if (!req.isAuthenticated()) {
     // display logIn/SignUp page

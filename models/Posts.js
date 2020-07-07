@@ -9,7 +9,7 @@ const PostSchema = new Schema({
   likes: [{ likedBy: { type: Schema.Types.ObjectId, ref: "users" }}],
   comments: [
     {
-      commentBody: String,
+      commentBody: { type: String, required: true },
       commentedBy: { type: Schema.Types.ObjectId, ref: "users" },
       date: { type: Date, default: Date.now }
     }

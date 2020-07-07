@@ -9,7 +9,7 @@ module.exports = function validateCommentInput(data) {
   }
 
   if (isEmpty(data.commentBody)) {
-    errors.text = "Comment is empty";
+    errors.text = "Comment should not be empty";
   }
 
   return {

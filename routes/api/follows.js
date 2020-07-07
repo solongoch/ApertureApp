@@ -9,13 +9,13 @@ const User = require('../../models/User');
 // @access  Private
 
 
-router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }), (req, res) => {
-
+router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const userId = req.params.userId;
   // check if your id doesn't match the id of the user you want to follow
-  if (req.user.id === req.params.user_id) {
+  if (req.user.id === userId) {
     return res.status(400).json({ alreadyfollow: "You cannot follow yourself" })
   }
-  User.findById(req.params.user_id)
+  User.findById(userId)
     .then(user => {
       if (user) {//user exists
         // check if the requested user is already in follower list of other user then 
@@ -23,16 +23,16 @@ router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }),
         if (user.followers.some(follower => follower.user.toString() === req.user.id)) {
           return res.status(400).json({ alreadyfollow: "You already followed the user" });
         }
-        user.followers.unshift({ user: req.user.id });
+        user.followers.unshift({ user: req.user.id });//adding in follower[]
         user.save()
           .then(result => {
             User.findOne({ email: req.user.email }) 
               .then(user => {
                 if (user.following.filter(following =>
-                  following.user.toString() === req.params.userId).length > 0) {
+                  following.user.toString() === userId).length > 0) {
                   return res.status(400).json({ alreadyfollow: "You already following the user" })
                 }
-                user.following.unshift({ user: req.params.user_id });
+                user.following.unshift({ user: userId });
                 user.save().then(user => res.json({
                   success: true,
                   message: "Followed"
@@ -55,13 +55,14 @@ router.put('/:user_id/follow', passport.authenticate('jwt', { session: false }),
 // @input   Get Userid from req params of person whom user wants to unfollow.
 // @access  Private
 
-router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false }), (req, res) => {
 
+  const userId = req.params.userId;
   // check if your id doesn't match the id of the user you want to follow
-  if (req.user.id === req.params.user_id) {
+  if (req.user.id === userId) {
     return res.status(400).json({ alreadyfollow: "You cannot unfollow follow yourself" })
   }
-  User.findById(req.params.user_id)
+  User.findById(userId)
     .then(user => {
       if (user) {//user exists
         // check if the requested user is already in follower list then remove 
@@ -75,7 +76,7 @@ router.put('/:user_id/unfollow', passport.authenticate('jwt', { session: false }
               User.findOne({ email: req.user.email })
                 .then(doc => { //check if unfollow user in following [] then remove
                   if (doc.following.filter(follow =>
-                    follow.user.toString() === req.params.user_id).length > 0) {
+                    follow.user.toString() === userId).length > 0) {
                     const followingIndex = doc.following.map(follow =>
                       follow.user.toString().indexOf(req.userid));
                     doc.following.splice(followingIndex, 1);

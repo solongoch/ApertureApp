@@ -4,9 +4,8 @@ const passport = require("passport");
 // Model
 const User = require("../../models/User");
 
-// @route   Post api/posts/create
-// @desc    Create Post
-// @input   Postid from request params
+// @route   Post api/suggestion
+// @desc    Suggest accounts to user who didn't followed anyone
 // @access  Private
 router.get(
   "/suggestion",
@@ -17,13 +16,12 @@ router.get(
         .sort({ followers: -1 })
         .limit(10)
         .then(accounts => {
-          return res.json({accounts});
+          return res.json({'Suggestion': accounts});
         })
         .catch(err => {
           return res.json(err);
         });
     }
-  }
-);
+  });
 
 module.exports = router;

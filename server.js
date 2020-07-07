@@ -26,18 +26,22 @@ app.use(bodyparser.json());
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
-// homepage route
+// Landing page route
 app.get('/',
   optionalJWT,
   (req, res) => {
+    // if user logged in
     if (req.isAuthenticated()) {
+      // suggest accounts to user who didn't follow anyone
       if(req.user.following.length < 1) {
         res.redirect('/api/suggestion');
+      // if user followed someone, redirect to homepage
       } else {
         res.redirect('/api/home');
       }
+    // if user not logged in, redirect to Login page
     } else {
-      res.redirect('/api/users/login'); // cannot GET login, because login method is POST
+      res.redirect('/api/users/login');
     }
   });
 

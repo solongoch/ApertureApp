@@ -7,7 +7,6 @@ const User = require("../../models/User");
 // @desc    Follow User
 // @input   Get Userid from req params of person whom user wants to follow.
 // @access  Private
-
 router.put(
   "/:user_id/follow",
   passport.authenticate("jwt", { session: false }),
@@ -74,7 +73,6 @@ router.put(
 // @desc    Unfollow User
 // @input   Get Userid from req params of person whom user wants to unfollow.
 // @access  Private
-
 router.put(
   "/:user_id/unfollow",
   passport.authenticate("jwt", { session: false }),
@@ -144,7 +142,6 @@ router.put(
 // @route   put api/:username/followers
 // @desc    Get followers[] id, name, username and avatar
 // @access  Private
-
 router.get(
   "/:username/followers",
   passport.authenticate("jwt", { session: false }),
@@ -162,7 +159,7 @@ router.get(
           // user seeing followers of person who following
           req.user.following.some(obj => obj.user.toString() == paramsId.toString())
         ) {
-          return res.json(user.followers);
+          return res.json({'Followers': user.followers});
         } else {
           // can't see followers list of person who didn't follow
           return res.json({ msg: "Do you want to follow?" });
@@ -177,7 +174,6 @@ router.get(
 // @route   put api/:username/following
 // @desc    Get following[] id, name, username and avatar
 // @access  Private
-
 router.get(
   "/:username/following",
   passport.authenticate("jwt", { session: false }),
@@ -195,7 +191,7 @@ router.get(
           // user seeing following of person who following
           req.user.following.some(obj => obj.user.toString() == paramsId.toString())
         ) {
-          return res.json(user.following);
+          return res.json({'Following': user.following});
         } else {
           // can't see followers list of person who didn't follow
           return res.json({ msg: "Do you want to follow?" });

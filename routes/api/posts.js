@@ -8,7 +8,7 @@ const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithW
 const validatePostInput = require('../../validation/posts');
 const validateCommentInput = require("../../validation/comment");
 
-// @route   Post api/posts/:postId/likes
+// @route   Post api/posts/create
 // @desc    Create Post 
 // @input   Postid from request params
 // @access  Private

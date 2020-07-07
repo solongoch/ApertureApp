@@ -13,6 +13,7 @@ const suggestion = require('./routes/api/suggestion');
 const bodyparser = require('body-parser');
 const port = require('./config/keys').port;
 const passport = require('passport');
+const optionalJWT = require('./controller/accessRouteWithWithoutToken');
 
 // Configures the database and opens a global connection
 const db = require('./config/database');
@@ -27,12 +28,14 @@ require('./config/passport')(passport);
 
 // homepage route
 app.get('/',
-  passport.authenticate("jwt", { session: false }),
+  optionalJWT,
   (req, res) => {
-    if(req.user.following.length < 1) {
-      res.redirect('/api/suggestion');
-    } else {
-      res.redirect('/api/home');
+    if (req.isAuthenticated()) {
+      if(req.user.following.length < 1) {
+        res.redirect('/api/suggestion');
+      } else {
+        res.redirect('/api/home');
+      }
     }
   });
 

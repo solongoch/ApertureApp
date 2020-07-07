@@ -22,7 +22,7 @@ router.get('/home', passport.authenticate('jwt', { session: false }), (req, res)
               return res.status(500).json({ success: false, message: err.message });
             }
             if(records.length==0) {
-              return res.status(500).json({ success: false, message: "No Posts to show. Would you like to follow someone?" });
+              return res.status(400).json({ success: false, message: "No Posts to show. Would you like to follow someone?" });
             }
             return res.json(records);
 

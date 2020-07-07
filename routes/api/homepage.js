@@ -1,34 +1,36 @@
-const router = require("express").Router();
-// Model
-const Post = require("../../models/Posts");
-// Function
-const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
+const Post = require('../../models/Posts');
+const User = require('../../models/User');
 
-// @route   GET 'http://localhost:7500'
-// @desc    Landing page
-// @access  Public and Private
-router.get('/home', accessRouteWithOrWithoutToken, (req, res) => {
-  // if user not logged in
-  if (!req.isAuthenticated()) {
-    // display logIn/SignUp page
-    return res.json({ msg: "Do you want to log in or sign up?" });
-  } else {
-    const following = req.user.following;
+router.get('/home', passport.authenticate('jwt', { session: false }), (req, res) => {
+  var userFollowing = [];
 
-    // if user didn't follow anyone
-    if (following.length === 0) {
-      // suggest someone to follow
-      return res.json({ msg: "Accounts suggestion to follow" });
-    }
+  
+  User.findById(req.user.id, ('following.user')).lean()
+  .then(following => {
 
-    Post.find({ postedBy: { $in: following.map(following => following.user) } }) // check postedBy user is in following
-      .sort({ timePosted: -1 }) // sort post date by descending order
-      .limit(10)
-      .then(posts => {
-        return res.send(posts);
-      })
-      .catch(err => { return res.send(err) });
-  }
+      userFollowing = following.following.map(follow => follow.user._id);
+       //Get the posts of whom user is following's posts
+      Post.find({ "postedBy": { "$in": userFollowing } } ).lean()
+          .populate('postedBy likes.likedBy comments.commentedBy ',
+            ['username', 'avatar'])
+          .sort({ timePosted: -1 })//for latest records
+          .exec((err, records) => {            
+            if(err) {
+              return res.status(500).json({ success: false, message: err.message });
+            }
+            if(records.length==0) {
+              return res.status(500).json({ success: false, message: "No Posts to show. Would you like to follow someone?" });
+            }
+            return res.json(records);
+
+          });//Post find ends
+    })//then ends
+    .catch(err => {
+      return res.status(500).json({ success: false, message: err.message });
+    });//user findById catch ends 
 });
 
 module.exports = router;

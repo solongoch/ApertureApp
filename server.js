@@ -36,6 +36,8 @@ app.get('/',
       } else {
         res.redirect('/api/home');
       }
+    } else {
+      res.redirect('/api/users/login'); // cannot GET login, because login method is POST
     }
   });
 

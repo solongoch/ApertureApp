@@ -136,4 +136,11 @@ router.post("/login", (req, res) => {
     );
 });
 
+// @route   GET http://localhost:7500/api/users/login
+// @desc    Login page
+// @access  Public
+router.get("/login", (req, res) => {
+  res.json({msg: "Login page"})
+});
+
 module.exports = router;

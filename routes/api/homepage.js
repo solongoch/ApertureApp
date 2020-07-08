@@ -17,12 +17,13 @@ router.get('/home', passport.authenticate('jwt', { session: false }), (req, res)
           .populate('postedBy likes.likedBy comments.commentedBy ',
             ['username', 'avatar'])
           .sort({ timePosted: -1 })//for latest records
+          .limit(20)
           .exec((err, records) => {            
             if(err) {
               return res.status(500).json({ success: false, message: err.message });
             }
             if(records.length==0) {
-              return res.status(400).json({ success: false, message: "No Posts to show. Would you like to follow someone?" });
+              return res.redirect('/api/suggestion')
             }
             return res.json(records);
 

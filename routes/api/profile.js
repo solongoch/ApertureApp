@@ -51,8 +51,17 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
                     (user._id == req.user.id)) {
                     data.posts = posts;
                   }
-                  else { // req.user is not following OR not own post
-                   return  res.json({ msg: "This account is private. Do you want to follow?" });
+                  // req.user is not following OR not own post
+                  else (user) => { const data = {
+                    isPublic: user.isPublic,
+                    name: user.name,
+                    username: user.username,
+                    avatar: user.avatar,
+                    bio: user.bio,
+                    website: user.website,
+                    followersCount: user.followers ? user.followers.length : 0,
+                    followingCount: user.following ? user.following.length : 0
+                  };
                   }
                 }//For Private route ends
               }

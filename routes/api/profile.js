@@ -52,8 +52,8 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
                     data.posts = posts;
                   }
                   else { // req.user is not following OR not own post
-                   return  res.json({ msg: "This account is private. Do you want to follow?" });
-                  }
+                    return  res.json(data);
+                   }
                 }//For Private route ends
               }
               //get the count of posts posted by username 

@@ -124,7 +124,8 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
       } else { // accessing post from private account and user not logged in
         res.send("This is a private account! Please log in.");
       }
-    });
+    })
+    .catch(err => res.status(404).json({success: false, error: err.message}));
 });
 
 // @route   DELETE api/posts/:id
@@ -147,7 +148,7 @@ router.delete(
           // delete ':id' post
           post.remove().then(() => res.json({ success: true , message: "Post deleted" }));
         })
-        .catch(err => res.status(404).json({ postnotfound: "No post found" }));
+        .catch(err => res.status(404).json({success: false, error: err.message}));
     });
   }
 );
@@ -177,7 +178,7 @@ router.post(
             post.comments.unshift(newComment);  // Add to comments array
             post.save().then((post) => res.json(post)); // Save
           }else{
-            return res.status(404).json({ success:false,postnotfound: "No post found" });
+            return res.status(404).json({ success:false, postnotfound: "No post found" });
 
           }
         })

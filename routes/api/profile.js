@@ -78,7 +78,7 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
 });
 
 
-// @route   GET api/profile/edit
+// @route   GET api/profile/accounts/edit
 // @desc    Display profile information
 // @access  Private
 router.get(
@@ -100,7 +100,7 @@ router.get(
     });
   }
 );
-// @route   POST api/profile
+// @route   POST api/profile/accounts/edit
 // @desc    Create or edit user profile
 // @access  Private
 router.post(

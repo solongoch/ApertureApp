@@ -31,7 +31,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
   //Save post in Posts Collection
   newPost.save()
          .then(post => {
-            return res.json({ success: true, message: "Successfully posted!" });
+            return res.json({ success: true, message: "Successfully posted!",post });
           })
           .catch(err => {
             return res.status(500).json({ success: false, message : err.message });

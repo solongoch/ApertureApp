@@ -55,7 +55,7 @@ router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req
             const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
             post.likes.splice(userIndex, 1);
             post.save()
-              .then(data => res.json({ success: true, message: "User disliked a Post", noOfUnLikes: post.likes.length }))
+              .then(data => res.json({ success: true, message: "User disliked a Post"}))
               .catch(err => res.status(500).json({ success: false, message: err.message }));
           }
           else {//add user to likes []

@@ -83,8 +83,13 @@ router.get("/",
   (req, res) => {
     Post.find()
       .sort({ timePosted: -1 })
-      .then(posts => res.json(posts))
-      .catch(err => res.status(404).json({ nopostsfound: "No post found" }));
+      .then(posts => {
+        if (!posts) {
+          return res.json(404).json({msg: 'Posts not found.'})
+        }
+        return res.json(posts);
+      })
+      .catch(err => res.status(500).json({success: false, error: err.message}));
 });
 
 // @route   GET api/posts/:id
@@ -94,6 +99,10 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
   Post.findById(req.params.id)
     .populate("postedBy", ["_id", 'name', "isPublic", "followers"])
     .then(post => {
+      // if there is no post with :id
+      if (!post) {
+        return res.status(404).json({msg: 'Post not found'});
+      }
       // if post author's account is public, show post
       if (post.postedBy.isPublic) {
         // remove isPublic and followers from display
@@ -102,29 +111,32 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
         delete post.postedBy.followers;
 
         // show post
-        res.json(post);
+        return res.json(post);
 
       // @usage   if user who posted this post has public account, anyone who logged in or not can see this post
       // @access  Private
       } else if (req.isAuthenticated()) { // user logged in
         if (!post.postedBy.isPublic) { // private account
           // req.user is following postedBy OR
-          if (post.postedBy.followers.includes(`\{ user: ${req.user.id} \}`) || 
+          if (post.postedBy.followers.some(obj => obj.user == req.user.id) || 
           // req.user is postedBy (user's own post)
           (post.postedBy._id == req.user.id)) {
             // remove isPublic and followers from display
             post = post.toObject();
             delete post.postedBy.isPublic;
             delete post.postedBy.followers;
-            res.json(post);
+            
+            // show post
+            return res.json(post);
           } else { // req.user is not following OR not own post
-            res.json({ msg: "This account is private. Do you want to follow?" });
+            return res.json({ msg: "This account is private. Do you want to follow?" });
           }
         }
       } else { // accessing post from private account and user not logged in
-        res.send("This is a private account! Please log in.");
+        return res.json({msg: "This is a private account! Please log in."});
       }
-    });
+    })
+    .catch(err => res.status(500).json({success: false, error: err.message}));
 });
 
 // @route   DELETE api/posts/:id
@@ -137,6 +149,10 @@ router.delete(
     User.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
+          // if there is no post with :id
+          if(!post){
+            return res.status(404).json({msg: 'Post not found'});
+          }
           // check for post owner
           if (post.postedBy.toString() !== req.user.id) {
             return res
@@ -147,7 +163,7 @@ router.delete(
           // delete ':id' post
           post.remove().then(() => res.json({ success: true , message: "Post deleted" }));
         })
-        .catch(err => res.status(404).json({ postnotfound: "No post found" }));
+        .catch(err => res.status(500).json({success: false, error: err.message}));
     });
   }
 );
@@ -177,7 +193,7 @@ router.post(
             post.comments.unshift(newComment);  // Add to comments array
             post.save().then((post) => res.json(post)); // Save
           }else{
-            return res.status(404).json({ success:false,postnotfound: "No post found" });
+            return res.status(404).json({ success:false, postnotfound: "No post found" });
 
           }
         })

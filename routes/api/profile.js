@@ -51,18 +51,9 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
                     (user._id == req.user.id)) {
                     data.posts = posts;
                   }
-                  // req.user is not following OR not own post
-                  else (user) => { const data = {
-                    isPublic: user.isPublic,
-                    name: user.name,
-                    username: user.username,
-                    avatar: user.avatar,
-                    bio: user.bio,
-                    website: user.website,
-                    followersCount: user.followers ? user.followers.length : 0,
-                    followingCount: user.following ? user.following.length : 0
-                  };
-                  }
+                  else { // req.user is not following OR not own post
+                    return  res.json(data);
+                   }
                 }//For Private route ends
               }
               //get the count of posts posted by username 

@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const User = require("../../models/User");// Load User Model
-const Post = require("../../models/Posts");// Load Posts Model
-const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
-// Load Validation
+// Model
+const User = require("../../models/User");
+const Post = require("../../models/Posts");
+// Validation
 const validateProfileInput = require("../../validation/profile");
+// Function
+const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
 
 // @route   Get http://localhost:7500/api/profile/:username
@@ -132,10 +134,10 @@ router.post(
             { email: req.user.email },
             { $set: userFields },
             { new: true }
-          ).then(updatedUser => res.json(updatedUser));
+          ).then(updatedUser => {return res.json(updatedUser)});
         }
       })
-      .catch(err => res.status(500).json({ err: "findOne method failed" }));
+      .catch(err => {return res.status(400).json({ err: "findOne method failed" })});
   }
 );
 

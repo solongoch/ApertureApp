@@ -3,12 +3,13 @@ const router = express.Router();
 const passport = require('passport');
 const Post = require('../../models/Posts');
 const User = require('../../models/User');
-const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 // Validation
 const validatePostInput = require('../../validation/posts');
 const validateCommentInput = require("../../validation/comment");
+// Function
+const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
 
-// @route   Post api/posts/:postId/likes
+// @route   Post api/posts/create
 // @desc    Create Post 
 // @input   Postid from request params
 // @access  Private

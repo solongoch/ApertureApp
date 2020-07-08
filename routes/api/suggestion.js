@@ -12,7 +12,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     if (req.user.following.length < 1) {
-      User.find({_id: {$ne: req.user.id} }, { name: 1, username: 1, avatar: 1, followers: 1 })
+      User.find({}, { name: 1, username: 1, avatar: 1, followers: 1 })
         .sort({ followers: -1 })
         .limit(10)
         .then(accounts => {

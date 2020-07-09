@@ -5,7 +5,7 @@ const passport = require("passport");
 const User = require("../../models/User");
 
 // @route   Post api/suggestion
-// @desc    Suggest accounts to user who didn't followed anyone
+// @desc    Suggest accounts to user who didn't follow anyone
 // @access  Private
 router.get(
   "/suggestion",

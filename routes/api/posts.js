@@ -11,7 +11,6 @@ const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithW
 
 // @route   Post api/posts/create
 // @desc    Create Post 
-// @input   Postid from request params
 // @access  Private
 
 router.post('/create', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -55,13 +54,13 @@ router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req
             const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
             post.likes.splice(userIndex, 1);
             post.save()
-              .then(data => res.json({ success: true, message: "User disliked a Post"}))
+              .then(data => res.json({ success: true, message: "User disliked a Post", likesCount: post.likes.length }))
               .catch(err => res.status(500).json({ success: false, message: err.message }));
           }
           else {//add user to likes []
             post.likes.unshift({ likedBy: req.user.id });
             post.save()
-              .then(data => res.json({ success: true, message: "User liked a Post" ,noOfLikes: post.likes.length }))
+              .then(data => res.json({ success: true, message: "User liked a Post" ,likesCount: post.likes.length }))
               .catch(err => res.status(500).json({ success: false, message: err.message }));
           }
       }
@@ -76,7 +75,7 @@ router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req
 });
 
 // @route   GET api/posts
-// @desc    Get posts
+// @desc    Get all posts of logged in user
 // @access  Private
 router.get("/", 
   passport.authenticate("jwt", { session: false }), 
@@ -93,7 +92,8 @@ router.get("/",
 });
 
 // @route   GET api/posts/:id
-// @desc    Get post by id
+// @desc    Get single post by postid
+// @input   postId from request params
 // @access  Public and Private
 router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
   Post.findById(req.params.id)
@@ -140,7 +140,8 @@ router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
 });
 
 // @route   DELETE api/posts/:id
-// @desc    Delete post
+// @desc    Delete post by postId
+// @input   postId from request params
 // @access  Private
 router.delete(
   "/:id",
@@ -170,6 +171,7 @@ router.delete(
 
 // @route   POST api/posts/comment/:id
 // @desc    Add comment to post
+// @input   postId from request params
 // @access  Private
 router.post(
     "/comment/:id",
@@ -203,6 +205,7 @@ router.post(
   
   // @route   DELETE api/posts/comment/:id/:comment_id
   // @desc    Remove comment from post
+  // @input   postId and comment_id from request params
   // @access  Private
   router.delete(
     "/comment/:postId/:commentId",

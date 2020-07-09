@@ -103,7 +103,8 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
 });
 
 // @route   put api/:username/followers
-// @desc    Get followers[] id, name, username and avatar
+// @desc    Get followers[] id, name, username and avatar of given user
+// @input   username from request params
 // @access  Private
 router.get(
   "/:username/followers",
@@ -112,6 +113,9 @@ router.get(
     User.findOne({ username: req.params.username }, ["_id", "followers"])
       .populate("followers.user", ["username", "name", "avatar"])
       .then(user => {
+        if(!user){
+          return res.status(404).json({ success: false, message: "User not found" });
+        }
         const paramsId = user._id;
         // empty followers array
         if (user.followers.length < 1) { // Note: on instagram "followers" is not clickable
@@ -135,7 +139,8 @@ router.get(
 );
 
 // @route   put api/:username/following
-// @desc    Get following[] id, name, username and avatar
+// @desc    Get following[] id, name, username and avatar of given user
+// @input   username from request params
 // @access  Private
 router.get(
   "/:username/following",
@@ -144,6 +149,9 @@ router.get(
     User.findOne({ username: req.params.username }, ["_id", "following"])
       .populate("following.user", ["username", "name", "avatar"])
       .then(user => {
+        if(!user){
+          return res.status(404).json({ success: false, message: "User not found" });
+        }
         const paramsId = user._id;
         // empty following array
         if (user.following.length < 1) { // Note: on instagram "following" is not clickable

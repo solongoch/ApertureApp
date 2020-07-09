@@ -101,6 +101,7 @@ router.get(
     });
   }
 );
+
 // @route   POST api/profile/accounts/edit
 // @desc    Create or edit user profile
 // @access  Private

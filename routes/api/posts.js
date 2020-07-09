@@ -81,7 +81,7 @@ router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req
 router.get("/", 
   passport.authenticate("jwt", { session: false }), 
   (req, res) => {
-    Post.find()
+    Post.find({ postedBy: req.user.id })
       .sort({ timePosted: -1 })
       .then(posts => {
         if (!posts) {

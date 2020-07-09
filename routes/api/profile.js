@@ -52,6 +52,7 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
                     data.posts = posts;
                   }
                   else { // req.user is not following OR not own post
+                    data.noOfPosts = posts.length;
                     return  res.json(data);
                    }
                 }//For Private route ends
@@ -100,6 +101,7 @@ router.get(
     });
   }
 );
+
 // @route   POST api/profile/accounts/edit
 // @desc    Create or edit user profile
 // @access  Private

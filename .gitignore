@@ -3,3 +3,5 @@ package-lock.json
 /config/keys.js
 /request.rest
 /Test.mongodb
+/client/node_modules
+/client/package-lock.json

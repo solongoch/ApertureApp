@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PhoneImage from '../../image/insta3.png';
+import PhoneImage from '../../image/insta2.png';
 import '../css/Signup.css';
 
 class Signup extends Component {

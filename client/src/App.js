@@ -1,13 +1,15 @@
 import React,{Component}from 'react';
 import './App.css';
+// import Navbar from './components/Layout/Navbar';
+import Signup from './components/Auth/Signup';
 
 class App extends Component {
  
   render(){
     return (
       <div className="App">
-        <h1>My React APP</h1>
-
+        {/* <Navbar/> */}
+        <Signup/>
       </div>
     );
 

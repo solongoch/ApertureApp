@@ -116,8 +116,8 @@
     margin: 0 auto !important;
   }
   .right-column-login {
-    margin:0 5px;
-
+    margin-left: 5px;
+    margin-right: 5px;
   }
 }
 
@@ -135,6 +135,7 @@
   }
   .right-column {
     margin-left: 5px;
+    
   }
   .logoText {
     font-size: 3rem;
@@ -149,12 +150,24 @@
 }
 
 /*border: none forright-Column breakpoint 320px-499px  */
-@media (min-width: 320px) and (max-width: 499px){
+@media (min-width: 350px) and (max-width: 499px){
   .right-column {
     border: none;
-    margin-left: 5px;
+    /* margin-left: 15px; */
   }
   .right-column-login {
     border: none;
   }  
 }
+
+@media (min-width: 320px) and (max-width: 349px){
+  .right-column {
+   margin-left: 15px;
+   margin-right: 0;
+   border: none;
+  }
+  .right-column-login {
+    border: none;
+  }  
+  
+} 

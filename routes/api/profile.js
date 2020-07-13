@@ -136,7 +136,15 @@ router.post(
             { email: req.user.email },
             { $set: userFields },
             { new: true }
-          ).then(updatedUser => res.json(updatedUser))
+          ).then(updatedUser => {
+            updatedUser = updatedUser.toObject();
+            delete updatedUser._id;
+            delete updatedUser.password;
+            delete updatedUser.followers;
+            delete updatedUser.following;
+            delete updatedUser.__v;
+            res.json({'User': updatedUser})
+          })
            .catch(err => res.status(500).json({ success:false, err: err.message }));
         }
       })

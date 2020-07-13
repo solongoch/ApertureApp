@@ -1,21 +1,15 @@
 /* SignUp Component CSS starts*/
 
 .col-lg-6{
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-
-.col-md-6{
-  padding-left: 0px !important;
-  padding-right: 0px !important;
+  padding: 0;
 }
 
 .phoneImg{
-  max-width: 450px;
+  max-width: 420px;
   width: 100%;
   float: right;
-  height: 650px;
-  padding-top: 30px;
+  height: 618px;
+  padding-top: 20px;
   align-items: stretch;
 }
 
@@ -58,7 +52,6 @@
   font-size: 16px !important;
   line-height: 20px;
 }
-
 ::placeholder{
   columns: #999!important;
 }
@@ -68,7 +61,6 @@
   padding: 2px!important;
   margin: 12px auto;
 }
-
 .btn-primary{
   background-color: #3897f0 !important;
   border: 1px solid #3897f0 !important;
@@ -103,7 +95,11 @@
 }
 
 /********** For MD devices **********/
-
+@media (min-width: 876px) and (max-width: 991px) {
+.phoneImg{
+  width: 410px;
+}
+}
 @media (min-width: 768px) and (max-width: 875px) {
   .container {
     max-width: 875.33px;
@@ -120,15 +116,13 @@
     max-width: 100%;
     margin: 0 auto !important;
   }
-
   .right-column-login {
     margin:0 5px;
 
   }
 }
 
-/********** Small devices only **********/
-
+/********** XS to Small devices only **********/
 @media (min-width: 320px) and (max-width: 767.98px) {
   .container{
     display: flex;
@@ -154,16 +148,14 @@
   .right-column-login {
     margin: 0 auto;
   }
-  /* End Home Page */
 }
 
+/*border: none forright-Column breakpoint 320px-499px  */
 @media (min-width: 320px) and (max-width: 499px){
-
   .right-column {
     border: none;
   }
   .right-column-login {
     border: none;
-  }
-
+  }  
 }

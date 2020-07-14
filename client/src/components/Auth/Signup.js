@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PhoneImage from '../../image/insta2.png';
-import logoImage from '../../image/logo1.png';
+import logoImage from '../../image/logo2.png';
 import AppleBadge from '../../image/Applebadge.png';
 import GoogleBadge from '../../image/googleplay.png';
 import '../css/Signup.css';
@@ -16,7 +16,7 @@ class Signup extends Component {
           </div>
           <div className="col-lg-6 col-md-6 right-column-container">
             <div className="right-column">
-              <img src={logoImage} alt="LogoImage" Style="width:50px"/>
+              <img src={logoImage} alt="LogoImage" style={{width:50}}/>
               <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
               <form className="signup-form">

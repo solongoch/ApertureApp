@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import PhoneImage from '../../image/insta2.png';
 import '../css/Signup.css';
 
@@ -12,7 +13,7 @@ class Signup extends Component {
           </div>
           <div className="col-lg-6 col-md-6 right-column-container">           
             <div className="right-column">
-              <h1 className="logoText">Instagram</h1>
+              <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
               <form className="signup-form">
                 <div className="form-group">
@@ -34,7 +35,7 @@ class Signup extends Component {
               </p>
             </div>
             <div className="right-column-login">
-              <p className="have-an-account">Have an account? <a href="www.toutube.com">Log in</a> </p>
+              <p className="have-an-account">Have an account? <Link to="/">Log in</Link> </p>
             </div>
           </div>
         </div>        

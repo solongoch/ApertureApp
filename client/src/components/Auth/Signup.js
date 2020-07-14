@@ -7,21 +7,29 @@ import GoogleBadge from '../../image/googleplay.png';
 import '../css/Signup.css';
 
 class Signup extends Component {
-  constructor(){
+  constructor() {
 
     super();
-    this.state={
-      email:'',
-      name:'',
-      username:'',
-      password:''
+    //Initialize state
+    this.state = {
+      email: '',
+      name: '',
+      username: '',
+      password: '',
+      errors: {}
     };
+    //bind input values to this.onChange()
+    this.onChange = this.onChange.bind(this);
+
   }
 
-  // function onChange(e){
-
-
-  // }
+  //read values from input field to state
+  onChange(e){ 
+    this.setState(
+      {
+        [e.target.name] : e.target.value
+      });
+  }
 
   render() {
     return (
@@ -32,27 +40,58 @@ class Signup extends Component {
           </div>
           <div className="col-lg-6 col-md-6 right-column-container">
             <div className="right-column">
-              <img src={logoImage} alt="LogoImage" style={{width:50}}/>
+              <img src={logoImage} alt="LogoImage" style={{ width: 50 }} />
               <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
               <form className="signup-form">
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Email" name="email"
-                    value={this.state.email} onChange={this.onChange}/>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
+                    required
+                  />
                 </div>
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Full Name" name="name" 
-                   value={this.state.name} onChange={this.onChange}/>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Full Name"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.onChange}
+                    required
+                  />
                 </div>
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Username" name="username" 
-                   value={this.state.username} onChange={this.onChange}/>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Username"
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.onChange}
+                    required
+                  />
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" placeholder="Password" name="password" 
-                  value={this.state.password} onChange={this.onChange} />
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                    required
+                  />
                 </div>
-                <button type="submit" className="btn btn-block btn-primary">Sign up</button>
+                <button
+                  type="submit"
+                  className="btn btn-block btn-primary">Sign up
+                </button>
               </form>
               <p className="terms">
                 By signing up, you agree to our <b>Terms , Data Policy</b> and <b>Cookies Policy</b>.

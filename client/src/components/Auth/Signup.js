@@ -7,6 +7,22 @@ import GoogleBadge from '../../image/googleplay.png';
 import '../css/Signup.css';
 
 class Signup extends Component {
+  constructor(){
+
+    super();
+    this.state={
+      email:'',
+      name:'',
+      username:'',
+      password:''
+    };
+  }
+
+  // function onChange(e){
+
+
+  // }
+
   render() {
     return (
       <div className="container">
@@ -21,16 +37,20 @@ class Signup extends Component {
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
               <form className="signup-form">
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Email" name="email" />
+                  <input type="text" className="form-control" placeholder="Email" name="email"
+                    value={this.state.email} onChange={this.onChange}/>
                 </div>
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Full Name" name="name" />
+                  <input type="text" className="form-control" placeholder="Full Name" name="name" 
+                   value={this.state.name} onChange={this.onChange}/>
                 </div>
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Username" name="username" />
+                  <input type="text" className="form-control" placeholder="Username" name="username" 
+                   value={this.state.username} onChange={this.onChange}/>
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control" placeholder="Password" name="password" />
+                  <input type="password" className="form-control" placeholder="Password" name="password" 
+                  value={this.state.password} onChange={this.onChange} />
                 </div>
                 <button type="submit" className="btn btn-block btn-primary">Sign up</button>
               </form>

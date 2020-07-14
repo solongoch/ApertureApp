@@ -1,19 +1,18 @@
-import React,{Component}from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-// import Navbar from './components/Layout/Navbar';
 import Signup from './components/Auth/Signup';
 
 class App extends Component {
- 
+
   render(){
     return (
-      <div className="App">
-        {/* <Navbar/> */}
-        <Signup/>
-      </div>
+      <Router>
+        <div className="App">
+          <Route exact path='/signup' component={Signup} />
+        </div>
+      </Router>
     );
-
-
   }
 }
 

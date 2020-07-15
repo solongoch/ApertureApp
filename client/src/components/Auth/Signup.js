@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import PhoneImage from '../../image/insta2.png';
 import logoImage from '../../image/logo2.png';
 import AppleBadge from '../../image/Applebadge.png';
@@ -16,13 +17,31 @@ class Signup extends Component {
       name: '',
       username: '',
       password: '',
-      errors: {}
+      password2: '',
+      errors: {},
+      isPasswordShown: false,
+      isPassword2Shown: false
     };
     //bind input values to this.onChange()
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
   }
 
+  //toggle password
+  togglePasswordVisiblity =()=>{
+    const {isPasswordShown} = this.state;
+    this.setState({
+      isPasswordShown:!isPasswordShown,
+    });
+  }
+//toggle password2
+  togglePassword2Visiblity =()=>{
+    const {isPassword2Shown} = this.state;
+    this.setState({
+      isPassword2Shown:!isPassword2Shown
+    });
+  }
   //read values from input field to state
   onChange(e){ 
     this.setState(
@@ -31,7 +50,27 @@ class Signup extends Component {
       });
   }
 
+  //Make API call onSubmit of the form
+  onSubmit(e){
+    //cancels default behavoiur of submit button from routing to another page 
+    e.preventDefault();
+    //build user object to make API call
+    const newUser = {
+      email: this.state.email,
+      name: this.state.name,
+      username: this.state.username,
+      password: this.state.password,
+      password2: this.state.password2
+    };
+    //API call
+    axios
+      .post('/api/users/signup', newUser)
+      .then(res=> console.log(res.data))
+      .catch(err => console.log(err.response.data));
+  }
+  
   render() {
+    const {isPasswordShown,isPassword2Shown} = this.state;
     return (
       <div className="container">
         <div className="row">
@@ -40,14 +79,13 @@ class Signup extends Component {
           </div>
           <div className="col-lg-6 col-md-6 right-column-container">
             <div className="right-column">
-              <img src={logoImage} alt="LogoImage" style={{ width: 50 }} />
               <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
-              <form className="signup-form">
+              <form className="signup-form" onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control shadow-none"
                     placeholder="Email"
                     name="email"
                     value={this.state.email}
@@ -58,7 +96,7 @@ class Signup extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control shadow-none"
                     placeholder="Full Name"
                     name="name"
                     value={this.state.name}
@@ -69,7 +107,7 @@ class Signup extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control shadow-none"
                     placeholder="Username"
                     name="username"
                     value={this.state.username}
@@ -79,19 +117,41 @@ class Signup extends Component {
                 </div>
                 <div className="form-group">
                   <input
-                    type="password"
-                    className="form-control"
+                    type={isPasswordShown ? "text" : "password"}
+                    className="form-control shadow-none"
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
+                    
+                  />
+                  { this.state.password ? 
+                      <i className={`fa ${isPasswordShown ? "fa-eye-slash" : "fa-eye"} password-icon`}
+                        onClick={this.togglePasswordVisiblity} 
+                      />
+                    : null
+                  }
+                
+                </div>
+                <div className="form-group">
+                  <input
+                    type={isPassword2Shown ? "text" : "password"}
+                    className="form-control shadow-none"
+                    placeholder="Confirm password"
+                    name="password2"
+                    value={this.state.password2}
+                    onChange={this.onChange}
                     required
                   />
+                  { this.state.password2 ? 
+                      <i 
+                        className={`fa ${ isPassword2Shown ? "fa-eye-slash" : "fa-eye"} password-icon`}
+                        onClick={this.togglePassword2Visiblity}
+                      />
+                    : null
+                  }
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-block btn-primary">Sign up
-                </button>
+                <button type="submit" className="btn btn-block btn-primary">Sign up</button>
               </form>
               <p className="terms">
                 By signing up, you agree to our <b>Terms , Data Policy</b> and <b>Cookies Policy</b>.
@@ -101,6 +161,7 @@ class Signup extends Component {
               <p className="have-an-account">Have an account? <Link to="/">Log in</Link> </p>
             </div>
             <div className="get-the-app">
+              <img src={logoImage} alt="LogoImage" style={{ width: 30 }} />
               <span>Get the app.</span>
               <div className="badges">
                 <img src={AppleBadge} alt="AppStore" />

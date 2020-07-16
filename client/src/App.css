@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 * {
@@ -26,7 +27,12 @@ a:hover {
   color: #000;
 }
 
+.make-gray {
+  color: #999999;
+}
+
 .container {
+  position: relative;
   width: 940px;
   display: flex;
   justify-content: space-between;

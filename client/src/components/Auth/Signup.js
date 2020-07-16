@@ -72,17 +72,17 @@ class Signup extends Component {
   render() {
     const {isPasswordShown,isPassword2Shown} = this.state;
     return (
-      <div className="container">
+      <div className="signup-wrapper">
         <div className="row">
-          <div className="col-lg-6 col-md-6 d-none d-sm-none d-md-block d-lg-block">
+          <div className="col-md-6 col-lg-6 col-xl-7 d-none d-sm-none d-md-block d-lg-block">
             <img className="phoneImg" src={PhoneImage} alt="HomeImage" />
           </div>
-          <div className="col-lg-6 col-md-6 right-column-container">
+          <div className="col-md-6 col-lg-5 col-xl-4 right-column-container">
             <div className="right-column">
               <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
               <form className="signup-form" onSubmit={this.onSubmit}>
-                <div className="form-group">
+                <div className="form-group text-xs-center">
                   <input
                     type="text"
                     className="form-control shadow-none"

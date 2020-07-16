@@ -1,10 +1,16 @@
 /* SignUp Component CSS starts*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .col-lg-6 {
   padding: 0;
 }
 
 .phoneImg {
-  max-width: 400px;
+  /* width: 400px; */
   /* width: 100%; */
   float: right;
   height: 618px;
@@ -13,16 +19,16 @@
 }
 
 .right-column-container {
-  padding-top: 1px;
+  padding-top: 20px;
 }
 
 .right-column {
   border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
-  width: 350px;
-  /* width: 100%; */
+  /* width: 350px; */
+  text-align: center;
   border-radius: 1px;
-  margin: 5px;
-  padding: 10px 25px 15px;
+  margin-bottom: 5px;
+  padding: 10px 10px 15px;
 }
 
 .logoText {
@@ -38,10 +44,6 @@
   color: rgba(var(--f52, 142, 142, 142), 1);
   margin: 0 20px 20px;
 }
-
-/* .signup-form {
-  padding: 0!important;
-} */
 
 .form-group {
   margin-bottom: 6px !important;
@@ -75,11 +77,15 @@
   text-align: center;
   margin-left: 5px!important;
 }
+
+.btn-block {
+  margin-left: 0!important;
+}
+
 .btn-primary {
   background-color: #3897f0 !important;
   border: 1px solid #3897f0 !important;
   border-radius: 6px;
-  width:294px;
 }
 
 .terms {
@@ -87,16 +93,16 @@
   font-size: 12px;
   line-height: 16px;
   font-family: Arial, Helvetica, sans-serif;
-  margin: 5px 5px;
+  margin: 5px 6px;
   text-align: center;
+  margin-top: 10px;
+  font-weight: 400;
 }
 
 .right-column-login {
   background: #fff;
   border: 1px solid #e6e6e6;
-  width: 350px;
-  margin-left: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding: 10px 0;
   text-align: center;
 }
@@ -104,10 +110,9 @@
 .have-an-account {
   color: rgba(var(--i1d, 38, 38, 38), 1);
   font-size: 14px;
-  margin-top: 15px;
-  margin-bottom: 15px;
   text-align: center;
   font-weight: 400;
+  margin-bottom: 5px;
 }
 
 .right-column-login a:hover {
@@ -115,7 +120,6 @@
 }
 
 .get-the-app {
-  width: 350px;
   padding: 5px;
 }
 
@@ -129,7 +133,7 @@
 }
 
 .badges img {
-  max-width: 8rem;
+  max-width: 7rem;
   cursor: pointer;
   padding-bottom: 10px;
 }
@@ -140,89 +144,141 @@
 
 /********** For MD devices **********/
 
-@media (min-width: 876px) and (max-width: 991px) {
+/* @media (min-width: 876px) and (max-width: 991px) {
   .phoneImg {
     width: 400px;
   }
-}
-
-@media (min-width: 768px) and (max-width: 875px) {
-  .container {
-    max-width: 875.33px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+} */
+@media (min-width:736px) and (max-width: 875px) {
+  div{
+    margin: auto;
+    text-align: center;
   }
-  /*Hide Phone Image */
+  .right-column {
+    width:380px;
+  }
   .d-md-block {
     display: none !important;
-  }
-  .right-column-container {
-    max-width: 100%;
     margin: 0 auto !important;
   }
+  .form-group{
+    width: 80%;
+  }
+  .btn-block{
+    width: 80%;
+    margin: auto!important;
+  }
+  .terms{
+    margin-left: 30px;
+    margin-right:30px;
+  }
   .right-column-login {
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    width:380px;
+  }
+  .get-the-app {
+    width:380px;
   }
 }
 
-/********** XS to Small devices only **********/
-
-@media (min-width: 320px) and (max-width: 767.98px) {
-  /* .container{
-    display: flex;
-    justify-content: center;
-  } */
-  .right-column-container {
-    width: 100%;
-  }
-  .right-column {
-    margin-left: 5px;
-  }
-  .logoText {
-    font-size: 3rem;
-  }
-  .terms {
-    margin: 0 -5px;
-    font-weight: 400;
-  }
-  .right-column-login {
-    margin: 0 auto;
-    margin-bottom: 5px;
-  }
-}
-
-/*border: none for right-Column breakpoint 320px-499px  */
-@media (min-width: 350px) and (max-width: 499px) {
-  .right-column {
-    border: none;
-    /* margin-left: 15px; */
-  }
-  .right-column-login {
-    border: none;
-    margin-bottom: 10px;
-  }
-}
-
-@media (min-width: 320px) and (max-width: 349px) {
-  .right-column {
-    border: none;
+@media (min-width:501px) and (max-width: 735px) {
+  div{
+    margin: auto;
     text-align: center;
+  }
+  .right-column {
+    width:360px;
+  }
+
+  .form-group{
+    width: 80%;
+  }
+  .btn-block{
+    width: 80%;
+    margin: auto!important;
+  }
+  .terms{
+    margin-left: 30px;
+    margin-right:30px;
+  }
+  .right-column-login {
+    width:360px;
+  }
+  .get-the-app {
+    width:360px;
+  }
+}
+@media (min-width:451px) and (max-width: 500px) {
+  div{
+    margin: auto;
+    text-align: center;
+  }
+  .right-column {
+    width:350px;
+  }
+  .form-group{
+    width: 80%;
+  }
+  .btn-block{
+    width: 80%;
+    margin: auto!important;
+  }
+  .terms{
+    margin-left: 30px;
+    margin-right:30px;
+  }
+  .right-column-login {
+    width:350px;
+  }
+  .right-column-login {
+    width:350px;
+  }
+
+}
+
+@media (min-width:376px) and (max-width: 450px) {
+ div{
+    margin: auto;
+    text-align: center;
+  }
+  .right-column {
+    border: none;
   }
   .right-column-login {
     border: none;
     margin-bottom: 0;
     padding-bottom: 5px;
-    text-align: center;
   }
-  .terms {
-    margin: 0;
-    margin-left: -5px;
-    font-weight: 400;
+  .form-group{
+    width: 80%;
   }
-  .have-an-account {
-    margin-bottom: 5px;
+  .btn-block{
+    width: 80%;
+    margin: auto!important;
+  }
+  .terms{
+    margin-left: 30px;
+    margin-right:30px;
   }
 }
+
+@media (min-width: 320px) and (max-width: 375px) {
+  div{
+    margin: auto;
+    text-align: center;
+  }
+  .right-column {
+    border: none;
+  }
+  .right-column-login {
+    border: none;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+  }
+}
+/* 
+@media (min-width: 768px) and (max-width: 875px) {
+  .d-md-block {
+    display: none !important;
+    margin: 0 auto !important;
+  }
+} */

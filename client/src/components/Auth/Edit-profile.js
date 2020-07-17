@@ -200,7 +200,7 @@ class EditProfile extends Component {
               <div className="col-md-10">
                 <button className="btn btn-primary" type="submit">Update Profile</button>
                 <div className="has-separator">Terminate Account</div>
-                <Link to="/remove" className="btn btn-lg btn-info mr-2">Delete Account</Link>
+                <Link to="/remove" className="btn btn-lg btn-info mr-2 delete">Delete Account</Link>
               </div>
             </div>
 

@@ -40,9 +40,9 @@ class ChangePassword extends Component {
      <div className="chgpwd-div">
        <div className="container">
           <div className="row align-items-center">
-                <div className="col-12 col-sm-12 col-md-10 col-lg-7 col-xxs-6 mx-auto ">
+                <div className="col-12 col-sm-12 col-md-10 col-lg-7 col-xxs-6">
                   <div className="card">
-                    <form>
+                    <form className="Chgpwd-form">
                       <div className="form-group">
                         <div className=" col-sm-10 col-md-12 col-lg-12">
                           <img className="avatar-img " src={logoImage} alt="Avatar" />
@@ -83,11 +83,10 @@ class ChangePassword extends Component {
                             value={this.state.confirmpassword} onChange={this.onChange} />
                         </div>
                       
-                      <div className="form-row">
-                        
-                        <div className="form-group col-md-10">
-                          
-                        <button type="submit" className="btn mt-3 btn-primary submit-btn ">Change Password</button>
+                      <div className="form-row">                        
+                        <div className="form-group col-md-10">                          
+                        <button type="submit" 
+                                className="btn mt-3 btn-primary submit-btn">Change Password</button>
                         </div>
                       </div>
                     </form>

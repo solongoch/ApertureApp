@@ -1,14 +1,5 @@
 
 
-.App {
-    background-color: #fafafa;
-  }
-
-  html {
-      font-size: 10px;
-      box-sizing: border-box;
-  }
-
   img {
     width: 100%;
     max-width: 100%;
@@ -21,30 +12,32 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding-top: 10rem;
+      padding-top: 100px;
+      background-color: #fafafa;
   }
   
   .row {
       width: 100%;
-      max-width: 93.5rem;
-      margin: 3rem auto 0;
+      max-width: 935px;
+      margin: 30px auto 30px;
   }
 
   .login > .row {
       display: flex;
-      padding: 0 8rem;
+      padding: 0 80px;
   }
 
   .phone-app-demo {
-    height: 61.8rem;
+    height: 550px;
     flex: 1;
     background-image: url(../../img/insta2.png);
+    background-repeat: no-repeat;
 }
 
   .form-data {
       width: 100%;
-      max-width: 35rem;
-      margin-top: 3rem;
+      max-width: 350px;
+      margin-top: 30px;
   }
 
   .form-data form {
@@ -52,43 +45,43 @@
       border: 2px solid #eee;
       display: flex;
       flex-direction: column;
-      padding: 2rem 4rem;
+      padding: 20px 40px;
       text-align: center;
   }
 
 .logo img {
-    width: 17.5rem;
-    margin-bottom: 2.5rem;
+    width: 175px;
+    margin-bottom: 25px;
 }
 
 .form-data form input {
-    padding: .8rem;
-    margin-bottom: .5rem;
+    padding: 8px;
+    margin-bottom: 5px;
     border: 2px solid #eee;
-    border-radius: .4rem;
+    border-radius: 4px;
 
 }
 
 .btn {
-    margin: 1rem 0 1.5rem;
-    height: 3rem;
+    margin: 10px 0 15px;
+    height: 30px;
     background-color: #3897f0;
-    font-size: 1.4rem;
+    font-size: 14px;
     color: #fff;
     font-weight: bold;
     border: none;
-    border-radius: .4rem;
+    border-radius: 4px;
     cursor: pointer;
 }
 
 .sign-up {
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 14px;
     color: #262626;
     background-color: #fff;
-    padding: .5rem 0;
+    padding: 5px 0;
     border: 2px solid #eee;
-    margin: 1rem 0;
+    margin: 10px 0;
 }
 
 @media (max-width: 900px) {
@@ -113,12 +106,12 @@
     .form-data form {
         background-color: transparent;
         border: none;
-        padding: 0 2rem;
+        padding: 0 20px;
     }
 
     .sign-up {
         background-color: transparent;
         border: none;
-        padding: 4rem 0;
+        padding: 40px 0;
     }
 }

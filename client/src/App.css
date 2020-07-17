@@ -1,3 +1,8 @@
+.App{
+  text-align: center;
+  position: relativ;
+}
+
 * {
   margin: 0;
   padding: 0;

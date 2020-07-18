@@ -41,26 +41,33 @@ nav {
   margin: 0 5px;
 }
 
-#log-in, #log-in:hover {
+.log-in, .log-in:hover {
+  font-weight: 700;
   color: #fff;
 }
 
-#sign-up, #sign-up:hover {
+.sign-up, .sign-up:hover {
+  font-weight: 700;
   color: #3897f0;
 }
 
 .button {
   height: 32px;
-  background-color: rgb(56, 151, 240);
+  border: 1px solid rgb(239, 239, 239);
   border-radius: 3px;
+  padding: 8px;
+}
+
+.blue-bg {
+  background-color: rgb(56, 151, 240);
+}
+
+.white-bg {
+  background-color: #FFF;
 }
 
 .menu {
   height: 22px;
-}
-
-.profile {
-  border-radius: 50%;
 }
 
 @media (max-width: 991px) {
@@ -75,6 +82,7 @@ nav {
     margin-left: 17px;
   }
 }
+
 @media (max-width: 767px) {
   #search {
     visibility: hidden;

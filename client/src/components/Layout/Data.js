@@ -2,39 +2,46 @@ import avatar from "../../image/avatar.png";
 
 export default [
   {
+    userId :'gj121yu2',
     avatar: avatar,
-    username : "Username",
+    username : "aadhiyaa90",
     name: "William"   
   },
   {
+    userId :'qw12qw',
     avatar: avatar,
-    username : "Username1",
-    name: "Chris"
+    username : "shaludasweety",
+    name: "shalini"
   },
   {
+    userId :'erer23',
     avatar: avatar,
-    username : "Username2",
-    name: "Rose"
+    username : "dont_give_up_buddy",
+    name: "dont_give_up_buddy"
   
   },
   {
+    userId :'hj678hj96gh',
     avatar: avatar,
-    username : "Username@",
+    username : "aarathya_29@",
     name: "Mike"    
   },
   {
+    userId :'hj45rt12wqw23',
     avatar: avatar,
-    username : "Liz@",
+    username : "daywalker.photography@",
     name: "Liz"
   },
   {
+    userId :'gh45789hjxq',
     avatar: avatar,
-    username : "Mariaz_",
-    name: "Mariaz"
+    username : "mkrishofficial",
+    name: "mkrishnan"
   },
   {
+    userId :'1234rfvyh567',
     avatar: avatar,
-    username : "Lizza_itzme",
-    name: "Lizza"  
+    username : "allaanushadevi104",
+    name: "Anusha"  
   }
 ];

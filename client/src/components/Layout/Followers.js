@@ -22,11 +22,11 @@ class Followers extends Component {
               </span>
               <hr />
 
-              <div className='container scrolluser'>
+              <div className='scrolluser'>
                    {
                      users.map( (user) => {
                        return(
-                        <div className='row' key={user.username}>
+                        <div className='row' key={user.userId}>
                           
                           <div className='avatar-div col-2 col-sm-2 col-md-2 col-lg-2 col-xxs-2'>
                             <Link to='#'>
@@ -51,12 +51,7 @@ class Followers extends Component {
                           <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
                               <button
                                 className='btn btn-primary-outline btn-lg float-right'
-                                style={{
-                                  lineHeight: "2px",
-                                  float: "right",
-                                  height: "30px",
-                                }}// onClick={this.handleClick}
-                               >      Follow  {/* {this.state.isToggleOn ? "Follow" : "Following"} */}
+                              >      Follow 
                               </button>
                           </div>
                          </div>                          

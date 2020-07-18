@@ -119,13 +119,13 @@ font-size: 14px!important;
   border-color: #ccc !important;
 }
 @media (max-width: 576px) {
+  .col-sm-3{
+    width:25%;
+  }
+  .col-sm-6{
+    width:50%;
+  }
   .col-xxs-7, .col-xxs-3{
-  float: left;
+    float: left;
   }           
-.col-sm-3{
-width:25%;
- }
-.col-sm-6{
-width:50%;
- }
 }

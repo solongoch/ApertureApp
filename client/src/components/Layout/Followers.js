@@ -39,20 +39,17 @@ class Followers extends Component {
                           </div>
                           <div className='userinfo-div col-7 col-sm-7 col-md-7 col-lg-7 col-xxs-7'>
                                   <Link
-                                  to='#' 
-                                  className='username-link'
-                                  style={{ marginLeft: "-60px",textDecoration: 'inherit',
-                                  "cursor": "pointer" }}                                 
-                                >
+                                    to='#'
+                                    className='username-link'
+                                    style={{ marginLeft: "-60px",textDecoration: 'inherit',
+                                    "cursor": "pointer" }}                                 
+                                  >
                                 <span className="username"> {user.username} </span>
                                 </Link>
                                 <span className="name"> {user.name}  </span>
                           </div>
                           <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                              <button
-                                className='btn btn-primary-outline btn-lg float-right'
-                              >      Follow 
-                              </button>
+                              <button className='btn btn-primary-outline btn-lg'>Follow </button>
                           </div>
                          </div>                          
                         )

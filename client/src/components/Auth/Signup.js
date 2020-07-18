@@ -24,22 +24,23 @@ class Signup extends Component {
     };
     //bind input values to this.onChange()
     this.onChange = this.onChange.bind(this);
+    //bind the onSubmit of form when user clicks the signIn button(submit type)
     this.onSubmit = this.onSubmit.bind(this);
-
+    //bind password eye onclick methods
+    this.togglePasswordVisiblity = this.togglePasswordVisiblity.bind(this);
+    this.togglePassword2Visiblity = this.togglePassword2Visiblity.bind(this);
   }
 
-  //toggle password
+  //toggle password eye icon
   togglePasswordVisiblity =()=>{
-    const {isPasswordShown} = this.state;
     this.setState({
-      isPasswordShown:!isPasswordShown,
+      isPasswordShown:!this.state.isPasswordShown
     });
   }
-//toggle password2
+//toggle password2 eye icon
   togglePassword2Visiblity =()=>{
-    const {isPassword2Shown} = this.state;
     this.setState({
-      isPassword2Shown:!isPassword2Shown
+      isPassword2Shown:!this.state.isPassword2Shown
     });
   }
   //read values from input field to state
@@ -77,7 +78,7 @@ class Signup extends Component {
           <div className="col-md-6 col-lg-6 col-xl-7 d-none d-sm-none d-md-block d-lg-block">
             <img className="phoneImg" src={PhoneImage} alt="HomeImage" />
           </div>
-          <div className="col-md-6 col-lg-5 col-xl-4 right-column-container">
+          <div className="col-md-6 col-lg-5 col-xl-5 right-column-container">
             <div className="right-column">
               <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>

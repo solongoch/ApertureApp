@@ -6,6 +6,7 @@ import logoImage from '../../image/logo2.png';
 import AppleBadge from '../../image/Applebadge.png';
 import GoogleBadge from '../../image/googleplay.png';
 import '../css/Signup.css';
+import classNames from 'classnames';
 
 class Signup extends Component {
   constructor() {
@@ -67,11 +68,11 @@ class Signup extends Component {
     axios
       .post('/api/users/signup', newUser)
       .then(res=> console.log(res.data))
-      .catch(err => console.log(err.response.data));
+      .catch(err => console.log(this.setState({errors: err.response.data})));
   }
   
   render() {
-    const {isPasswordShown,isPassword2Shown} = this.state;
+    const {isPasswordShown,isPassword2Shown,errors,password,password2} = this.state;
     return (
       <div className="signup-wrapper">
         <div className="row">
@@ -83,80 +84,81 @@ class Signup extends Component {
               <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
               <form className="signup-form" onSubmit={this.onSubmit}>
-                <div className="form-group text-xs-center">
+                <div className="form-group text-xs-center col-auto">
                   <input
                     type="text"
-                    className="form-control shadow-none"
+                    className={classNames("form-control shadow-none" , {"is-invalid" : errors.email})}
                     placeholder="Email"
                     name="email"
                     value={this.state.email}
                     onChange={this.onChange}
-                    required
                   />
+                  {/*show invalid-feedback div only if errors.name is true */}
+                  {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
                 </div>
-                <div className="form-group">
+                <div className="form-group col-auto">
                   <input
                     type="text"
-                    className="form-control shadow-none"
+                    className={ classNames("form-control shadow-none" , {'is-invalid' : errors.name})}
                     placeholder="Full Name"
                     name="name"
                     value={this.state.name}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
                 </div>
-                <div className="form-group">
+                <div className="form-group col-auto">
                   <input
                     type="text"
-                    className="form-control shadow-none"
+                    className={ classNames("form-control shadow-none" , {'is-invalid' : errors.username})}
                     placeholder="Username"
                     name="username"
                     value={this.state.username}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.username && (<div className="invalid-feedback">{errors.username}</div>)}
                 </div>
-                <div className="form-group">
-                  <input
+                <div className="form-group col-auto">
+                 <input
                     type={isPasswordShown ? "text" : "password"}
-                    className="form-control shadow-none"
+                    className={ classNames("form-control shadow-none" , {'is-invalid' : errors.password})}
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
-                    
                   />
-                  { this.state.password ? 
-                      <i className={`fa ${isPasswordShown ? "fa-eye-slash" : "fa-eye"} password-icon`}
+                  {/* display eye icon only if password has value */} 
+                  {password &&( 
+                      <span className={`fa ${isPasswordShown ? "fa-eye-slash" : "fa-eye"} password-icon`}
                         onClick={this.togglePasswordVisiblity} 
-                      />
-                    : null
-                  }
-                
+                      />)           
+                  } 
+                  {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                 </div>
-                <div className="form-group">
+                <div className="form-group col-auto">
                   <input
                     type={isPassword2Shown ? "text" : "password"}
-                    className="form-control shadow-none"
+                    className={ classNames("form-control shadow-none" , {'is-invalid' : errors.password2})}
                     placeholder="Confirm password"
                     name="password2"
                     value={this.state.password2}
                     onChange={this.onChange}
-                    required
                   />
-                  { this.state.password2 ? 
-                      <i 
-                        className={`fa ${ isPassword2Shown ? "fa-eye-slash" : "fa-eye"} password-icon`}
+                  {/* display eye icon only if password2 has value */} 
+                  {password2 && ( 
+                      <span className={`fa ${ isPassword2Shown ? "fa-eye-slash" : "fa-eye"} password-icon`}
                         onClick={this.togglePassword2Visiblity}
-                      />
-                    : null
+                      />)
                   }
+                  {errors.password2 && (<div className="invalid-feedback ">{errors.password2}</div>)}
                 </div>
-                <button type="submit" className="btn btn-block btn-primary">Sign up</button>
-              </form>
-              <p className="terms">
-                By signing up, you agree to our <b>Terms , Data Policy</b> and <b>Cookies Policy</b>.
-              </p>
+                <div className ="col-auto mb-5">
+                <button type="submit" className="btn btn-block btn-primary shadow-none">Sign up</button>
+                </div>
+              </form>           
+                  <p className="terms col-auto">
+                  By signing up, you agree to our <b>Terms , Data Policy</b> and <b>Cookies Policy</b>.
+                  </p>
             </div>
             <div className="right-column-login">
               <p className="have-an-account">Have an account? <Link to="/">Log in</Link> </p>

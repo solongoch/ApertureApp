@@ -5,7 +5,7 @@ import '../css/Unfollow.css';
 class Unfollow extends Component {
   render() {
     return (
-      <div className="chgpwd-div">
+      <div className="unfollow-div">
         <div className="container">
           <div className="row align-items-center">
           <div className="mx-auto ">

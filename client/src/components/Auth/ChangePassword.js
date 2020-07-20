@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import logoImage from "../../image/avatar.png";
 import '../css/ChangePassword.css';
-import axios from 'axios'
+import axios from 'axios';
+import classNames from 'classnames';
 
 class ChangePassword extends Component {
   constructor() {
@@ -10,7 +11,8 @@ class ChangePassword extends Component {
     this.state = {
       oldpassword: '',
       newpassword: '',
-      confirmpassword: ''
+      confirmpassword: '',
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -33,16 +35,17 @@ class ChangePassword extends Component {
     axios
       .post('/api/changepassword', changePass)
       .then(res => console.log(res.data))
-      .catch(err => console.log(err.response.data));
+      .catch(err => console.log(this.setState({erros : err.response.data})));
   }
   render() {
+    const{errors} = this.state;
     return (
      <div className="chgpwd-div">
        <div className="container">
           <div className="row align-items-center">
                 <div className="col-12 col-sm-12 col-md-10 col-lg-7 col-xxs-6">
                   <div className="card">
-                    <form className="Chgpwd-form">
+                    <form className="Chgpwd-form" onSubmit={this.onSubmit}>
                       <div className="form-group">
                         <div className=" col-sm-10 col-md-12 col-lg-12">
                           <img className="avatar-img " src={logoImage} alt="Avatar" />
@@ -58,27 +61,39 @@ class ChangePassword extends Component {
                           style={{textAlign: 'right'}}>Old Password</label>
                           <input
                               type="password" name="oldpassword"
-                              className="form-control shadow-none col-sm-7"
+                              className=
+                              {
+                                classNames('form-control shadow-none col-sm-7' , 
+                                {'is-invalid' : errors.oldpassword})
+                              }
                               id="oldpassword" placeholder="Current Password"
                               value={this.state.oldpassword} onChange={this.onChange}/>
                         </div>
                       
                         <div className="form-group form-inline">
-                          <label htmlFor="oldpassword" className="col-form-label col-sm-5" 
+                          <label htmlFor="newpassword" className="col-form-label col-sm-5" 
                           style={{textAlign: 'right'}}>New Password</label>
                           <input
                               type="password" name="newpassword"
-                              className="form-control shadow-none col-sm-7"
+                              className=
+                              {
+                                classNames('form-control shadow-none col-sm-7' , 
+                                {'is-invalid' : errors.newpassword})
+                              }
                               id="newpassword" placeholder="New Password"
                               value={this.state.newpassword} onChange={this.onChange}/>
 
                         </div>
                 
                         <div className="form-group form-inline">
-                          <label htmlFor="oldpassword"  className="col-form-label col-sm-5" style={{textAlign: 'right'}}>Confirm New Password</label>
+                          <label htmlFor="confirmpassword"  className="col-form-label col-sm-5" style={{textAlign: 'right'}}>Confirm New Password</label>
                           <input
                             type="password" name="confirmpassword"
-                            className="form-control shadow-none col-sm-7"
+                            className=
+                            {
+                              classNames('form-control shadow-none col-sm-7' , 
+                              {'is-invalid' : errors.confirmpassword})
+                            }
                             id="confirmpassword" placeholder="Confirm New Password"
                             value={this.state.confirmpassword} onChange={this.onChange} />
                         </div>

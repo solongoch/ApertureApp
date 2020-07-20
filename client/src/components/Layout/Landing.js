@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import '../css/Landing.css'
-import Logo from '../../img/aperturelogo.png';
+import '../css/landing.css'
+import Logo from '../../image/aperturelogo.png';
 
 export default class Landing extends Component {
     render() {

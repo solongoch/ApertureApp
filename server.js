@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 // Create the Express application
 const app = express();
 // Load APIs
@@ -14,6 +15,28 @@ const bodyparser = require('body-parser');
 const port = require('./config/keys').port;
 const passport = require('passport');
 const optionalJWT = require('./controller/accessRouteWithWithoutToken');
+
+//for avatar file upload//
+app.use(fileUpload());
+
+//Upload Endpoint
+app.post('/upload', (req, res) => {
+  if(req.files === null) {
+    return res.status(400).json({msg: 'No file upload'});
+  }
+
+  const file = req.files.file;
+
+  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+    if(err){
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}`});
+  })
+
+});
 
 // Configures the database and opens a global connection
 const db = require('./config/database');

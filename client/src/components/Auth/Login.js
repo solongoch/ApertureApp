@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import classnames from "classnames";
-import '../css/Login.css';
-import Logo from '../../img/aperturelogo.png';
+import '../css/login.css';
+import Logo from '../../image/aperturelogo.png';
 import {Link} from 'react-router-dom';
 
 class Login extends Component {

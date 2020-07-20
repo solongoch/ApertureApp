@@ -42,7 +42,7 @@ module.exports = function validateProfileInput(data) {
   }
 
   // validate gender
-  if (!isEmpty(data.gender)&&(!validator.isIn(data.gender, ['male', 'female', 'other']))) {
+  if (!isEmpty(data.gender)&&(!validator.isIn(data.gender, ['Male', 'Female', 'Other', 'Prefer Not to Say']))) {
     errors.gender = "Invalid gender value";
   }
 

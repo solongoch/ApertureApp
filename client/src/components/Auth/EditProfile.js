@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import '../css/Edit-profile.css';
+import '../css/editprofile.css';
 import {Link} from 'react-router-dom';
-import Avatar from '../../img/instav.png';
+import Avatar from '../../image/instav.png';
 import axios from 'axios';
 import classnames from 'classnames';
+import FileUpload from './AvatarUpload/FileUpload';
+import { Alert, Collapse, Card, CardBody } from 'reactstrap';
+import cloudinary from '../config/key'
 
 class EditProfile extends Component {
   constructor() {
@@ -15,11 +18,18 @@ class EditProfile extends Component {
       bio: '',
       email: '',
       mobile: '',
+      visible: false,
       errors: {}
     }
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      visible: ! this.state.visible
+    });
   }
 
   onChange(e){
@@ -39,7 +49,7 @@ class EditProfile extends Component {
     };
 
     axios
-      .get('/api/profile/accounts/edit', user)
+      .post('/api/profile/edit', user)
       .then(res => console.log(res.data))
       .catch(err => this.setState({errors: err.response.data}))
   }
@@ -53,14 +63,20 @@ class EditProfile extends Component {
             <div className="sidebar">
               <img src={Avatar} className="avatar img-circle" alt="avatar" />
               <h6 className="text-center">Change Avatar</h6>
-              <input type="file" className="form-control"></input>
+              <FileUpload />
               <Link to="/changepassword" className="btn btn-lg mr-2">Change Password</Link>
             </div>
             </div>
 
         <div className="profile-info col-md-9">
 
-        <Link to="/changepassword" className="btn btn-lg mr-2 password-mobile">Change Password</Link>
+        <div className="sidebar-mobile">
+              <img src={Avatar} className="avatar img-circle" alt="avatar" />
+              <h6 className="text-center">Change Avatar</h6>
+              <FileUpload />
+              <Link to="/changepassword" className="btn btn-lg mr-2">Change Password</Link>
+            </div>
+
           <form onSubmit={this.onSubmit}>
           <h3> Edit User Profile</h3>
             <div className="form-group">
@@ -125,23 +141,20 @@ class EditProfile extends Component {
             <div className="form-group">
               <label className="col-lg-3 control-label">Bio</label>
               <div className="col-lg-10">
-                <input 
+                <textarea
                 type="text"
-                className={classnames("bio form-control form-control-lg", {
-                  "is-invalid": errors.bio
-                })} 
+                className="form-control form-control-lg"
+                rows="3"
                 placeholder=""
-                name="Bio"
+                name="bio"
                 value={this.state.bio}
                 onChange={this.onChange}
                 />
-                {errors.bio && (
-                  <div className="invalid-feedback">{errors.bio}</div>
-                )}
               </div>
             </div>
+
             <h3>Edit Personal Info</h3>
-            <p>Provide your personal information, even if the account is used for a business, a pet or something else. This won't be a part of your public profile</p>
+            <p>Provide your personal information. This won't be a part of your public profile</p>
 
             <div className="form-group">
               <label className="col-lg-3 control-label">Email</label>
@@ -166,12 +179,12 @@ class EditProfile extends Component {
               <label className="col-lg-3 control-label">Phone Number</label>
               <div className="col-lg-10">
                 <input 
-                type="text" 
+                type="tel" 
                 className={classnames("form-control form-control-lg", {
                   "is-invalid": errors.mobile
                 })}
                 placeholder="Phone Number"
-                name="Moble"
+                name="mobile"
                 value={this.state.mobile}
                 onChange={this.onChange}
                 />
@@ -195,14 +208,22 @@ class EditProfile extends Component {
             </div>
           </div>
 
-            <div className="form-group">
-              <label className="col-md-3 control-label"></label>
-              <div className="col-md-10">
+          <div className="form-group">
+        <label className="col-md-3 control-label"></label>
+            <div className="col-md-10">
                 <button className="btn btn-primary" type="submit">Update Profile</button>
-                <div className="has-separator">Terminate Account</div>
-                <Link to="/remove" className="btn btn-lg btn-info mr-2 delete">Delete Account</Link>
-              </div>
+                    <div className="has-separator">Terminate Account</div>
+                    <button className="btn btn-lg btn-danger btn-info delete mr-2" onClick={this.toggle.bind(this)}>Delete Account</button>
+                    <Collapse isOpen={this.state.visible} toggle={this.toggle.bind(this)}>
+                      <Card>
+                        <CardBody >
+                        <Alert color="danger">Are you sure you want to delete your account?</Alert>
+                        <Link to="/remove" className="btn btn-lg btn-info mr-2 btn-danger delete">Confirm Delete Account</Link>
+                        </CardBody>
+                      </Card>
+                    </Collapse>
             </div>
+        </div>
 
 
           </form>

@@ -18,11 +18,11 @@ class Navbar extends Component {
       <header>
         <nav className="navbar navbar-expand-lg navbar-light mx-auto">
           {/* Logo */}
-          <div className="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+          <div className="logo-div col-lg-4 col-md-4 col-sm-4">
             <Link to="/"><img id="logo" src={logo} alt="ApertureApp logo" /></Link>
           </div>
           {/* Search */}
-          <div className="col-lg-4 col-md-4 col-sm-4">
+          <div className="search-div col-lg-4 col-md-4 col-sm-4">
             <form className="form-inline">
               <input
                 id="search"
@@ -36,30 +36,30 @@ class Navbar extends Component {
             </form>
           </div>
           {/* Menus */}
-          <div className="col-lg-4 col-md-4 col-sm-4 col-xs-6 d-inline-flex justify-content-end">
+          <div className="menus-div col-lg-4 col-md-4 col-sm-4">
             <ul className="navbar-nav">
               {/* <li className="nav-item menu blue-bg button"><Link id="log-in" className="nav-Link" to="/">Log In</Link></li>
               <li className="nav-item menu"><Link className="sign-up" className="nav-Link" to="/">Sign Up</Link></li> */}
               <li className="nav-item">
-                <Link className="nav-Link" to="/">
+                <Link className="nav-link" to="/">
                   {/* <img className="menu" src={home} aria-label="Home" alt="Home button" /> */}
                   <img className="menu active" src={homeActive} aria-label="Home" alt="Active Home button" />
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-Link" to="/suggestion">
+                <Link className="nav-link" to="/suggestion">
                   <img className="menu" src={findPeople} aria-label="Find People" alt="Suggestion button" />
                   {/* <img className="menu active" src={findPeopleActive} aria-label="Find People" alt="Active Suggestion button" /> */}
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-Link" to="/">
+                <Link className="nav-link" to="/">
                   <img className="menu" src={heart} aria-label="Notification" alt="Notification button" />
                   {/* <img className="menu active" src={heartActive} aria-label="Notification" alt="Active Notification button" /> */}
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-Link" to="/profile">
+                <Link className="nav-link" to="/profile">
                   <img className="menu round-image image-22" src={profilePicture} alt="My profile"/>
                 </Link>
               </li>

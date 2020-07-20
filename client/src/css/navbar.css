@@ -50,6 +50,11 @@ nav {
   color: #3897f0;
 }
 
+.menus-div {
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
 .menu {
   height: 22px;
 }
@@ -68,7 +73,14 @@ nav {
 }
 
 @media (max-width: 767px) {
-  #search {
+  .logo-div {
+    width: 50%;
+  }
+  .menus-div {
+    width: 50%;
+  }
+  .search-div {
+    width: 0;
     display: none;
   }
 }

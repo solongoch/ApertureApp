@@ -1,6 +1,5 @@
 header {
   width: 100%;
-  margin-bottom: 32px;
   background-color: #fff;
   border-bottom: 1px solid rgb(239, 239, 239);
 }
@@ -51,21 +50,6 @@ nav {
   color: #3897f0;
 }
 
-.button {
-  height: 32px;
-  border: 1px solid rgb(239, 239, 239);
-  border-radius: 3px;
-  padding: 8px;
-}
-
-.blue-bg {
-  background-color: rgb(56, 151, 240);
-}
-
-.white-bg {
-  background-color: #FFF;
-}
-
 .menu {
   height: 22px;
 }
@@ -85,6 +69,6 @@ nav {
 
 @media (max-width: 767px) {
   #search {
-    visibility: hidden;
+    display: none;
   }
 }

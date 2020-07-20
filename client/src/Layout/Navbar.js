@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/navbar.css';
+import '../css/global.css';
 import logo from '../image/aperture-logo.svg';
 import profilePicture from '../image/img-sq.jpg';
 import home from '../image/home.svg';

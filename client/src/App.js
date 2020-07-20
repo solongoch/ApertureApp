@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './Layout/Navbar';
 import Footer from './Layout/Footer';
 import Profile from './Layout/Profile';
+import Homepage from './Layout/Homepage';
 
 class App extends Component {
   render() {
@@ -10,8 +11,8 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <div className="container">
-          {/* <h1>ApertureApp</h1> */}
-          <Profile />
+          <Homepage />
+          {/* <Profile /> */}
         </div>
         <Footer />
       </div>

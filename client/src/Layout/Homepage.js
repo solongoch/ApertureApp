@@ -13,7 +13,7 @@ import saveIcon from '../image/save.svg';
 class Homepage extends Component {
   render() {
     return (
-      <div id="page-body">
+      <div id="homepage-body">
         <div id="posts">
           {/* .post-div will be repeated */}
           <div className="post-div d-flex flex-column">

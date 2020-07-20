@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import './App.css';
-import './css/global.css';
-import Navbar from './Layout/Navbar';
-import Footer from './Layout/Footer';
-import Profile from './Layout/Profile';
-import Homepage from './Layout/Homepage';
-import Suggestion from './Layout/Suggestion';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+// import CSS
+import "./App.css";
+import "./css/global.css";
+// import Components
+import Navbar from "./Layout/Navbar";
+import Footer from "./Layout/Footer";
+import Homepage from "./Layout/Homepage";
+import Suggestion from "./Layout/Suggestion";
+import Profile from "./Layout/Profile";
 
 class App extends Component {
   render() {
@@ -22,7 +24,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-    )
+    );
   }
 }
 

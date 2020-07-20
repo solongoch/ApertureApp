@@ -16,8 +16,8 @@ class Profile extends Component {
           <div className="d-flex flex-column">
             <div className="d-flex flex-row">
               <div className="profile-username">Username</div>
-              <div className="white-bg button font-weight-bold edit-profile-button"><Link to="/">Edit Profile</Link></div>
-              <img src={settings} alt="Settings button" />
+              <div className="white-bg button font-weight-bold"><Link to="/">Edit Profile</Link></div>
+              <Link to="/"><img src={settings} alt="Settings button" /></Link>
             </div>
             <ul className="counts d-flex flex-row">
               <li className="count"><span className="font-weight-bold">100</span> posts</li>

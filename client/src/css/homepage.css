@@ -1,4 +1,4 @@
-#page-body {
+#homepage-body {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -65,6 +65,9 @@
 }
 
 @media (max-width: 991px) {
+  .container {
+    margin-top: -1px;
+  }
   #posts {
     margin: 0;
   }

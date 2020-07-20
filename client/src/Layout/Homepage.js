@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// load CSS
-import '../css/global.css';
+import { Link } from "react-router-dom";
+// import CSS
 import '../css/homepage.css';
-// load images 
+// import images 
 import profilePicture from '../image/img-sq.jpg';
 import postPicture from '../image/img1.jpg';
 import heartIcon from '../image/heart.svg';
@@ -18,12 +18,12 @@ class Homepage extends Component {
           {/* .post-div will be repeated */}
           <div className="post-div d-flex flex-column">
             <div className="post-header">
-              <a href="#">
-                <img className="round-image image-32" src={profilePicture} alt="Post author's image" />
-              </a>
+              <Link to="/profile">
+                <img className="round-image image-32" src={profilePicture} alt="Post author" />
+              </Link>
               <div className="d-flex flex-column left-15">
-                <div className="font-weight-bold"><a href="#">Name</a></div>
-                {/* <div><a href="#">Location</a></div> */}
+                <div className="font-weight-bold"><Link to="/profile">Name</Link></div>
+                {/* <div><Link to="/">Location</Link></div> */}
               </div>
             </div>
             <div className="post-image-div">
@@ -36,14 +36,14 @@ class Homepage extends Component {
                 <img className="action  image-22" src={shareIcon} aria-label="Share" alt="Share" />
                 <img className="action  image-22" src={saveIcon} aria-label="Save" alt="Save" />
               </div>
-              <div className="font-weight-bold line"><a href="#">27013 likes</a></div>
+              <div className="font-weight-bold line"><Link to="/likes">27013 likes</Link></div>
               <div className="line">
-                <a href="#" className="font-weight-bold">Name</a>
+                <Link to="/profile" className="font-weight-bold">Name</Link>
                 Description Ra-Ra Rama-Ma Ga-Ga Oh-La-La Doo-Bee-Doo-Bee-Doo
-                <a href="#" className="make-gray">... more</a>
+                <Link to="/" className="make-gray">... more</Link>
               </div>
-              <div className="line"><a href="#" className="make-gray">View all 1737 comments</a></div>
-              <div className="line"><a href="#" className="font-weight-bold">Commentor name</a> Comment</div>
+              <div className="line"><Link to="/" className="make-gray">View all 1737 comments</Link></div>
+              <div className="line"><Link to="/profile" className="font-weight-bold">Commentor name</Link> Comment</div>
               <div className="post-time line">8 hours ago</div>
               <form>
                 <input
@@ -58,12 +58,12 @@ class Homepage extends Component {
 
           <div className="post-div d-flex flex-column">
             <div className="post-header">
-              <a href="#">
-                <img className="round-image image-32" src={profilePicture} alt="Post author's image" />
-              </a>
+              <Link to="/profile">
+                <img className="round-image image-32" src={profilePicture} alt="Post author" />
+              </Link>
               <div className="d-flex flex-column left-15">
-                <div className="font-weight-bold"><a href="#">Name</a></div>
-                {/* <div><a href="#">Location</a></div> */}
+                <div className="font-weight-bold"><Link to="/profile">Name</Link></div>
+                {/* <div><Link to="/">Location</Link></div> */}
               </div>
             </div>
             <div className="post-image-div">
@@ -76,14 +76,14 @@ class Homepage extends Component {
                 <img className="action  image-22" src={shareIcon} aria-label="Share" alt="Share" />
                 <img className="action  image-22" src={saveIcon} aria-label="Save" alt="Save" />
               </div>
-              <div className="font-weight-bold line"><a href="#">27013 likes</a></div>
+              <div className="font-weight-bold line"><Link to="/">27013 likes</Link></div>
               <div className="line">
-                <a href="#" className="font-weight-bold">Name</a>
+                <Link to="/" className="font-weight-bold">Name</Link>
                 Description Ra-Ra Rama-Ma Ga-Ga Oh-La-La Doo-Bee-Doo-Bee-Doo
-                <a href="#" className="make-gray">... more</a>
+                <Link to="/" className="make-gray">... more</Link>
               </div>
-              <div className="line"><a href="#" className="make-gray">View all 1737 comments</a></div>
-              <div className="line"><a href="#" className="font-weight-bold">Commentor name</a> Comment</div>
+              <div className="line"><Link to="/" className="make-gray">View all 1737 comments</Link></div>
+              <div className="line"><Link to="/" className="font-weight-bold">Commentor name</Link> Comment</div>
               <div className="post-time line">8 hours ago</div>
               <form>
                 <input
@@ -100,11 +100,11 @@ class Homepage extends Component {
         {/* RIGHT BAR */}
         <div id="right-bar">
           <div className="profile-section">
-            <a href="#">
-              <img className="round-image image-50" src={profilePicture} alt="User image" />
-            </a>
+            <Link to="/">
+              <img className="round-image image-50" src={profilePicture} alt="User" />
+            </Link>
             <div className="left-15">
-              <div className="font-weight-bold"><a href="#">Username</a></div>
+              <div className="font-weight-bold"><Link to="/">Username</Link></div>
               <div>Name</div>
             </div>
           </div>
@@ -112,17 +112,17 @@ class Homepage extends Component {
           {/* Follower suggestion */}
           <div className="d-flex justify-content-between">
             <span className="font-weight-bold">Suggestions For You</span>
-            <a className="font-weight-bold">See all</a>
+            <Link className="font-weight-bold">See all</Link>
           </div>
 
           {/* .profile-section below will be repeated */}
           <div className="d-flex justify-content-between align-items-center">
             <div className="profile-section">
-              <a href="#">
-                <img className="round-image image-32" src={profilePicture} alt="User image" />
-              </a>
+              <Link to="/">
+                <img className="round-image image-32" src={profilePicture} alt="User" />
+              </Link>
               <div>
-                <div className="font-weight-bold left-15"><a href="#">Username</a></div>
+                <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
@@ -132,11 +132,11 @@ class Homepage extends Component {
 
           <div className="d-flex justify-content-between align-items-center">
               <div className="profile-section">
-                <a href="#">
-                  <img className="round-image image-32" src={profilePicture} alt="User image" />
-                </a>
+                <Link to="/">
+                  <img className="round-image image-32" src={profilePicture} alt="User" />
+                </Link>
                 <div>
-                  <div className="font-weight-bold left-15"><a href="#">Username</a></div>
+                  <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
                   <div className="make-gray left-15">Followed by xyz + 14 more</div>
                 </div>
               </div>
@@ -146,11 +146,11 @@ class Homepage extends Component {
 
           <div className="d-flex justify-content-between align-items-center">
               <div className="profile-section">
-                <a href="#">
-                  <img className="round-image image-32" src={profilePicture} alt="User image" />
-                </a>
+                <Link to="/">
+                  <img className="round-image image-32" src={profilePicture} alt="User" />
+                </Link>
                 <div>
-                  <div className="font-weight-bold left-15"><a href="#">Username</a></div>
+                  <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
                   <div className="make-gray left-15">Followed by xyz + 14 more</div>
                 </div>
               </div>
@@ -160,11 +160,11 @@ class Homepage extends Component {
 
           <div className="d-flex justify-content-between align-items-center">
               <div className="profile-section">
-                <a href="#">
-                  <img className="round-image image-32" src={profilePicture} alt="User image" />
-                </a>
+                <Link to="/">
+                  <img className="round-image image-32" src={profilePicture} alt="User" />
+                </Link>
                 <div>
-                  <div className="font-weight-bold left-15"><a href="#">Username</a></div>
+                  <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
                   <div className="make-gray left-15">Followed by xyz + 14 more</div>
                 </div>
               </div>
@@ -174,11 +174,11 @@ class Homepage extends Component {
 
           <div className="d-flex justify-content-between align-items-center">
               <div className="profile-section">
-                <a href="#">
-                  <img className="round-image image-32" src={profilePicture} alt="User image" />
-                </a>
+                <Link to="/">
+                  <img className="round-image image-32" src={profilePicture} alt="User" />
+                </Link>
                 <div>
-                  <div className="font-weight-bold left-15"><a href="#">Username</a></div>
+                  <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
                   <div className="make-gray left-15">Followed by xyz + 14 more</div>
                 </div>
               </div>

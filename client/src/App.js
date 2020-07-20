@@ -4,6 +4,7 @@ import Navbar from './Layout/Navbar';
 import Footer from './Layout/Footer';
 import Profile from './Layout/Profile';
 import Homepage from './Layout/Homepage';
+import Suggestion from './Layout/Suggestion';
 
 class App extends Component {
   render() {
@@ -11,7 +12,8 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <div className="container">
-          <Homepage />
+          {/* <Homepage /> */}
+          <Suggestion />
           {/* <Profile /> */}
         </div>
         <Footer />

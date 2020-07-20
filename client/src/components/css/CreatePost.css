@@ -1,0 +1,68 @@
+.card {
+  margin:50px auto ;
+  max-width:100%;
+  width:60%;
+  border-radius: 25px;  
+  background-color: rgba(var(--f23,255,255,255),1);
+  overflow: hidden;
+}
+div .card-header{
+  font-size:24px;
+  font-weight: 500;
+}
+.user-avatar{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;  
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.createpost-form{
+  margin-top :20px;
+}
+.caption{
+  font-family: Roboto, Helvetica, sans-serif;
+  padding-top:20px;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: pre-line;
+  z-index: 1;
+  margin-right: 10px;
+  border: 1px solid #ccd0d5;
+  border-radius: 30px!important;
+  background-color: #F0F2F5
+}
+/* textarea::-webkit-scrollbar {
+  border-radius: 2px;
+} */
+
+.form-group {
+  width: 100%!important;
+}
+
+div.upload-image{
+  text-align: center;
+}
+.fa.fa-file-image-o{
+  cursor: pointer;
+  font-size: 40px; 
+  color:#3897f0;
+
+}
+.btn-primary{
+  background-color: transparent;
+  border-top: 1px solid rgba(var(--b6a,219,219,219),1);
+  margin: 0;
+  text-align: center;
+}
+.form-inline{
+  justify-content: center!important;
+}
+
+@media(max-width:768px){
+  .card{
+    width: 80%;
+  }
+}

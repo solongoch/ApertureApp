@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 // import CSS
 import "./App.css";
-import "./css/global.css";
+import "./components/css/global.css";
 // import Components
-import Navbar from "./Layout/Navbar";
-import Footer from "./Layout/Footer";
-import Homepage from "./Layout/Homepage";
-import Suggestion from "./Layout/Suggestion";
-import Profile from "./Layout/Profile";
+import Navbar from "./components/Layout/Navbar";
+import Footer from "./components/Layout/Footer";
+import Homepage from "./components/Layout/Homepage";
+import Suggestion from "./components/Layout/Suggestion";
+import Profile from "./components/Layout/Profile";
 
 class App extends Component {
   render() {

@@ -4,7 +4,7 @@ import axios from 'axios';
 // load CSS
 import '../css/suggestion.css';
 // load images
-import profilePicture from '../image/img-sq.jpg';
+import profilePicture from '../../image/img-sq.jpg';
 
 class Suggestion extends Component {
   constructor() {

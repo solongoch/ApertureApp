@@ -4,12 +4,12 @@ import axios from 'axios';
 // import CSS
 import '../css/homepage.css';
 // import images 
-import profilePicture from '../image/img-sq.jpg';
-import postPicture from '../image/img1.jpg';
-import heartIcon from '../image/heart.svg';
-import commentIcon from '../image/comment.svg';
-import shareIcon from '../image/share.svg';
-import saveIcon from '../image/save.svg';
+import profilePicture from '../../image/img-sq.jpg';
+import postPicture from '../../image/img1.jpg';
+import heartIcon from '../../image/heart.svg';
+import commentIcon from '../../image/comment.svg';
+import shareIcon from '../../image/share.svg';
+import saveIcon from '../../image/save.svg';
 
 class Homepage extends Component {
   constructor() {

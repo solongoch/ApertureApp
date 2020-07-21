@@ -4,11 +4,11 @@ import axios from 'axios';
 // import CSS
 import '../css/profile.css';
 // import images
-import profilePicture from '../image/img-sq.jpg';
-import settings from '../image/settings.svg';
-import posts from '../image/posts.svg';
-import like from '../image/heart-white.svg'
-import comment from '../image/comment-white.svg'
+import profilePicture from '../../image/img-sq.jpg';
+import settings from '../../image/settings.svg';
+import posts from '../../image/posts.svg';
+import like from '../../image/heart-white.svg'
+import comment from '../../image/comment-white.svg'
 
 class Profile extends Component {
   constructor() {

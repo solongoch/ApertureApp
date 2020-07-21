@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 // import CSS
 import '../css/navbar.css';
 // import images
-import logo from '../image/aperture-logo.svg';
-import profilePicture from '../image/img-sq.jpg';
-import home from '../image/home.svg';
-import homeActive from '../image/home-active.svg';
-import findPeople from '../image/find-people.svg';
-import findPeopleActive from '../image/find-people-active.svg';
-import heart from '../image/heart.svg';
-import heartActive from '../image/heart-active.svg';
+import logo from '../../image/aperture-logo.svg';
+import profilePicture from '../../image/img-sq.jpg';
+import home from '../../image/home.svg';
+import homeActive from '../../image/home-active.svg';
+import findPeople from '../../image/find-people.svg';
+import findPeopleActive from '../../image/find-people-active.svg';
+import heart from '../../image/heart.svg';
+import heartActive from '../../image/heart-active.svg';
 
 class Navbar extends Component {
   constructor() {

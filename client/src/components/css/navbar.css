@@ -21,7 +21,7 @@ nav {
 
 .form-inline #search {
   background-color: #fafafa;
-  background-image: url('../image/search-icon.png');
+  background-image: url('../../image/search-icon.png');
   background-position: 9px 9px;
   background-repeat: no-repeat;
   background-size: 10px 10px;

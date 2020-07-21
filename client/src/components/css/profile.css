@@ -85,12 +85,6 @@
   font-weight: 600;
 }
 
-.numbers > img {
-  width: 1em;
-  margin-right: 3px;
-  margin-top: -2px;
-}
-
 .numbers > img:last-child {
   margin-left: 15px;
 }

@@ -5,10 +5,6 @@ import axios from 'axios';
 import '../css/profile.css';
 // import images
 import profilePicture from '../../image/img-sq.jpg';
-import settings from '../../image/settings.svg';
-import posts from '../../image/posts.svg';
-import like from '../../image/heart-white.svg'
-import comment from '../../image/comment-white.svg'
 
 class Profile extends Component {
   constructor() {
@@ -31,7 +27,7 @@ class Profile extends Component {
             <div className="d-flex flex-row">
               <div className="profile-username">Username</div>
               <div className="white-bg button font-weight-bold"><Link to="/">Edit Profile</Link></div>
-              <Link to="/"><img src={settings} alt="Settings button" /></Link>
+              <Link to="/"><i className="fas fa-cog fa-lg"></i></Link>
             </div>
             <ul className="counts d-flex flex-row">
               <li className="count"><span className="font-weight-bold">100</span> posts</li>
@@ -44,15 +40,8 @@ class Profile extends Component {
           </div>
         </div>
 
-        <div className="top-post-menu d-flex flex-row justify-content-center">
-          <div className="active">
-            <img src={posts} width="16px" height="16px" alt="Posts" />
-            <Link to="/">posts</Link>
-          </div>
-          <div><Link to="/">IGTV</Link></div>
-          <div><Link to="/">saved</Link></div>
-          <div><Link to="/">tagged</Link></div>
-        </div>
+        {/* <div className="top-post-menu d-flex flex-row justify-content-center">
+        </div> */}
         {/* Posts */}
         <div className="posts d-flex flex-column">
           {/* This .single-row div will be repeated */}
@@ -60,10 +49,10 @@ class Profile extends Component {
             <div className="post">
               <img className="image" src={profilePicture} alt="Post"/>
               <div className="overlay">
-                <Link to="/">
+                <Link to="/profile">
                   <div className="numbers">
-                    <img src={like} alt="likes" />987
-                    <img src={comment} alt="comments" />4321
+                    <span className="right-15"><i className="far fa-heart"></i> 987</span>
+                    <span><i className="far fa-comment"></i> 4321</span>
                   </div>
                 </Link>
               </div>
@@ -74,8 +63,8 @@ class Profile extends Component {
               <div className="overlay">
                 <Link to="/">
                   <div className="numbers">
-                    <img src={like} alt="likes" />987
-                    <img src={comment} alt="comments" />4321
+                    <span className="right-15"><i className="far fa-heart"></i> 987</span>
+                    <span><i className="far fa-comment"></i> 4321</span>
                   </div>
                 </Link>
               </div>
@@ -86,8 +75,8 @@ class Profile extends Component {
               <div className="overlay">
                 <Link to="/">
                   <div className="numbers">
-                    <img src={like} alt="likes" />987
-                    <img src={comment} alt="comments" />4321
+                    <span className="right-15"><i className="far fa-heart"></i> 987</span>
+                    <span><i className="far fa-comment"></i> 4321</span>
                   </div>
                 </Link>
               </div>
@@ -100,8 +89,8 @@ class Profile extends Component {
               <div className="overlay">
                 <Link to="/">
                   <div className="numbers">
-                    <img src={like} alt="likes" />987
-                    <img src={comment} alt="comments" />4321
+                    <span className="right-15"><i className="far fa-heart"></i> 987</span>
+                    <span><i className="far fa-comment"></i> 4321</span>
                   </div>
                 </Link>
               </div>
@@ -112,8 +101,8 @@ class Profile extends Component {
               <div className="overlay">
                 <Link to="/">
                   <div className="numbers">
-                    <img src={like} alt="likes" />987
-                    <img src={comment} alt="comments" />4321
+                    <span className="right-15"><i className="far fa-heart"></i> 987</span>
+                    <span><i className="far fa-comment"></i> 4321</span>
                   </div>
                 </Link>
               </div>
@@ -124,8 +113,8 @@ class Profile extends Component {
               <div className="overlay">
                 <Link to="/">
                   <div className="numbers">
-                    <img src={like} alt="likes" />987
-                    <img src={comment} alt="comments" />4321
+                    <span className="right-15"><i className="far fa-heart"></i> 987</span>
+                    <span><i className="far fa-comment"></i> 4321</span>
                   </div>
                 </Link>
               </div>

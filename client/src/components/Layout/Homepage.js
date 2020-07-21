@@ -6,10 +6,6 @@ import '../css/homepage.css';
 // import images 
 import profilePicture from '../../image/img-sq.jpg';
 import postPicture from '../../image/img1.jpg';
-import heartIcon from '../../image/heart.svg';
-import commentIcon from '../../image/comment.svg';
-import shareIcon from '../../image/share.svg';
-import saveIcon from '../../image/save.svg';
 
 class Homepage extends Component {
   constructor() {
@@ -43,10 +39,10 @@ class Homepage extends Component {
             </div>
             <div className="post-footer">
               <div className="actions">
-                <img className="action  image-22" src={heartIcon} height="24px" width="24px" aria-label="Like" alt="Like" />
-                <img className="action  image-22" src={commentIcon} aria-label="Comment" alt="Comment" />
-                <img className="action  image-22" src={shareIcon} aria-label="Share" alt="Share" />
-                <img className="action  image-22" src={saveIcon} aria-label="Save" alt="Save" />
+                <i className="far fa-heart fa-2x action"></i>
+                <i className="far fa-comment fa-2x action"></i>
+                <i className="far fa-paper-plane fa-2x action"></i>
+                <i className="far fa-bookmark fa-2x action"></i>
               </div>
               <div className="font-weight-bold line"><Link to="/likes">27013 likes</Link></div>
               <div className="line">
@@ -83,10 +79,10 @@ class Homepage extends Component {
             </div>
             <div className="post-footer">
               <div className="actions">
-                <img className="action  image-22" src={heartIcon} height="24px" width="24px" aria-label="Like" alt="Like" />
-                <img className="action  image-22" src={commentIcon} aria-label="Comment" alt="Comment" />
-                <img className="action  image-22" src={shareIcon} aria-label="Share" alt="Share" />
-                <img className="action  image-22" src={saveIcon} aria-label="Save" alt="Save" />
+                <i className="far fa-heart fa-2x action"></i>
+                <i className="far fa-comment fa-2x action"></i>
+                <i className="far fa-paper-plane fa-2x action"></i>
+                <i className="far fa-bookmark fa-2x action"></i>
               </div>
               <div className="font-weight-bold line"><Link to="/">27013 likes</Link></div>
               <div className="line">

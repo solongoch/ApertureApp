@@ -1,0 +1,66 @@
+.card.create-postcard {
+  margin:50px auto ;
+  width:600px;
+  border-radius: 25px; 
+  padding-bottom: 10px; 
+  background-color: rgba(var(--f23,255,255,255),1);
+  overflow: hidden;
+}
+div.card-header{
+  font-size:24px;
+  font-weight: 500;
+}
+.userpost-avatar{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;  
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-left: 25px;
+  margin-top: 5px;
+}
+.createpost-form{
+  margin-top :20px;
+}
+textarea.caption{
+  font-family: Roboto, Helvetica, sans-serif;
+  padding-top:20px;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  border: 1px solid #ccd0d5;
+  border-radius: 15px;
+  background-color: #F0F2F5; 
+  /* border: 5px solid transparent; */
+}
+/* textarea::-webkit-scrollbar {
+  border-radius: 2px;
+} */
+
+.form-group {
+  width: 100%!important;
+}
+
+div.upload-image{
+  text-align: center;
+}
+.fa.fa-file-image-o{
+  cursor: pointer;
+  font-size: 40px; 
+  color:#3897f0;
+
+}
+.btn-primary{
+  background-color: transparent;
+  border-top: 1px solid rgba(var(--b6a,219,219,219),1);
+  margin: 0;
+  text-align: center;
+}
+.form-inline{
+  justify-content: center!important;
+}
+
+@media(max-width:425px){
+  .card.create-postcard{
+    width: 100%;
+  }
+}

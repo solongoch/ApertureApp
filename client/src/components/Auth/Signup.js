@@ -5,7 +5,7 @@ import PhoneImage from '../../image/insta2.png';
 import logoImage from '../../image/logo2.png';
 import AppleBadge from '../../image/Applebadge.png';
 import GoogleBadge from '../../image/googleplay.png';
-import '../css/Signup.css';
+import '../css/signup.css';
 import classNames from 'classnames';
 
 class Signup extends Component {

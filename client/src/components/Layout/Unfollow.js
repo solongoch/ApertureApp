@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
-import '../css/Unfollow.css';
+import { Link } from 'react-router-dom'
+import '../css/unfollow.css';
 
 class Unfollow extends Component {
   render() {
     return (
-      <div className="unfollow-div">
-        <div className="container">
-          <div className="row align-items-center">
-          <div className="mx-auto ">
-            <div className="card">
-              <form>
+      <div className="main-wrapper">
+        <div className='subwrapper-div'>
+          <div className="card unfollow-card mx-auto">
+            <div className="row">
+              <form className="following-form">
                 <div className="form-group">
-                  <div className=" col-sm-10 col-md-12 col-lg-12">
+                  <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6">
                     <img className="avatar-img " src={logoImage} alt="Avatar" />
                   </div>
-                  <div className="username-div col-sm-12 col-md-12 col-lg-12">
-                          <p className="username-p">If you change your mind, you'll have to request to follow @keerthikadambala again.
-                          </p>
+                  <div className="info-div col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6">
+                    <p className="info-p">
+                      If you change your mind, you'll have to request to follow @keerthikadambala again.
+                    </p>
+                  </div>               
+                  <div className="action-div">
+                    <button className=" btn-unfollow col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 shadow-none">
+                      Unfollow</button>           
+                    <Link to='/followings' className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6">Cancel</Link>
                   </div>
-                  <div className="unfollow-div">
-                    <button className=" btn-unfollow btn-common btn-block">Unfollow</button>
-                    <button className="btn-cancel btn-common btn-block">Cancel</button>
-                  </div>
-                  </div>
-               </form>
+                </div>
+              </form>
             </div>
-          </div> 
           </div>
         </div>
       </div>

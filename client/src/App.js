@@ -7,6 +7,9 @@ import followers from './components/Layout/Followers';
 import followings from './components/Layout/Followings';
 import unfollow from './components/Layout/Unfollow';
 import createPost from './components/Layout/CreatePost';
+import Navbar from './components/Layout/Navbar';
+import Footer from './components/Layout/Footer';
+
 
 
 class App extends Component {
@@ -14,13 +17,17 @@ class App extends Component {
   render(){
     return (
       <Router>
-        <div className="App container">
+        <div className="App">
+        <Navbar />
+        <div className="container">
           <Route exact path='/' component={Signup} />
           <Route exact path='/changePassword' component={ChangePassword} />
           <Route exact path='/followers' component={followers} />
           <Route exact path='/followings' component={followings} />
           <Route exact path='/unfollow' component={unfollow} />
           <Route path='/create' component={createPost} />
+          </div>
+          <Footer />
         </div>
       </Router>
     );

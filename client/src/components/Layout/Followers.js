@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "../css/Follow.css";
+import "../css/follow.css";
 import { Link } from "react-router-dom";
 import users from './Data';
 
@@ -11,8 +11,8 @@ class Followers extends Component {
   
   render() {
     return (
-        <div className='main-wrapper'>
-          <div className='sub-wrapper-div'>
+     <div className='mainwrapper-div'>
+          <div className='subwrapper-div'>
              <div className='user-container'>
               <h5>Followers</h5>
               <span>
@@ -37,25 +37,24 @@ class Followers extends Component {
                               />
                             </Link>
                           </div>
-                          <div className='userinfo-div col-7 col-sm-7 col-md-7 col-lg-7 col-xxs-7'>
+                          <div className='userinfo-div col-5 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
                                   <Link
                                     to='#'
                                     className='username-link'
                                     style={{ marginLeft: "-60px",textDecoration: 'inherit',
-                                    "cursor": "pointer" }}                                 
+                                    "cursor": "pointer" }}                          
                                   >
                                 <span className="username"> {user.username} </span>
                                 </Link>
                                 <span className="name"> {user.name}  </span>
                           </div>
                           <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                              <button className='btn btn-primary-outline btn-lg'>Follow </button>
+                              <button className='btn btn-primary btn-lg'>Follow</button>
                           </div>
-                         </div>                          
+                         </div>
                         )
                       })
                   }  
-                                           
               </div>
        
             </div>
@@ -64,5 +63,4 @@ class Followers extends Component {
     );
   }
 }
-
 export default Followers;

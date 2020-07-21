@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
-import '../css/CreatePost.css';
-import cloudniary from '../config/key';
+import '../css/createpost.css';
+import cloudniary from '../config/Key';
 import axios from 'axios';
 import classNames from 'classnames';
 
@@ -99,15 +99,15 @@ export class CreatePost extends Component {
     }
 
     return (
-      <div className="card shadow-lg">
+      <div className="card create-postcard shadow-lg col-11 col-sm-9 col-md-9 col-lg-9">
         <div className="card-header">New Photo Post</div>
         <form className="createpost-form row" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <div className="input-group mb-3">
-              <img src={logoImage} alt="Avatar" className='user-avatar' />
+              <img src={logoImage} alt="Avatar" className='userpost-avatar ' />
               <textarea rows='2'
                 placeholder="Write a caption..."
-                className= { classNames('form-control caption' , {'is-invalid' : errors.caption }) }
+                className= { classNames('form-control caption col-11 col-sm-9 col-md-9 col-lg-9' , {'is-invalid' : errors.caption }) }
                 type="text"
                 name="caption"
                 value={this.state.caption}

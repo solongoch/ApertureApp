@@ -6,6 +6,8 @@ import '../css/profile.css';
 import profilePicture from '../image/img-sq.jpg';
 import settings from '../image/settings.svg';
 import posts from '../image/posts.svg';
+import like from '../image/heart-white.svg'
+import comment from '../image/comment-white.svg'
 
 class Profile extends Component {
   render() {
@@ -42,16 +44,80 @@ class Profile extends Component {
         {/* Posts */}
         <div className="posts d-flex flex-column">
           {/* This .single-row div will be repeated */}
-          <div className="single-row d-flex flex-row justify-content-between">
-            <div className="post"><img src={profilePicture} alt="Post" /></div>
-            <div className="post"><img src={profilePicture} alt="Post" /></div>
-            <div className="post"><img src={profilePicture} alt="Post" /></div>
+          <div className="single-row d-flex flex-row justify-content-between">        
+            <div className="post">
+              <img className="image" src={profilePicture} alt="Post"/>
+              <div className="overlay">
+                <Link to="/">
+                  <div className="numbers">
+                    <img src={like} alt="likes" />987
+                    <img src={comment} alt="comments" />4321
+                  </div>
+                </Link>
+              </div>
+            </div>
+                   
+            <div className="post">
+              <img className="image" src={profilePicture} alt="Post"/>
+              <div className="overlay">
+                <Link to="/">
+                  <div className="numbers">
+                    <img src={like} alt="likes" />987
+                    <img src={comment} alt="comments" />4321
+                  </div>
+                </Link>
+              </div>
+            </div>
+                   
+            <div className="post">
+              <img className="image" src={profilePicture} alt="Post"/>
+              <div className="overlay">
+                <Link to="/">
+                  <div className="numbers">
+                    <img src={like} alt="likes" />987
+                    <img src={comment} alt="comments" />4321
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
 
           <div className="single-row d-flex flex-row justify-content-between">
-            <div className="post"><img src={profilePicture} alt="Post" /></div>
-            <div className="post"><img src={profilePicture} alt="Post" /></div>
-            <div className="post"><img src={profilePicture} alt="Post" /></div>
+            <div className="post">
+              <img className="image" src={profilePicture} alt="Post"/>
+              <div className="overlay">
+                <Link to="/">
+                  <div className="numbers">
+                    <img src={like} alt="likes" />987
+                    <img src={comment} alt="comments" />4321
+                  </div>
+                </Link>
+              </div>
+            </div>
+                   
+            <div className="post">
+              <img className="image" src={profilePicture} alt="Post"/>
+              <div className="overlay">
+                <Link to="/">
+                  <div className="numbers">
+                    <img src={like} alt="likes" />987
+                    <img src={comment} alt="comments" />4321
+                  </div>
+                </Link>
+              </div>
+            </div>
+                   
+            <div className="post">
+              <img className="image" src={profilePicture} alt="Post"/>
+              <div className="overlay">
+                <Link to="/">
+                  <div className="numbers">
+                    <img src={like} alt="likes" />987
+                    <img src={comment} alt="comments" />4321
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

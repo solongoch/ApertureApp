@@ -11,6 +11,13 @@ import shareIcon from '../image/share.svg';
 import saveIcon from '../image/save.svg';
 
 class Homepage extends Component {
+  constructor() {
+    super();
+    this.state = {
+
+    }
+  }
+
   render() {
     return (
       <div id="homepage-body">

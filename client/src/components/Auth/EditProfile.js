@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import '../css/editprofile.css';
 import {Link} from 'react-router-dom';
-// import Avatar from '../../image/instav.png';
 import axios from 'axios';
 import classnames from 'classnames';
 import UploadAvatar from './UploadAvatar';
@@ -61,12 +60,6 @@ class EditProfile extends Component {
         <div className="row">
           <div className="col-md-3">
             <div className="sidebar">
-              {/* <img 
-                src={Avatar} 
-                className="avatar img-circle" 
-                alt="avatar" 
-                style={{ height: '110px', width: 'auto'}} 
-              /> */}
               <UploadAvatar />
               <Link to="/changepassword" className="btn btn-lg mr-2">Change Password</Link>
             </div>
@@ -75,12 +68,6 @@ class EditProfile extends Component {
         <div className="profile-info col-md-9">
 
         <div className="sidebar-mobile">
-              {/* <img 
-                src={Avatar} 
-                className="avatar img-circle" 
-                alt="avatar" 
-                style={{ height: '110px', width: 'auto'}} 
-              /> */}
               <UploadAvatar />
               <Link to="/changepassword" className="btn btn-lg mr-2">Change Password</Link>
             </div>

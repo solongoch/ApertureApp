@@ -5,3 +5,4 @@ package-lock.json
 /Test.mongodb
 /client/node_modules
 /client/package-lock.json
+/client/src/components/config/keys.js

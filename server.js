@@ -1,5 +1,5 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
+const {cloudinary} = require('./client/src/components/config/keys');
 // Create the Express application
 const app = express();
 // Load APIs
@@ -16,26 +16,35 @@ const port = require('./config/keys').port;
 const passport = require('passport');
 const optionalJWT = require('./controller/accessRouteWithWithoutToken');
 
-//for avatar file upload//
-app.use(fileUpload());
+//Retrieve Profile Avatar
+app.get('/api/images', async (req, res) => {
+  const {resources} = await cloudinary.search.expression
+  ('folder:dev_setups')
+  .sort_by('public_id', 'desc')
+  .max_results(1)
+  .execute();
+  const publicIds = resources.map( file => file.public_id);
+  res.send(publicIds);
+})
 
-//Upload Endpoint
-app.post('/upload', (req, res) => {
-  if(req.files === null) {
-    return res.status(400).json({msg: 'No file upload'});
+//Post Avatar
+//Upload Profile Avatar
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true}));
+
+app.post('/api/upload', async (req, res) =>{
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.
+    upload(fileStr, {
+      upload_preset: 'dev_setups'
+    })
+    console.log(uploadedResponse);
+    res.json({msg: "Upload successful"})
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({err:'Something went wrong'})
   }
-
-  const file = req.files.file;
-
-  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
-    if(err){
-      console.error(err);
-      return res.status(500).send(err);
-    }
-
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}`});
-  })
-
 });
 
 // Configures the database and opens a global connection

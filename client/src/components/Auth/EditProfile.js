@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import '../css/editprofile.css';
 import {Link} from 'react-router-dom';
-import Avatar from '../../image/instav.png';
+// import Avatar from '../../image/instav.png';
 import axios from 'axios';
 import classnames from 'classnames';
-import FileUpload from './AvatarUpload/FileUpload';
+import UploadAvatar from './UploadAvatar';
 import { Alert, Collapse, Card, CardBody } from 'reactstrap';
-import cloudinary from '../config/key'
 
 class EditProfile extends Component {
   constructor() {
@@ -56,14 +55,19 @@ class EditProfile extends Component {
 
   render() {
     const {errors} = this.state;
+ 
     return (
       <div className="edit-profile">
         <div className="row">
           <div className="col-md-3">
             <div className="sidebar">
-              <img src={Avatar} className="avatar img-circle" alt="avatar" />
-              <h6 className="text-center">Change Avatar</h6>
-              <FileUpload />
+              {/* <img 
+                src={Avatar} 
+                className="avatar img-circle" 
+                alt="avatar" 
+                style={{ height: '110px', width: 'auto'}} 
+              /> */}
+              <UploadAvatar />
               <Link to="/changepassword" className="btn btn-lg mr-2">Change Password</Link>
             </div>
             </div>
@@ -71,9 +75,13 @@ class EditProfile extends Component {
         <div className="profile-info col-md-9">
 
         <div className="sidebar-mobile">
-              <img src={Avatar} className="avatar img-circle" alt="avatar" />
-              <h6 className="text-center">Change Avatar</h6>
-              <FileUpload />
+              {/* <img 
+                src={Avatar} 
+                className="avatar img-circle" 
+                alt="avatar" 
+                style={{ height: '110px', width: 'auto'}} 
+              /> */}
+              <UploadAvatar />
               <Link to="/changepassword" className="btn btn-lg mr-2">Change Password</Link>
             </div>
 

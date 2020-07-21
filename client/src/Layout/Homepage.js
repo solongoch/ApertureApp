@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 // import CSS
 import '../css/homepage.css';
 // import images 
@@ -14,8 +15,12 @@ class Homepage extends Component {
   constructor() {
     super();
     this.state = {
-
     }
+
+    axios
+      .post('/api/home')
+      .then(res => console.log(res))
+      .catch(err => console.log(err.response.data));
   }
 
   render() {
@@ -119,7 +124,7 @@ class Homepage extends Component {
           {/* Follower suggestion */}
           <div className="d-flex justify-content-between">
             <span className="font-weight-bold">Suggestions For You</span>
-            <Link className="font-weight-bold">See all</Link>
+            <Link to="/" className="font-weight-bold">See all</Link>
           </div>
 
           {/* .profile-section below will be repeated */}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 // import CSS
 import '../css/profile.css';
 // import images
@@ -10,6 +11,17 @@ import like from '../image/heart-white.svg'
 import comment from '../image/comment-white.svg'
 
 class Profile extends Component {
+  constructor() {
+    super();
+    this.state = {
+    }
+
+    axios
+      .post('/api/profile/:username')
+      .then(res => console.log(res))
+      .catch(err => console.log(err.response.data));
+  }
+
   render() {
     return (
       <div className="profile">
@@ -37,9 +49,9 @@ class Profile extends Component {
             <img src={posts} width="16px" height="16px" alt="Posts" />
             <Link to="/">posts</Link>
           </div>
-          <div><Link href="">IGTV</Link></div>
-          <div><Link href="">saved</Link></div>
-          <div><Link href="">tagged</Link></div>
+          <div><Link to="/">IGTV</Link></div>
+          <div><Link to="/">saved</Link></div>
+          <div><Link to="/">tagged</Link></div>
         </div>
         {/* Posts */}
         <div className="posts d-flex flex-column">

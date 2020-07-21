@@ -1,11 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 // load CSS
 import '../css/suggestion.css';
 // load images
 import profilePicture from '../image/img-sq.jpg';
 
 class Suggestion extends Component {
+  constructor() {
+    super();
+    this.state = {
+    }
+
+    axios
+      .post('/api/suggestion')
+      .then(res => console.log(res))
+      .catch(err => console.log(err.response.data));
+  }
+
   render() {
     return (
       <div id="page-body">

@@ -13,6 +13,11 @@ import heart from '../image/heart.svg';
 import heartActive from '../image/heart-active.svg';
 
 class Navbar extends Component {
+  constructor() {
+    super();
+    this.state = {
+    }
+  }
   render() {
     return (
       <header>
@@ -30,7 +35,7 @@ class Navbar extends Component {
                 type="search"
                 name="search"
                 placeholder="Search"
-                value="Search"
+                defaultValue="Search"
                 aria-label="Search"
               />
             </form>

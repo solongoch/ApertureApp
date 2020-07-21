@@ -1,0 +1,142 @@
+.profile {
+  margin: 0 20px;
+  width: 100%;
+  font-size: 1.3em;
+  line-height: 1.5em;
+}
+
+.profile-info {
+  padding-bottom: 44px;
+  width: 100%;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  margin: 0 70px;
+}
+
+.profile-username {
+  padding-top: 3px;
+  font-size: 1.6em;
+}
+
+.profile-info .button {
+  margin: 0 20px;
+  padding: 5px 9px;
+}
+
+.top-post-menu {
+  border-top: 1px solid rgba(var(--b38,219,219,219),1);
+  height: 52px;
+  text-transform: uppercase;
+}
+
+.top-post-menu div {
+  padding-top: 12px;
+  margin: 0 30px;
+}
+
+.top-post-menu .active {
+  border-top: 1px solid rgba(var(--i1d,38,38,38),1);
+}
+
+.single-row {
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.single-row > .post {
+  position: relative;
+  width: 293px;
+  margin-right: 28px;
+}
+
+.single-row > .post:last-child {
+  margin-right: 0;
+}
+
+.post img {
+  max-width: 100%;
+  max-height: 100%;
+  /* -webkit-transition: .2s all; */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s, visibility .2s;
+}
+.post:hover .overlay {
+  visibility: visible;
+  opacity: 1;
+}
+.numbers {
+  color: #FFF;
+  font-weight: 600;
+}
+
+.numbers > img:last-child {
+  margin-left: 15px;
+}
+.counts {
+  list-style-type: none;
+  margin: 20px 0;
+}
+
+.count {
+  margin-right: 20px;
+}
+
+@media (min-width: 736px) and (max-width: 991px) {
+  .container {
+    max-width: 100%;
+    margin: 0;
+    padding: 30px 20px 0;
+  }
+  .profile {
+    margin: 0;
+  }
+  .single-row > .post {
+    width: 100%;
+  }
+  .post > img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 735px) {
+  .container {
+    max-width: 100%;
+    margin: 0;
+    padding: 30px 0;
+  }
+  .profile {
+    margin: 0;
+  }
+  .profile-image {
+    width: 77px;
+    height: 77px;
+  }
+  .single-row {
+    width: 100%;
+    height: auto;
+    margin-bottom: 3px;
+  }
+  
+  .single-row > .post {
+    margin-right: 3px;
+  }
+  .post > img {
+    width: 100%;
+  }
+}

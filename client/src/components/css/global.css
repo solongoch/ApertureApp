@@ -1,0 +1,70 @@
+.round-image {
+  border-radius: 50%;
+}
+
+.image-22 {
+  width: 22px;
+  height: 22px;
+}
+
+.image-24 {
+  width: 24px;
+  height: 24px;
+}
+
+.image-32 {
+  width: 32px;
+  height: 32px;
+}
+
+.image-50 {
+  width: 50px;
+  height: 50px;
+}
+
+.image-150 {
+  width: 150px;
+  height: 150px;
+}
+
+.left-15 {
+  margin-left: 15px;
+}
+
+.right-15 {
+  margin-right: 15px;
+}
+
+.line {
+  line-height: 2em;
+}
+
+.button {
+  height: 32px;
+  border: 1px solid rgb(239, 239, 239);
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.blue-bg {
+  background-color: #0095f6;
+}
+
+.white-bg {
+  background-color: #FFF;
+}
+
+.make-gray {
+  color: #999999;
+}
+
+.post-header {
+  height: 60px;
+  width: 100%;
+  margin: 0;
+  padding: 15px;
+  border-bottom: 1px;
+  display: flex;
+  justify-items: start;
+  align-items: center;
+}

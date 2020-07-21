@@ -5,23 +5,30 @@ const passport = require("passport");
 const User = require("../../models/User");
 
 // @route   Post api/suggestion
-// @desc    Suggest accounts to user who didn't followed anyone
+// @desc    Suggest accounts to user who didn't follow anyone
 // @access  Private
 router.get(
   "/suggestion",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    if (req.user.following.length < 1) {
-      User.find({}, { name: 1, username: 1, avatar: 1, followers: 1 })
+    User.find({ $and: [
+      // not suggesting user himself
+      { _id: { $ne: req.user.id } },
+      // not suggesting accounts user already followed
+      { _id: { $nin: req.user.following.map(obj => obj.user) } }
+      ]},
+      // get name, username, avatar and followers fields
+      { name: 1, username: 1, avatar: 1, followers: 1 })
+        // sort by followers number
         .sort({ followers: -1 })
         .limit(10)
         .then(accounts => {
-          return res.json({'Suggestion': accounts});
+          return res.json({ Suggestion: accounts });
         })
         .catch(err => {
           return res.json(err);
         });
-    }
-  });
+  }
+);
 
 module.exports = router;

@@ -52,6 +52,7 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
                     data.posts = posts;
                   }
                   else { // req.user is not following OR not own post
+                    data.noOfPosts = posts.length;
                     return  res.json(data);
                    }
                 }//For Private route ends
@@ -78,7 +79,7 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
 });
 
 
-// @route   GET api/profile/edit
+// @route   GET api/profile/accounts/edit
 // @desc    Display profile information
 // @access  Private
 router.get(
@@ -100,11 +101,12 @@ router.get(
     });
   }
 );
-// @route   POST api/profile
+
+// @route   POST api/profile/accounts/edit
 // @desc    Create or edit user profile
 // @access  Private
 router.post(
-  "/edit",
+  "/accounts/edit",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateProfileInput(req.body);
@@ -134,7 +136,15 @@ router.post(
             { email: req.user.email },
             { $set: userFields },
             { new: true }
-          ).then(updatedUser => res.json(updatedUser))
+          ).then(updatedUser => {
+            updatedUser = updatedUser.toObject();
+            delete updatedUser._id;
+            delete updatedUser.password;
+            delete updatedUser.followers;
+            delete updatedUser.following;
+            delete updatedUser.__v;
+            res.json({'User': updatedUser})
+          })
            .catch(err => res.status(500).json({ success:false, err: err.message }));
         }
       })

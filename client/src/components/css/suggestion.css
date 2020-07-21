@@ -1,0 +1,34 @@
+#page-body {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.suggestion {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+
+.suggestion {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+}
+
+.suggested-div {
+  width: 100%;
+  margin: 15px;
+  font-size: 1.5em;
+}
+
+@media (max-width: 645px) {
+  .container {
+    max-width: 600px;
+    margin: 0;
+  }
+  #page-body {
+    margin-top: 0;
+  }
+}

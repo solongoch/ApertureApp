@@ -130,6 +130,9 @@ button.btn-follow {
   color: rgba(var(--f52, 142, 142, 142), 1);
 }
 
+.btn.btn-follow:hover{
+color:white
+}
 
 
 button.btn-primary-outline {

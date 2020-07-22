@@ -112,7 +112,7 @@ export class CreatePost extends Component {
 
     return (
       <div className="card create-postcard shadow-lg col-11 col-sm-9 col-md-10 col-lg-10">
-        <div className="card-header post-header">New Photo Post</div>
+        <div className="card-header newpost-header">New Photo Post</div>
         <hr className="post-hr"/>
         <form className="createpost-form row" onSubmit={this.handleSubmit}>
           <div className="form-group">

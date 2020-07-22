@@ -1,5 +1,5 @@
 const express = require('express');
-const {cloudinary} = require('./client/src/components/config/keys');
+const cloudinary = require('./client/src/components/config/keys');
 // Create the Express application
 const app = express();
 // Load APIs

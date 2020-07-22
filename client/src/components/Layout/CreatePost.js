@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
 import '../css/createpost.css';
-import cloudniary from '../config/Key';
+import cloudinary from '../config/keys';
 import axios from 'axios';
 import classNames from 'classnames';
 
@@ -45,18 +45,18 @@ export class CreatePost extends Component {
   }
 
   handleUploadImg(){
-    //upload file in cloudniary
+    //upload file in cloudinary
     const formData = new FormData();
     formData.append('file', this.state.file);
-    formData.append('upload_preset', cloudniary.UPLOAD_PRESET);
-    formData.append('cloud_name', cloudniary.CLOUD_NAME);
+    formData.append('upload_preset', cloudinary.UPLOAD_PRESET);
+    formData.append('cloud_name', cloudinary.CLOUD_NAME);
 
     const opts = {
       method: 'POST',
       body: formData,
     };
 
-    fetch(cloudniary.URL, opts)
+    fetch(cloudinary.URL, opts)
       .then(response => response.json())
       .then(res => {
         //set secure_url to photo state to send DB

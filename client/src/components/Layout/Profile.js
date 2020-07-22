@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Followings from './Followings'
 // import CSS
 import '../css/profile.css';
 // import images
@@ -10,6 +11,7 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = {
+      _showFollowings:false
     }
 
     axios
@@ -17,6 +19,15 @@ class Profile extends Component {
       .then(res => console.log(res))
       .catch(err => console.log(err.response.data));
   }
+
+  //to show and hide Following component 
+  showFollowings = () => {
+    this.setState({_showFollowings:true})  
+   }
+
+  hideFollowings = () => {
+    this.setState({_showFollowings:false})    
+  } 
 
   render() {
     return (
@@ -32,8 +43,11 @@ class Profile extends Component {
             <ul className="counts d-flex flex-row">
               <li className="count"><span className="font-weight-bold">100</span> posts</li>
               <li className="count"><span className="font-weight-bold">133</span> followers</li>
-              <li className="count"><span className="font-weight-bold">388</span> following</li>
+              <li className="count"><span className="font-weight-bold">388</span>
+              <span  className="count" onClick={this.showFollowings}>followings</span>
+              </li>
             </ul>
+            <Followings _showFollowings={this.state._showFollowings} handleFollowingClose={this.hideFollowings}/>
             <div className="font-weight-bold">Name</div>
             <div>This is bio section</div>
             <div><Link to="/" target="_blank">https://www.instagram.com/</Link></div>

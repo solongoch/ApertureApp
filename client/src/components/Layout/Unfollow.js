@@ -5,6 +5,9 @@ import '../css/unfollow.css';
 
 class Unfollow extends Component {
   render() {
+    if (!this.props._showUnfollow) {
+      return null;
+    }
     return (
       <div className="main-wrapper">
         <div className='subwrapper-div'>
@@ -19,11 +22,11 @@ class Unfollow extends Component {
                     <p className="info-p">
                       Unfollow @keerthikadambala?
                     </p>
-                  </div>               
+                  </div>
                   <div className="action-div">
                     <button className=" btn-unfollow col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 shadow-none">
-                      Unfollow</button>           
-                    <Link to='/followings' className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</Link>
+                      Unfollow</button>
+                    <span onClick={this.props.hideUnfollow} className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</span>
                   </div>
                 </div>
               </form>

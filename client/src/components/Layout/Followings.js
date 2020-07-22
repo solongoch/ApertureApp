@@ -2,37 +2,35 @@ import React, { Component } from 'react';
 import "../css/follow.css";
 import { Link } from "react-router-dom";
 import users from './Data';
-import { Modal,ModalBody } from 'react-bootstrap';
 import Unfollow from './Unfollow';
 
 
 class Followings extends Component {
   constructor() {
     super();
-    this.state={
-      showModal: false
+    this.state = {
+      _showUnfollow: false
     }
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-  handleOpenModal = () => {
-    this.setState({showModal:true})    
+  showUnfollow = () => {
+    this.setState({ _showUnfollow: true })
   }
-  handleCloseModal () {
-    this.setState({ showModal: false });
+  hideUnfollow = () => {
+    this.setState({ _showUnfollow: false });
   }
 
   render() {
+    if (!this.props._showFollowings) {
+      return null;
+    }
     return (
       <div className='mainwrapper-div'>
         <div className='subwrapper-div'>
           <div className='user-container'>
             <h5>Followings</h5>
             <span>
-              <Link to='/profile' className='close'>
-                <i className="fa fa-times" aria-hidden="true"></i>
-              </Link>
+              <i onClick={this.props.handleFollowingClose} className="fa fa-times close" aria-hidden="true"></i>
             </span>
             <hr />
             <div className='scrolluser'>
@@ -52,40 +50,25 @@ class Followings extends Component {
                       </div>
                       <div className='userinfo-div col-6 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
                         <Link
-                          to='#' 
+                          to='#'
                           className='username-link'>
                           <span className="username"> {user.username} </span>
                         </Link>
                         <span className="name"> {user.name}  </span>
                       </div>
                       <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                        <button className='btn btn-primary-outline' 
-                           onClick={this.handleOpenModal}>
-                          {/* <Link to='/unfollow' className='link-unfollow'> */}
-                            Followings
-                                  {/* </Link> */}
+                        <button className='btn btn-primary-outline'
+                          onClick={this.showUnfollow}>
+                          Followings
                         </button>
-                        <Modal 
-                                isOpen={this.state.showModal}
-                                size='modal-lg'
-                                contentLabel="Minimal Modal Example"
-                                className="Modal"
-                                overlayClassName="Overlay"
-                                onRequestClose={this.handleCloseModal}>
-                                  <ModalBody>
-                                    {console.log(Unfollow)}
-
-                                  <div>{Unfollow}</div>
-                                      <button onClick={this.handleCloseModal}>Close Modal</button>
-
-                                  </ModalBody>
-                        </Modal>
                       </div>
                     </div>
                   )
                 })
+
               }
             </div>
+            <Unfollow _showUnfollow={this.state._showUnfollow} hideUnfollow={this.hideUnfollow} />
           </div>
         </div>
       </div>

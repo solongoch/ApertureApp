@@ -40,24 +40,22 @@ class ChangePassword extends Component {
   render() {
     const{errors} = this.state;
     return (
-     <div className="chgpwd-div">
-          <div className="row align-items-center">
        <div className="container">
-                <div className="col-12 col-sm-12 col-md-12 col-lg-6 col-xxs-10">
+          <div className="chgpwd-container">
+          <div className="row">
                   <div className="card chgpwd-card">
                     <form className="Chgpwd-form" onSubmit={this.onSubmit}>
-                        <div className="form-group">
-                          <div className=" col-sm-12 col-md-12 col-lg-12">
-                            <img className="avatar-img " src={logoImage} alt="Avatar" />
+                        <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
+                          <div className="  ">
+                            <img className="chgpwdavatar-img" src={logoImage} alt="Avatar" />
                           </div>
-                            <div className="username-div col-sm-12 col-md-12 col-lg-12">
-                                  <h1 className="username-h1">rambhaindran_
-                                  </h1>
+                            <div className="username-div"> 
+                               <h1 className="username-h1">rambhaindra_</h1>
                             </div>
                         </div>
                         
                         <div className="form-group form-inline">
-                          <label htmlFor="oldpassword"  className="col-form-label password-label col-sm-5 col-md-5">Old Password</label>
+                          <label htmlFor="oldpassword" className="col-form-label password-label col-sm-5 col-md-5">Old Password</label>
                           <input
                               type="password" name="oldpassword"
                               className=
@@ -97,7 +95,7 @@ class ChangePassword extends Component {
                         </div>
                       
                       <div className="form-row">                        
-                        <div className="form-group  col-sm-12 col-md-9 col-lg-9">                          
+                        <div className="form-group col-sm-12 col-md-12 col-lg-12">                          
                         <button type="submit" 
                                 className="btn mt-3 btn-primary submit-btn">Change Password</button>
                         </div>
@@ -107,7 +105,6 @@ class ChangePassword extends Component {
               </div>
             </div>
          </div>
-     </div>
     )
   }
 }

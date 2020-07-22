@@ -1,23 +1,20 @@
 /* SignUp Component CSS starts*/
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .col-lg-6 {
   padding: 0;
 }
 
-.phoneImg {
+img.signin-phoneImg {
   float: right;
   height: 618px;
   padding-top: 20px;
+  width:430px;
   align-items: stretch;
-}
+  padding-right:0;
+ }
 
 .right-column-container {
   padding-top: 20px;
+  padding-left:0;
 }
 
 .right-column {
@@ -94,12 +91,6 @@
   font-size: 80%;
 }
 
-/* .form-control.is-invalid, .was-validated .form-control:invalid{
-  background-image: none;
-  padding-right: 0;
-} */
-
-
 .terms {
   color: rgba(var(--f52, 142, 142, 142), 1);
   font-size: 12px;
@@ -120,7 +111,14 @@
   font-size: 14px;
   text-align: center;
   font-weight: 400;
-  margin-bottom: 5px;
+  margin-bottom: 5px;  
+  line-height: 18px;
+}
+.have-login{
+  color: #0095f6;
+  font-size: 14px;  
+  line-height: 18px;
+  font-weight: 600;
 }
 
 .right-column-login a:hover {
@@ -128,6 +126,7 @@
 }
 
 .get-the-app {
+  text-align: center;
   padding: 5px;
 }
 

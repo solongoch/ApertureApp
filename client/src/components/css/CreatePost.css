@@ -1,37 +1,57 @@
 .card.create-postcard {
-  margin:50px auto ;
-  width:600px;
-  border-radius: 25px; 
-  padding-bottom: 10px; 
-  background-color: rgba(var(--f23,255,255,255),1);
+  margin: 50px auto;
+  width: 600px;
+  border-radius: 25px;
+  padding-bottom: 10px;
+  background-color: rgba(var(--f23, 255, 255, 255), 1);
   overflow: hidden;
 }
-div.card-header{
-  font-size:24px;
-  font-weight: 500;
+
+.post-header {
+  display: block;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 15px;
+  background-color: #F9F9F9;
+  text-align: center;
+  text-overflow: ellipsis;
+  line-height:40px;
+  white-space: nowrap;
 }
-.userpost-avatar{
+.post-hr{
+  margin-top: 0;
+  margin-bottom: 0;;
+}
+
+.userpost-avatar {
   border-radius: 50%;
   width: 50px;
-  height: 50px;  
+  height: 50px;
   vertical-align: middle;
   margin-right: 10px;
-  margin-left: 25px;
+  margin-left: 5px;
   margin-top: 5px;
 }
-.createpost-form{
-  margin-top :20px;
+
+.createpost-form {
+  margin-top: 20px;
 }
-textarea.caption{
+
+textarea.caption {
   font-family: Roboto, Helvetica, sans-serif;
-  padding-top:20px;
+  padding-top: 20px;
   text-overflow: ellipsis;
   vertical-align: middle;
   border: 1px solid #ccd0d5;
-  border-radius: 15px;
-  background-color: #F0F2F5; 
-  /* border: 5px solid transparent; */
+  background-color: #F0F2F5;
 }
+
+div.previewText {
+  text-align: center;
+  font-size: 16px;
+}
+
 /* textarea::-webkit-scrollbar {
   border-radius: 2px;
 } */
@@ -40,27 +60,30 @@ textarea.caption{
   width: 100%!important;
 }
 
-div.upload-image{
+div.upload-image {
   text-align: center;
 }
-.fa.fa-file-image-o{
-  cursor: pointer;
-  font-size: 40px; 
-  color:#3897f0;
 
+.fa.fa-file-image-o {
+  justify-content: center;
+  cursor: pointer;
+  font-size: 40px;
+  color: #3897f0;
 }
-.btn-primary{
+
+.btn-primary {
   background-color: transparent;
-  border-top: 1px solid rgba(var(--b6a,219,219,219),1);
+  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
   margin: 0;
   text-align: center;
 }
-.form-inline{
+
+.form-inline {
   justify-content: center!important;
 }
 
-@media(max-width:425px){
-  .card.create-postcard{
+@media(max-width:425px) {
+  .card.create-postcard {
     width: 100%;
   }
 }

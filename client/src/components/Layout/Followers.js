@@ -21,7 +21,6 @@ class Followers extends Component {
                 </Link>
               </span>
               <hr />
-
               <div className='scrolluser'>
                    {
                      users.map( (user) => {
@@ -37,24 +36,21 @@ class Followers extends Component {
                               />
                             </Link>
                           </div>
-                          <div className='userinfo-div col-5 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
+                          <div className='userinfo-div col-6 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
                                   <Link
                                     to='#'
-                                    className='username-link'
-                                    style={{ marginLeft: "-60px",textDecoration: 'inherit',
-                                    "cursor": "pointer" }}                          
-                                  >
-                                <span className="username"> {user.username} </span>
-                                </Link>
-                                <span className="name"> {user.name}  </span>
+                                    className='username-link'>
+                                    <span className="username"> {user.username} </span>
+                                  </Link>
+                                  <span className="name"> {user.name}  </span>
                           </div>
                           <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                              <button className='btn btn-primary btn-lg'>Follow</button>
+                              <button className='btn btn-primary'>Follow</button>
                           </div>
                          </div>
                         )
                       })
-                  }  
+                  }
               </div>
        
             </div>

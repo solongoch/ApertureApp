@@ -12,18 +12,18 @@ class Unfollow extends Component {
             <div className="row">
               <form className="following-form">
                 <div className="form-group">
-                  <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6">
-                    <img className="avatar-img " src={logoImage} alt="Avatar" />
+                  <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">
+                    <img className="avatar-img-unfollow " src={logoImage} alt="Avatar" />
                   </div>
                   <div className="info-div col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6">
                     <p className="info-p">
-                      If you change your mind, you'll have to request to follow @keerthikadambala again.
+                      Unfollow @keerthikadambala?
                     </p>
                   </div>               
                   <div className="action-div">
                     <button className=" btn-unfollow col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 shadow-none">
                       Unfollow</button>           
-                    <Link to='/followings' className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6">Cancel</Link>
+                    <Link to='/followings' className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</Link>
                   </div>
                 </div>
               </form>

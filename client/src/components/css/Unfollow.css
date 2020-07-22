@@ -29,7 +29,7 @@
 form.following-form{
   width: 400px!important;
 }
-.avatar-img {
+img.avatar-img-unfollow{
   margin: 32px 16px 16px;
   vertical-align: middle;
   height: 90px;
@@ -47,22 +47,24 @@ form.following-form{
 .btn-unfollow {
   color: rgba(var(--i30, 237, 73, 86), 1);
   background-color: white;
-  justify-content: center;
+  text-align: center;
   border-top: 1px solid #dbdbdb;
   border-bottom: 1px solid #dbdbdb;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 10px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 700;
 }
 button:focus{
 
   outline:0;
 }
-.link-cancel {
-  /* display: block; */
+.link-cancel{
+  display: block;
+  font-size: 14px;
   font-weight: 500;
-  color: #575757;
+  color: inherit;
   cursor: pointer;
   line-height: 1.5;
 }

@@ -2,21 +2,26 @@ import React, { Component } from 'react';
 import "../css/follow.css";
 import { Link } from "react-router-dom";
 import users from './Data';
-// import Overlay from "react-overlay-component";
-// import Unfollow from './Unfollow';
+import { Modal,ModalBody } from 'react-bootstrap';
+import Unfollow from './Unfollow';
+
 
 class Followings extends Component {
-  // constructor() {
-  //   super();
-  //   this.state={
-  //     isOpen :false
-  //   }
-  //   this.setOverlay = this.setOverlay.bind(this)
-  // }
+  constructor() {
+    super();
+    this.state={
+      showModal: false
+    }
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
 
-  // setOverlay = () => {
-  //   this.setState({isOpen:true})    
-  // }
+  handleOpenModal = () => {
+    this.setState({showModal:true})    
+  }
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
 
   render() {
     return (
@@ -45,26 +50,36 @@ class Followings extends Component {
                           />
                         </Link>
                       </div>
-                      <div className='userinfo-div col-5 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
+                      <div className='userinfo-div col-6 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
                         <Link
-                          to='#'
-                          className='username-link'
-                          style={{
-                            marginLeft: "-60px", textDecoration: 'inherit',
-                            "cursor": "pointer"
-                          }}
-                        >
+                          to='#' 
+                          className='username-link'>
                           <span className="username"> {user.username} </span>
                         </Link>
                         <span className="name"> {user.name}  </span>
                       </div>
                       <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                        <button className='btn btn-primary-outline btn-lg' >
-                          {/*  onClick={this.setOverlay}> */}
-                          <Link to='/unfollow' className='link-unfollow'>
+                        <button className='btn btn-primary-outline' 
+                           onClick={this.handleOpenModal}>
+                          {/* <Link to='/unfollow' className='link-unfollow'> */}
                             Followings
-                                  </Link>
+                                  {/* </Link> */}
                         </button>
+                        <Modal 
+                                isOpen={this.state.showModal}
+                                size='modal-lg'
+                                contentLabel="Minimal Modal Example"
+                                className="Modal"
+                                overlayClassName="Overlay"
+                                onRequestClose={this.handleCloseModal}>
+                                  <ModalBody>
+                                    {console.log(Unfollow)}
+
+                                  <div>{Unfollow}</div>
+                                      <button onClick={this.handleCloseModal}>Close Modal</button>
+
+                                  </ModalBody>
+                        </Modal>
                       </div>
                     </div>
                   )

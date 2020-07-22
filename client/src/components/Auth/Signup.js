@@ -76,10 +76,10 @@ class Signup extends Component {
     return (
       <div className="signup-wrapper">
         <div className="row">
-          <div className="col-md-6 col-lg-6 col-xl-7 d-none d-sm-none d-md-block d-lg-block">
-            <img className="phoneImg" src={PhoneImage} alt="HomeImage" />
+          <div className="col-md-6 col-lg-5 col-xl-7 d-none d-sm-none d-md-block d-lg-block">
+            <img className="signin-phoneImg" src={PhoneImage} alt="HomeImage" />
           </div>
-          <div className="col-md-6 col-lg-5 col-xl-5 right-column-container">
+          <div className="col-md-5 col-lg-5 col-xl-5 right-column-container">
             <div className="right-column">
               <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
@@ -161,7 +161,7 @@ class Signup extends Component {
                   </p>
             </div>
             <div className="right-column-login">
-              <p className="have-an-account">Have an account? <Link to="/login">Log in</Link> </p>
+              <p className="have-an-account">Have an account? <Link className='have-login' to="/login">Log in</Link> </p>
             </div>
             <div className="get-the-app">
               <img src={logoImage} alt="LogoImage" style={{ width: 30 }} />

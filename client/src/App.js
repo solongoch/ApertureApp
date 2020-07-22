@@ -27,12 +27,12 @@ class App extends Component {
           <Navbar />
           <div className="container">
             <Route exact path="/" component={Landing} />
-            <Route exact path='/' component={Signup} />
+            <Route exact path='/signup' component={Signup} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/" component={Homepage} />
+            <Route exact path="/home" component={Homepage} />
             <Route exact path="/suggestion" component={Suggestion} />
             <Route exact path="/edit" component={EditProfile} />
-            <Route exact path='/changePassword' component={ChangePassword} />
+            <Route exact path='/changepassword' component={ChangePassword} />
             <Route exact path="/profile" component={Profile} />
             <Route path='/create' component={CreatePost} />
             <Route exact path='/followers' component={Followers} />

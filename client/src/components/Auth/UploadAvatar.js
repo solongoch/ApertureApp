@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import staticImage from "../../image/instav.png";
-import '../css/upload.css';
+import '../css/uploadavatar.css';
 import cloudniary from '../config/key';
 import axios from 'axios';
 

@@ -34,13 +34,13 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Homepage} />
             <Route exact path="/suggestion" component={Suggestion} />
-            <Route exact path='/changePassword' component={ChangePassword} />
+            <Route exact path="/edit" component={EditProfile} />
+            <Route exact path='/changepassword' component={ChangePassword} />
             <Route exact path="/profile" component={Profile} />
             <Route path='/create' component={CreatePost} />
             <Route exact path='/followers' component={Followers} />
             <Route exact path='/followings' component={Followings} />
             <Route exact path='/unfollow' component={Unfollow} />
-            <Route exact path="/edit" component={EditProfile} />
           </div>
           <Footer />
         </div>

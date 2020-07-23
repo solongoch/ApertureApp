@@ -1,95 +1,127 @@
-import React, {useState, useEffect} from 'react';
-import {Image} from 'cloudinary-react';
-import '../css/editprofile.css'
+import React, { Component } from 'react';
+import staticImage from "../../image/instav.png";
+import '../css/upload.css';
+import cloudniary from '../config/key';
+import axios from 'axios';
 
-export default function UploadAvatar() {
-    const [fileInputState, setFileInputState] = useState('');
-    const [previewSource, setPreviewSource] = useState('');
-    const [selectedFile, setSelectedFile] = useState('');
-    const handleFileInputChange = e => {
-        const file = e.target.files[0];
-        previewFile(file);
-        setSelectedFile(file);
-        setFileInputState(e.target.value);
+export class UploadAvatar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      avatar:'',
+      submitDisabled: true
     };
 
-    const previewFile = (file) => {
-     const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setPreviewSource(reader.result);
-        };
-    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleCaption = this.handleCaption.bind(this);
+    // this.handleUploadImg = this.handleUploadImg.bind(this)
+  }
 
-    const handleSubmitFile = (e) => {
-        console.log('submitting');
-        e.preventDefault();
-        if(!previewSource) return;
-        uploadImage(previewSource);
-    };
+  // set caption in state on its Onchange
+  handleCaption = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
-    const uploadImage = async (base64EncodedImage) => {
-        console.log(base64EncodedImage);
-        try {
-            await fetch('/api/upload', {
-                method: 'POST',
-                body: JSON.stringify({data: base64EncodedImage}),
-                headers: {'Content-type': 'application/json'}
-            })
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  // Read the file and set it in state
+  handleImageChange(e) {
+    const reader = new FileReader();
+    const file = e.target.files[0];
+    reader.readAsDataURL(file);
 
-    const [imageIds, setImageIds] = useState();
-    const loadImages = async () => {
-      try {
-          const res = await fetch('/api/images');
-          const data = await res.json();
-          console.log(data);
-          setImageIds(data);
-      } catch (error) {
-        console.error(error)
-      }
+    //result is the o/p of reader object.
+    reader.onloadend = () => {
+      this.setState({
+        file,
+        imagePreviewUrl: reader.result,
+        submitDisabled: !this.state.submitDisabled//share button is disabled before uploading image.
+      });
     }
-    useEffect(() => {
-        loadImages();
-    }, [])
-    return (
-        <div>
-            {imageIds && imageIds.map((imageId, index) => (
-                <Image
-                key={index}
-                cloudName="dtkpn9glp"
-                publicId={imageId}
-                height="110"
-                width="110"
-                radius="1000"
-                />
-            ))}
-            <h6 className="text-center">Upload New Avatar</h6>
-            <form onSubmit={handleSubmitFile}
-            className="form">
-                <input 
-                    type="file" 
-                    name="image" 
-                    onChange={handleFileInputChange} 
-                    value={fileInputState} 
-                    className="form-input" 
-                />
+  }
 
-                {previewSource && (
-                <img 
-                    src={previewSource} 
-                    alt="chosen"
-                    style={{ height: '110px', width: 'auto'}} 
-                />
-                )}
-                
-                <button className="btn" type="submit">
-                    Change Avatar
-                </button>
-            </form>
+  handleUploadImg(){
+    //upload file in cloudniary
+    const formData = new FormData();
+    formData.append('file', this.state.file);
+    formData.append('upload_preset', cloudniary.UPLOAD_PRESET);
+    formData.append('cloud_name', cloudniary.CLOUD_NAME);
+
+    const opts = {
+      method: 'POST',
+      body: formData,
+    };
+
+    fetch(cloudniary.URL, opts)
+      .then(response => response.json())
+      .then(res => {
+        //set secure_url to photo state to send DB
+        this.setState({ avatar: res.secure_url });
+        const {avatar} = this.state;
+        const newAvatar ={
+          avatar
+        }
+        console.log(newAvatar);
+        //API call to Upload Avatar
+        axios.post('/api/profile/Upload', newAvatar)
+             .then(res =>{ console.log(res.data)})
+             .catch(err =>{ this.setState({errors: err.response.data})});
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+  }
+
+
+ // form submit
+  handleSubmit(e) {
+    e.preventDefault();
+    this.handleUploadImg();
+    // TODO: do something with -> this.state.file
+    // console.log('handle uploading-', this.state.photo);
+     
+  }
+
+  render() {
+
+    let previewImage = null;
+    let { imagePreviewUrl,errors,submitDisabled } = this.state;
+    if (imagePreviewUrl) {
+      previewImage = (<img src={imagePreviewUrl} className="image-fluid" alt="UserImage" style={{ width: '110px' }} />);
+    } else {
+      previewImage = (<div className="previewText">Please select an Image for Preview</div>);
+    }
+
+    return (
+      <div className="card upload-avatar shadow-lg col-11 col-sm-11 col-md-11 col-lg-11">
+        <div className="card-header-av">Upload New Avatar</div>
+        <form className="uploadav-form row" onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            
+            <div className="input-group">
+            <img src={staticImage} alt="Avatar" className="static-av" />
+            </div>
+
+            <div className="form-inline row upload-image ">
+              <label className="fa fa-file-image-o ">
+                <input type="file" hidden onChange={this.handleImageChange}
+                    name='avatar' className="form-input" />
+              </label>
+              <button className="btn btn-primary shadow-none" disabled ={submitDisabled}>Change Avatar</button>
+            </div>
+          
+          </div>
+        </form>
+        <div className="imgPreview">
+          {previewImage}
         </div>
+      </div>
+
+      
+
+
     )
+  }
 }
+
+export default UploadAvatar;

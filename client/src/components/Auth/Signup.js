@@ -161,7 +161,7 @@ class Signup extends Component {
                   </p>
             </div>
             <div className="right-column-login">
-              <p className="have-an-account">Have an account? <Link to="/">Log in</Link> </p>
+              <p className="have-an-account">Have an account? <Link to="/login">Log in</Link> </p>
             </div>
             <div className="get-the-app">
               <img src={logoImage} alt="LogoImage" style={{ width: 30 }} />

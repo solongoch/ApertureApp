@@ -58,20 +58,21 @@ class EditProfile extends Component {
     return (
       <div className="edit-profile">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-4">
             <div className="sidebar">
               <UploadAvatar />
               <Link to="/changepassword" className="btn btn-lg mr-2">Change Password</Link>
             </div>
             </div>
 
-        <div className="profile-info col-md-9">
+        <div className="profile-info col-md-8">
 
         <div className="sidebar-mobile">
               <UploadAvatar />
               <Link to="/changepassword" className="btn btn-lg mr-2">Change Password</Link>
             </div>
 
+        <div className="form-data-omega">
           <form onSubmit={this.onSubmit}>
           <h3> Edit User Profile</h3>
             <div className="form-group">
@@ -200,13 +201,17 @@ class EditProfile extends Component {
                   <option value="Prefer Not To Say">Prefer Not to Say</option>
                 </select>
               </div>
+
+              <button className="btn btn-primary" type="submit">Update Profile</button>
+
             </div>
+          </div>
+          </form>
           </div>
 
           <div className="form-group">
         <label className="col-md-3 control-label"></label>
             <div className="col-md-10">
-                <button className="btn btn-primary" type="submit">Update Profile</button>
                     <div className="has-separator">Terminate Account</div>
                     <button className="btn btn-lg btn-danger btn-info delete mr-2" onClick={this.toggle.bind(this)}>Delete Account</button>
                     <Collapse isOpen={this.state.visible} toggle={this.toggle.bind(this)}>
@@ -220,8 +225,6 @@ class EditProfile extends Component {
             </div>
         </div>
 
-
-          </form>
           </div>
         </div>
       </div>

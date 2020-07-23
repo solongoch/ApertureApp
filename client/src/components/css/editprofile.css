@@ -1,4 +1,4 @@
- .edit-profile {
+.edit-profile {
     font-size: 15px;
     box-sizing: border-box;
     width: 100%;
@@ -74,6 +74,22 @@ p {
     margin-top: 25px;
     margin-bottom: 25px;
     text-align: center;
+}
+
+.form-data-omega form {
+    background-color: #fff;
+    border: 2px solid #eee;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+}
+
+.form-data-omega form input {
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 2px solid #eee;
+    border-radius: 4px;
+
 }
 
 @media (max-width: 900px) {

@@ -1,8 +1,8 @@
 
 const cloudniary ={
-  UPLOAD_PRESET : 'Aperture',
-  CLOUD_NAME:'apertureapp',
-  URL : 'https://api.cloudinary.com/v1_1/apertureapp/image/upload'
+  UPLOAD_PRESET : 'dev_setups',
+  CLOUD_NAME:'dtkpn9glp',
+  URL : 'https://api.cloudinary.com/v1_1/dtkpn9glp/image/upload'
 }
 
 export default cloudniary;

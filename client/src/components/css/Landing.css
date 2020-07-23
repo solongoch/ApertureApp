@@ -16,7 +16,7 @@
       padding-top: 100px;
   }
   
-  .row {
+  .row-landing {
       width: 100%;
       max-width: 935px;
       margin: 30px auto 0;
@@ -42,7 +42,7 @@
       text-align: center;
   }
 
-.logo img {
+.logo-alpha img {
     width: 175px;
     margin-bottom: 25px;
 }
@@ -55,7 +55,7 @@
 
 }
 
-.btn {
+.btn-alpha {
     margin: 10px 0 15px;
     height: 30px;
     background-color: #3897f0;
@@ -65,16 +65,6 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.sign-up {
-    text-align: center;
-    font-size: 14px;
-    color: #262626;
-    background-color: #fff;
-    padding: 5px 0;
-    border: 2px solid #eee;
-    margin: 10px 0;
 }
 
 .has-separator {
@@ -87,11 +77,7 @@
 
 @media (max-width: 900px) {
 
-    .form-data {
-        margin: 0 auto;
-    }
-
-    .landing > .row {
+    .landing > .row-landing {
         padding: 0;
     }
 }
@@ -101,15 +87,4 @@
         padding-top: 0;
     }
 
-    .form-data form {
-        background-color: transparent;
-        border: none;
-        padding: 0 20px;
-    }
-
-    .sign-up {
-        background-color: transparent;
-        border: none;
-        padding: 40px 0;
-    }
 }

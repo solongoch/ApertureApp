@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
+import {Link} from 'react-router-dom'
 import '../css/createpost.css';
 // import cloudniary from '../config/Keys';
 import axios from 'axios';
@@ -82,7 +83,12 @@ export class CreatePost extends Component {
 
     return (
       <div className="card create-postcard shadow-lg col-11 col-sm-9 col-md-10 col-lg-10">
-        <div className="card-header newpost-header">New Photo Post</div>
+        <div className="card-header newpost-header">
+          <Link to="/home">
+              <i className="fa fa-times post-cancel" style={{float:'right'}}aria-hidden="true"></i>
+          </Link>
+          New Photo Post
+        </div>
         <hr className="post-hr"/>
         <form className="createpost-form row" onSubmit={this.handleSubmitPost}>
           <div className="form-group createpost_formgrp">

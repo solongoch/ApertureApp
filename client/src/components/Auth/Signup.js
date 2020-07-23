@@ -27,9 +27,6 @@ class Signup extends Component {
     this.onChange = this.onChange.bind(this);
     //bind the onSubmit of form when user clicks the signIn button(submit type)
     this.onSubmit = this.onSubmit.bind(this);
-    //bind password eye onclick methods
-    this.togglePasswordVisiblity = this.togglePasswordVisiblity.bind(this);
-    this.togglePassword2Visiblity = this.togglePassword2Visiblity.bind(this);
   }
 
   //toggle password eye icon
@@ -76,52 +73,52 @@ class Signup extends Component {
     return (
       <div className="signup-wrapper">
         <div className="row">
-          <div className="col-md-6 col-lg-5 col-xl-7 d-none d-sm-none d-md-block d-lg-block">
-            <img className="signin-phoneImg" src={PhoneImage} alt="HomeImage" />
-          </div>
-          <div className="col-md-5 col-lg-5 col-xl-5 right-column-container">
+            <div className="col-md-6 col-lg-6 col-xl-7 d-none d-sm-none d-md-block d-lg-block">
+              <img className="signin-phoneImg" src={PhoneImage} alt="HomeImage" />
+            </div>
+          <div className="right-column-container col-md-5 col-lg-5 col-xl-5 ">
             <div className="right-column">
               <h1 className="logoText">aperture</h1>
               <h2 className="info">Sign up to see photos and videos from your friends.</h2>
               <form className="signup-form" onSubmit={this.onSubmit}>
-                <div className="form-group text-xs-center col-auto">
+                <div className="form-group signup_fg text-xs-center col-auto">
                   <input
                     type="text"
-                    className={classNames("form-control shadow-none" , {"is-invalid" : errors.email})}
+                    className={classNames("form-control inputstyles shadow-none" , {"is-invalid" : errors.email})}
                     placeholder="Email"
                     name="email"
                     value={this.state.email}
                     onChange={this.onChange}
                   />
-                  {/*show invalid-feedback div only if errors.name is true */}
-                  {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
+                  {/*show invalid-feedback error-style div only if errors.name is true */}
+                  {errors.email && (<div className="invalid-feedback error-style">{errors.email}</div>)}
                 </div>
-                <div className="form-group col-auto">
+                <div className="form-group signup_fg col-auto">
                   <input
                     type="text"
-                    className={ classNames("form-control shadow-none" , {'is-invalid' : errors.name})}
+                    className={ classNames("form-control inputstyles shadow-none" , {'is-invalid' : errors.name})}
                     placeholder="Full Name"
                     name="name"
                     value={this.state.name}
                     onChange={this.onChange}
                   />
-                  {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
+                  {errors.name && (<div className="invalid-feedback error-style">{errors.name}</div>)}
                 </div>
-                <div className="form-group col-auto">
+                <div className="form-group signup_fg col-auto">
                   <input
                     type="text"
-                    className={ classNames("form-control shadow-none" , {'is-invalid' : errors.username})}
+                    className={ classNames("form-control inputstyles shadow-none" , {'is-invalid' : errors.username})}
                     placeholder="Username"
                     name="username"
                     value={this.state.username}
                     onChange={this.onChange}
                   />
-                  {errors.username && (<div className="invalid-feedback">{errors.username}</div>)}
+                  {errors.username && (<div className="invalid-feedback error-style">{errors.username}</div>)}
                 </div>
-                <div className="form-group col-auto">
+                <div className="form-group signup_fg col-auto">
                  <input
                     type={isPasswordShown ? "text" : "password"}
-                    className={ classNames("form-control shadow-none" , {'is-invalid' : errors.password})}
+                    className={ classNames("form-control inputstyles shadow-none" , {'is-invalid' : errors.password})}
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
@@ -129,16 +126,16 @@ class Signup extends Component {
                   />
                   {/* display eye icon only if password has value */} 
                   {password &&( 
-                      <span className={`fa ${isPasswordShown ? "fa-eye-slash" : "fa-eye"} password-icon`}
+                      <span className={`fa fa-eyeicon ${isPasswordShown ? "fa-eye-slash" : "fa-eye"} password-icon`}
                         onClick={this.togglePasswordVisiblity} 
                       />)           
                   } 
-                  {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+                  {errors.password && (<div className="invalid-feedback error-style">{errors.password}</div>)}
                 </div>
-                <div className="form-group col-auto">
+                <div className="form-group signup_fg col-auto">
                   <input
                     type={isPassword2Shown ? "text" : "password"}
-                    className={ classNames("form-control shadow-none" , {'is-invalid' : errors.password2})}
+                    className={ classNames("form-control inputstyles shadow-none" , {'is-invalid' : errors.password2})}
                     placeholder="Confirm password"
                     name="password2"
                     value={this.state.password2}
@@ -146,14 +143,14 @@ class Signup extends Component {
                   />
                   {/* display eye icon only if password2 has value */} 
                   {password2 && ( 
-                      <span className={`fa ${ isPassword2Shown ? "fa-eye-slash" : "fa-eye"} password-icon`}
+                      <span className={`fa fa-eyeicon ${ isPassword2Shown ? "fa-eye-slash" : "fa-eye"} password-icon`}
                         onClick={this.togglePassword2Visiblity}
                       />)
                   }
-                  {errors.password2 && (<div className="invalid-feedback ">{errors.password2}</div>)}
+                  {errors.password2 && (<div className="invalid-feedback error-style ">{errors.password2}</div>)}
                 </div>
                 <div className ="col-auto mb-5">
-                <button type="submit" className="btn btn-block btn-primary shadow-none">Sign up</button>
+                <button type="submit" className="btn btn-block btn-primary shadow-none btn-signup">Sign up</button>
                 </div>
               </form>           
                   <p className="terms col-auto">

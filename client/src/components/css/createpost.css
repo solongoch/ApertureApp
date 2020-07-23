@@ -56,8 +56,8 @@ div.previewText {
   border-radius: 2px;
 } */
 
-.form-group {
-  width: 100%!important;
+.createpost_formgrp {
+  width: 100%;
 }
 
 div.upload-image {
@@ -67,19 +67,22 @@ div.upload-image {
 .fa.fa-file-image-o {
   justify-content: center;
   cursor: pointer;
-  font-size: 40px;
+  font-size: 60px;
   color: #3897f0;
+  padding-right: 5px;
 }
 
-.btn-primary {
+.btn-submitpost {
   background-color: transparent;
   border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
   margin: 0;
   text-align: center;
+  width:80px;
+  line-height: 10px;
 }
 
-.form-inline {
-  justify-content: center!important;
+.upload-image {
+  justify-content: center;
 }
 
 @media(max-width:425px) {

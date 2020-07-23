@@ -9,8 +9,6 @@ import home from '../../image/home.svg';
 import homeActive from '../../image/home-active.svg';
 import findPeople from '../../image/find-people.svg';
 import findPeopleActive from '../../image/find-people-active.svg';
-import heart from '../../image/heart.svg';
-import heartActive from '../../image/heart-active.svg';
 
 class Navbar extends Component {
   constructor() {
@@ -46,7 +44,13 @@ class Navbar extends Component {
               {/* <li className="nav-item menu blue-bg button"><Link id="log-in" className="nav-Link" to="/">Log In</Link></li>
               <li className="nav-item menu"><Link className="sign-up" className="nav-Link" to="/">Sign Up</Link></li> */}
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/create">
+                  {/* <i className="fas fa-plus-square fa-2x"></i> */}
+                  <i className="far fa-plus-square fa-2x"></i>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/home">
                   {/* <img className="menu" src={home} aria-label="Home" alt="Home button" /> */}
                   <img className="menu active" src={homeActive} aria-label="Home" alt="Active Home button" />
                 </Link>
@@ -59,8 +63,8 @@ class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/">
-                  <img className="menu" src={heart} aria-label="Notification" alt="Notification button" />
-                  {/* <img className="menu active" src={heartActive} aria-label="Notification" alt="Active Notification button" /> */}
+                  <i class="far fa-heart fa-2x"></i>
+                  {/* <i class="fas fa-heart fa-2x"></i> */}
                 </Link>
               </li>
               <li className="nav-item">

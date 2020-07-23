@@ -5,7 +5,7 @@
   line-height: 1.5em;
 }
 
-.profile-info {
+.profile-info-header {
   padding-bottom: 44px;
   width: 100%;
 }
@@ -21,7 +21,7 @@
   font-size: 1.6em;
 }
 
-.profile-info .button {
+.profile-info-header .button {
   margin: 0 20px;
   padding: 5px 9px;
 }

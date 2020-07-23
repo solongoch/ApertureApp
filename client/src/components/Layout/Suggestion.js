@@ -13,7 +13,7 @@ class Suggestion extends Component {
     }
 
     axios
-      .post('/api/suggestion')
+      .get('/api/suggestion')
       .then(res => console.log(res))
       .catch(err => console.log(err.response.data));
   }

@@ -40,6 +40,10 @@ nav {
   margin: 0 5px;
 }
 
+.far, .fas  {
+  color: #000;
+}
+
 .log-in, .log-in:hover {
   font-weight: 700;
   color: #fff;

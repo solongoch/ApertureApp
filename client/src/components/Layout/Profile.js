@@ -13,7 +13,7 @@ class Profile extends Component {
     }
 
     axios
-      .post('/api/profile/:username')
+      .get('/api/profile/:username')
       .then(res => console.log(res))
       .catch(err => console.log(err.response.data));
   }
@@ -21,7 +21,7 @@ class Profile extends Component {
   render() {
     return (
       <div className="profile">
-        <div className="profile-info d-flex flex-row">
+        <div className="profile-info-header d-flex flex-row">
           <Link to="/"><img className="round-image image-150 profile-image" src={profilePicture} alt="Profile" /></Link>
           <div className="d-flex flex-column">
             <div className="d-flex flex-row">
@@ -40,14 +40,14 @@ class Profile extends Component {
           </div>
         </div>
 
-        {/* <div className="top-post-menu d-flex flex-row justify-content-center">
-        </div> */}
+        <div className="top-post-menu d-flex flex-row justify-content-center">
+        </div>
         {/* Posts */}
         <div className="posts d-flex flex-column">
           {/* This .single-row div will be repeated */}
           <div className="single-row d-flex flex-row justify-content-between">        
             <div className="post">
-              <img className="image" src={profilePicture} alt="Post"/>
+              <img className="image" src={profilePicture} alt="Post" />
               <div className="overlay">
                 <Link to="/profile">
                   <div className="numbers">

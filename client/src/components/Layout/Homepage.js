@@ -14,7 +14,7 @@ class Homepage extends Component {
     }
 
     axios
-      .post('/api/home')
+      .get('/api/home')
       .then(res => console.log(res))
       .catch(err => console.log(err.response.data));
   }

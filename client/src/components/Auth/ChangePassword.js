@@ -64,7 +64,11 @@ class ChangePassword extends Component {
                                 {'is-invalid' : errors.oldpassword})
                               }
                               id="oldpassword" placeholder="Current Password"
-                              value={this.state.oldpassword} onChange={this.onChange}/>
+                              value={this.state.oldpassword} onChange={this.onChange}
+                          />
+                              {/*show invalid-feedback div only if errors.oldPassword is true */}
+                                {errors.oldpassword && (<div className="invalid-feedback">{errors.oldpassword}</div>)
+                                }
                         </div>
                       
                         <div className="form-group form-inline">
@@ -78,7 +82,8 @@ class ChangePassword extends Component {
                               }
                               id="newpassword" placeholder="New Password"
                               value={this.state.newpassword} onChange={this.onChange}/>
-
+                                {errors.newpassword && (<div className="invalid-feedback">{errors.newpassword}</div>)
+                                }
                         </div>
                 
                         <div className="form-group form-inline">
@@ -92,6 +97,9 @@ class ChangePassword extends Component {
                             }
                             id="confirmpassword" placeholder="Confirm New Password"
                             value={this.state.confirmpassword} onChange={this.onChange} />
+                             {
+                                errors.confirmpassword && (<div className="invalid-feedback">{errors.confirmpassword}</div>)
+                             }
                         </div>
                       
                       <div className="form-row">                        

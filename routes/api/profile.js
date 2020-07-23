@@ -152,22 +152,5 @@ router.post(
   }
 );
 
-// @route   Post api/profile/Upload
-// @desc    Upload Avatar
-// @access  Private
-
-router.post('/Upload', passport.authenticate('jwt', { session: false }), (req, res) => {
-
-  const avatar = req.body.avatar; 
-  const newAvatar = new Post(avatar);
-  newAvatar.save()
-         .then(post => {
-            return res.json({ success: true, message: "Successfully uploaded!",post });
-          })
-          .catch(err => {
-            return res.status(500).json({ success: false, message : err.message });
-          });
-});
-
 
 module.exports = router;

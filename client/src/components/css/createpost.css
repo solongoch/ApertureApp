@@ -6,7 +6,6 @@
   background-color: rgba(var(--f23, 255, 255, 255), 1);
   overflow: hidden;
 }
-
 .post-cancel{
   margin:10px;
   padding-top: 5px;
@@ -21,6 +20,7 @@
 .post-cancel:hover{
   color: black;
 }
+
 .newpost-header {
   display: block;
   justify-content: center;
@@ -33,6 +33,7 @@
   line-height:40px;
   white-space: nowrap;
 }
+
 .post-hr{
   margin-top: 0;
   margin-bottom: 0;;
@@ -66,10 +67,6 @@ div.previewText {
   font-size: 16px;
 }
 
-/* textarea::-webkit-scrollbar {
-  border-radius: 2px;
-} */
-
 .createpost_formgrp {
   width: 100%;
 }
@@ -82,17 +79,30 @@ div.upload-image {
   justify-content: center;
   cursor: pointer;
   font-size: 60px;
-  color: #3897f0;
+  color: #3897f6;
   padding-right: 5px;
 }
 
 .btn-submitpost {
-  background-color: transparent;
   border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
   margin: 0;
   text-align: center;
   width:80px;
   line-height: 10px;
+}
+.btn-submitpost.btn-primary.focus,
+.btn-submitpost.btn-primary:focus,
+.btn-submitpost.btn-primary.hover,
+.btn-submitpost.btn-primary:hover
+{
+  background-color:#3897f6;
+  border-color: #3897f6;
+ 
+}
+.btn-submitpost.btn-primary:not(:disabled):not(.disabled):active{
+  background-color: #3897f6;
+  border-color: #3897f6;
+  outline: none;
 }
 
 .upload-image {

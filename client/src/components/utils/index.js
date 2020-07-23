@@ -8,12 +8,15 @@ const uploadImage = (file) => {
   formData.append('upload_preset', cloudniary.UPLOAD_PRESET);
   formData.append('cloud_name', cloudniary.CLOUD_NAME);
 
-  
- return axios.post(cloudniary.URL, formData)
-        .then(res => res.data)
-        .catch(err => {
-          console.log(err.message);
-        });
+
+  return axios.post(cloudniary.URL, formData,
+    {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }
+  ).then(res => res.data)
+    .catch(err => {
+      console.log(err.message);
+    });
 }
 
 

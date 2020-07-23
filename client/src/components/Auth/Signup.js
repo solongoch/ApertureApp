@@ -30,13 +30,13 @@ class Signup extends Component {
   }
 
   //toggle password eye icon
-  togglePasswordVisiblity =()=>{
+  togglePasswordVisiblity = () => {
     this.setState({
       isPasswordShown:!this.state.isPasswordShown
     });
   }
 //toggle password2 eye icon
-  togglePassword2Visiblity =()=>{
+  togglePassword2Visiblity = () => {
     this.setState({
       isPassword2Shown:!this.state.isPassword2Shown
     });

@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 package-lock.json
-/components/config/keys.js
+/components/config/Keys.js

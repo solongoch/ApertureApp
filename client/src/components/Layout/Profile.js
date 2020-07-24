@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Followers from './Followers';
+import Followings from './Followings';
 // import CSS
 import '../css/profile.css';
 // import images
@@ -10,12 +12,30 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = {
+      _showFollowings:false,
+      _showFollowers:false
     }
 
     axios
       .post('/api/profile/:username')
       .then(res => console.log(res))
       .catch(err => console.log(err.response.data));
+  }
+
+  //to show and hide Following component 
+  showFollowings = () => {
+    this.setState({_showFollowings:true})  
+   }
+  hideFollowings = () => {
+    this.setState({_showFollowings:false})    
+  }
+
+  //to show and hide Followers component 
+  showFollowers = () => {
+    this.setState({_showFollowers:true})  
+   }
+  hideFollowers = () => {
+    this.setState({_showFollowers:false})    
   }
 
   render() {
@@ -31,9 +51,15 @@ class Profile extends Component {
             </div>
             <ul className="counts d-flex flex-row">
               <li className="count"><span className="font-weight-bold">100</span> posts</li>
-              <li className="count"><span className="font-weight-bold">133</span> followers</li>
-              <li className="count"><span className="font-weight-bold">388</span> following</li>
+              <li className="count" onClick={this.showFollowers}>
+                <span className="font-weight-bold">133</span> followers
+              </li>
+              <li className="count" onClick={this.showFollowings}>
+                <span className="font-weight-bold">388</span> followings
+              </li>
             </ul>
+            <Followers _showFollowers={this.state._showFollowers} followersClose={this.hideFollowers}/>
+            <Followings _showFollowings={this.state._showFollowings} followingsClose={this.hideFollowings}/>
             <div className="font-weight-bold">Name</div>
             <div>This is bio section</div>
             <div><Link to="/" target="_blank">https://www.instagram.com/</Link></div>

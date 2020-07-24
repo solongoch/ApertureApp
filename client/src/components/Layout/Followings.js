@@ -30,7 +30,7 @@ class Followings extends Component {
           <div className='user-container'>
             <h5>Followings</h5>
             <span>
-              <i onClick={this.props.handleFollowingClose} className="fa fa-times close" aria-hidden="true"></i>
+              <i onClick={this.props.followingsClose} className="fa fa-times close" aria-hidden="true"></i>
             </span>
             <hr />
             <div className='scrolluser'>

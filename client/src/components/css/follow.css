@@ -15,21 +15,23 @@ div.row {
 }
 
 .mainwrapper-div {
-  height: 100%;
-  position: absolute;
-  margin: auto;
+  position: fixed; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, .5);
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2;
 }
 
 .subwrapper-div {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
 }
 
 .user-container {
@@ -138,7 +140,7 @@ color:white
 button.btn-primary-outline {
   color: black;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
   background: 0 0;
   appearance: none;
   border: 1px solid rgb(170, 170, 170);

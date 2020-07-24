@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
-import { Link } from 'react-router-dom'
 import '../css/unfollow.css';
 
 class Unfollow extends Component {
@@ -26,7 +25,7 @@ class Unfollow extends Component {
                   <div className="action-div">
                     <button className=" btn-unfollow col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 shadow-none">
                       Unfollow</button>
-                    <span style={{siaplay:'block'}} onClick={this.props.hideUnfollow} className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</span>
+                    <span style={{diaplay:'block'}} onClick={this.props.hideUnfollow} className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</span>
                   </div>
                 </div>
               </form>

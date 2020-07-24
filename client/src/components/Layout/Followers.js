@@ -14,15 +14,18 @@ class Followers extends Component {
   // }
 
   render() {
+    if (!this.props._showFollowers) {
+      return null;
+    }
     return (
       <div className='mainwrapper-div'>
         <div className='subwrapper-div'>
           <div className='user-container'>
             <h5>Followers</h5>
             <span>
-              <Link to='/profile' className='close'>
-                <i className="fa fa-times" aria-hidden="true"></i>
-              </Link>
+              <span>
+                <i onClick={this.props.followersClose} className="fa fa-times close" aria-hidden="true"></i>
+              </span>
             </span>
             <hr />
             <div className='scrolluser'>
@@ -49,12 +52,11 @@ class Followers extends Component {
                         <span className="name"> {user.name}  </span>
                       </div>
                       <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                        <button className='btn mt-1  btn-sm btn-follow' 
-                           onClick={this.handleOpenModal}>
+                        <button className='btn mt-1  btn-sm btn-follow'>
                           {/* <Link to='/unfollow' className='link-unfollow'> */}
                             Follow
                                   {/* </Link> */}
-                        </button>                        
+                        </button>
                       </div>
                     </div>
                   )

@@ -320,6 +320,20 @@ class EditProfile extends Component {
                 </select>
               </div>
 
+              <div className="form-group">
+              <label className="col-lg-3 control-label">Account Privacy</label>
+              <div className="col-lg-10">
+              <div className="ui-select">
+                <select id="isPublic" className="form-control">
+                  <option value="Public">public</option>
+                  <option value="Private">private</option>
+                </select>
+              </div>
+              </div>
+            </div>
+
+              
+
               <button className="btn btn-primary" type="submit">Update Profile</button>
 
             </div>

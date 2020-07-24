@@ -20,6 +20,7 @@ import Followers from './components/Layout/Followers';
 import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
+import SinglePost from "./components/Layout/SinglePost";
 
 class App extends Component {
   render() {
@@ -37,6 +38,7 @@ class App extends Component {
               <Route exact path="/edit" component={EditProfile} />
               <Route exact path='/changepassword' component={ChangePassword} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/single-post" component={SinglePost} />
               <Route path='/create' component={CreatePost} />
               <Route exact path='/followers' component={Followers} />
               <Route exact path='/followings' component={Followings} />

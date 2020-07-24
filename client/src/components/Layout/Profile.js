@@ -49,7 +49,7 @@ class Profile extends Component {
             <div className="post">
               <img className="image" src={profilePicture} alt="Post" />
               <div className="overlay">
-                <Link to="/profile">
+                <Link to="/single-post">
                   <div className="numbers">
                     <span className="right-15"><i className="far fa-heart"></i> 987</span>
                     <span><i className="far fa-comment"></i> 4321</span>
@@ -61,7 +61,7 @@ class Profile extends Component {
             <div className="post">
               <img className="image" src={profilePicture} alt="Post"/>
               <div className="overlay">
-                <Link to="/">
+                <Link to="/single-post">
                   <div className="numbers">
                     <span className="right-15"><i className="far fa-heart"></i> 987</span>
                     <span><i className="far fa-comment"></i> 4321</span>
@@ -73,7 +73,7 @@ class Profile extends Component {
             <div className="post">
               <img className="image" src={profilePicture} alt="Post"/>
               <div className="overlay">
-                <Link to="/">
+                <Link to="/single-post">
                   <div className="numbers">
                     <span className="right-15"><i className="far fa-heart"></i> 987</span>
                     <span><i className="far fa-comment"></i> 4321</span>
@@ -87,7 +87,7 @@ class Profile extends Component {
             <div className="post">
               <img className="image" src={profilePicture} alt="Post"/>
               <div className="overlay">
-                <Link to="/">
+                <Link to="/single-post">
                   <div className="numbers">
                     <span className="right-15"><i className="far fa-heart"></i> 987</span>
                     <span><i className="far fa-comment"></i> 4321</span>
@@ -99,7 +99,7 @@ class Profile extends Component {
             <div className="post">
               <img className="image" src={profilePicture} alt="Post"/>
               <div className="overlay">
-                <Link to="/">
+                <Link to="/single-post">
                   <div className="numbers">
                     <span className="right-15"><i className="far fa-heart"></i> 987</span>
                     <span><i className="far fa-comment"></i> 4321</span>
@@ -111,7 +111,7 @@ class Profile extends Component {
             <div className="post">
               <img className="image" src={profilePicture} alt="Post"/>
               <div className="overlay">
-                <Link to="/">
+                <Link to="/single-post">
                   <div className="numbers">
                     <span className="right-15"><i className="far fa-heart"></i> 987</span>
                     <span><i className="far fa-comment"></i> 4321</span>

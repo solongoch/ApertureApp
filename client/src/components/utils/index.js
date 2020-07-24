@@ -1,5 +1,5 @@
 import cloudniary from '../config/Keys';
-import axios from 'axios'
+import axios from 'axios';
 
 const uploadImage = (file) => {
   //upload file in cloudniary

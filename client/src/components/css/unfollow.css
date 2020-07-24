@@ -1,7 +1,6 @@
-.main-wrapper {
-  height: 100%;
+.mainWrapunfollow-div{  height: 100%;
   padding-top: 50px;
-  margin: auto;
+  margin: 0;
   top: 0;
   bottom: 0;
   left: 0;
@@ -9,9 +8,9 @@
   position: absolute;
   background-color: rgba(0,0,0,.5);
   outline:0;
-  height: 100vh;
+  height: 100%;
 }
-.subwrapper-div {
+.subwrapperunfollow-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,11 +56,17 @@ img.avatar-img-unfollow{
   font-size: 14px;
   font-weight: 700;
 }
-button:focus{
 
-  outline:0;
+.link-unfollow {
+  display: block;
+  color: rgba(var(--i30, 237, 73, 86), 1);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1.5;
 }
-.link-cancel{
+
+.link-cancel {
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -71,12 +76,11 @@ button:focus{
 }
 
 @media(min-width:320px) and (max-width:576px) {
-  .subwrapper-div {
+  .unfollow-card {
     width: 290px;
     height:290px;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-   
   }
 }

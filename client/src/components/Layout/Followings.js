@@ -40,7 +40,7 @@ class Followings extends Component {
                     <div className='row' key={user.userId}>
 
                       <div className='avatar-div col-2 col-sm-2 col-md-2 col-lg-2 col-xxs-2'>
-                        <Link to='#'>
+                        <Link to='/profile'>
                           <img
                             className='user-avatar'
                             src={user.avatar}
@@ -50,7 +50,7 @@ class Followings extends Component {
                       </div>
                       <div className='userinfo-div col-6 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
                         <Link
-                          to='#'
+                          to='/profile'
                           className='username-link'>
                           <span className="username"> {user.username} </span>
                         </Link>
@@ -72,6 +72,7 @@ class Followings extends Component {
           </div>
         </div>
       </div>
+  
     );
   }
 }

@@ -37,7 +37,7 @@ class App extends Component {
             <Route path='/create' component={CreatePost} />
             <Route exact path='/profile/followers' component={Followers} />
             <Route exact path='/profile/followings' component={Followings} />
-            <Route exact path='/unfollow' component={Unfollow} />
+            <Route exact path='/profile/unfollow' component={Unfollow} />
           </div>
           <Footer />
         </div>

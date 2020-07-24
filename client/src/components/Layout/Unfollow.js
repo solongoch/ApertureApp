@@ -8,8 +8,9 @@ class Unfollow extends Component {
       return null;
     }
     return (
-      <div className="main-wrapper">
-        <div className='subwrapper-div'>
+     
+      <div className="mainWrapunfollow-div">
+        <div className='subwrapperunfollow-div'>
           <div className="card unfollow-card mx-auto">
             <div className="row">
               <form className="following-form">
@@ -19,13 +20,12 @@ class Unfollow extends Component {
                   </div>
                   <div className="info-div col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6">
                     <p className="info-p">
-                      Unfollow @keerthikadambala?
+                      Unfollow @rambha_?
                     </p>
                   </div>
                   <div className="action-div">
-                    <button className=" btn-unfollow col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 shadow-none">
-                      Unfollow</button>
-                    <span style={{display:'block'}} onClick={this.props.hideUnfollow} className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</span>
+                    <span onClick={this.props.hideUnfollow} className="link-unfollow col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 btn-unfollow text-center">Unfollow</span>
+                    <span onClick={this.props.hideUnfollow} className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</span>
                   </div>
                 </div>
               </form>

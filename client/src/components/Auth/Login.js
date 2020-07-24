@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import axios from "axios";
 import classnames from "classnames";
 import '../css/login.css';
 import Logo from '../../image/aperturelogo.png';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {loginUser} from '../../actions/authActions';
 
 class Login extends Component {
   constructor() {
@@ -30,24 +31,36 @@ class Login extends Component {
       password: this.state.password
     };
 
-    axios
-      .post("/api/users/login", user)
-      .then((res) => console.log(res.data))
-      .catch((err) => this.setState({ errors: err.response.data }));
+    this.props.loginUser(user);
+  }
+
+  componentDidMount(){
+    if (this.props.auth.isAuthenticated){
+      this.props.history.push('/home');
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/home');
+    }
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
 
   render() {
     const { errors } = this.state;
     return (
-      <div className="login">
-        <div className="row">
+      <div className="login-beta">
+        <div className="row-login">
           
-          <div className="phone-app-demo">       
+          <div className="phone-app-demo-beta">       
           </div>
 
-          <div className="form-data">
+          <div className="form-data-beta">
             <form onSubmit={this.onSubmit}>
-              <div className="logo">
+              <div className="logo-beta">
                 <img src={Logo} alt="Logo" />
               </div>
                   <input
@@ -76,10 +89,10 @@ class Login extends Component {
                   {errors.password && (
                     <div className="invalid-feedback">{errors.password}</div>
                   )}
-                <button className="btn btn-primary" type="submit">Log In</button>
+                <button className="btn-beta btn-primary" type="submit">Log In</button>
               </form>
-              <div className="sign-up">
-                Don't have an account? <Link to="/signup" className="btn btn-lg btn-info mr-2">Sign Up</Link>
+              <div className="sign-up-beta">
+                Don't have an account? <Link to="/signup" className="btn-beta btn-lg btn-info mr-2">Sign Up</Link>
               </div>
             </div>
           </div>
@@ -88,4 +101,9 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, {loginUser})(Login);

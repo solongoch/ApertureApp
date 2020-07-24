@@ -36,7 +36,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 2 */}
@@ -49,7 +49,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 3 */}
@@ -62,7 +62,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 4 */}
@@ -75,7 +75,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 5 */}
@@ -88,7 +88,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 6 */}
@@ -101,7 +101,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 7 */}
@@ -114,7 +114,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 8 */}
@@ -127,7 +127,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 9 */}
@@ -141,7 +141,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 10 */}
@@ -154,7 +154,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
 
           {/* 11 */}
@@ -167,7 +167,7 @@ class Suggestion extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <Link className="log-in blue-bg button font-weight-bold follow" to="/">Follow</Link>
+            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
           </div>
         </div>
       </div>

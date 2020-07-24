@@ -134,7 +134,7 @@ class Homepage extends Component {
                 <div className="make-gray left-15">Followed by xyz + 14 more</div>
               </div>
             </div>
-            <div className="sign-up font-weight-bold follow">Follow</div>
+            <div className="sign-up-button font-weight-bold follow">Follow</div>
           </div>
 
 
@@ -148,7 +148,7 @@ class Homepage extends Component {
                   <div className="make-gray left-15">Followed by xyz + 14 more</div>
                 </div>
               </div>
-              <div className="sign-up font-weight-bold follow">Follow</div>
+              <div className="sign-up-button font-weight-bold follow">Follow</div>
             </div>
 
 
@@ -162,7 +162,7 @@ class Homepage extends Component {
                   <div className="make-gray left-15">Followed by xyz + 14 more</div>
                 </div>
               </div>
-              <div className="sign-up font-weight-bold follow">Follow</div>
+              <div className="sign-up-button font-weight-bold follow">Follow</div>
             </div>
 
 
@@ -176,7 +176,7 @@ class Homepage extends Component {
                   <div className="make-gray left-15">Followed by xyz + 14 more</div>
                 </div>
               </div>
-              <div className="sign-up font-weight-bold follow">Follow</div>
+              <div className="sign-up-button font-weight-bold follow">Follow</div>
             </div>
 
 
@@ -190,7 +190,7 @@ class Homepage extends Component {
                   <div className="make-gray left-15">Followed by xyz + 14 more</div>
                 </div>
               </div>
-              <div className="sign-up font-weight-bold follow">Follow</div>
+              <div className="sign-up-button font-weight-bold follow">Follow</div>
             </div>
         </div>
       </div>

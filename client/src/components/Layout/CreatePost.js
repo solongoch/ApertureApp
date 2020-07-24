@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
 import '../css/createpost.css';
-import cloudinary from '../config/keys';
+import cloudinary from '../config/Keys';
 import axios from 'axios';
 import classNames from 'classnames';
 

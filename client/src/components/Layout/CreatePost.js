@@ -44,7 +44,6 @@ export class CreatePost extends Component {
       });
     }
   }
-
   handleSubmitPost(e) {
     e.preventDefault();
         const{file} = this.state;      

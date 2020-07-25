@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from 'react-redux';
+import store from './store';
 // import CSS
 import "./App.css";
 import "./components/css/global.css";
@@ -19,6 +20,7 @@ import Followers from './components/Layout/Followers';
 import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
+import SinglePost from "./components/Layout/SinglePost";
 import store from './store';
 //for checking login token expiration
 import setAuthToken from "./utils/setAuthToken";
@@ -37,7 +39,6 @@ if (localStorage.jwtToken){
     type: SET_CURRENT_USER,
     payload:decoded 
   });
-
   
   //check for expired token
   const currentTime = Date.now() / 1000;
@@ -52,26 +53,27 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-      <Router>
-        <div className="App">
-          <Navbar />
-          <div className="container">
-            <Route exact path="/" component={Landing} />
-            <Route exact path='/signup' component={Signup} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/home" component={Homepage} />
-            <Route exact path="/suggestion" component={Suggestion} />
-            <Route exact path="/edit" component={EditProfile} />
-            <Route exact path='/changepassword' component={ChangePassword} />
-            <Route exact path="/profile" component={Profile} />
-            <Route path='/create' component={CreatePost} />
-            <Route exact path='/profile/followers' component={Followers} />
-            <Route exact path='/profile/followings' component={Followings} />
-            <Route exact path='/profile/unfollow' component={Unfollow} />
+        <Router>
+          <div className="App">
+            <Navbar />
+            <div className="container">
+              <Route exact path="/" component={Landing} />
+              <Route exact path='/signup' component={Signup} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/home" component={Homepage} />
+              <Route exact path="/suggestion" component={Suggestion} />
+              <Route exact path="/edit" component={EditProfile} />
+              <Route exact path='/changepassword' component={ChangePassword} />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/single-post" component={SinglePost} />
+              <Route path='/create' component={CreatePost} />
+              <Route exact path='/profile/followers' component={Followers} />
+              <Route exact path='/profile/followings' component={Followings} />
+              <Route exact path='/profile/unfollow' component={Unfollow} />
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </Router>
+        </Router>
       </Provider>
     );
   }

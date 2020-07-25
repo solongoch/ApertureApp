@@ -1,5 +1,4 @@
 const express = require('express');
-const cloudinary = require('./client/src/components/config/Keys');
 // Create the Express application
 const app = express();
 // Load APIs
@@ -26,26 +25,6 @@ app.get('/api/images', async (req, res) => {
   const publicIds = resources.map( file => file.public_id);
   res.send(publicIds);
 })
-
-//Post Avatar
-//Upload Profile Avatar
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true}));
-
-app.post('/api/upload', async (req, res) =>{
-  try {
-    const fileStr = req.body.data;
-    const uploadedResponse = await cloudinary.uploader.
-    upload(fileStr, {
-      upload_preset: 'dev_setups'
-    })
-    console.log(uploadedResponse);
-    res.json({msg: "Upload successful"})
-  } catch(error) {
-    console.error(error);
-    res.status(500).json({err:'Something went wrong'})
-  }
-});
 
 // Configures the database and opens a global connection
 const db = require('./config/database');

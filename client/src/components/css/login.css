@@ -6,41 +6,40 @@
     height: 100%;
   }
 
-  .login{
+  .login-beta {
       width: 100%;
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding-top: 100px;
       background-color: #fafafa;
   }
   
-  .row {
+  .row-login {
       width: 100%;
       max-width: 935px;
       margin: 30px auto 30px;
   }
 
-  .login > .row {
+  .login-beta > .row-login {
       display: flex;
       padding: 0 80px;
   }
 
-  .phone-app-demo {
+  .phone-app-demo-beta {
     height: 550px;
     flex: 1;
-    background-image: url(../../image/insta2.png);
+    background-image: url(../../image/loginimage.png);
     background-repeat: no-repeat;
 }
 
-  .form-data {
+  .form-data-beta {
       width: 100%;
       max-width: 350px;
       margin-top: 30px;
   }
 
-  .form-data form {
+  .form-data-beta form {
       background-color: #fff;
       border: 2px solid #eee;
       display: flex;
@@ -49,12 +48,12 @@
       text-align: center;
   }
 
-.logo img {
+.logo-beta img {
     width: 175px;
     margin-bottom: 25px;
 }
 
-.form-data form input {
+.form-data-beta form input {
     padding: 8px;
     margin-bottom: 5px;
     border: 2px solid #eee;
@@ -62,7 +61,7 @@
 
 }
 
-.btn {
+.btn-beta {
     margin: 10px 0 15px;
     height: 30px;
     background-color: #3897f0;
@@ -74,7 +73,7 @@
     cursor: pointer;
 }
 
-.sign-up {
+.sign-up-beta {
     text-align: center;
     font-size: 14px;
     color: #262626;
@@ -85,31 +84,31 @@
 }
 
 @media (max-width: 900px) {
-    .phone-app-demo {
+    .phone-app-demo-beta {
         display: none;
     }
 
-    .form-data {
+    .form-data-beta {
         margin: 0 auto;
     }
 
-    .login > .row {
+    .login-beta > .row-login {
         padding: 0;
     }
 }
 
 @media (max-width: 450px) {
-    .logn {
+    .login-beta {
         padding-top: 0;
     }
 
-    .form-data form {
+    .form-data-beta form {
         background-color: transparent;
         border: none;
         padding: 0 20px;
     }
 
-    .sign-up {
+    .sign-up-beta {
         background-color: transparent;
         border: none;
         padding: 40px 0;

@@ -1,4 +1,4 @@
- .edit-profile {
+.edit-profile {
     font-size: 15px;
     box-sizing: border-box;
     width: 100%;
@@ -75,6 +75,83 @@ p {
     margin-bottom: 25px;
     text-align: center;
 }
+
+.form-data-omega form {
+    background-color: #fff;
+    border: 2px solid #eee;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+}
+
+.form-data-omega form input {
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 2px solid #eee;
+    border-radius: 4px;
+
+}
+
+.card.upload-avatar {
+    margin:50px auto ;
+    width:300px;
+    border-radius: 25px; 
+    padding-bottom: 10px; 
+    background-color: rgba(var(--f23,255,255,255),1);
+    overflow: hidden;
+  }
+
+  div.card-header-av{
+    font-size:20px;
+    font-weight: 500;
+  }
+ 
+  .userpost-avatar{
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;  
+    vertical-align: middle;
+    justify-content: center;
+    margin-right: 10px;
+    margin-left: 25px;
+    margin-top: 5px;
+  }
+
+  .static-av {
+      border-radius: 50%;
+      width: 110px;
+      height: 110px;
+      justify-content: center;
+  }
+
+  .uploadav-form{
+    margin-top :20px;
+    justify-content: center;
+  }
+
+  .form-group {
+    width: 100%!important;
+  }
+  
+  div.upload-image{
+    text-align: center;
+  }
+  .fa.fa-file-image-o{
+    cursor: pointer;
+    font-size: 40px; 
+    color:#3897f0;
+  
+  }
+  .btn-primary{
+    background-color: transparent;
+    border-top: 1px solid rgba(var(--b6a,219,219,219),1);
+    margin: 0;
+    text-align: center;
+  }
+  .form-inline{
+    justify-content: center!important;
+  }
+  
 
 @media (max-width: 900px) {
 

@@ -21,6 +21,33 @@ import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
 import SinglePost from "./components/Layout/SinglePost";
+import store from './store';
+//for checking login token expiration
+import setAuthToken from "./utils/setAuthToken";
+import jwt_decode from 'jwt-decode';
+import { SET_CURRENT_USER } from "./actions/types";
+import { logoutUser } from "./actions/authActions";
+
+//Check for token
+if (localStorage.jwtToken){
+  //Set auth header with the token
+  setAuthToken(localStorage.jwtToken);
+  //decode token
+  const decoded = jwt_decode(localStorage.jwtToken);
+  //write user data to redux store
+  store.dispatch({
+    type: SET_CURRENT_USER,
+    payload:decoded 
+  });
+  
+  //check for expired token
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    store.dispatch(logoutUser());
+
+    window.location.href='/login';
+  }
+}
 
 class App extends Component {
   render() {
@@ -40,9 +67,9 @@ class App extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/single-post" component={SinglePost} />
               <Route path='/create' component={CreatePost} />
-              <Route exact path='/followers' component={Followers} />
-              <Route exact path='/followings' component={Followings} />
-              <Route exact path='/unfollow' component={Unfollow} />
+              <Route exact path='/profile/followers' component={Followers} />
+              <Route exact path='/profile/followings' component={Followings} />
+              <Route exact path='/profile/unfollow' component={Unfollow} />
             </div>
             <Footer />
           </div>

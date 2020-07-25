@@ -76,7 +76,10 @@
   }
 }
 
-@media (max-width: 615px) {
+@media (max-width: 614px) {
+  #posts {
+    width: 100%;
+  }
   img {
     width: 100%;
   }

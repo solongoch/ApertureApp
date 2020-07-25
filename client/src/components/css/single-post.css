@@ -1,0 +1,51 @@
+#single-post-div {
+  width: 100%;
+  border: 1px solid rgb(239, 239, 239);
+  display: flex;
+  flex-direction: row;
+}
+
+#single-post-div .post-image {
+  width: 600px;
+}
+
+.post-details {
+  width: 340px;
+  padding: 0 20px;
+}
+
+.comments {
+  height: calc(100% - 215px);
+  border-top: 1px solid rgb(239, 239, 239);
+  border-bottom: 1px solid rgb(239, 239, 239);
+  overflow: auto;
+}
+
+.comment-div {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-items: start;
+}
+
+.commentor-image {
+  max-width: 32px;
+  max-height: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.comment-text {
+  display: inline;
+  margin-left: 5px;
+}
+
+.actions {
+  padding: 15px 0 0;
+}
+
+.posted-date {
+  padding: 13px 0 9px;
+  text-transform: uppercase;
+}

@@ -9,8 +9,6 @@ import home from '../../image/home.svg';
 import homeActive from '../../image/home-active.svg';
 import findPeople from '../../image/find-people.svg';
 import findPeopleActive from '../../image/find-people-active.svg';
-import heart from '../../image/heart.svg';
-import heartActive from '../../image/heart-active.svg';
 
 class Navbar extends Component {
   constructor() {
@@ -23,15 +21,16 @@ class Navbar extends Component {
       <header>
         <nav className="navbar navbar-expand-lg navbar-light mx-auto">
           {/* Logo */}
-          <div className="logo-div col-lg-4 col-md-4 col-sm-4">
-            <Link to="/"><img id="logo" src={logo} alt="ApertureApp logo" /></Link>
+          <div className="logo-div col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <Link to="/home"><img id="logo" src={logo} alt="ApertureApp logo" /></Link>
           </div>
           {/* Search */}
           <div className="search-div col-lg-4 col-md-4 col-sm-4">
             <form className="form-inline">
+              {/* <i class="fas fa-search" aria-hidden="true"></i> */}
               <input
                 id="search"
-                className="form-control mr-sm-2"
+                className="form-control"
                 type="search"
                 name="search"
                 placeholder="Search"
@@ -41,12 +40,20 @@ class Navbar extends Component {
             </form>
           </div>
           {/* Menus */}
-          <div className="menus-div col-lg-4 col-md-4 col-sm-4">
+          <div className="menus-div col-lg-4 col-md-4 col-sm-4 col-xs-8">
             <ul className="navbar-nav">
-              {/* <li className="nav-item menu blue-bg button"><Link id="log-in" className="nav-Link" to="/">Log In</Link></li>
-              <li className="nav-item menu"><Link className="sign-up" className="nav-Link" to="/">Sign Up</Link></li> */}
+              {/* <li className="nav-item blue-bg button"><Link className="nav-link unauth-button" to="/login"><span className="log-in-button">Log In</span></Link></li>
+              <li className="nav-item"><Link className="nav-link unauth-button" to="/signup"><span className="sign-up-button">Sign Up</span></Link></li> */}
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/create">
+                  {/* Active */}
+                  {/* <i className="fas fa-plus-square fa-2x"></i> */}
+                  {/* Not Active */}
+                  <i className="far fa-plus-square fa-2x"></i>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/home">
                   {/* <img className="menu" src={home} aria-label="Home" alt="Home button" /> */}
                   <img className="menu active" src={homeActive} aria-label="Home" alt="Active Home button" />
                 </Link>
@@ -59,8 +66,8 @@ class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/">
-                  <img className="menu" src={heart} aria-label="Notification" alt="Notification button" />
-                  {/* <img className="menu active" src={heartActive} aria-label="Notification" alt="Active Notification button" /> */}
+                  <i class="far fa-heart fa-2x"></i>
+                  {/* <i class="fas fa-heart fa-2x"></i> */}
                 </Link>
               </li>
               <li className="nav-item">

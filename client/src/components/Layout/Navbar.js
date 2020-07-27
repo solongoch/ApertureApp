@@ -27,14 +27,12 @@ class Navbar extends Component {
           {/* Search */}
           <div className="search-div col-lg-4 col-md-4 col-sm-4">
             <form className="form-inline">
-              {/* <i class="fas fa-search" aria-hidden="true"></i> */}
+              {/* <i className="fas fa-search" aria-hidden="true"></i> */}
               <input
                 id="search"
-                className="form-control"
                 type="search"
                 name="search"
                 placeholder="Search"
-                defaultValue="Search"
                 aria-label="Search"
               />
             </form>
@@ -66,8 +64,8 @@ class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/">
-                  <i class="far fa-heart fa-2x"></i>
-                  {/* <i class="fas fa-heart fa-2x"></i> */}
+                  <i className="far fa-heart fa-2x"></i>
+                  {/* <i className="fas fa-heart fa-2x"></i> */}
                 </Link>
               </li>
               <li className="nav-item">

@@ -13,8 +13,8 @@ export default function (state = initialState, action) {
                 ...state,
                 user: action.payload,
                 isAuthenticated : !isEmpty(action.payload)
-            };
-        default:
-            return state;//Writing data into the store
+            };          
+        default: 
+            return state;
     }
 };

@@ -11,6 +11,7 @@ import Login from './components/Auth/LogIn/Login';
 import Homepage from './components/Home/Homepage';
 import Suggestion from './components/Suggestion/Suggestion';
 import EditProfile from './components/EditProfile/EditProfile';
+import CreateProfile from './components/EditProfile/CreateProfile.js';
 import ChangePassword from './components/EditProfile/ChangePassword';
 import Profile from './components/Profile/Profile';
 import CreatePost from './components/Post/CreatePost';
@@ -63,6 +64,7 @@ class App extends Component {
               <Route exact path="/home" component={Homepage} />
               <Route exact path="/suggestion" component={Suggestion} />
               <Route exact path="/edit" component={EditProfile} />
+              <Route exact path="/createprofile" component={CreateProfile} />
               <Route exact path='/changepassword' component={ChangePassword} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/single-post" component={SinglePost} />

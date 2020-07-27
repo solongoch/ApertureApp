@@ -17,6 +17,4 @@ const uploadImage = (file) => {
       console.log(err.message);
     });
 }
-
-
 export default uploadImage;

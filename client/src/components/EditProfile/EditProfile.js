@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import cloudniary from '../../../src/utils/setAuthToken';
 import DeleteProfile from './DeleteProfile';
 
-
 class EditProfile extends Component {
   constructor() {
     super();

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import logoImage from "../../image/avatar.png";
-import { createBrowserHistory as history } from 'history';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './createpost.css';
-import axios from 'axios';
 import classNames from 'classnames';
 import uploadImage from '../utils';
+//import connect used to talk to the redux store 
+import { connect } from 'react-redux';
+import { createPost } from '../../actions/postActions'
 
 toast.configure();
 export class CreatePost extends Component {
@@ -16,10 +16,19 @@ export class CreatePost extends Component {
     this.state = {
       caption: '',
       file: '',
-      photo:'',
+      photo: '',
       imagePreview: '',
       errors: {},
-      submitDisabled: true
+      submitDisabled: true,
+      toastopts: {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: 1
+      }
     };
 
     this.handleSubmitPost = this.handleSubmitPost.bind(this);
@@ -49,47 +58,41 @@ export class CreatePost extends Component {
   }
   handleSubmitPost(e) {
     e.preventDefault();
-    const  toastopts= {
-      position: "top-center",
-      autoClose: false,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: true,
-      progress: 1
-      }
-        const{file} = this.state;      
-        uploadImage(file)
-          .then((res) => {
-            this.setState({photo : res.secure_url});
-            const {caption,photo} = this.state;
-            const newPost ={
-              caption,
-              photo
-            }
-            console.log(newPost);
-            //API call to MongoDB to Create Post
-            axios.post('/api/posts/create', newPost)
-                .then(res =>{ 
-                    const post = res.data;
-                    toast.success('Your post has been submitted successfully',toastopts);
-                    history.push('/home');
-                    // console.log('Your post has been submitted successfully' , post);
-                  })
-                .catch(err =>{ 
-                  toast.error(err.response.data,toastopts);
-                  this.setState({errors: err.response.data})
-                });
-        });
+    const { file } = this.state;
+    uploadImage(file)
+      .then((res) => {
+        this.setState({ photo: res.secure_url });
+        const { caption, photo } = this.state;
+        const newPost = {
+          caption,
+          photo
+        }
 
-        // this.setState({ photo: uploadImage(this.state.file)  });
-     
+        this.props.createPost(newPost)
+
+      });
+  }
+
+
+
+  componentWillReceiveProps(newProps) {
+
+    alert(this.props.post.success)
+
+    if (this.props.post.success) {
+      toast.success('Posted Successfully', this.state.toastopts)
+    }
+    if (newProps.errors) {
+      this.setState({ errors: newProps.errors })
+      toast.error(this.state.errros, this.state.toastopts);
+    }
+
   }
 
   render() {
-
+    const { user } = this.props.auth
     let previewImage = null;
-    let { imagePreview,errors,submitDisabled } = this.state;
+    let { imagePreview, errors, submitDisabled } = this.state;
     if (imagePreview) {
       previewImage = (<img src={imagePreview} className="image-fluid" alt="UserImage" style={{ width: '100%' }} />);
     } else {
@@ -100,18 +103,18 @@ export class CreatePost extends Component {
       <div className="card create-postcard shadow-lg col-11 col-sm-9 col-md-10 col-lg-10">
         <div className="card-header newpost-header">
           <Link to="/home">
-              <i className="fa fa-times post-cancel" style={{float:'right'}}aria-hidden="true"></i>
+            <i className="fa fa-times post-cancel" style={{ float: 'right' }} aria-hidden="true"></i>
           </Link>
           New Photo Post
         </div>
-        <hr className="post-hr"/>
+        <hr className="post-hr" />
         <form className="createpost-form row" onSubmit={this.handleSubmitPost}>
           <div className="form-group createpost_formgrp">
             <div className="input-group mb-3">
-              <img src={logoImage} alt="Avatar" className='userpost-avatar ' />
+              <img src={user.avatar} alt="Avatar" className='userpost-avatar ' />
               <textarea rows='2'
                 placeholder="Write a caption..."
-                className= { classNames('form-control  rounded caption col-11 col-sm-9 col-md-10 col-lg-10' , {'is-invalid' : errors.caption }) }
+                className={classNames('form-control  rounded caption col-11 col-sm-9 col-md-10 col-lg-10', { 'is-invalid': errors.caption })}
                 type="text"
                 name="caption"
                 value={this.state.caption}
@@ -120,9 +123,9 @@ export class CreatePost extends Component {
             <div className=" form-inline row upload-image text-center">
               <label className="fa fa-file-image-o">
                 <input type="file" hidden onChange={this.handleImageChange}
-                    name='photo' className={classNames({'is-invalid': errors.photo})} />
+                  name='photo' className={classNames({ 'is-invalid': errors.photo })} />
               </label>
-              <button className="btn btn-primary shadow-none btn-submitpost" disabled ={submitDisabled}>Share</button>
+              <button className="btn btn-primary shadow-none btn-submitpost" disabled={submitDisabled}>Share</button>
             </div>
           </div>
         </form>
@@ -134,4 +137,10 @@ export class CreatePost extends Component {
   }
 }
 
-export default CreatePost;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  post: state.post,
+  errors: state.errors
+})
+
+export default connect(mapStateToProps, { createPost })(CreatePost);

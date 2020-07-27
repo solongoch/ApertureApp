@@ -4,7 +4,7 @@ import axios from 'axios';
 // import Component
 import HomeSuggestion from './HomeSuggestion';
 // import CSS
-import '../Home/homepage.css';
+import './homepage.css';
 // import images 
 import profilePicture from '../../image/img-sq.jpg';
 import postPicture from '../../image/img1.jpg';

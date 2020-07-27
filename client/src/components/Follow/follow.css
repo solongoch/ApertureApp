@@ -55,7 +55,7 @@ div.row {
 
 div.row {
   margin: 0;
-  padding-bottom: 0;
+  margin-bottom: 5px;
 }
 
 .scrolluser {
@@ -64,9 +64,7 @@ div.row {
 }
 
 .avatar-div {
-  margin-top: -5px;
-  /* padding-left: 0; */
-  padding-right: 0;
+    padding-right: 0;
 }
 
 .close:hover {
@@ -126,6 +124,10 @@ button.btn-follow {
   line-height: 2px;
   float: right;
   height: 30px;
+  background-color:#0095F6;
+    border-color: #0095F6;
+  color: #fff;
+  
 }
 
 .name {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import staticImage from "../../image/instav.png";
 import {Link} from 'react-router-dom';
 import './createprofile.css';
-import cloudniary from '../../../src/utils/setAuthToken';
+import cloudniary from '../config/Keys';
 import axios from 'axios';
 import classnames from 'classnames';
 

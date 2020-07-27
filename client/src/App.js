@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 //import Provide
 import { Provider } from 'react-redux';
+import store from './store';
 // import CSS
 import "./App.css";
 import "./components/css/global.css";
@@ -20,16 +21,13 @@ import Followers from './components/Layout/Followers';
 import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
+import SinglePost from "./components/Layout/SinglePost";
 //import store
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { SET_CURRENT_USER } from './actions/types';
 import { logoutUser } from './actions/authActions';
-
-
-
-
 
 //scenario if User goes out to some other page(app) and comes back to our app before token expires
 //Check for token
@@ -43,7 +41,7 @@ if (localStorage.jwtToken) {
     type: SET_CURRENT_USER,
     payload: decoded
   });
-
+  
   //check for expired token
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
@@ -68,6 +66,7 @@ class App extends Component {
               <Route exact path="/edit" component={EditProfile} />
               <Route exact path='/changepassword' component={ChangePassword} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/single-post" component={SinglePost} />
               <Route path='/create' component={CreatePost} />
               <Route exact path='/profile/followers' component={Followers} />
               <Route exact path='/profile/followings' component={Followings} />

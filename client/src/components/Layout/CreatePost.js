@@ -47,7 +47,6 @@ export class CreatePost extends Component {
       });
     }
   }
-
   handleSubmitPost(e) {
     e.preventDefault();
     const  toastopts= {

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import staticImage from "../../image/instav.png";
 import {Link} from 'react-router-dom';
-import '../css/createprofile.css';
+import './createprofile.css';
 import axios from 'axios';
 import classnames from 'classnames';
 // import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import cloudniary from '../config/Keys';
+import cloudniary from '../../../src/utils/setAuthToken';
 import DeleteProfile from './DeleteProfile';
 
 

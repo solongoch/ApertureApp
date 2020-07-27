@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import '../css/createprofile.css';
+import './createprofile.css';
 import {Alert, Collapse, Card, CardBody } from 'reactstrap';
 
 

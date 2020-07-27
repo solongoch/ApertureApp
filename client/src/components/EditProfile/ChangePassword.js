@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import logoImage from "../../image/avatar.png";
-import '../css/changepassword.css';
+import './changepassword.css';
 import axios from 'axios';
 import classNames from 'classnames';
 

@@ -1,6 +1,4 @@
 import cloudniary from '../config/Keys';
-import axios from 'axios'
-
 const uploadImage = (file) => {
   //upload file in cloudniary
   const formData = new FormData();
@@ -8,16 +6,15 @@ const uploadImage = (file) => {
   formData.append('upload_preset', cloudniary.UPLOAD_PRESET);
   formData.append('cloud_name', cloudniary.CLOUD_NAME);
 
+  const opts = {
+    method: 'POST',
+    body: formData
+  }
 
-  return axios.post(cloudniary.URL, formData,
-    {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }
-  ).then(res => res.data)
+  return fetch(cloudniary.URL, opts)
+    .then(res => res.json())
     .catch(err => {
       console.log(err.message);
     });
 }
-
-
 export default uploadImage;

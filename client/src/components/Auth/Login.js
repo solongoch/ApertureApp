@@ -26,8 +26,8 @@ class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
     const user = {
-      email: this.state.loginId,
-      password: this.state.password,
+      loginId: this.state.loginId,
+      password: this.state.password
     };
 
     this.props.loginUser(user);

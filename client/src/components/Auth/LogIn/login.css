@@ -29,7 +29,7 @@
   .phone-app-demo-beta {
     height: 550px;
     flex: 1;
-    background-image: url(../../image/loginimage.png);
+    background-image: url(../../../image/loginimage.png);
     background-repeat: no-repeat;
 }
 

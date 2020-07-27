@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 // import CSS
-import '../css/navbar.css';
+import './navbar.css';
 // import images
 import logo from '../../image/aperture-logo.svg';
 import profilePicture from '../../image/img-sq.jpg';
@@ -66,7 +66,7 @@ class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/">
-                  <i class="far fa-heart fa-2x"></i>
+                  <i className="far fa-heart fa-2x"></i>
                   {/* <i class="fas fa-heart fa-2x"></i> */}
                 </Link>
               </li>

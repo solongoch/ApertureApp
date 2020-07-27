@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 // import CSS
-import '../css/single-post.css';
+import './single-post.css';
 // import images
 import post from '../../image/img-sq.jpg';
 

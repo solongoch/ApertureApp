@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import PhoneImage from '../../image/insta2.png';
-import logoImage from '../../image/logo2.png';
-import AppleBadge from '../../image/Applebadge.png';
-import GoogleBadge from '../../image/googleplay.png';
-import '../css/signup.css';
+import PhoneImage from '../../../image/insta2.png';
+import logoImage from '../../../image/logo2.png';
+import AppleBadge from '../../../image/Applebadge.png';
+import GoogleBadge from '../../../image/googleplay.png';
+import './signup.css';
 import SignupInputField from './SignupInputField';
 import SignupPasswordField from './SignupPasswordField';
 
 //import connect used to talk to the redux store 
 import { connect } from 'react-redux';
 //import registerUser action to trigger action
-import { registerUser } from '../../actions/authActions';
+import { registerUser } from '../../../actions/authActions';
 
 class Signup extends Component {
   constructor() {

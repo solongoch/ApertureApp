@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import Followers from './Followers';
-import Followings from './Followings';
+import Followers from '../Follow/Followers';
+import Followings from '../Follow/Followings';
 // import CSS
-import '../css/profile.css';
+import './profile.css';
 // import images
 import profilePicture from '../../image/img-sq.jpg';
 

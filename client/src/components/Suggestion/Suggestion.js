@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 // load CSS
-import '../css/suggestion.css';
+import './suggestion.css';
 // load images
 import profilePicture from '../../image/img-sq.jpg';
 

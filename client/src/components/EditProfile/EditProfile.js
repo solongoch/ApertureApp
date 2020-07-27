@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../css/editprofile.css';
+import './editprofile.css';
 import {Link} from 'react-router-dom';
 import cloudniary from '../config/Keys';
 import staticImage from "../../image/instav.png";

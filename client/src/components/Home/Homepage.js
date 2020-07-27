@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 // import CSS
-import '../css/homepage.css';
+import './homepage.css';
 // import images 
 import profilePicture from '../../image/img-sq.jpg';
 import postPicture from '../../image/img1.jpg';

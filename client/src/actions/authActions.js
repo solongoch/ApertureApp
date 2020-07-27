@@ -47,7 +47,7 @@ export const loginUser = userData => dispatch => {
 // Logout user
 export const logoutUser = () => dispatch => {
   //Remove token from local storage
-  jwt_decode.removeItem('jwtToken');
+  localStorage.removeItem('jwtToken');
   //Remove token from auth header
   setAuthToken(false);
   //Reset the redux store to fasle and {}

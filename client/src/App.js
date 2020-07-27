@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-//import Provide
-import { Provider } from 'react-redux';
-import store from './store';
 // import CSS
 import "./App.css";
 import "./components/css/global.css";
@@ -22,6 +19,8 @@ import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
 import SinglePost from "./components/Layout/SinglePost";
+//import Provide
+import { Provider } from 'react-redux';
 //import store
 import store from './store';
 import setAuthToken from './utils/setAuthToken';

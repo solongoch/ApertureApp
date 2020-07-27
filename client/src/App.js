@@ -8,12 +8,12 @@ import Navbar from './components/Layout/Navbar';
 import Landing from './components/Layout/Landing';
 import Signup from './components/Auth/Signup';
 import Login from './components/Auth/Login';
-import Homepage from "./components/Layout/Homepage";
+import Homepage from "./components/Home/Homepage";
 import Suggestion from "./components/Layout/Suggestion";
 import EditProfile from './components/EditProfile/EditProfile';
 import CreateProfile from './components/EditProfile/CreateProfile.js';
 import ChangePassword from './components/Auth/ChangePassword'
-import Profile from './components/Layout/Profile';
+import ProfileHeader from "./components/Layout/ProfileHeader";
 import CreatePost from './components/Layout/CreatePost';
 import Followers from './components/Layout/Followers';
 import Followings from './components/Layout/Followings';
@@ -64,7 +64,7 @@ class App extends Component {
               <Route exact path="/edit" component={EditProfile} />
               <Route exact path="/createprofile" component={CreateProfile} />
               <Route exact path='/changepassword' component={ChangePassword} />
-              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/profile" component={ProfileHeader} />
               <Route exact path="/single-post" component={SinglePost} />
               <Route path='/create' component={CreatePost} />
               <Route exact path='/profile/followers' component={Followers} />

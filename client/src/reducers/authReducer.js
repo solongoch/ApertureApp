@@ -12,8 +12,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 user: action.payload,
-                isAuthenticated : !isEmpty(action.payload)
-            };          
+                isAuthenticated:  !isEmpty(action.payload)
+            }
         default: 
             return state;
     }

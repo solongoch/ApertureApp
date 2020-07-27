@@ -5,11 +5,17 @@
   flex-direction: row;
 }
 
-#single-post-div .post-image {
+.single-post {
   width: 600px;
+  margin: auto 0;
+}
+
+.post-image > img {
+  width: 100%;
 }
 
 .post-details {
+  background-color: #FFF;
   width: 340px;
   padding: 0 20px;
 }
@@ -48,4 +54,10 @@
 .posted-date {
   padding: 13px 0 9px;
   text-transform: uppercase;
+}
+
+@media (max-width: 991px) {
+  .comments {
+    max-height: calc(100% - 215px);
+  }
 }

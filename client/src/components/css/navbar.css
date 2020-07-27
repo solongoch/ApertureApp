@@ -19,7 +19,8 @@ nav {
   height: 28px;
 }
 
-.form-inline > #search {
+#search {
+  position: relative;
   background-color: #fafafa;
   background-image: url('../../image/search-icon.png');
   background-position: 9px 9px;
@@ -27,7 +28,6 @@ nav {
   background-size: 10px 10px;
   width: 215px;
   height: 28px;
-  font-size: 14px;
   padding: 3px 10px 3px 26px;
   border-radius: 3px;
   border: 1px solid rgb(219, 219, 219);

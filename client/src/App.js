@@ -1,28 +1,30 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 // import CSS
+import "./global.css";
 import "./App.css";
-import "./components/css/global.css";
 // import Components
 import Navbar from './components/Layout/Navbar';
 import Landing from './components/Layout/Landing';
-import Signup from './components/Auth/Signup';
-import Login from './components/Auth/Login';
-import Homepage from "./components/Home/Homepage";
-import Suggestion from "./components/Layout/Suggestion";
+import Signup from './components/Auth/SignUp/Signup';
+import Login from './components/Auth/LogIn/Login';
+import Homepage from './components/Home/Homepage';
+import Suggestion from './components/Suggestion/Suggestion';
 import EditProfile from './components/EditProfile/EditProfile';
 import CreateProfile from './components/EditProfile/CreateProfile.js';
-import ChangePassword from './components/Auth/ChangePassword'
-import ProfileHeader from "./components/Layout/ProfileHeader";
-import CreatePost from './components/Layout/CreatePost';
-import Followers from './components/Layout/Followers';
-import Followings from './components/Layout/Followings';
-import Unfollow from './components/Layout/Unfollow';
+import ChangePassword from './components/EditProfile/ChangePassword';
+import ProfileHeader from './components/Profile/ProfileHeader';
+import CreatePost from './components/Post/CreatePost';
+import Followers from './components/Follow/Followers';
+import Followings from './components/Follow/Followings';
+import Unfollow from './components/Follow/Unfollow';
 import Footer from './components/Layout/Footer';
-import SinglePost from "./components/Layout/SinglePost";
-import { Provider } from 'react-redux';//import Provider
-import store from './store';//import store
-import setAuthToken from "./utils/setAuthToken";//For setting token on request header
+import SinglePost from './components/Post/SinglePost';
+//import Provide
+import { Provider } from 'react-redux';
+//import store
+import store from './store';
+import setAuthToken from './utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { SET_CURRENT_USER } from './actions/types';
 import { logoutUser } from './actions/authActions';

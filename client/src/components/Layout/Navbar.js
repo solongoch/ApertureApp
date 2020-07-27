@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
 // import CSS
-import '../css/navbar.css';
+import './navbar.css';
 // import images
 import logo from '../../image/aperture-logo.svg';
 import profilePicture from '../../image/img-sq.jpg';
@@ -11,8 +9,8 @@ import home from '../../image/home.svg';
 import homeActive from '../../image/home-active.svg';
 import findPeople from '../../image/find-people.svg';
 import findPeopleActive from '../../image/find-people-active.svg';
-//for logout
 import { connect } from 'react-redux';
+//for logout
 import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {

@@ -4,13 +4,11 @@ import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 //Register User
-
 export const registerUser = (userData, history) => dispatch => {
   //API call
   axios
     .post('/api/users/signup', userData)
     .then(res => {
-      console.log(res);
       history.push('/login')
     })
     .catch(err =>

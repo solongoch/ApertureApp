@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
-import "../css/follow.css";
+import "./follow.css";
 import { Link } from "react-router-dom";
 import users from './Data';
+import Unfollow from './Unfollow';
 
-class Followers extends Component {
-  // constructor() {
-  //   super();
-  //   this.state={
-  //     showModal: false
-  //   }
-  //   this.handleOpenModal = this.handleOpenModal.bind(this);
-  //   this.handleCloseModal = this.handleCloseModal.bind(this);
-  // }
+
+class Followings extends Component {
+  constructor() {
+    super();
+    this.state = {
+      _showUnfollow: false
+    }
+  }
+
+  showUnfollow = () => {
+    this.setState({ _showUnfollow: true })
+  }
+  hideUnfollow = () => {
+    this.setState({ _showUnfollow: false });
+  }
 
   render() {
-    if (!this.props._showFollowers) {
+    if (!this.props._showFollowings) {
       return null;
     }
     return (
       <div className='mainwrapper-div'>
         <div className='subwrapper-div'>
           <div className='user-container'>
-            <h5>Followers</h5>
+            <h5>Followings</h5>
             <span>
-              <span>
-                <i onClick={this.props.followersClose} className="fa fa-times close" aria-hidden="true"></i>
-              </span>
+              <i onClick={this.props.followingsClose} className="fa fa-times close" aria-hidden="true"></i>
             </span>
             <hr />
             <div className='scrolluser'>
@@ -52,21 +57,23 @@ class Followers extends Component {
                         <span className="name"> {user.name}  </span>
                       </div>
                       <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                        <button className='btn mt-1  btn-sm btn-follow'>
-                          {/* <Link to='/unfollow' className='link-unfollow'> */}
-                            Follow
-                                  {/* </Link> */}
+                        <button className='btn btn-primary-outline'
+                          onClick={this.showUnfollow}>
+                          Followings
                         </button>
                       </div>
                     </div>
                   )
                 })
+
               }
             </div>
+            <Unfollow _showUnfollow={this.state._showUnfollow} hideUnfollow={this.hideUnfollow} />
           </div>
         </div>
       </div>
+  
     );
   }
 }
-export default Followers;
+export default Followings;

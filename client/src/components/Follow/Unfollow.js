@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
-import '../css/unfollow.css';
+import './unfollow.css';
 
 class Unfollow extends Component {
   render() {

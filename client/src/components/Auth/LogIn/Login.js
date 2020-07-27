@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import classnames from "classnames";
-import '../css/login.css';
-import Logo from '../../image/aperturelogo.png';
+import './login.css';
+import Logo from '../../../image/aperturelogo.png';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {loginUser} from '../../actions/authActions';
+import {loginUser} from '../../../actions/authActions';
 
 class Login extends Component {
   constructor() {

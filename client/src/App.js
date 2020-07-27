@@ -21,7 +21,6 @@ import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
 import SinglePost from "./components/Layout/SinglePost";
-import store from './store';
 //for checking login token expiration
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from 'jwt-decode';

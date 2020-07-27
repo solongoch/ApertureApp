@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import staticImage from "../../image/instav.png";
 import {Link} from 'react-router-dom';
-import '../css/createprofile.css';
+import './createprofile.css';
 import axios from 'axios';
 import classnames from 'classnames';
 // import { toast } from 'react-toastify';

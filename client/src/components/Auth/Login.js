@@ -25,7 +25,6 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const user = {
       loginId: this.state.loginId,
       password: this.state.password
@@ -34,15 +33,15 @@ class Login extends Component {
     this.props.loginUser(user);
   }
 
-  componentDidMount(){
-    if (this.props.auth.isAuthenticated){
-      this.props.history.push('/home');
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/home");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/home');
+      this.props.history.push("/home");
     }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -103,7 +102,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.errors
 });
 
 export default connect(mapStateToProps, {loginUser})(Login);

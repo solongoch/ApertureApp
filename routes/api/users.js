@@ -57,23 +57,25 @@ router.post("/signup", (req, res) => {
             message: "User Successfully Registered!"
           });
         })
-        .catch(err => {
-          if (err.message.includes("username_1 dup key:")) {
-            //duplicate username
-            err.message = "Username already exist";
-          } else if (err.message.includes("email_1 dup key:")) {
-            //dupicate email id
-            err.message = "Email already exists";
-          }
-          res.status(409).json({
-            success: false,
-            message: err.message
-          });
-        });
+        .catch(err => errorHandler(err, res));
     });
   });
 });
 
+function errorHandler(err, res) {
+  let errors = {}
+  if (err.message.includes("username_1 dup key:")) {
+    //duplicate username
+    errors.username = "Username already exist";
+  } else if (err.message.includes("email_1 dup key:")) {
+    //dupicate email id
+    errors.email = "Email already exists";
+  }
+  res.status(409).json({
+    email: errors.email,
+    username: errors.username
+  });
+}
 // @route   POST http://localhost:7500/api/users/login
 // @desc    Login User
 // @input   Username or email and password
@@ -119,8 +121,7 @@ router.post("/login", (req, res) => {
             });
           } else {
             return res.status(401).json({
-              success: false,
-              message: "Incorrect Password"
+              password: "Incorrect Password"
             });
           }
         })
@@ -140,7 +141,7 @@ router.post("/login", (req, res) => {
 // @desc    Login page
 // @access  Public
 router.get("/login", (req, res) => {
-  res.json({msg: "Login page"})
+  res.json({ msg: "Login page" })
 });
 
 module.exports = router;

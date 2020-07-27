@@ -11,6 +11,9 @@ import home from '../../image/home.svg';
 import homeActive from '../../image/home-active.svg';
 import findPeople from '../../image/find-people.svg';
 import findPeopleActive from '../../image/find-people-active.svg';
+//for logout
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
 
@@ -99,4 +102,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {logoutUser})(Navbar);
+export default connect(mapStateToProps, { logoutUser })(Navbar);

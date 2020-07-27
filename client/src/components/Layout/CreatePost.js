@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
+import { createBrowserHistory as history } from 'history';
 import {Link} from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../css/createpost.css';
 import axios from 'axios';
 import classNames from 'classnames';
 import uploadImage from '../utils';
 
+toast.configure();
 export class CreatePost extends Component {
   constructor() {
     super();
@@ -21,7 +25,6 @@ export class CreatePost extends Component {
     this.handleSubmitPost = this.handleSubmitPost.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleCaption = this.handleCaption.bind(this);
-    // this.handleUploadImg = this.handleUploadImg.bind(this)
   }
 
   // set caption in state on its Onchange
@@ -46,6 +49,15 @@ export class CreatePost extends Component {
   }
   handleSubmitPost(e) {
     e.preventDefault();
+    const  toastopts= {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: 1
+      }
         const{file} = this.state;      
         uploadImage(file)
           .then((res) => {
@@ -60,9 +72,14 @@ export class CreatePost extends Component {
             axios.post('/api/posts/create', newPost)
                 .then(res =>{ 
                     const post = res.data;
-                    console.log('Your post has been submitted successfully' , post);
+                    toast.success('Your post has been submitted successfully',toastopts);
+                    history.push('/home');
+                    // console.log('Your post has been submitted successfully' , post);
                   })
-                .catch(err =>{ this.setState({errors: err.response.data})});
+                .catch(err =>{ 
+                  toast.error(err.response.data,toastopts);
+                  this.setState({errors: err.response.data})
+                });
         });
 
         // this.setState({ photo: uploadImage(this.state.file)  });

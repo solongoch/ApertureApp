@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logoImage from "../../image/avatar.png";
 import {Link} from 'react-router-dom'
-import '../css/createpost.css';
+import './createpost.css'
 import axios from 'axios';
 import classNames from 'classnames';
 import uploadImage from '../utils';

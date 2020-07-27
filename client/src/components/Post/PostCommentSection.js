@@ -1,29 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 // import CSS
-import '../css/single-post.css';
+import './single-post.css';
 // import images
 import post from '../../image/img-sq.jpg';
 
-class SinglePost extends Component {
+class PostCommentSection extends Component {
   render() {
     return (
-      <div id="single-post-div">
-        <div className="post-image">
-          <img src={post} alt="Post" />
-        </div>
-        <div className="post-details">
-          <div className="post-header">
-            <Link to="/profile">
-              <img className="round-image image-32" src={post} alt="Post author" />
-            </Link>
-            <div className="d-flex flex-column left-15">
-              <div className="font-weight-bold">
-                <Link to="/profile">Name</Link>
-              </div>
-              {/* <div><Link to="/">Location</Link></div> */}
-            </div>
-          </div>
+      
+        
           <div className="comments">
             <div className="comment-div">
               <div>
@@ -67,29 +53,13 @@ class SinglePost extends Component {
               </div>
             </div>
           </div>
-          <div className="actions">
-            <i className="far fa-heart fa-2x action"></i>
-            <i className="far fa-comment fa-2x action"></i>
-            <i className="far fa-paper-plane fa-2x action"></i>
-            <i className="far fa-bookmark fa-2x action"></i>
-          </div>
-          <div className="likes">
-            {/* <img src={post} className="round-image image-22" /> */}
-            <span className="font-weight-bold">1234 likes</span>
-          </div>
-          <div className="posted-date">May 23</div>
-              <form>
-                <input
-                  className="add-comment"
-                  type="text"
-                  name="add-comment"
-                  placeholder="Add a comment..."
-                />
-              </form>
-        </div>
-      </div>
+          
+          
+          
+        
+      
     )
   }
 }
 
-export default SinglePost;
+export default PostCommentSection;

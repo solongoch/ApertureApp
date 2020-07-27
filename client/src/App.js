@@ -14,14 +14,14 @@ import Homepage from "./components/Layout/Homepage";
 import Suggestion from "./components/Layout/Suggestion";
 import EditProfile from './components/EditProfile/EditProfile';
 import CreateProfile from './components/EditProfile/CreateProfile.js';
-import ChangePassword from './components/Auth/ChangePassword'
+import ChangePassword from './components/EditProfile/ChangePassword'
 import Profile from "./components/Layout/Profile";
-import CreatePost from './components/Layout/CreatePost';
+import CreatePost from './components/Post/CreatePost';
 import Followers from './components/Layout/Followers';
 import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
-import SinglePost from "./components/Layout/SinglePost";
+import SinglePost from "./components/Post/SinglePost";
 //for checking login token expiration
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from 'jwt-decode';

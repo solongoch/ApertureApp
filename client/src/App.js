@@ -12,7 +12,8 @@ import Signup from './components/Auth/Signup';
 import Login from './components/Auth/Login';
 import Homepage from "./components/Layout/Homepage";
 import Suggestion from "./components/Layout/Suggestion";
-import EditProfile from './components/Auth/EditProfile';
+import EditProfile from './components/EditProfile/EditProfile';
+import CreateProfile from './components/EditProfile/CreateProfile.js';
 import ChangePassword from './components/Auth/ChangePassword'
 import Profile from "./components/Layout/Profile";
 import CreatePost from './components/Layout/CreatePost';
@@ -21,7 +22,6 @@ import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
 import SinglePost from "./components/Layout/SinglePost";
-import store from './store';
 //for checking login token expiration
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from 'jwt-decode';
@@ -63,6 +63,7 @@ class App extends Component {
               <Route exact path="/home" component={Homepage} />
               <Route exact path="/suggestion" component={Suggestion} />
               <Route exact path="/edit" component={EditProfile} />
+              <Route exact path="/createprofile" component={CreateProfile} />
               <Route exact path='/changepassword' component={ChangePassword} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/single-post" component={SinglePost} />

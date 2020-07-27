@@ -25,24 +25,23 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const user = {
-      loginId: this.state.loginId,
-      password: this.state.password
+      email: this.state.email,
+      password: this.state.password,
     };
 
     this.props.loginUser(user);
   }
 
-  componentDidMount(){
-    if (this.props.auth.isAuthenticated){
-      this.props.history.push('/home');
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/home');
+      this.props.history.push("/dashboard");
     }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });

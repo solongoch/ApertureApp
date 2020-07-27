@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+// import Component
+import HomeSuggestion from './HomeSuggestion';
 // import CSS
 import './homepage.css';
 // import images 
@@ -118,80 +120,7 @@ class Homepage extends Component {
           </div>
 
           {/* Follower suggestion */}
-          <div className="d-flex justify-content-between">
-            <span className="font-weight-bold">Suggestions For You</span>
-            <Link to="/" className="font-weight-bold">See all</Link>
-          </div>
-
-          {/* .profile-section below will be repeated */}
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="profile-section">
-              <Link to="/">
-                <img className="round-image image-32" src={profilePicture} alt="User" />
-              </Link>
-              <div>
-                <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <div className="sign-up-button font-weight-bold follow">Follow</div>
-          </div>
-
-
-          <div className="d-flex justify-content-between align-items-center">
-              <div className="profile-section">
-                <Link to="/">
-                  <img className="round-image image-32" src={profilePicture} alt="User" />
-                </Link>
-                <div>
-                  <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
-                  <div className="make-gray left-15">Followed by xyz + 14 more</div>
-                </div>
-              </div>
-              <div className="sign-up-button font-weight-bold follow">Follow</div>
-            </div>
-
-
-          <div className="d-flex justify-content-between align-items-center">
-              <div className="profile-section">
-                <Link to="/">
-                  <img className="round-image image-32" src={profilePicture} alt="User" />
-                </Link>
-                <div>
-                  <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
-                  <div className="make-gray left-15">Followed by xyz + 14 more</div>
-                </div>
-              </div>
-              <div className="sign-up-button font-weight-bold follow">Follow</div>
-            </div>
-
-
-          <div className="d-flex justify-content-between align-items-center">
-              <div className="profile-section">
-                <Link to="/">
-                  <img className="round-image image-32" src={profilePicture} alt="User" />
-                </Link>
-                <div>
-                  <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
-                  <div className="make-gray left-15">Followed by xyz + 14 more</div>
-                </div>
-              </div>
-              <div className="sign-up-button font-weight-bold follow">Follow</div>
-            </div>
-
-
-          <div className="d-flex justify-content-between align-items-center">
-              <div className="profile-section">
-                <Link to="/">
-                  <img className="round-image image-32" src={profilePicture} alt="User" />
-                </Link>
-                <div>
-                  <div className="font-weight-bold left-15"><Link to="/">Username</Link></div>
-                  <div className="make-gray left-15">Followed by xyz + 14 more</div>
-                </div>
-              </div>
-              <div className="sign-up-button font-weight-bold follow">Follow</div>
-            </div>
+          <HomeSuggestion />
         </div>
       </div>
     )

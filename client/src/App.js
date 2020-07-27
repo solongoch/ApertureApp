@@ -8,9 +8,10 @@ import Navbar from './components/Layout/Navbar';
 import Landing from './components/Layout/Landing';
 import Signup from './components/Auth/Signup';
 import Login from './components/Auth/Login';
-import Homepage from './components/Layout/Homepage';
-import Suggestion from './components/Layout/Suggestion';
-import EditProfile from './components/Auth/EditProfile';
+import Homepage from "./components/Layout/Homepage";
+import Suggestion from "./components/Layout/Suggestion";
+import EditProfile from './components/EditProfile/EditProfile';
+import CreateProfile from './components/EditProfile/CreateProfile.js';
 import ChangePassword from './components/Auth/ChangePassword'
 import Profile from './components/Layout/Profile';
 import CreatePost from './components/Layout/CreatePost';
@@ -19,11 +20,9 @@ import Followings from './components/Layout/Followings';
 import Unfollow from './components/Layout/Unfollow';
 import Footer from './components/Layout/Footer';
 import SinglePost from "./components/Layout/SinglePost";
-//import Provide
-import { Provider } from 'react-redux';
-//import store
-import store from './store';
-import setAuthToken from './utils/setAuthToken';
+import { Provider } from 'react-redux';//import Provider
+import store from './store';//import store
+import setAuthToken from "./utils/setAuthToken";//For setting token on request header
 import jwt_decode from 'jwt-decode';
 import { SET_CURRENT_USER } from './actions/types';
 import { logoutUser } from './actions/authActions';
@@ -63,6 +62,7 @@ class App extends Component {
               <Route exact path="/home" component={Homepage} />
               <Route exact path="/suggestion" component={Suggestion} />
               <Route exact path="/edit" component={EditProfile} />
+              <Route exact path="/createprofile" component={CreateProfile} />
               <Route exact path='/changepassword' component={ChangePassword} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/single-post" component={SinglePost} />

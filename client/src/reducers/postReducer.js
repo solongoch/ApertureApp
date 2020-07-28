@@ -9,7 +9,7 @@ export default function (state = initialState, action) {
     case CREATE_POST:
       return {
         ...state,
-        post: [action.payload, ...state]
+        posts: [action.payload, ...state.posts]
       };
     default:
       return state;

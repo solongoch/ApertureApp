@@ -84,11 +84,10 @@ div.upload-image {
 }
 
 .btn-submitpost {
-  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
   margin: 0;
   text-align: center;
   width:80px;
-  line-height: 10px;
+  line-height: 15px;
 }
 .btn-submitpost.btn-primary.focus,
 .btn-submitpost.btn-primary:focus,

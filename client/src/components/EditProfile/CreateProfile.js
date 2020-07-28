@@ -14,6 +14,7 @@ class CreateProfile extends Component {
     this.state = {
       name: '',
       username: '',
+      avatar :'',
       website: '',
       bio: '',
       email: '',
@@ -73,7 +74,7 @@ class CreateProfile extends Component {
         <div className="row">
           <div className="col-3">
             <div className="sidebar">
-              <Uploadavatar/>
+              <Uploadavatar />
               <hr />
               <div className="col-12 change-password"><Link to="/changepassword" className="btn btn-primary mr-2">Change Password</Link></div>
            

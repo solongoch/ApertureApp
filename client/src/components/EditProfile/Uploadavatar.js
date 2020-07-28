@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import staticImage from "../../image/instav.png";
 import uploadImage from '../utils';
 import { connect } from 'react-redux';
 import { uploadAvatar } from './../../actions/profileActions';
@@ -49,20 +48,21 @@ class Uploadavatar extends Component {
       })
   }
 
-  componentWillReceiveProps(newProps){
-    if(newProps.profile){
-      this.setState({avatar : newProps.profile.profile.avatar})
-    }
+  // componentWillReceiveProps(newProps){
+  //   if(newProps.profile){
+  //     this.setState({avatar : newProps.profile.profile.avatar})
+  //   }
 
-  }
+  // }
 
   render() {
+    const {user} = this.props.auth;
     let img = null;
     const { imagePreview, submitDisabled , avatar } = this.state
     if (imagePreview) {
       img = <img src={imagePreview} className="createuser-avatar" alt="UserImage" />
     } else {
-      img = <img src={avatar} className="createuser-avatar" alt="UserImage" />
+      img = <img src={user.avatar} className="createuser-avatar" alt="UserImage" />
     }
 
     return (

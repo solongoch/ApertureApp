@@ -19,6 +19,13 @@
 .uploadavatar-card{
     padding-top: 20px;
     padding-bottom: 20px;
+    margin-right: auto;
+}
+
+.div-editchgpwd{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 .btn-createprofile{
     display: block;
@@ -51,7 +58,6 @@
     margin-bottom: 5px;
     border: 2px solid #eee;
     border-radius: 4px;
-
 }
 
 h3 {
@@ -65,16 +71,4 @@ h3 {
     margin-top: 100px;
     margin-bottom: 25px;
     text-align: center;
-}
-
-@media(min-width: 767px) {
-    .sidebar-mobile {
-        display: none;
-    }
-}
-
-@media(max-width: 767px) {
-    .sidebar {
-        display: none;
-    }
 }

@@ -58,10 +58,15 @@ class Navbar extends Component {
             {/* <i className="fas fa-heart fa-2x"></i> */}
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/profile">
+        <li className="nav-item dropdown">
+          <div className="nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img className="menu round-image image-22" src={profilePicture} alt="My profile"/>
-          </Link>
+          </div>
+          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <Link className="dropdown-item" to="/profile">Profile</Link>
+            <div className="dropdown-divider"></div>
+            <Link className="dropdown-item" to="/">Log out</Link>
+          </div>
         </li>
       </ul>
     );

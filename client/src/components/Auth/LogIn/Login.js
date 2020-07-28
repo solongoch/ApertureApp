@@ -5,7 +5,7 @@ import './login.css';
 import Logo from '../../../image/aperture-logo.png';
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
-import TextFieldGroup from "./TextFieldGroup";
+import TextFieldGroup from "../../common/TextFieldGroup";
 
 class Login extends Component {
   constructor() {

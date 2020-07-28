@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import 'react-toastify/dist/ReactToastify.css';
 import cloudniary from '../../../src/utils/setAuthToken';
 import DeleteProfile from './DeleteProfile';
+import Uploadavatar from './Uploadavatar';
 
 class EditProfile extends Component {
   constructor() {
@@ -133,8 +134,13 @@ class EditProfile extends Component {
                 <div className="row">
 `                   <div className="col-lg-3">
                         <div className="sidebar">
+                        <Uploadavatar
+                          avatar={staticImage}
+                          previewImage={previewImage}
+                          submitDisabled={submitDisabled}
+                        />
 
-                        <div className="text-center">
+                        {/* <div className="text-center">
                             <img src={staticImage} alt="Avatar" className="static-av" style={{width:'110px'}} />
                             <h6>Upload a different photo...</h6>
                             <form onSubmit={this.handleSubmit}>
@@ -147,7 +153,7 @@ class EditProfile extends Component {
                             <div className="imgPreview">{previewImage}</div>
                             <button className="btn btn-primary shadow-none" disabled ={submitDisabled}>Change Avatar</button>
                             </form>
-                        </div>
+                        </div> */}
                         <hr/>
                         <div className="col-12 change-password"><Link to="/changepassword" className="btn btn-primary mr-2">Change Password</Link></div>
 
@@ -176,11 +182,11 @@ class EditProfile extends Component {
                     </div>
 
                 <div className="col-lg-8 col-md-8 col-sm-12 profile-info">
-                    <div class="form-group">
+                    <div className="form-group">
                     <form onSubmit={this.onSubmit}>
                         <h3>User Profile</h3>
                           
-                          <div class="col-10">
+                          <div className="col-10">
                               <label htmlFor="Name"><h5>Name</h5></label>
                               <input 
                               type="text" 
@@ -198,7 +204,7 @@ class EditProfile extends Component {
                               <p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name.</p>
                           </div>
 
-                          <div class="col-10">
+                          <div className="col-10">
                               <label htmlFor="Name"><h5>Username</h5></label>
                               <input 
                               type="text" 
@@ -215,7 +221,7 @@ class EditProfile extends Component {
                               )}  
                           </div>
 
-                          <div class="col-10">
+                          <div className="col-10">
                               <label htmlFor="Name"><h5>Website</h5></label>
                               <input 
                               type="text" 
@@ -232,7 +238,7 @@ class EditProfile extends Component {
                               )} 
                           </div>
 
-                          <div class="col-10">
+                          <div className="col-10">
                               <label htmlFor="Name"><h5>Bio</h5></label>
                               <textarea 
                               type="text" 
@@ -248,7 +254,7 @@ class EditProfile extends Component {
                           <h3>Personal Info</h3>
                             <p>Provide your personal information. This won't be a part of your public profile</p>
                           
-                        <div class="col-10">
+                        <div className="col-10">
                               <label htmlFor="Name"><h5>Email</h5></label>
                               <input 
                               type="text" 
@@ -265,7 +271,7 @@ class EditProfile extends Component {
                               )} 
                           </div>  
 
-                          <div class="col-10">
+                          <div className="col-10">
                               <label htmlFor="Name"><h5>Phone Number</h5></label>
                               <input 
                               type="text" 

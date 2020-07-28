@@ -5,7 +5,7 @@ import './createprofile.css';
 import cloudniary from '../config/Keys';
 import axios from 'axios';
 import classnames from 'classnames';
-
+import DeleteProfile from './DeleteProfile';
 
 class CreateProfile extends Component {
     constructor() {
@@ -305,17 +305,15 @@ class CreateProfile extends Component {
                           <button className="btn btn-primary" type="submit">Create Profile</button>
 
                     </form>
+
+                    </div>
+                         <DeleteProfile/>        
+                    </div>
+
                     </div>
                 </div>
-
-
-
-
-                </div>
-
-                
-
-            </div>
+              
+            
         );
     }
 }

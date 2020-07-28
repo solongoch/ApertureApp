@@ -19,13 +19,7 @@ class PostHeader extends Component {
           </div>
           {/* <div><Link to="/">Location</Link></div> */}
         </div>
-      </div>
-          
-          
-          
-          
-              
-        
+      </div> 
       
     )
   }

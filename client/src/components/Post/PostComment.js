@@ -6,8 +6,6 @@ import './single-post.css';
 class PostComment extends Component {
   render() {
     return (
-      
-          
               <form>
                 <input
                   className="add-comment"
@@ -16,8 +14,6 @@ class PostComment extends Component {
                   placeholder="Add a comment..."
                 />
               </form>
-            
-      
     )
   }
 }

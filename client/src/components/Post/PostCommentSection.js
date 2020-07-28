@@ -7,9 +7,7 @@ import post from '../../image/img-sq.jpg';
 
 class PostCommentSection extends Component {
   render() {
-    return (
-      
-        
+    return (   
           <div className="comments">
             <div className="comment-div">
               <div>
@@ -52,9 +50,7 @@ class PostCommentSection extends Component {
                 </div>
               </div>
             </div>
-          </div>
-                    
-      
+          </div>                
     )
   }
 }

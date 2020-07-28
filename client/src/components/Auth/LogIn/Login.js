@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {loginUser} from '../../../actions/authActions';
 import './login.css';
-import Logo from '../../../image/aperture-logo.png';
+import Logo from '../../../image/aperturelogo.png';
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 import TextFieldGroup from "../../common/TextFieldGroup";

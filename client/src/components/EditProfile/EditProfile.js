@@ -6,7 +6,7 @@ import axios from 'axios';
 import classnames from 'classnames';
 // import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import cloudniary from '../config/Keys';
+import cloudniary from '../../../src/utils/setAuthToken';
 import DeleteProfile from './DeleteProfile';
 
 class EditProfile extends Component {

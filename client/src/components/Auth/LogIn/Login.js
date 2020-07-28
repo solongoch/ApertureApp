@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import classnames from "classnames";
-import './login.css';
-import Logo from '../../../image/aperturelogo.png';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {loginUser} from '../../../actions/authActions';
+import './login.css';
+import Logo from '../../../image/aperture-logo.png';
+import {Link} from 'react-router-dom';
+import PropTypes from "prop-types";
+import TextFieldGroup from "../TextFieldGroup";
 
 class Login extends Component {
   constructor() {
@@ -62,32 +63,27 @@ class Login extends Component {
               <div className="logo-beta">
                 <img src={Logo} alt="Logo" />
               </div>
-                  <input
-                    type="loginId"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.loginId,
-                    })}
+                <div className="form-group">
+                  <TextFieldGroup
                     placeholder="Username or Email Address"
                     name="loginId"
+                    type="loginId"
                     value={this.state.loginId}
                     onChange={this.onChange}
+                    error={errors.email}
                   />
-                  {errors.loginId && (
-                    <div className="invalid-feedback">{errors.loginId}</div>
-                  )}
-                  <input
-                    type="password"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.password,
-                    })}
+                  </div>
+                  <div className="form-group">
+                  <TextFieldGroup
                     placeholder="Password"
                     name="password"
+                    type="password"
                     value={this.state.password}
                     onChange={this.onChange}
+                    error={errors.password}
                   />
-                  {errors.password && (
-                    <div className="invalid-feedback">{errors.password}</div>
-                  )}
+                  </div>
+                  
                 <button className="btn-beta btn-primary" type="submit">Log In</button>
               </form>
               <div className="sign-up-beta">
@@ -99,6 +95,13 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
 
 const mapStateToProps = (state) => ({
   auth: state.auth,

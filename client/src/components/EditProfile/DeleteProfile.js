@@ -1,45 +1,67 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
 import './createprofile.css';
-import { Alert, Collapse, Card, CardBody } from 'reactstrap';
-
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 
 class DeleteProfile extends Component {
-  constructor() {
-    super();
-    this.state = {
-      visible: false,
-    }
+  componentDidMount() {
+    this.props.getCurrentProfile();
   }
 
-
-  toggle() {
-    this.setState({
-      visible: !this.state.visible
-    });
+  onDeleteClick(e) {
+    this.props.deleteAccount();
   }
-
-
 
   render() {
+  const profile = this.props.profile;
 
-    return (
-      <div className="form-group">
-        <label className="col-md-3 control-label"></label>
-        <div className="col-md-10">
-          <button className="btn btn-danger mr-2" onClick={this.toggle.bind(this)}>Delete Account</button>
-          <Collapse isOpen={this.state.visible} toggle={this.toggle.bind(this)}>
-            <Card>
-              <CardBody >
-                <Alert color="danger"><b>Are you sure you want to delete your account?</b></Alert>
-                <Link to="/remove" className="btn btn-md mr-2 btn-danger">Confirm Delete Account</Link>
-              </CardBody>
-            </Card>
-          </Collapse>
+    let deleteAction;
+
+    if (profile === null ) {
+      deleteAction = (
+        <div>
+          <p>Fill out the info above to set up a profile</p>
         </div>
-      </div>
-    );
-  }
-}
+      );
+    } else {
+    
+        deleteAction = (
+          <div>
 
-export default DeleteProfile;
+            <div style={{ marginBottom: '60px' }} />
+            <button
+              onClick={this.onDeleteClick.bind(this)}
+              className="btn btn-danger"
+            >
+              Delete My Account
+            </button>
+          </div>
+        );
+      } 
+    
+
+        return (
+          <div className="has-separator">Terminate Account
+            <div className="col-12">{deleteAction}</div>
+          </div>
+                      
+        );
+    }
+}
+    
+DeleteProfile.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  profile: state.profile,
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
+  DeleteProfile
+);

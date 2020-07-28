@@ -14,20 +14,19 @@ class CreateProfile extends Component {
     this.state = {
       name: '',
       username: '',
-      avatar :'',
+      avatar: '',
       website: '',
       bio: '',
       email: '',
       mobile: '',
       errors: {},
       visible: false,
-     }
+    }
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.handleCaption = this.handleCaption.bind(this);
-  
   }
 
   // set caption in state on its Onchange
@@ -35,9 +34,6 @@ class CreateProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
- 
-
- 
   toggle() {
     this.setState({
       visible: !this.state.visible
@@ -77,9 +73,8 @@ class CreateProfile extends Component {
               <Uploadavatar />
               <hr />
               <div className="col-12 change-password"><Link to="/changepassword" className="btn btn-primary mr-2">Change Password</Link></div>
-           
             </div>
-          </div>          
+          </div>
           <div className="col-lg-8 col-md-8 col-sm-12 profile-info">
             <div className="form-group">
               <form onSubmit={this.onSubmit}>
@@ -87,39 +82,39 @@ class CreateProfile extends Component {
                 <div className="col-10">
                   <label htmlFor="Name"><h5>Name</h5></label>
                   <TextFieldGroup
-                   placeholder="Name"
-                   name="name"
-                   type="text"
-                   value={this.state.name}
-                   onChange={this.onChange}
-                   error={errors.name}
-                  />                            
+                    placeholder="Name"
+                    name="name"
+                    type="text"
+                    value={this.state.name}
+                    onChange={this.onChange}
+                    error={errors.name}
+                  />
                   <p className="createprofile-info">Help people discover your account by using the name you're known by: either your full name, nickname, or business name.</p>
                 </div>
 
                 <div className="col-10">
                   <label htmlFor="Name"><h5>Username</h5></label>
                   <TextFieldGroup
-                   placeholder="Username"
-                   name="username"
-                   type="text"
-                   value={this.state.username}
-                   onChange={this.onChange}
-                   error={errors.username}
-                  />   
-                 </div>
+                    placeholder="Username"
+                    name="username"
+                    type="text"
+                    value={this.state.username}
+                    onChange={this.onChange}
+                    error={errors.username}
+                  />
+                </div>
 
                 <div className="col-10">
                   <label htmlFor="Name"><h5>Website</h5></label>
                   <TextFieldGroup
-                   placeholder="Website"
-                   name="website"
-                   type="text"
-                   value={this.state.website}
-                   onChange={this.onChange}
-                   error={errors.website}
+                    placeholder="Website"
+                    name="website"
+                    type="text"
+                    value={this.state.website}
+                    onChange={this.onChange}
+                    error={errors.website}
                   />
-                  </div>
+                </div>
 
                 <div className="col-10">
                   <label htmlFor="Name"><h5>Bio</h5></label>
@@ -140,26 +135,26 @@ class CreateProfile extends Component {
                 <div className="col-10">
                   <label htmlFor="Name"><h5>Email</h5></label>
                   <TextFieldGroup
-                   placeholder="Email"
-                   name="email"
-                   type="text"
-                   value={this.state.email}
-                   onChange={this.onChange}
-                   error={errors.email}
+                    placeholder="Email"
+                    name="email"
+                    type="text"
+                    value={this.state.email}
+                    onChange={this.onChange}
+                    error={errors.email}
                   />
                 </div>
 
                 <div className="col-10">
                   <label htmlFor="Name"><h5>Phone Number</h5></label>
                   <TextFieldGroup
-                   placeholder="Phone Number"
-                   name="mobile"
-                   type="text"
-                   value={this.state.mobile}
-                   onChange={this.onChange}
-                   error={errors.mobile}
+                    placeholder="Phone Number"
+                    name="mobile"
+                    type="text"
+                    value={this.state.mobile}
+                    onChange={this.onChange}
+                    error={errors.mobile}
                   />
-                 </div>
+                </div>
 
                 <div className="form-group">
                   <label className="control-label pl-3"><h5>Gender</h5></label>
@@ -183,11 +178,11 @@ class CreateProfile extends Component {
                   </div>
                 </div>
 
-                <button className="btn btn-primary col-4 btn-createprofile" type="submit">Submit 
+                <button className="btn btn-primary col-4 btn-createprofile" type="submit">Submit
                 </button>
               </form>
-            </div>                    
-          <DeleteProfile/>
+            </div>
+            <DeleteProfile />
           </div>
         </div>
       </div>

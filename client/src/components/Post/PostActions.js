@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import CSS
 import './single-post.css';
+import PostComment from './PostComment';
 // import images
 
 class PostAction extends Component {
@@ -20,14 +21,7 @@ class PostAction extends Component {
             <span className="font-weight-bold">1234 likes</span>
           </div>
           <div className="posted-date">May 23</div>
-              <form>
-                <input
-                  className="add-comment"
-                  type="text"
-                  name="add-comment"
-                  placeholder="Add a comment..."
-                />
-              </form>
+              <PostComment></PostComment>
             </div>
       
     )

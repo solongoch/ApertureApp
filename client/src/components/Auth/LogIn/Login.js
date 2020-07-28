@@ -64,7 +64,7 @@ class Login extends Component {
               </div>
                   <input
                     type="loginId"
-                    className={classnames("form-control form-control-lg", {
+                    className={classnames("form-control form-control-lg login-input", {
                       "is-invalid": errors.loginId,
                     })}
                     placeholder="Username or Email Address"
@@ -77,7 +77,7 @@ class Login extends Component {
                   )}
                   <input
                     type="password"
-                    className={classnames("form-control form-control-lg", {
+                    className={classnames("form-control form-control-lg login-input", {
                       "is-invalid": errors.password,
                     })}
                     placeholder="Password"
@@ -91,7 +91,7 @@ class Login extends Component {
                 <button className="btn-beta btn-primary" type="submit">Log In</button>
               </form>
               <div className="sign-up-beta">
-                Don't have an account? <Link to="/signup" className="btn-beta btn-lg btn-info mr-2">Sign Up</Link>
+                <p className="have-an-account">Don't have an account? <Link to="/signup" className="have-signup">Sign Up</Link></p>
               </div>
             </div>
           </div>

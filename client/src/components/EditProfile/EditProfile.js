@@ -71,6 +71,9 @@ class EditProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
 
@@ -250,6 +253,7 @@ class EditProfile extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  errors: state.errors
 })
 export default connect(mapStateToProps, { getCurrentProfile, editProfile })(EditProfile);

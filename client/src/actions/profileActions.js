@@ -29,20 +29,27 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
-  // Create Profile
-export const createProfile = (profileData, history) => dispatch => {
-    axios
-      .post('/api/profile/accounts/edit', profileData)
-      .then(res => history.push('/profile'))
-      .catch(err =>
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.response.data
-        })
-      );
-  };
+//Edit Profile
 
-  //Upload Avatar
+export const editProfile = (profileData) => dispatch => {
+  axios
+    .post('/api/profile/accounts/edit', profileData)
+    .then(res => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+     
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    })
+}
+
+//Upload Avatar
 export const uploadAvatar = (newAvatar) => dispatch => {
 
   axios.put('/api/profile/editavatar', newAvatar)

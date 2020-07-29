@@ -8,7 +8,8 @@ const Post = require("../../models/Posts");
 const validateProfileInput = require("../../validation/profile");
 // Function
 const accessRouteWithOrWithoutToken = require("../../controller/accessRouteWithWithoutToken");
-
+//common function for error handling for Signup and Edit profile
+const {errorHandler} = require("../../utils/common");
 
 // @route   Get http://localhost:7500/api/profile/:username
 // @desc    Return public user's data like name,username,bio,website, avatar, 
@@ -86,19 +87,19 @@ router.get(
   "/accounts/edit",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    return res.json({
-      User: {
-        name: req.user.name,
-        username: req.user.username,
-        email: req.user.email,
-        avatar: req.user.avatar,
-        website: req.user.website,
-        bio: req.user.bio,
-        mobile: req.user.mobile,
-        gender: req.user.gender,
-        date: req.user.date
-      }
-    });
+    const user = {
+      name: req.user.name,
+      username: req.user.username,
+      email: req.user.email,
+      avatar: req.user.avatar,
+      isPublic:req.user.isPublic,
+      website: req.user.website,
+      bio: req.user.bio,
+      mobile: req.user.mobile,
+      gender: req.user.gender,
+      date: req.user.date
+    }
+    return res.json(user);
   }
 );
 
@@ -125,17 +126,17 @@ router.post(
     userFields.website = req.body.website;
     userFields.bio = req.body.bio;
     userFields.mobile = req.body.mobile;
-    if (req.body.gender) userFields.gender = req.body.gender;
-    if (req.body.isPublic) userFields.isPublic = req.body.isPublic;
+    userFields.gender = req.body.gender;
+    userFields.isPublic = req.body.isPublic;
 
     User.findById(req.user.id)
-      .then(user => {
-        if (user) {
-          // update profile
-          User.findOneAndUpdate(
-            { email: req.user.email },
-            { $set: userFields },
-            { new: true }
+    .then(user => {
+      if (user) {
+        // update profile
+        User.findOneAndUpdate(
+          { email: req.user.email },
+          { $set: userFields },
+          { new: true }
           ).then(updatedUser => {
             updatedUser = updatedUser.toObject();
             delete updatedUser._id;
@@ -143,9 +144,9 @@ router.post(
             delete updatedUser.followers;
             delete updatedUser.following;
             delete updatedUser.__v;
-            res.json({ 'User': updatedUser })
+            res.json(updatedUser)
           })
-            .catch(err => res.status(500).json({ success: false, err: err.message }));
+          .catch(err => errorHandler(err, res));
         }
       })
       .catch(err => res.status(500).json({ success: false, err: err.message }));

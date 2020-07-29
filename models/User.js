@@ -43,7 +43,7 @@ const UserSchema = new Schema({
   gender: { 
     type: String, 
     //enum: This states that the string can only have the value specified in the enum array.
-    enum: ["male", "female", "other"] 
+    enum: ["Male", "Female", "Prefer Not to Say" , "Custom"] 
   },
   isPublic: {
     type: Boolean,

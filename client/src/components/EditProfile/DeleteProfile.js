@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './createprofile.css';
+import './editprofile.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';

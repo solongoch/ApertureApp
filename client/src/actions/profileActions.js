@@ -27,6 +27,26 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
+//Edit Profile
+
+export const editProfile = (profileData) => dispatch => {
+  axios
+    .post('/api/profile/accounts/edit', profileData)
+    .then(res => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+     
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    })
+}
+
 //Upload Avatar
 export const uploadAvatar = (newAvatar) => dispatch => {
 

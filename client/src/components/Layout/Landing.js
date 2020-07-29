@@ -11,9 +11,9 @@ export default class Landing extends Component {
                   <div className="col-md-12 text-center">
                     <div className="logo-alpha"><img src={Logo} alt="Logo" /></div>
                     <p className="lead"> Sign up to share photos with your friends </p>
-                    <Link to="/login" className="btn-alpha btn-lg btn-light">Log in with username or email</Link>
+                    <Link to="/login" className="btn-alpha btn-lg">Log in with username or email</Link>
                     <hr/>
-                    <Link to="/signup" className="btn-alpha btn-lg btn-info mr-2">Sign Up</Link>
+                    <Link to="/signup" className="btn-alpha btn-lg mr-2">Sign Up</Link>
                   </div>
                 </div>
               </div>

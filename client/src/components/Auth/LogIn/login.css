@@ -83,6 +83,23 @@
     margin: 10px 0;
 }
 
+.login-input{
+    font-size: 1rem;
+}
+.have-an-account {
+    color: rgba(var(--i1d, 38, 38, 38), 1);
+    font-size: 14px;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+
+.have-signup, .have-signup:hover {
+    font-weight: 600;
+    color: #0095f6;
+}
+  
 @media (max-width: 900px) {
     .phone-app-demo-beta {
         display: none;

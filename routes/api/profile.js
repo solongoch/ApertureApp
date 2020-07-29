@@ -42,19 +42,19 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
             if (posts) {
               //If user has public account anyone can see posts
               if (user.isPublic) {
-                 data.posts = posts;
+                data.posts = posts;
               } else {//private user
                 if (req.isAuthenticated()) {
                   // check logged in user(req.user) is following the user OR
-                  if (user.followers.some(follower =>follower.user == req.user.id) ||
+                  if (user.followers.some(follower => follower.user == req.user.id) ||
                     // req.user can see his own post (user's own post)
                     (user._id == req.user.id)) {
                     data.posts = posts;
                   }
                   else { // req.user is not following OR not own post
                     data.noOfPosts = posts.length;
-                    return  res.json(data);
-                   }
+                    return res.json(data);
+                  }
                 }//For Private route ends
               }
               //get the count of posts posted by username 
@@ -143,14 +143,47 @@ router.post(
             delete updatedUser.followers;
             delete updatedUser.following;
             delete updatedUser.__v;
-            res.json({'User': updatedUser})
+            res.json({ 'User': updatedUser })
           })
-           .catch(err => res.status(500).json({ success:false, err: err.message }));
+            .catch(err => res.status(500).json({ success: false, err: err.message }));
         }
       })
-      .catch(err => res.status(500).json({ success:false, err: err.message }));
+      .catch(err => res.status(500).json({ success: false, err: err.message }));
   }
 );
 
+// @route   POST api/profile/accounts/edit
+// @desc    Create or edit user profile
+// @access  Private
+
+router.put('/editavatar', passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    User.findById(req.user.id)
+      .then(user => {
+        if (user) {
+          // update avatar
+          User.findByIdAndUpdate(
+            { _id: req.user.id },
+            { avatar: req.body.avatar },
+            { new: true })
+            .then(user => {
+
+              user = user.toObject();
+              delete user._id;
+              delete user.password;
+              delete user.followers;
+              delete user.following;
+              delete user.__v;
+              res.json(user)
+            })
+            .catch(err => res.status(500).json({ success: false, message: err.message }))
+        } else {
+          return res.status(404).json({ success: false, message: 'There is no such profile' });
+        }
+      })
+      .catch(err => {
+        res.status(500).json({ success: false, message: err.message })
+      })
+  });
 
 module.exports = router;

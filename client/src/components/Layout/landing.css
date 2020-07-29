@@ -67,12 +67,8 @@
     cursor: pointer;
 }
 
-.has-separator {
-    font-size: 13px;
-    color: #999999;
-    text-transform: uppercase;
-    position: relative;
-    margin-bottom: 25px;
+.btn-alpha:hover {
+    color: #fff;
 }
 
 @media (max-width: 900px) {

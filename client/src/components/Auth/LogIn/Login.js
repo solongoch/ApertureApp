@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {loginUser} from '../../../actions/authActions';
 import './login.css';
-import Logo from '../../../image/aperture-logo.png';
+import Logo from '../../../image/aperturelogo.png';
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 import TextFieldGroup from "../../common/TextFieldGroup";
@@ -87,7 +87,7 @@ class Login extends Component {
                 <button className="btn-beta btn-primary" type="submit">Log In</button>
               </form>
               <div className="sign-up-beta">
-                Don't have an account? <Link to="/signup" className="btn-beta btn-lg btn-info mr-2">Sign Up</Link>
+                <p className="have-an-account">Don't have an account? <Link to="/signup" className="have-signup">Sign Up</Link></p>
               </div>
             </div>
           </div>

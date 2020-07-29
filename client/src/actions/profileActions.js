@@ -1,32 +1,33 @@
 import axios from 'axios';
-
 import {
-  GET_PROFILE, 
-  PROFILE_LOADING,
+  UPLOAD_AVATAR,
   GET_ERRORS,
+  GET_PROFILE,
+  PROFILE_LOADING,
   SET_CURRENT_USER
-} from './types';
+} from './types'
+
 
 
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
-    dispatch(setProfileLoading());
-    axios
-      .get('/api/profile/accounts/edit')
-      .then(res =>
-        dispatch({
-          type: GET_PROFILE,
-          payload: res.data
-        })
-      )
-      .catch(err =>
-        dispatch({
-          type: GET_PROFILE,
-          payload: {}
-        })
-      );
-  };
+  dispatch(setProfileLoading());
+  axios
+    .get('/api/profile/accounts/edit')
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: {}
+      })
+    );
+};
 
   // Create Profile
 export const createProfile = (profileData, history) => dispatch => {
@@ -40,6 +41,24 @@ export const createProfile = (profileData, history) => dispatch => {
         })
       );
   };
+
+  //Upload Avatar
+export const uploadAvatar = (newAvatar) => dispatch => {
+
+  axios.put('/api/profile/editavatar', newAvatar)
+    .then(res => {
+      dispatch({
+        type: UPLOAD_AVATAR,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    });
+}
 
 
 // Delete account & profile
@@ -66,10 +85,7 @@ export const deleteAccount = (history) => dispatch => {
 
 // Profile loading
 export const setProfileLoading = () => {
-    return {
-      type: PROFILE_LOADING
-    };
-
-
+  return {
+    type: PROFILE_LOADING
+  };
 };
-

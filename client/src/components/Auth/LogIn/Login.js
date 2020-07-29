@@ -70,7 +70,7 @@ class Login extends Component {
                     type="loginId"
                     value={this.state.loginId}
                     onChange={this.onChange}
-                    error={errors.email}
+                    error={errors.loginId}
                   />
                   </div>
                   <div className="form-group">

@@ -7,6 +7,7 @@ import Uploadavatar from './Uploadavatar';
 import DeleteProfile from './DeleteProfile';
 import { getCurrentProfile, editProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/is-empty';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 class EditProfile extends Component {
   constructor() {

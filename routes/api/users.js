@@ -8,6 +8,8 @@ const passport = require("passport");
 // Validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+//common function for error handling for Signup and Edit profile
+const {errorHandler} = require("../../utils/common");
 
 // @route   POST  http://localhost:7500/api/users/signup
 // @desc    Register User
@@ -62,20 +64,7 @@ router.post("/signup", (req, res) => {
   });
 });
 
-function errorHandler(err, res) {
-  let errors = {}
-  if (err.message.includes("username_1 dup key:")) {
-    //duplicate username
-    errors.username = "Username already exist";
-  } else if (err.message.includes("email_1 dup key:")) {
-    //dupicate email id
-    errors.email = "Email already exists";
-  }
-  res.status(409).json({
-    email: errors.email,
-    username: errors.username
-  });
-}
+
 // @route   POST http://localhost:7500/api/users/login
 // @desc    Login User
 // @input   Username or email and password

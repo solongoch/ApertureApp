@@ -7,6 +7,8 @@ import {
   SET_CURRENT_USER
 } from './types';
 
+
+
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
     dispatch(setProfileLoading());
@@ -26,25 +28,40 @@ export const getCurrentProfile = () => dispatch => {
       );
   };
 
-
-// Delete account & profile
-export const deleteAccount = () => dispatch => {
-  if (window.confirm('Are you sure you want to delete your account?')) {
+  // Create Profile
+export const createProfile = (profileData, history) => dispatch => {
     axios
-      .delete('/api/remove')
-      .then(res =>
-        dispatch({
-          type: SET_CURRENT_USER,
-          payload: {}
-        })
-      )
+      .post('/api/profile/accounts/edit', profileData)
+      .then(res => history.push('/profile'))
       .catch(err =>
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data
         })
       );
-  }
+  };
+
+
+// Delete account & profile
+export const deleteAccount = (history) => dispatch => {
+  if (window.confirm('Are you sure you want to delete your account?')) {
+    axios
+      .delete('/api/remove')
+      .then(res => {history.push('/'); 
+      dispatch({
+          type: SET_CURRENT_USER,
+          payload: {}
+        })}
+      )
+      .catch(err => {
+        console.log(err) 
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })}
+    );
+      
+};
 };
 
 // Profile loading
@@ -52,6 +69,7 @@ export const setProfileLoading = () => {
     return {
       type: PROFILE_LOADING
     };
-  };
 
+
+};
 

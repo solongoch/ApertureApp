@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import {loginUser} from '../../../actions/authActions';
-import './login.css';
-import Logo from '../../../image/aperture-logo.png';
+import {loginUser} from '../../actions/authActions';
+import '../css/login.css';
+import Logo from '../../image/aperturelogo.png';
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
-import TextFieldGroup from "../../common/TextFieldGroup";
+import TextFieldGroup from "../common/TextFieldGroup";
 
 class Login extends Component {
   constructor() {

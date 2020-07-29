@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './createprofile.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 
 class DeleteProfile extends Component {
@@ -10,7 +11,7 @@ class DeleteProfile extends Component {
   }
 
   onDeleteClick(e) {
-    this.props.deleteAccount();
+    this.props.deleteAccount(this.props.history);
   }
 
   render() {
@@ -62,6 +63,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  DeleteProfile
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(withRouter(DeleteProfile)
 );
+

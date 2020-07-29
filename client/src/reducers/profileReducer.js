@@ -1,18 +1,19 @@
-import { CREATE_POST } from '../actions/types';
+import { UPLOAD_AVATAR } from '../actions/types'
 
-const initialState = {
-  posts: []
-};
+const initialState =
+{
+  profile: null,
+  profiles: null
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case CREATE_POST:
+    case UPLOAD_AVATAR:
       return {
         ...state,
-        posts: [action.payload, ...state.posts]
+        profile: action.payload
       };
     default:
       return state;
   }
-
 }

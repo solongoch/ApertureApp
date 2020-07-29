@@ -21,7 +21,7 @@ export class CreatePost extends Component {
       errors: {},
       submitDisabled: true,
       toastopts: {
-        position: "top-center",
+        position: "bottom-center",
         autoClose: false,
         hideProgressBar: true,
         closeOnClick: false,
@@ -52,10 +52,12 @@ export class CreatePost extends Component {
       this.setState({
         file,
         imagePreview: reader.result,
+        errors:{},
         submitDisabled: !this.state.submitDisabled//share button is disabled before uploading image.
       });
     }
   }
+  
   handleSubmitPost(e) {
     e.preventDefault();
     const { file } = this.state;
@@ -67,9 +69,7 @@ export class CreatePost extends Component {
           caption,
           photo
         }
-
         this.props.createPost(newPost)
-
       });
   }
 
@@ -77,14 +77,12 @@ export class CreatePost extends Component {
 
   componentWillReceiveProps(newProps) {
 
-    alert(this.props.post.success)
-
-    if (this.props.post.success) {
-      toast.success('Posted Successfully', this.state.toastopts)
-    }
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors })
-      toast.error(this.state.errros, this.state.toastopts);
+    if (newProps.post.posts.length>0) {
+      toast.success('Posted Successfully', this.state.toastopts);
+      this.props.history.push("/profile");
+    }else if (newProps.errors.errors) {
+      this.setState({ errors: newProps.errors.errors });
+      toast.error(newProps.errors.errors.photo, this.state.toastopts);
     }
 
   }

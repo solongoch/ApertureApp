@@ -28,7 +28,6 @@ class DeleteProfile extends Component {
     
         deleteAction = (
           <div>
-
             <div style={{ marginBottom: '60px' }} />
             <button
               onClick={this.onDeleteClick.bind(this)}

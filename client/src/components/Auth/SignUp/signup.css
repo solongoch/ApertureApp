@@ -117,13 +117,14 @@ div.error-style {
 
 .have-login {
   color: #0095f6;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 18px;
   font-weight: 600;
 }
 
 .right-column-login a:hover {
   text-decoration: none;
+  color:  #0095f6 ;
 }
 
 .get-the-app {

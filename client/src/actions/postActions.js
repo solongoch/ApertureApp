@@ -9,7 +9,7 @@ export const createPost = (newPost) => dispatch => {
     .then(res => {
       dispatch({
         type: CREATE_POST,
-        payload: res.data
+        payload: res.data.post
       })
 
     })

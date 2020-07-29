@@ -1,66 +1,89 @@
 import React, {Component} from 'react';
 import staticImage from "../../image/instav.png";
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './createprofile.css';
-import axios from 'axios';
-import classnames from 'classnames';
 import DeleteProfile from './DeleteProfile';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import TextProfileFieldGroup from '../common/TextProfileFieldGroup';
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import SelectListGender from '../common/SelectListGender';
+import SelectListPrivacy from '../common/SelectListPrivacy';
+import { createProfile  } from '../../actions/profileActions';
 
 class EditProfile extends Component {
-    constructor() {
-        super();
-        this.state = {
-          name: '',
-          username: '',
-          avatar: '',
-          website: '',
-          bio: '',
-          email: '',
-          mobile: '',
-          submitDisabled: true,
-          visible: false,
-          errors: {}
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      username: '',
+      avatar: '',
+      website: '',
+      bio: '',
+      email: '',
+      mobile: '',
+      gender: '',
+      isPublic: '',
+      errors: {}
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+      const profileData={
+        name: this.state.name,
+        username: this.state.username,
+        website: this.state.website,
+        bio: this.state.bio,
+        email: this.state.email,
+        mobile: this.state.mobile,
+        gender: this.state.gender,
+        isPubilc: this.state.isPubilc
+      };
+
+      this.props.createProfile(profileData, this.props.history);
+  }
     
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-      }
-       
-      onChange(e){
-        this.setState({[e.target.name]: e.target.value })
-      }
-    
-      onSubmit(e){
-        e.preventDefault();
-    
-        const user = {
-          name: this.state.name,
-          username: this.state.email,
-          avatar: this.state.avatar,
-          website: this.state.website,
-          bio: this.state.bio,
-          email: this.state.email,
-          mobile: this.state.mobile
-        };
-    
-        axios
-          .post('/api/profile/edit', user)
-          .then(res => console.log(res.data))
-          .catch(err => this.setState({errors: err.response.data}))
-      } 
+    onChange(e){
+      this.setState({[e.target.name]: e.target.value });
+    }
 
     render() {
       const {errors} = this.state;
+          // Select options for gender
+    const genderoptions = [
+      { label: 'Select Gender', value: 0},
+      { label: 'Male', value: 'Male' },
+      { label: 'Female', value: 'Female' },
+      { label: 'Custom', value: 'Custom' },
+      { label: 'Prefer Not to Say', value: 'Prefer Not to Say' },
+    ];
+
+      const privacyoptions = [
+      { label: 'Select Privacy', value: 0 },
+      { label: 'Public', value: 'Public' },
+      { label: 'Private', value: 'Private' }
+    ];
 
         return (
             <div className="create-profile">
 
                 <div className="row">
-`                   <div className="col-3">
+`                   <div className="col-lg-3">
                         <div className="sidebar">
 
                         <div className="text-center">
-                            <img src={staticImage} alt="Avatar" className="static-av" />
+                            <img src={staticImage} alt="Avatar" className="static-av" style={{width:'110px'}} />
                             <h6>Upload a different photo...</h6>
                             <form onSubmit={this.handleSubmit}>
                             <label className="fa fa-file-image-o col-12">
@@ -82,7 +105,7 @@ class EditProfile extends Component {
                     <div className="sidebar-mobile col-12">
 
                         <div className="text-center">
-                            <img src={staticImage} alt="Avatar" className="static-av" />
+                            <img src={staticImage} alt="Avatar" className="static-av" style={{width:'110px'}} />
                             <h6>Upload a different photo...</h6>
                             <form onSubmit={this.handleSubmit}>
                             <label className="fa fa-file-image-o col-12">
@@ -101,148 +124,114 @@ class EditProfile extends Component {
                     </div>
 
                 <div className="col-lg-8 col-md-8 col-sm-12 profile-info">
-                    <div className="form-group">
+                    <div class="form-group">
                     <form onSubmit={this.onSubmit}>
                         <h3>User Profile</h3>
                           
-                          <div className="col-10">
-                              <label htmlFor="Name"><h5>Name</h5></label>
-                              <input 
-                              type="text" 
-                              className={classnames("form-control form-control-lg", {
-                                "is-invalid": errors.name
-                              })}
+                            <TextProfileFieldGroup 
                               placeholder="Name"
-                              name="Name" 
+                              name="name"
                               value={this.state.name}
                               onChange={this.onChange}
-                              />
-                              {errors.name && (
-                              <div className="invalid-feedback">{errors.name}</div>
-                              )}
-                              <p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name.</p>
-                          </div>
+                              error={errors.name}
+                              info="Help people discover your account by using the name you're known by: either your full name, nickname, or business name."
+                            />
 
-                          <div className="col-10">
-                              <label htmlFor="Name"><h5>Username</h5></label>
-                              <input 
-                              type="text" 
-                              className={classnames("form-control form-control-lg", {
-                                "is-invalid": errors.username
-                              })}
+                            <TextProfileFieldGroup 
                               placeholder="Username"
-                              name="Username" 
+                              name="username"
                               value={this.state.username}
                               onChange={this.onChange}
-                              />
-                              {errors.username && (
-                              <div className="invalid-feedback">{errors.username}</div>
-                              )}  
-                          </div>
+                              error={errors.username}
+                              info=""
+                            />
 
-                          <div className="col-10">
-                              <label htmlFor="Name"><h5>Website</h5></label>
-                              <input 
-                              type="text" 
-                              className={classnames("form-control form-control-lg", {
-                                "is-invalid": errors.website
-                              })}
+                            <TextProfileFieldGroup 
                               placeholder="Website"
-                              name="Website"
-                              value={this.state.webite}
-                              onChange={this.onChange} 
-                              />
-                              {errors.website && (
-                              <div className="invalid-feedback">{errors.website}</div>
-                              )} 
-                          </div>
-
-                          <div className="col-10">
-                              <label htmlFor="Name"><h5>Bio</h5></label>
-                              <textarea 
-                              type="text" 
-                              className="form-control form-control-lg" 
-                              rows="3"
-                              placeholder=""
-                              name="Bio" 
+                              name="website"
+                              value={this.state.website}
+                              onChange={this.onChange}
+                              error={errors.website}
+                              info=""
+                            />
+                        
+                            <TextAreaFieldGroup 
+                              placeholder="Bio"
+                              name="bio"
                               value={this.state.bio}
-                              onChange={this.onChange} 
-                              />
-                          </div>
+                              onChange={this.onChange}
+                              error={errors.bio}
+                              info=""
+                            />
 
                           <h3>Personal Info</h3>
                             <p>Provide your personal information. This won't be a part of your public profile</p>
                           
-                        <div className="col-10">
-                              <label htmlFor="Name"><h5>Email</h5></label>
-                              <input 
-                              type="text" 
-                              className={classnames("form-control form-control-lg", {
-                                "is-invalid": errors.email
-                              })} 
+                            <TextProfileFieldGroup 
                               placeholder="Email"
-                              name="Email" 
+                              name="email"
                               value={this.state.email}
-                              onChange={this.onChange} 
-                              />
-                              {errors.email && (
-                              <div className="invalid-feedback">{errors.email}</div>
-                              )} 
-                          </div>  
-
-                          <div className="col-10">
-                              <label htmlFor="Name"><h5>Phone Number</h5></label>
-                              <input 
-                              type="text" 
-                              className={classnames("form-control form-control-lg", {
-                                "is-invalid": errors.mobile
-                              })} 
-                              placeholder="Phone Number"
-                              name="Phone Number" 
-                              value={this.state.mobile}
-                              onChange={this.onChange} 
-                              />
-                              {errors.mobile && (
-                              <div className="invalid-feedback">{errors.mobile}</div>
-                              )} 
-                          </div>   
-
-                          <div className="form-group">
-                            <label className="col-lg-3 control-label">Gender</label>
-                            <div className="col-lg-10 ui-select">
-                                <select id="gender" className="form-control">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Custom">Custom</option>
-                                <option value="Prefer Not To Say">Prefer Not to Say</option>
-                                </select>
-                            </div>
-                          </div>
-
-                          <div className="form-group">
-                            <label className="col-lg-3 control-label">Account Privacy</label>
-                            <div className="col-lg-10 ui-select">
-                                <select id="privacy" className="form-control">
-                                <option value="Male">Public</option>
-                                <option value="Female">Private</option>
-                                </select>
-                            </div>
-                          </div>
-
-                          <button className="btn btn-primary" type="submit">Create Profile</button>
-
-                    </form>
-
-                    </div>
-                         <DeleteProfile/>        
-                    </div>
-
-                    </div>
-                </div>
+                              onChange={this.onChange}
+                              error={errors.email}
+                              info=""
+                            />
               
-            
+                            <TextProfileFieldGroup 
+                              placeholder="Phone Number"
+                              name="Phone Number"
+                              value={this.state.mobile}
+                              onChange={this.onChange}
+                              error={errors.mobie}
+                              info=""
+                            />
+                        
+                          <SelectListGender 
+                              placeholder="Gender"
+                              name="gender"
+                              value={this.state.gender}
+                              onChange={this.onChange}
+                              options={genderoptions}
+                              error={errors.gender}
+                              info=""
+                            />
+                          
+                          <SelectListPrivacy 
+                              placeholder="Privacy"
+                              name="privacy"
+                              value={this.state.isPublic}
+                              onChange={this.onChange}
+                              options={privacyoptions}
+                              error={errors.isPubilc}
+                              info="Selecting Private will allow only people who follow you to see your posts"
+                            />
+                      
+                          <div className="mb-3">
+                          <button className="btn btn-primary btn-block mt-4" type="submit">Create Profile</button>
+                          </div>
+                          
+                    </form>
+                    </div>
+
+                         <DeleteProfile></DeleteProfile>         
+                    </div>
+
+                </div>
+
+            </div>
         );
     }
 }
-    
-export default EditProfile;
+
+EditProfile.propTypes = {
+  profile: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  profile: state.profile,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { createProfile })(
+  withRouter(EditProfile)
+);

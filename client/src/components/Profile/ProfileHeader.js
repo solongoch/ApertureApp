@@ -8,8 +8,6 @@ import Followers from '../Follow/Followers';
 import Followings from '../Follow/Followings';
 // import CSS
 import './profile.css';
-// import images
-import profilePicture from '../../image/img-sq.jpg';
 
 class Profile extends Component {
   constructor() {

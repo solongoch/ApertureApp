@@ -1,7 +1,7 @@
 import { UPLOAD_AVATAR, GET_PROFILE, GET_PROFILE_BY_USERNAME } from '../actions/types';
 
 const initialState = {
-    profile: null
+    profile: ''
 };
 
 export default function (state = initialState, action) {

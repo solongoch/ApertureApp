@@ -14,7 +14,9 @@ class ChangePassword extends Component {
       oldpassword: '',
       newpassword: '',
       confirmpassword: '',
-      errors: {}
+      errors: {},
+      avatar: '',
+      username: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -51,6 +53,15 @@ class ChangePassword extends Component {
     this.props.changePassword(changePass, this.props.history);
   }
 
+
+   //call after component is mounted in browser
+   componentDidMount() {
+    if (this.props.auth.user) {
+      let { avatar, username } = this.props.auth.user;
+      this.setState({ avatar: avatar });
+      this.setState({ username: username })
+    }
+  }
   //trigger whenever we get newProps 
   //Usage  assign this.props.errors to local setState.errors
   componentWillReceiveProps(nextProps) {
@@ -60,8 +71,7 @@ class ChangePassword extends Component {
   }
 
   render() {
-    const user = this.props.auth;
-    const errors = this.state;
+    const { errors, avatar, username } = this.state;
     return (
        <div className="container">
           <div className="chgpwd-container">
@@ -70,10 +80,10 @@ class ChangePassword extends Component {
                     <form className="Chgpwd-form" onSubmit={this.onSubmit}>
                         <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
                           <div className="  ">
-                            <img className="chgpwdavatar-img" src={user.avatar} alt="Avatar" />
+                            <img className="chgpwdavatar-img" src={avatar} alt="Avatar" />
                           </div>
                             <div className="username-div"> 
-                               <h1 className="username-h1">{user.username}</h1>
+                               <h1 className="username-h1">{username}</h1>
                             </div>
                         </div>
                         
@@ -135,7 +145,7 @@ class ChangePassword extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  errors: state.errors,
+  errors: state.errors.errors,
   auth: state.auth
 });
 

@@ -11,6 +11,7 @@ class PostAction extends Component {
         <div>
           <div className="actions">
             <i className="far fa-heart fa-2x action"></i>
+            <button>Like Button</button>
             <i className="far fa-comment fa-2x action"></i>
             <i className="far fa-paper-plane fa-2x action"></i>
             <i className="far fa-bookmark fa-2x action"></i>

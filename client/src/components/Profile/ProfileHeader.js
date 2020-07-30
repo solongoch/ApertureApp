@@ -41,29 +41,30 @@ class Profile extends Component {
   }
 
   render() {
+    const { profile } = this.props;
     return (
         <div className="profile-info-header d-flex flex-row">
-          <Link to="/"><img className="round-image image-150 profile-image" src={this.props.profile.avatar} alt="Profile" /></Link>
+          <Link to="/"><img className="round-image image-150 profile-image" src={profile.avatar} alt="Profile" /></Link>
           <div className="d-flex flex-column">
             <div className="d-flex flex-row">
-              <div className="profile-username">{this.props.profile.username}</div>
+              <div className="profile-username">{profile.username}</div>
               <div className="white-bg button font-weight-bold"><Link to="/edit">Edit Profile</Link></div>
               <Link to="/"><i className="fas fa-cog fa-lg"></i></Link>
             </div>
             <ul className="counts d-flex flex-row">
-              <li className="count"><span className="font-weight-bold">100</span> posts</li>
+              <li className="count"><span className="font-weight-bold">{profile.noOfPosts}</span> posts</li>
               <li className="count" onClick={this.showFollowers}>
-                <span className="font-weight-bold">133</span> followers
+                <span className="font-weight-bold">{profile.followersCount}</span> followers
               </li>
               <li className="count" onClick={this.showFollowings}>
-                <span className="font-weight-bold">388</span> followings
+                <span className="font-weight-bold">{profile.followingCount}</span> followings
               </li>
             </ul>
             <Followers _showFollowers={this.state._showFollowers} followersClose={this.hideFollowers}/>
             <Followings _showFollowings={this.state._showFollowings} followingsClose={this.hideFollowings}/>
-            <div className="font-weight-bold">Name</div>
-            <div>This is bio section</div>
-            <div><Link to="/" target="_blank">https://www.instagram.com/</Link></div>
+            <div className="font-weight-bold">{profile.name}</div>
+            <div>{profile.bio}</div>
+            <div><Link to="/" target="_blank">{profile.website}</Link></div>
           </div>
         </div>
     )

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import CSS
 import './navbar.css';
 // import Components
-import SearchComponent from './searchProfile';
+import SearchComponent from './SearchProfile';
 // import images
 import logo from '../../image/aperture-logo.svg';
 import home from '../../image/home.svg';

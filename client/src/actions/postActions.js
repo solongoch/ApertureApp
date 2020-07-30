@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { CREATE_POST, GET_ERRORS } from './types';
 
-
 //Create Post
 export const createPost = (newPost) => dispatch => {
   //API call to MongoDB to Create Post

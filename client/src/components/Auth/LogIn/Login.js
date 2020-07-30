@@ -22,6 +22,19 @@ class Login extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    if ((this.state.errors.hasOwnProperty([e.target.name]))) {
+      this.clearError(e.target.name);
+    }
+  }
+
+  //clear errors onChange
+  clearError(errorProperty) {
+    var errors = this.state.errors;
+    var errPropertyValue = errors[errorProperty];
+    if (errPropertyValue.length > 0) {
+      errors[errorProperty] = ''
+      this.setState({ errors });
+    }
   }
 
   onSubmit(e) {

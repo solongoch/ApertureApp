@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import logoImage from "../../image/avatar.png";
 import './changepassword.css';
-import axios from 'axios';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { changePassword } from '../../actions/profileActions';
+import { withRouter } from 'react-router-dom';
 
 class ChangePassword extends Component {
   constructor() {
@@ -22,6 +24,19 @@ class ChangePassword extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    if ((this.state.errors.hasOwnProperty([e.target.name]))) {
+      this.clearError(e.target.name);
+    }
+  }
+
+  //clear errors onChange
+  clearError(errorProperty) {
+    var errors = this.state.errors;
+    var errPropertyValue = errors[errorProperty];
+    if (errPropertyValue.length > 0) {
+      errors[errorProperty] = ''
+      this.setState({ errors });
+    }
   }
 
   onSubmit(e) {
@@ -31,12 +46,19 @@ class ChangePassword extends Component {
       newpassword: this.state.newpassword,
       confirmpassword: this.state.confirmpassword
     };
-    //API call
-    axios
-      .post('/api/changepassword', changePass)
-      .then(res => console.log(res.data))
-      .catch(err => console.log(this.setState({erros : err.response.data})));
+    
+    //trigger action
+    this.props.changePassword(changePass, this.props.history);
   }
+
+  //trigger whenever we get newProps 
+  //Usage  assign this.props.errors to local setState.errors
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   render() {
     const{errors} = this.state;
     return (
@@ -57,18 +79,16 @@ class ChangePassword extends Component {
                         <div className="form-group form-inline">
                           <label htmlFor="oldpassword" className="col-form-label password-label col-sm-5 col-md-5">Old Password</label>
                           <input
-                              type="password" name="oldpassword"
-                              className=
-                              {
-                                classNames('form-control shadow-none col-sm-7 col-md-7' , 
+                              type="password" 
+                              name="oldpassword"
+                              className={classNames('form-control shadow-none col-sm-7 col-md-7' , 
                                 {'is-invalid' : errors.oldpassword})
                               }
                               id="oldpassword" placeholder="Current Password"
                               value={this.state.oldpassword} onChange={this.onChange}
                           />
                               {/*show invalid-feedback div only if errors.oldPassword is true */}
-                                {errors.oldpassword && (<div className="invalid-feedback">{errors.oldpassword}</div>)
-                                }
+                              {errors.oldpassword && (<div className="invalid-feedback">{errors.oldpassword}</div>)}
                         </div>
                       
                         <div className="form-group form-inline">
@@ -76,8 +96,7 @@ class ChangePassword extends Component {
                           <input
                               type="password" name="newpassword"
                               className=
-                              {
-                                classNames('form-control shadow-none col-sm-7 col-md-7 col-lg-7' , 
+                              {classNames('form-control shadow-none col-sm-7 col-md-7 col-lg-7' , 
                                 {'is-invalid' : errors.newpassword})
                               }
                               id="newpassword" placeholder="New Password"
@@ -117,4 +136,9 @@ class ChangePassword extends Component {
   }
 }
 
-export default ChangePassword;
+//state:redux state (Assign redux state.errors to this.props.errors)
+const mapStateToProps = (state) => ({
+  errors: state.errors
+})
+
+export default connect(mapStateToProps, { changePassword })(withRouter(ChangePassword));

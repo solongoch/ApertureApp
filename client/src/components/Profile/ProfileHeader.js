@@ -43,10 +43,10 @@ class Profile extends Component {
   render() {
     return (
         <div className="profile-info-header d-flex flex-row">
-          <Link to="/"><img className="round-image image-150 profile-image" src={profilePicture} alt="Profile" /></Link>
+          <Link to="/"><img className="round-image image-150 profile-image" src={this.props.profile.avatar} alt="Profile" /></Link>
           <div className="d-flex flex-column">
             <div className="d-flex flex-row">
-              <div className="profile-username">Username</div>
+              <div className="profile-username">{this.props.profile.username}</div>
               <div className="white-bg button font-weight-bold"><Link to="/edit">Edit Profile</Link></div>
               <Link to="/"><i className="fas fa-cog fa-lg"></i></Link>
             </div>

@@ -64,7 +64,7 @@ class Navbar extends Component {
             <img className="menu round-image image-22" src={user.avatar} alt={user.name} />
           </div>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <Link className="dropdown-item" to="/profile">Profile</Link>
+            <Link className="dropdown-item" to="/profile/:username">Profile</Link>
             <div className="dropdown-divider"></div>
             <Link className="dropdown-item" to="/" onClick={this.onLogoutClick.bind(this)}>Log out</Link>
           </div>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 // import Action
@@ -8,28 +8,22 @@ import ProfileHeader from './ProfileHeader';
 import ProfilePosts from './ProfilePosts';
 // import CSS
 import './profile.css';
-import Spinner from '../common/Spinner';
 
 class ProfilePage extends Component {
-
+  constructor() {
+    super();
+    this.state = {}
+  }
+    
   componentDidMount() {
     this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
   }
 
-  // componentWillReceiveProps(nextProps){
-  //   if(nextProps.profile){
-
-  //   }
-
-  // }
-
   render() {
-    const { profile, loading } = this.props.profileState;
-
-    //let profileItems;
-    // if (profile === null || !loading) {
-    //   profileItems = <Spinner />;
-    // } else {
+    // TODO: "Profile loading"
+    // if (this.props.profileState.loading) {
+    //   return <div>Loading...</div>
+    // }
 
     var _posts = this.props.profileState.profile.posts;
     if (_posts) {
@@ -38,7 +32,7 @@ class ProfilePage extends Component {
 
     return (
       <div className="profile">
-        <ProfileHeader profile={profile} />
+        <ProfileHeader profile={ this.props.profileState.profile } />
         <div className="top-post-menu d-flex flex-row justify-content-center"></div>
         <div className="posts d-flex flex-column">
         <div className="single-row d-flex flex-row justify-content-between">
@@ -46,7 +40,7 @@ class ProfilePage extends Component {
       </div>
       </div>
       </div>
-    );
+    )
   }
 }
 

@@ -1,27 +1,26 @@
 import {
   UPLOAD_AVATAR,
-  GET_PROFILE,
-  GET_PROFILE_BY_USERNAME,
   PROFILE_LOADING,
-} from '../actions/types'
+  GET_PROFILE,
+  GET_PROFILE_BY_USERNAME
+} from "../actions/types";
 
-const initialState =
-{
-  profile: '',
+const initialState = {
+  profile: "",
   loading: false
-}
+};
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
-    case PROFILE_LOADING:
-      return {
-        ...state,
-        loading: true
-      };
     case UPLOAD_AVATAR:
       return {
         ...state,
         profile: action.payload
+      };
+    case PROFILE_LOADING:
+      return {
+        ...state,
+        loading: action.loading
       };
     case GET_PROFILE:
       return {

@@ -2,6 +2,13 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 
 class ProfilePosts extends Component {
+  constructor() {
+    super();
+    this.state = {
+
+    }
+  }
+
   render() {
     const { post } = this.props;
     return(

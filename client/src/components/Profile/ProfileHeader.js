@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
-// import Action
-import { getProfileByUsername } from '../../actions/profileActions';
+import { Link } from "react-router-dom";
 // import Components
 import Followers from '../Follow/Followers';
 import Followings from '../Follow/Followings';
 // import CSS
 import './profile.css';
 
-class Profile extends Component {
+class ProfileHeader extends Component {
   constructor() {
     super();
     this.state = {
       _showFollowings:false,
       _showFollowers:false
     }
-  }
-    
-  componentDidMount() {
-    this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
   }
 
   //to show and hide Following component 
@@ -42,7 +35,7 @@ class Profile extends Component {
     const { profile } = this.props;
     return (
         <div className="profile-info-header d-flex flex-row">
-          <Link to="/"><img className="round-image image-150 profile-image" src={profile.avatar} alt="Profile" /></Link>
+          <img className="round-image image-150 profile-image" src={profile.avatar} alt="Profile" />
           <div className="d-flex flex-column">
             <div className="d-flex flex-row">
               <div className="profile-username">{profile.username}</div>
@@ -69,8 +62,4 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  profile: state.profile.profile
-});
-
-export default connect(mapStateToProps, { getProfileByUsername })(withRouter(Profile));
+export default ProfileHeader;

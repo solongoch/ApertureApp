@@ -108,6 +108,21 @@ export const deleteAccount = () => dispatch => {
   }
 };
 
+//Change Password
+export const changePassword = (changePass, history) => dispatch => {
+  //API call
+  axios
+    .post('/api/changepassword', changePass)
+    .then(res => {
+      history.push('/home')
+    })
+    .catch(err =>
+      dispatch({
+        type: 'GET_ERRORS',
+        payload: err.response.data
+      }));
+}
+
 // Profile loading
 export const setProfileLoading = () => {
   return {

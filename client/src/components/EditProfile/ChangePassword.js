@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import logoImage from "../../image/avatar.png";
 import './changepassword.css';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { changePassword } from '../../actions/profileActions';
 import { withRouter } from 'react-router-dom';
+import ChangePasswordInputField from './ChangePasswordInputField';
 
 class ChangePassword extends Component {
   constructor() {
@@ -60,7 +60,8 @@ class ChangePassword extends Component {
   }
 
   render() {
-    const{errors} = this.state;
+    const profile  = this.state;
+    const errors = this.state;
     return (
        <div className="container">
           <div className="chgpwd-container">
@@ -69,57 +70,54 @@ class ChangePassword extends Component {
                     <form className="Chgpwd-form" onSubmit={this.onSubmit}>
                         <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
                           <div className="  ">
-                            <img className="chgpwdavatar-img" src={logoImage} alt="Avatar" />
+                            <img className="chgpwdavatar-img" src={profile.avatar} alt="Avatar" />
                           </div>
                             <div className="username-div"> 
-                               <h1 className="username-h1">rambhaindra_</h1>
+                               <h1 className="username-h1">{profile.username}</h1>
                             </div>
                         </div>
                         
                         <div className="form-group form-inline">
-                          <label htmlFor="oldpassword" className="col-form-label password-label col-sm-5 col-md-5">Old Password</label>
-                          <input
+                          <label htmlFor="oldpassword" 
+                          className="col-form-label password-label col-sm-5 col-md-5">Old Password</label>
+                          <ChangePasswordInputField
                               type="password" 
                               name="oldpassword"
-                              className={classNames('form-control shadow-none col-sm-7 col-md-7' , 
-                                {'is-invalid' : errors.oldpassword})
-                              }
-                              id="oldpassword" placeholder="Current Password"
-                              value={this.state.oldpassword} onChange={this.onChange}
+                              placeholder="Current Password"
+                              value={this.state.oldpassword}
+                              onChange={this.onChange}
+                              error={errors.oldpassword}
                           />
-                              {/*show invalid-feedback div only if errors.oldPassword is true */}
-                              {errors.oldpassword && (<div className="invalid-feedback">{errors.oldpassword}</div>)}
                         </div>
+                          
+                        
                       
                         <div className="form-group form-inline">
-                          <label htmlFor="newpassword" className="col-form-label password-label col-sm-5 col-md-5 col-lg-5" >New Password</label>
-                          <input
-                              type="password" name="newpassword"
-                              className=
-                              {classNames('form-control shadow-none col-sm-7 col-md-7 col-lg-7' , 
-                                {'is-invalid' : errors.newpassword})
-                              }
-                              id="newpassword" placeholder="New Password"
-                              value={this.state.newpassword} onChange={this.onChange}/>
-                                {errors.newpassword && (<div className="invalid-feedback">{errors.newpassword}</div>)
-                                }
-                        </div>
+                          <label htmlFor="newpassword" 
+                          className="col-form-label password-label col-sm-5 col-md-5 col-lg-5" >New Password</label>
+                          <ChangePasswordInputField
+                              type="password" 
+                              name="newpassword"
+                              placeholder="New Password"
+                              value={this.state.newpassword}
+                              onChange={this.onChange}
+                              error={errors.newpassword}
+                              />
+                          </div>
+                      
                 
                         <div className="form-group form-inline">
-                          <label htmlFor="confirmpassword"  className="col-form-label password-label col-sm-5 col-md-5 col-lg-5">Confirm New Password</label>
-                          <input
-                            type="password" name="confirmpassword"
-                            className=
-                            {
-                              classNames('form-control shadow-none col-sm-7 col-md-7 col-lg-7' , 
-                              {'is-invalid' : errors.confirmpassword})
-                            }
-                            id="confirmpassword" placeholder="Confirm New Password"
-                            value={this.state.confirmpassword} onChange={this.onChange} />
-                             {
-                                errors.confirmpassword && (<div className="invalid-feedback">{errors.confirmpassword}</div>)
-                             }
-                        </div>
+                          <label htmlFor="confirmpassword"  
+                          className="col-form-label password-label col-sm-5 col-md-5 col-lg-5">Confirm New Password</label>
+                          <ChangePasswordInputField
+                            type="password" 
+                            name="confirmpassword"
+                            placeholder="Confirm New Password"
+                            value={this.state.confirmpassword}
+                            onChange={this.onChange}
+                            />
+                          </div>
+                        
                       
                       <div className="form-row">                        
                         <div className="form-group col-sm-12 col-md-12 col-lg-12">                          
@@ -132,13 +130,13 @@ class ChangePassword extends Component {
               </div>
             </div>
          </div>
-    )
+    );
   }
 }
 
-//state:redux state (Assign redux state.errors to this.props.errors)
 const mapStateToProps = (state) => ({
-  errors: state.errors
+  errors: state.errors,
+  profile: state.profile
 })
 
 export default connect(mapStateToProps, { changePassword })(withRouter(ChangePassword));

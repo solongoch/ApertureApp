@@ -1,12 +1,36 @@
-import axios from 'axios';
-import {
-  UPLOAD_AVATAR,
-  GET_ERRORS,
+import { 
+  SET_CURRENT_USER,
   GET_PROFILE,
+  GET_PROFILE_BY_USERNAME,
   PROFILE_LOADING,
-  SET_CURRENT_USER
-} from './types'
+  UPLOAD_AVATAR,
+  GET_ERRORS } from "./types";
+import axios from "axios";
 
+// Get profile by username
+export const getProfileByUsername = (username, history) => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/${username}`)
+    .then(res => {
+      history.push(`/profile/${res.data.username}`)
+      dispatch({
+        type: GET_PROFILE_BY_USERNAME,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      // 404 ERROR. if user not found redirect to "/not-found"
+      if (err.response.status === 404) {
+        history.push("/not-found");
+      } else {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
+      }
+    });
+};
 
 
 
@@ -29,8 +53,7 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
-//Edit Profile
-
+// Edit Profile
 export const editProfile = (profileData) => dispatch => {
   axios
     .post('/api/profile/accounts/edit', profileData)
@@ -38,8 +61,7 @@ export const editProfile = (profileData) => dispatch => {
       dispatch({
         type: GET_PROFILE,
         payload: res.data
-      })
-     
+      })     
     })
     .catch(err => {
       dispatch({
@@ -51,7 +73,6 @@ export const editProfile = (profileData) => dispatch => {
 
 //Upload Avatar
 export const uploadAvatar = (newAvatar) => dispatch => {
-
   axios.put('/api/profile/editavatar', newAvatar)
     .then(res => {
       dispatch({

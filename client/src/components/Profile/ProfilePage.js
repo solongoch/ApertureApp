@@ -14,14 +14,13 @@ class ProfilePage extends Component {
     super();
     this.state = {}
   }
-  
-  // TODO: "Profile loading"
-  
+    
   componentDidMount() {
     this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
   }
 
   render() {
+    // TODO: "Profile loading"
     // if (this.props.profileState.loading) {
     //   return <div>Loading...</div>
     // }

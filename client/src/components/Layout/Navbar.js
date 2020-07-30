@@ -23,7 +23,8 @@ class Navbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-  
+
+    // when user not logged in
     const guestMenus = (
       <ul className="navbar-nav">
         <li className="nav-item blue-bg button"><Link className="nav-link unauth-button" to="/login"><span className="log-in-button">Log In</span></Link></li>
@@ -31,6 +32,7 @@ class Navbar extends Component {
       </ul>
     );
   
+    // when user logged in
     const userMenus =(
       <ul className="navbar-nav">
         <li className="nav-item">
@@ -64,7 +66,7 @@ class Navbar extends Component {
             <img className="menu round-image image-22" src={user.avatar} alt={user.name} />
           </div>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <Link className="dropdown-item" to="/profile/:username">Profile</Link>
+            <Link className="dropdown-item" to={`/profile/${user.username}`}>My Profile</Link>
             <div className="dropdown-divider"></div>
             <Link className="dropdown-item" to="/" onClick={this.onLogoutClick.bind(this)}>Log out</Link>
           </div>

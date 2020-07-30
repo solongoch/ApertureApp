@@ -20,7 +20,7 @@ export const getProfileByUsername = (username, history) => dispatch => {
       });
     })
     .catch(err => {
-      // if user not found redirect to /not-found
+      // 404 ERROR. if user not found redirect to "/not-found"
       if (err.response.status === 404) {
         history.push("/not-found");
       } else {

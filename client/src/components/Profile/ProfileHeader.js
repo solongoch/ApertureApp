@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
-import axios from 'axios';
+import { Link, withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+// import Action
+import { getProfileByUsername } from '../../actions/profileActions';
+// import Components
 import Followers from '../Follow/Followers';
 import Followings from '../Follow/Followings';
-import ProfilePosts from './ProfilePosts';
 // import CSS
 import './profile.css';
 // import images
@@ -16,11 +18,10 @@ class Profile extends Component {
       _showFollowings:false,
       _showFollowers:false
     }
-
-    axios
-      .get('/api/profile/:username')
-      .then(res => console.log(res))
-      .catch(err => console.log(err.response.data));
+  }
+    
+  componentDidMount() {
+    this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
   }
 
   //to show and hide Following component 
@@ -41,7 +42,6 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="profile">
         <div className="profile-info-header d-flex flex-row">
           <Link to="/"><img className="round-image image-150 profile-image" src={profilePicture} alt="Profile" /></Link>
           <div className="d-flex flex-column">
@@ -66,14 +66,12 @@ class Profile extends Component {
             <div><Link to="/" target="_blank">https://www.instagram.com/</Link></div>
           </div>
         </div>
-
-        <div className="top-post-menu d-flex flex-row justify-content-center">
-        </div>
-        {/* Posts goes here */}
-        <ProfilePosts></ProfilePosts>
-      </div>
     )
   }
 }
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  profile: state.profile.profile
+});
+
+export default connect(mapStateToProps, { getProfileByUsername })(withRouter(Profile));

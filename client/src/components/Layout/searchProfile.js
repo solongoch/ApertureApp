@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 // import CSS
 import './navbar.css';
 
@@ -21,7 +22,14 @@ class searchProfile extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.history.push(`/profile/${this.state.search}`);
+
+    axios.get(`/api/profile/${this.state.search}`)
+      .then(res => 
+        this.props.history.push(`/profile/${this.state.search}`)
+      )
+      .catch(err => {
+        this.props.history.push("/not-found");
+      });
   }
 
   render() {

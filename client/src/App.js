@@ -13,7 +13,7 @@ import Suggestion from './components/Suggestion/Suggestion';
 import EditProfile from './components/EditProfile/EditProfile';
 import CreateProfile from './components/EditProfile/CreateProfile.js';
 import ChangePassword from './components/EditProfile/ChangePassword';
-import ProfileHeader from './components/Profile/ProfileHeader';
+import ProfilePage from './components/Profile/ProfilePage';
 import CreatePost from './components/Post/CreatePost';
 import Followers from './components/Follow/Followers';
 import Followings from './components/Follow/Followings';
@@ -67,7 +67,7 @@ class App extends Component {
               <Route exact path="/edit" component={EditProfile} />
               <Route exact path="/createprofile" component={CreateProfile} />
               <Route exact path='/changepassword' component={ChangePassword} />
-              <Route exact path="/profile/:username" component={ProfileHeader} />
+              <Route exact path="/profile/:username" component={ProfilePage} />
               <Route exact path='/profile/:username/followers' component={Followers} />
               <Route exact path='/profile/:username/followings' component={Followings} />
               <Route exact path='/profile/:username/unfollow' component={Unfollow} />

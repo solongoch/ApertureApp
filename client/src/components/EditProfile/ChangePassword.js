@@ -62,7 +62,6 @@ class ChangePassword extends Component {
   //trigger whenever we get newProps 
   //Usage  assign this.props.errors to local setState.errors
   componentWillReceiveProps(nextProps) {
-    alert(nextProps);
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -75,7 +74,7 @@ class ChangePassword extends Component {
       <div className="container">
         <div className="chgpwd-container">
           <div className="row">
-            <div className="card -">
+            <div className="card chgpwd-card">
               <form className="Chgpwd-form" onSubmit={this.onSubmit}>
                 <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
                   <div className="  ">

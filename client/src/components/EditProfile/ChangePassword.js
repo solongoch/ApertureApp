@@ -60,7 +60,7 @@ class ChangePassword extends Component {
   }
 
   render() {
-    const profile  = this.state;
+    const user = this.props.auth;
     const errors = this.state;
     return (
        <div className="container">
@@ -70,10 +70,10 @@ class ChangePassword extends Component {
                     <form className="Chgpwd-form" onSubmit={this.onSubmit}>
                         <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
                           <div className="  ">
-                            <img className="chgpwdavatar-img" src={profile.avatar} alt="Avatar" />
+                            <img className="chgpwdavatar-img" src={user.avatar} alt="Avatar" />
                           </div>
                             <div className="username-div"> 
-                               <h1 className="username-h1">{profile.username}</h1>
+                               <h1 className="username-h1">{user.username}</h1>
                             </div>
                         </div>
                         
@@ -136,7 +136,7 @@ class ChangePassword extends Component {
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
-  profile: state.profile
-})
+  auth: state.auth
+});
 
 export default connect(mapStateToProps, { changePassword })(withRouter(ChangePassword));

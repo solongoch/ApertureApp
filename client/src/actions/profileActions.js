@@ -13,6 +13,7 @@ export const getProfileByUsername = (username, history) => dispatch => {
   axios
     .get(`/api/profile/${username}`)
     .then(res => {
+      history.push(`/profile/${res.data.username}`)
       dispatch({
         type: GET_PROFILE_BY_USERNAME,
         payload: res.data

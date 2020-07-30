@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+// import Action
+import { getProfileByUsername } from '../../actions/profileActions';
 import axios from 'axios';
 // import CSS
 import './navbar.css';
@@ -23,13 +26,14 @@ class searchProfile extends Component {
   onSubmit(e) {
     e.preventDefault();
     // TODO: use getProfileByUsername action
-    axios.get(`/api/profile/${this.state.search}`)
-      .then(res => 
-        this.props.history.push(`/profile/${this.state.search}`)
-      )
-      .catch(err => {
-        this.props.history.push("/not-found");
-      });
+    this.props.getProfileByUsername(this.state.search, this.props.history);
+    // axios.get(`/api/profile/${this.state.search}`)
+    //   .then(res => 
+    //     this.props.history.push(`/profile/${this.state.search}`)
+    //   )
+    //   .catch(err => {
+    //     this.props.history.push("/not-found");
+    //   });
   }
 
   render() {
@@ -51,4 +55,4 @@ class searchProfile extends Component {
   }
 }
 
-export default withRouter(searchProfile);
+export default connect(null, { getProfileByUsername })(withRouter(searchProfile));

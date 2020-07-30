@@ -12,13 +12,14 @@ import Homepage from './components/Home/Homepage';
 import Suggestion from './components/Suggestion/Suggestion';
 import EditProfile from './components/EditProfile/EditProfile';
 import ChangePassword from './components/EditProfile/ChangePassword';
-import ProfileHeader from './components/Profile/ProfileHeader';
+import ProfilePage from './components/Profile/ProfilePage';
 import CreatePost from './components/Post/CreatePost';
 import Followers from './components/Follow/Followers';
 import Followings from './components/Follow/Followings';
 import Unfollow from './components/Follow/Unfollow';
 import Footer from './components/Layout/Footer';
 import SinglePost from './components/Post/SinglePost';
+import NotFound from './components/NotFound/NotFound'
 //import Provide
 import { Provider } from 'react-redux';
 //import store
@@ -64,12 +65,13 @@ class App extends Component {
               <Route exact path="/suggestion" component={Suggestion} />
               <Route exact path="/edit" component={EditProfile} />
               <Route exact path='/changepassword' component={ChangePassword} />
-              <Route exact path="/profile" component={ProfileHeader} />
+              <Route exact path="/profile/:username" component={ProfilePage} />
+              <Route exact path='/profile/:username/followers' component={Followers} />
+              <Route exact path='/profile/:username/followings' component={Followings} />
+              <Route exact path='/profile/:username/unfollow' component={Unfollow} />
               <Route exact path="/single-post" component={SinglePost} />
+              <Route exact path="/not-found" component={NotFound} />
               <Route path='/create' component={CreatePost} />
-              <Route exact path='/profile/followers' component={Followers} />
-              <Route exact path='/profile/followings' component={Followings} />
-              <Route exact path='/profile/unfollow' component={Unfollow} />
             </div>
             <Footer />
           </div>

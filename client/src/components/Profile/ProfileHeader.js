@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import axios from 'axios';
+// import Components
 import Followers from '../Follow/Followers';
 import Followings from '../Follow/Followings';
-import ProfilePosts from './ProfilePosts';
 // import CSS
 import './profile.css';
-// import images
-import profilePicture from '../../image/img-sq.jpg';
 
-class Profile extends Component {
+class ProfileHeader extends Component {
   constructor() {
     super();
     this.state = {
       _showFollowings:false,
       _showFollowers:false
     }
-
-    axios
-      .get('/api/profile/:username')
-      .then(res => console.log(res))
-      .catch(err => console.log(err.response.data));
   }
 
   //to show and hide Following component 
@@ -40,40 +32,44 @@ class Profile extends Component {
   }
 
   render() {
+    const { profile } = this.props;
     return (
-      <div className="profile">
         <div className="profile-info-header d-flex flex-row">
-          <Link to="/"><img className="round-image image-150 profile-image" src={profilePicture} alt="Profile" /></Link>
+          {/* Avatar */}
+          <img className="round-image image-150 profile-image" src={profile.avatar} alt="Profile" />
           <div className="d-flex flex-column">
             <div className="d-flex flex-row">
-              <div className="profile-username">Username</div>
+              {/* Username */}
+              <div className="profile-username">{profile.username}</div>
+              {/* Edit Profile */}
               <div className="white-bg button font-weight-bold"><Link to="/edit">Edit Profile</Link></div>
+              {/* Settings (no functionality right now. TODO:) */}
               <Link to="/"><i className="fas fa-cog fa-lg"></i></Link>
             </div>
             <ul className="counts d-flex flex-row">
-              <li className="count"><span className="font-weight-bold">100</span> posts</li>
+              {/* Total number of posts */}
+              <li className="count"><span className="font-weight-bold">{profile.noOfPosts}</span> posts</li>
+              {/* Total number of followers */}
               <li className="count" onClick={this.showFollowers}>
-                <span className="font-weight-bold">133</span> followers
+                <span className="font-weight-bold">{profile.followersCount}</span> followers
               </li>
+              {/* Total number of following */}
               <li className="count" onClick={this.showFollowings}>
-                <span className="font-weight-bold">388</span> followings
+                <span className="font-weight-bold">{profile.followingCount}</span> followings
               </li>
             </ul>
             <Followers _showFollowers={this.state._showFollowers} followersClose={this.hideFollowers}/>
             <Followings _showFollowings={this.state._showFollowings} followingsClose={this.hideFollowings}/>
-            <div className="font-weight-bold">Name</div>
-            <div>This is bio section</div>
-            <div><Link to="/" target="_blank">https://www.instagram.com/</Link></div>
+            {/* Name */}
+            <div className="font-weight-bold">{profile.name}</div>
+            {/* Bio */}
+            <div>{profile.bio}</div>
+            {/* Website */}
+            <div><Link to="/" className="url" target="_blank">{profile.website}</Link></div>
           </div>
         </div>
-
-        <div className="top-post-menu d-flex flex-row justify-content-center">
-        </div>
-        {/* Posts goes here */}
-        <ProfilePosts></ProfilePosts>
-      </div>
     )
   }
 }
 
-export default Profile;
+export default ProfileHeader;

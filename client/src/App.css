@@ -12,6 +12,7 @@ body {
   line-height: 14px;
   box-sizing: border-box;
 }
+
 a {  
   color: #000;
 }
@@ -26,6 +27,11 @@ a:hover {
   display: flex;
   flex-direction: column;
   margin-top: 32px;
+}
+
+/* External links */
+.url, .url:hover {
+  color: #00F;
 }
 
 @media (max-width: 991px) {

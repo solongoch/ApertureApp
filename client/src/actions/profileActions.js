@@ -4,7 +4,8 @@ import {
   GET_ERRORS,
   GET_PROFILE,
   PROFILE_LOADING,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
+  GET_PROFILE_BY_USERNAME
 } from './types'
 
 
@@ -90,4 +91,28 @@ export const setProfileLoading = () => {
   return {
     type: PROFILE_LOADING
   };
+};
+
+// Get profile by username
+export const getProfileByUsername = (username, history) => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/${username}`)
+    .then(res => {
+      dispatch({
+        type: GET_PROFILE_BY_USERNAME,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      // if user not found redirect to /not-found
+      if (err.response.status === 404) {
+        history.push("/not-found");
+      } else {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
+      }
+    });
 };

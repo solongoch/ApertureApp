@@ -48,7 +48,8 @@
 
 .single-row > .post {
   position: relative;
-  width: 293px;
+  width: 300px;
+  height: 293px;
   margin-right: 28px;
 }
 
@@ -59,6 +60,7 @@
 .post img {
   max-width: 100%;
   max-height: 100%;
+
   /* -webkit-transition: .2s all; */
 }
 

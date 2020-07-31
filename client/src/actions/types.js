@@ -8,9 +8,9 @@ export const PROFILE_NOT_FOUND = 'PROFILE_NOT_FOUND';
 export const GET_PROFILE_BY_USERNAME = 'GET_PROFILE_BY_USERNAME';
 export const UPLOAD_AVATAR = 'UPLOAD_AVATAR';
 
-
 // Posts
 export const CREATE_POST = 'CREATE_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POSTS';
 export const POST_LOADING = 'POST_LOADING';
+export const GET_HOMEPAGE_POSTS = 'GET_HOMEPAGE_POSTS';

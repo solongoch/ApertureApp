@@ -6,14 +6,14 @@ import './single-post.css';
 class PostComment extends Component {
   render() {
     return (
-              <form>
-                <input
-                  className="add-comment"
-                  type="text"
-                  name="add-comment"
-                  placeholder="Add a comment..."
-                />
-              </form>
+      <form>
+        <input
+          className="add-comment"
+          type="text"
+          name="add-comment"
+          placeholder="Add a comment..."
+        />
+      </form>
     )
   }
 }

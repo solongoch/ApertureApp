@@ -2,7 +2,8 @@ import {
   UPLOAD_AVATAR,
   PROFILE_LOADING,
   GET_PROFILE,
-  GET_PROFILE_BY_USERNAME
+  GET_PROFILE_BY_USERNAME,
+  GET_SUGGESTED_PROFILES
 } from "../actions/types";
 
 const initialState = {
@@ -30,6 +31,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profile: action.payload
+      };
+    case GET_SUGGESTED_PROFILES:
+      return {
+        ...state,
+        suggestions: action.payload
       };
     default:
       return state;

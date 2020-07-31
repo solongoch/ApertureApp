@@ -18,7 +18,9 @@ class Homepage extends Component {
   render() {
     const { user } = this.props.auth;
     const { posts } = this.props.posts;
-    
+    if (posts.length === 0) {
+      this.props.history.push('/suggestion');
+    }
     const postItem = posts.map(post => (     
       <div className="post-div d-flex flex-column" key={Math.random()}>
         {/* POST HEADER - Avatar and Username */}

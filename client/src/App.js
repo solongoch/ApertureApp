@@ -91,7 +91,7 @@ class App extends Component {
                 <PrivateRoute exact path="/profile/:username/unfollow" component={Unfollow} />
               </Switch>
               <Switch>
-                <PrivateRoute exact path="/post/:podtId" component={SinglePost} />
+                <PrivateRoute exact path="/post/:postId" component={SinglePost} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/create" component={CreatePost} />

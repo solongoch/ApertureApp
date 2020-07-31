@@ -12,33 +12,42 @@ import './profile.css';
 class ProfilePage extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+      posts:[]
+    }
   }
     
   componentDidMount() {
     this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
   }
-
-  render() {
-    // TODO: "Profile loading"
-    // if (this.props.profileState.loading) {
-    //   return <div>Loading...</div>
-    // }
-
-    var _posts = this.props.profileState.profile.posts;
-    if (_posts) {
-      var _profilePosts = _posts.map(post => <ProfilePosts key={post._id} post={post} />)
+  componentWillReceiveProps(nextProps){
+    if(nextProps.profileState.profile)
+    {
+      this.setState({posts: nextProps.profileState.profile.posts })
     }
 
+  }
+
+  render() {
+    if(this.props.profileState.profile){
+
+      var _posts = this.props.profileState.profile.posts;
+      console.log("props",_posts);
+      var _profilePosts;
+      if (_posts) {
+        _profilePosts = <ProfilePosts posts={_posts} />
+      }
+    }
+    
+    // console.log(_posts.length);
     return (
       <div className="profile">
         <ProfileHeader profile={ this.props.profileState.profile } />
         <div className="top-post-menu d-flex flex-row justify-content-center"></div>
-        <div className="posts d-flex flex-column">
-        <div className="single-row d-flex flex-row justify-content-between">
+        
+        
         {_profilePosts}
-      </div>
-      </div>
+    
       </div>
     )
   }

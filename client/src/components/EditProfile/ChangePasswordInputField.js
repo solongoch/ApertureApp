@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
 
 
 const ChangePasswordInputField = ({
@@ -14,20 +13,17 @@ const ChangePasswordInputField = ({
 }) => {
   return (
 
-    // <div className="form-group form-inline">
     <Fragment>
-
       <input
         type={type}
         name={name}
         placeholder={placeholder}
         value={value}
-        className={classNames("form-control shadow-none", { "is-invalid": error })}
+        className={classNames("form-control shadow-none col-sm-7 col-md-7", { "is-invalid": error })}
         onChange={onChange}
-        />
+      />
       {error && (<div className="invalid-feedback error-style">{error}</div>)}
-        </Fragment>
-  // </div>
+  </Fragment>
   );
 }
 

@@ -51,8 +51,9 @@ class ChangePassword extends Component {
     this.props.changePassword(changePass, this.props.history);
   }
 
-  //call after component is mounted in browser
-  componentDidMount() {
+
+   //call after component is mounted in browser
+   componentDidMount() {
     if (this.props.auth.user) {
       let { avatar, username } = this.props.auth.user;
       this.setState({ avatar: avatar });
@@ -68,7 +69,6 @@ class ChangePassword extends Component {
   }
 
   render() {
-
     const { errors, avatar, username } = this.state;
     return (
       <div className="container">
@@ -77,7 +77,7 @@ class ChangePassword extends Component {
             <div className="card chgpwd-card">
               <form className="Chgpwd-form" onSubmit={this.onSubmit}>
                 <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
-                  <div className="  ">
+                  <div className="Chgpwd-avatar  ">
                     <img className="chgpwdavatar-img" src={avatar} alt="Avatar" />
                   </div>
                   <div className="username-div">
@@ -98,8 +98,6 @@ class ChangePassword extends Component {
                   />
                 </div>
 
-
-
                 <div className="form-group form-inline">
                   <label htmlFor="newpassword"
                     className="col-form-label password-label col-sm-5 col-md-5 col-lg-5" >New Password</label>
@@ -113,7 +111,6 @@ class ChangePassword extends Component {
                   />
                 </div>
 
-
                 <div className="form-group form-inline">
                   <label htmlFor="confirmpassword"
                     className="col-form-label password-label col-sm-5 col-md-5 col-lg-5">Confirm New Password</label>
@@ -125,7 +122,6 @@ class ChangePassword extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-
 
                 <div className="form-row">
                   <div className="form-group col-sm-12 col-md-12 col-lg-12">

@@ -34,6 +34,8 @@ export const getProfileByUsername = (username, history) => dispatch => {
     });
 };
 
+
+
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
@@ -88,25 +90,43 @@ export const uploadAvatar = (newAvatar) => dispatch => {
     });
 }
 
+
 // Delete account & profile
-export const deleteAccount = () => dispatch => {
+export const deleteAccount = (history) => dispatch => {
   if (window.confirm('Are you sure you want to delete your account?')) {
     axios
       .delete('/api/remove')
-      .then(res =>
-        dispatch({
+      .then(res => {history.push('/'); 
+      dispatch({
           type: SET_CURRENT_USER,
           payload: {}
-        })
+        })}
       )
-      .catch(err =>
+      .catch(err => {
+        console.log(err) 
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data
-        })
-      );
-  }
+        })}
+    );
+      
 };
+};
+
+//Change Password
+export const changePassword = (changePass, history) => dispatch => {
+  //API call
+  axios
+    .post('/api/changepassword', changePass)
+    .then(res => {
+      history.push('/home')
+    })
+    .catch(err =>
+      dispatch({
+        type: 'GET_ERRORS',
+        payload: err.response.data
+      }));
+}
 
 //Change Password
 export const changePassword = (changePass, history) => dispatch => {

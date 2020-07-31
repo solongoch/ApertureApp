@@ -1,12 +1,13 @@
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './editprofile.css';
 import Uploadavatar from './Uploadavatar';
-import TextFieldGroup from '../common/TextFieldGroup';
 import DeleteProfile from './DeleteProfile';
 import { getCurrentProfile, editProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/is-empty';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 class EditProfile extends Component {
   constructor() {
@@ -29,9 +30,23 @@ class EditProfile extends Component {
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
-    this.setState({ isEnabled: true })
+    this.setState({ [e.target.name]: e.target.value, isEnabled:true });
+    if ((this.state.errors.hasOwnProperty([e.target.name]))) {
+      this.clearError(e.target.name);
+    }
   }
+
+  //clear errors onChange
+  clearError(errorProperty) {
+    var errors = this.state.errors;
+    var errPropertyValue = errors[errorProperty];
+    if (errPropertyValue.length > 0) {
+      errors[errorProperty] = ''
+      this.setState({ errors });
+    }
+  }
+
+
   handleGenderChange = (e) => {
     this.setState({ gender: e.target.value })
     this.setState({ isEnabled: true })
@@ -70,6 +85,9 @@ class EditProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
 
@@ -249,6 +267,7 @@ class EditProfile extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  errors: state.errors
 })
 export default connect(mapStateToProps, { getCurrentProfile, editProfile })(EditProfile);

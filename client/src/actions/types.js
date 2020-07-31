@@ -14,3 +14,4 @@ export const CREATE_POST = 'CREATE_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POSTS';
 export const POST_LOADING = 'POST_LOADING';
+export const POST_COMMENT = 'POST_COMMENT';

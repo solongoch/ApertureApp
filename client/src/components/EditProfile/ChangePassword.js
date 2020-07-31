@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logoImage from "../../image/avatar.png";
 import './changepassword.css';
 import { connect } from 'react-redux';
 import { changePassword } from '../../actions/profileActions';

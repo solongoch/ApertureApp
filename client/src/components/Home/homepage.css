@@ -17,7 +17,9 @@
 }
 
 .post-image {
-  width: 100%;
+  max-width: 615px;
+  max-height: 615px;
+  object-fit: contain;
 }
 
 .post-footer {

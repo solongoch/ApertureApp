@@ -3,6 +3,7 @@ import {
   CREATE_POST,
   DELETE_POST,
   GET_POSTS,
+  GET_POST,
   GET_ERRORS,
   POST_COMMENT
 } from './types';
@@ -48,8 +49,8 @@ export const deletePostById = (postId, username, history) => dispatch => {
       })
     )
 }
-//Get Posts
 
+//Get Posts
 export const getAllPosts = () => dispatch => {
   axios.get('/api/posts/')
     .then(res => {
@@ -61,6 +62,23 @@ export const getAllPosts = () => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_POSTS,
+        payload: null
+      })
+    })
+}
+
+//Get post by id
+export const getPost = (postId) => dispatch => {
+  axios.get(`/api/posts/${postId}`)
+    .then(res => {
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_POST,
         payload: null
       })
     })

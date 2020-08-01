@@ -25,14 +25,8 @@ class Followings extends Component {
   componentDidMount() {
     this.props.getFollowings(this.props.auth.username)
   }
-  // componentWillReceiveProps(nextProps){
-  //   if(nextProps.profile)
-  //   {
-  //     this.setState({followingLists:nextProps.profile.profile})
-  //   }
 
-  // }
-  render() {
+render() {
     if (!this.props._showFollowings) {
       return null;
     }

@@ -27,12 +27,20 @@
   height: 150px;
 }
 
+.top-15 {
+  margin-top: 15px;
+}
+
 .left-15 {
   margin-left: 15px;
 }
 
 .right-15 {
   margin-right: 15px;
+}
+
+.right-5 {
+  margin-right: 5px;
 }
 
 .line {

@@ -26,11 +26,7 @@ router.get('/home', passport.authenticate('jwt', { session: false }), (req, res)
             if(err) {
               return res.status(500).json({ success: false, message: err.message });
             }
-            if(records.length==0) {
-              return res.redirect('/api/suggestion')
-            }
             return res.json(records);
-
           });//Post find ends
     })//then ends
     .catch(err => {

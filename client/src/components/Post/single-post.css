@@ -1,11 +1,9 @@
-
-
 .single-post {
   width: 600px;
   margin: auto 0;
 }
 
-.post-image > img {
+.post-image>img {
   width: 100%;
 }
 
@@ -52,13 +50,11 @@
     flex-direction: row;
     justify-items: start;
   }
-
   .post-details {
     background-color: #FFF;
     width: 340px;
     padding: 0 20px;
   }
-  
 }
 
 @media (max-width: 991px) {
@@ -66,14 +62,12 @@
     max-height: calc(100% - 215px);
     justify-content: center;
   }
-
   #single-post-div {
     width: 100%;
     border: 1px solid rgb(239, 239, 239);
     display: flex;
     flex-direction: column;
   }
-
   .comment-div {
     width: 100%;
     padding: 15px;
@@ -81,11 +75,9 @@
     flex-direction: column;
     justify-items: start;
   }
-  
   .post-details {
     background-color: #FFF;
     width: 600px;
     padding: 0 20px;
   }
-
 }

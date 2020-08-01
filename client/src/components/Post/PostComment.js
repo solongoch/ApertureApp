@@ -41,18 +41,16 @@ class PostComment extends Component {
   render() {
     const {errors} = this.state;
     return (
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="Add a comment..."
-                  name="comment"
-                  value={this.state.commentBody}
-                  onChange={this.onChange}
-                  error={errors.commentBody}
-                  info=""
-                />
-                <button className="btn btn-primary col-12"
-                  type="submit">Post Comment</button>
-              </form>
+      <form onSubmit={this.onSubmit}>
+        <TextFieldGroup
+          placeholder="Add a comment..."
+          name="comment"
+          value={this.state.commentBody}
+          onChange={this.onChange}
+          error={errors.commentBody}
+          info="" />
+        <button className="btn btn-primary col-12" type="submit">Post Comment</button>
+      </form>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import CSS
 import './single-post.css';
+// import Component
 import PostComment from './PostComment';
 
 import { connect } from 'react-redux';
@@ -29,22 +30,14 @@ class PostAction extends Component {
     this.props.deletePostById(postId, username, this.props.history)
   }
 
-  //   handleDeletePost = (postId) => {
-  //    console.log("IN" , postId);
-
-  // }
-
-
-
   render() {
 
-
-
     const { post, auth } = this.props
-    // let postId;
+    var postedById=null;
+    var postId=null;
     if (post.postedBy) {
-      var postedById = post.postedBy._id;
-      var postId = post._id
+      postedById = post.postedBy._id;
+      postId = post._id
     }
 
     return (

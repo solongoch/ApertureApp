@@ -2,12 +2,14 @@ import {
   CREATE_POST,
   DELETE_POST,
   GET_POSTS,
-  GET_POST
+  GET_POST,
+  GET_HOMEPAGE_POSTS
 } from '../actions/types';
+
 
 const initialState = {
   posts: [],
-  post:{}
+  post: {}
 };
 
 export default function (state = initialState, action) {
@@ -23,17 +25,21 @@ export default function (state = initialState, action) {
         posts: state.posts.filter(post => post._id !== action.payload)
       };
     case GET_POSTS:
-      return{
+      return {
         ...state,
         posts: action.payload
       };
-      case GET_POST:
-        return{
-          ...state,
-          post: action.payload
-        };
+    case GET_POST:
+      return {
+        ...state,
+        post: action.payload
+      };
+    case GET_HOMEPAGE_POSTS:
+      return {
+        ...state,
+        posts: action.payload
+      }
     default:
       return state;
   }
-
 }

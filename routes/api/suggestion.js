@@ -23,7 +23,7 @@ router.get(
         .sort({ followers: -1 })
         .limit(10)
         .then(accounts => {
-          return res.json({ Suggestion: accounts });
+          return res.send(accounts);
         })
         .catch(err => {
           return res.json(err);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import CSS
 import './single-post.css';
-// import images
+// import Components
 import PostCommentSection from './PostCommentSection';
 import PostActions from './PostActions';
 

@@ -3,16 +3,17 @@ import {
   PROFILE_LOADING,
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
-  GET_FOLLOWING
+  GET_FOLLOWING,
+  GET_SUGGESTED_PROFILES
 } from "../actions/types";
 
 const initialState = {
   profile: "",
   loading: false,
-  followingLists : null
+  followingLists: null
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case UPLOAD_AVATAR:
       return {
@@ -34,10 +35,15 @@ export default function(state = initialState, action) {
         ...state,
         profile: action.payload
       };
-      case GET_FOLLOWING:
+    case GET_FOLLOWING:
       return {
         ...state,
         followingLists: action.payload
+      }
+    case GET_SUGGESTED_PROFILES:
+      return {
+        ...state,
+        suggestions: action.payload
       };
     default:
       return state;

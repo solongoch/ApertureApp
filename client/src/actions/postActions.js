@@ -3,7 +3,6 @@ import {
   CREATE_POST,
   DELETE_POST,
   GET_POSTS,
-  GET_POST,
   GET_ERRORS,
   POST_COMMENT
 } from './types';
@@ -67,23 +66,6 @@ export const getAllPosts = () => dispatch => {
     })
 }
 
-//Get post by id
-
-export const getPost = (postId) => dispatch => {
-  axios.get(`/api/posts/${postId}`)
-    .then(res => {
-      dispatch({
-        type: GET_POST,
-        payload: res.data
-      })
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_POST,
-        payload: null
-      })
-    })
-}
 // Post Comment
 export const sendComment = (postId, comment) => dispatch => {
   axios

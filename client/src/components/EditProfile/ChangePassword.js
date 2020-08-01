@@ -47,7 +47,6 @@ class ChangePassword extends Component {
       newpassword: this.state.newpassword,
       confirmpassword: this.state.confirmpassword
     };
-    
     //trigger action
     this.props.changePassword(changePass, this.props.history);
   }
@@ -72,73 +71,69 @@ class ChangePassword extends Component {
   render() {
     const { errors, avatar, username } = this.state;
     return (
-       <div className="container">
-          <div className="chgpwd-container">
+      <div className="container">
+        <div className="chgpwd-container">
           <div className="row">
-                  <div className="card chgpwd-card">
-                    <form className="Chgpwd-form" onSubmit={this.onSubmit}>
-                        <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
-                          <div className="  ">
-                            <img className="chgpwdavatar-img" src={avatar} alt="Avatar" />
-                          </div>
-                            <div className="username-div"> 
-                               <h1 className="username-h1">{username}</h1>
-                            </div>
-                        </div>
-                        
-                        <div className="form-group form-inline">
-                          <label htmlFor="oldpassword" 
-                          className="col-form-label password-label col-sm-5 col-md-5">Old Password</label>
-                          <ChangePasswordInputField
-                              type="password" 
-                              name="oldpassword"
-                              placeholder="Current Password"
-                              value={this.state.oldpassword}
-                              onChange={this.onChange}
-                              error={errors.oldpassword}
-                          />
-                        </div>
-                          
-                        
-                      
-                        <div className="form-group form-inline">
-                          <label htmlFor="newpassword" 
-                          className="col-form-label password-label col-sm-5 col-md-5 col-lg-5" >New Password</label>
-                          <ChangePasswordInputField
-                              type="password" 
-                              name="newpassword"
-                              placeholder="New Password"
-                              value={this.state.newpassword}
-                              onChange={this.onChange}
-                              error={errors.newpassword}
-                              />
-                          </div>
-                      
-                
-                        <div className="form-group form-inline">
-                          <label htmlFor="confirmpassword"  
-                          className="col-form-label password-label col-sm-5 col-md-5 col-lg-5">Confirm New Password</label>
-                          <ChangePasswordInputField
-                            type="password" 
-                            name="confirmpassword"
-                            placeholder="Confirm New Password"
-                            value={this.state.confirmpassword}
-                            onChange={this.onChange}
-                            />
-                          </div>
-                        
-                      
-                      <div className="form-row">                        
-                        <div className="form-group col-sm-12 col-md-12 col-lg-12">                          
-                        <button type="submit" 
-                                className="btn mt-3 btn-primary submit-btn">Change Password</button>
-                        </div>
-                      </div>
-                    </form>
+            <div className="card chgpwd-card">
+              <form className="Chgpwd-form" onSubmit={this.onSubmit}>
+                <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
+                  <div className="Chgpwd-avatar  ">
+                    <img className="chgpwdavatar-img" src={avatar} alt="Avatar" />
+                  </div>
+                  <div className="username-div">
+                    <h1 className="username-h1">{username}</h1>
+                  </div>
                 </div>
-              </div>
+
+                <div className="form-group form-inline">
+                  <label htmlFor="oldpassword"
+                    className="col-form-label password-label col-sm-5 col-md-5">Old Password</label>
+                  <ChangePasswordInputField
+                    type="password"
+                    name="oldpassword"
+                    placeholder="Current Password"
+                    value={this.state.oldpassword}
+                    onChange={this.onChange}
+                    error={errors.oldpassword}
+                  />
+                </div>
+
+                <div className="form-group form-inline">
+                  <label htmlFor="newpassword"
+                    className="col-form-label password-label col-sm-5 col-md-5 col-lg-5" >New Password</label>
+                  <ChangePasswordInputField
+                    type="password"
+                    name="newpassword"
+                    placeholder="New Password"
+                    value={this.state.newpassword}
+                    onChange={this.onChange}
+                    error={errors.newpassword}
+                  />
+                </div>
+
+                <div className="form-group form-inline">
+                  <label htmlFor="confirmpassword"
+                    className="col-form-label password-label col-sm-5 col-md-5 col-lg-5">Confirm New Password</label>
+                  <ChangePasswordInputField
+                    type="password"
+                    name="confirmpassword"
+                    placeholder="Confirm New Password"
+                    value={this.state.confirmpassword}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group col-sm-12 col-md-12 col-lg-12">
+                    <button type="submit"
+                      className="btn mt-3 btn-primary submit-btn">Change Password</button>
+                  </div>
+                </div>
+              </form>
             </div>
-         </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

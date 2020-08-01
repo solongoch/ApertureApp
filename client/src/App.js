@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import CSS
 import "./global.css";
 import "./App.css";
@@ -29,6 +29,9 @@ import jwt_decode from 'jwt-decode';
 import { SET_CURRENT_USER } from './actions/types';
 import { logoutUser } from './actions/authActions';
 
+import PrivateRoute from './components/common/PrivateRoute';
+
+
 //scenario if User goes out to some other page(app) and comes back to our app before token expires
 //Check for token
 if (localStorage.jwtToken) {
@@ -41,7 +44,7 @@ if (localStorage.jwtToken) {
     type: SET_CURRENT_USER,
     payload: decoded
   });
-  
+
   //check for expired token
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
@@ -58,20 +61,43 @@ class App extends Component {
           <div className="App">
             <Navbar />
             <div className="container">
+              {/* Add public routes here*/}
               <Route exact path="/" component={Landing} />
               <Route exact path='/signup' component={Signup} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/home" component={Homepage} />
-              <Route exact path="/suggestion" component={Suggestion} />
-              <Route exact path="/edit" component={EditProfile} />
-              <Route exact path='/changepassword' component={ChangePassword} />
               <Route exact path="/profile/:username" component={ProfilePage} />
-              <Route exact path='/profile/:username/followers' component={Followers} />
-              <Route exact path='/profile/:username/followings' component={Followings} />
-              <Route exact path='/profile/:username/unfollow' component={Unfollow} />
-              <Route exact path="/single-post" component={SinglePost} />
               <Route exact path="/not-found" component={NotFound} />
-              <Route path='/create' component={CreatePost} />
+
+              {/* Add private routes here */}
+              <Switch>
+                <PrivateRoute exact path="/home" component={Homepage} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/suggestion" component={Suggestion} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/changepassword" component={ChangePassword} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/edit/:username" component={EditProfile} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/profile/:username/followings" component={Followings} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/profile/:username/followers" component={Followers} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/profile/:username/unfollow" component={Unfollow} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:postId" component={SinglePost} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/create" component={CreatePost} />
+              </Switch>
+
+            
             </div>
             <Footer />
           </div>

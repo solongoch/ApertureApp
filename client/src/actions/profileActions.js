@@ -1,10 +1,12 @@
-import { 
+import {
   SET_CURRENT_USER,
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
   PROFILE_LOADING,
   UPLOAD_AVATAR,
-  GET_ERRORS } from "./types";
+  GET_ERRORS
+} from "./types";
+
 import axios from "axios";
 
 // Get profile by username
@@ -61,7 +63,7 @@ export const editProfile = (profileData) => dispatch => {
       dispatch({
         type: GET_PROFILE,
         payload: res.data
-      })     
+      })
     })
     .catch(err => {
       dispatch({
@@ -132,3 +134,4 @@ export const setProfileLoading = () => {
     type: PROFILE_LOADING
   };
 };
+

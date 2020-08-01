@@ -1,9 +1,3 @@
-/* img {
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-} */
-
 .login-beta {
   width: 100%;
   height: 100vh;
@@ -20,8 +14,8 @@
 }
 
 .login-beta > .row-login {
-  display: flex;
-  padding: 0 80px;
+    display: flex;
+    padding: 0 80px;
 }
 
 .phone-app-demo-beta {

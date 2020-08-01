@@ -7,7 +7,8 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  profile: ""
+  profile: "",
+  loading: false
 };
 
 export default function(state = initialState, action) {

@@ -29,7 +29,7 @@ class PostComment extends Component {
 
     const comment = {commentBody: this.state.commentBody};
 
-    // this.props.sendComment(postid);
+    this.props.sendComment(postid);
   }
 
   onChange(e) {

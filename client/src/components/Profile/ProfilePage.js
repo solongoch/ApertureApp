@@ -12,23 +12,42 @@ import './profile.css';
 class ProfilePage extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+      posts:[]
+    }
   }
     
   componentDidMount() {
     this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
   }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.profileState.profile)
+    {
+      this.setState({posts: nextProps.profileState.profile.posts })
+    }
+
+  }
 
   render() {
-    // TODO: "Profile loading"
-    // if (this.props.profileState.loading) {
-    //   return <div>Loading...</div>
-    // }
+    if(this.props.profileState.profile){
+
+      var _posts = this.props.profileState.profile.posts;
+      console.log("props",_posts);
+      var _profilePosts;
+      if (_posts) {
+        _profilePosts = <ProfilePosts posts={_posts} />
+      }
+    }
+    
+    // console.log(_posts.length);
     return (
       <div className="profile">
         <ProfileHeader profile={ this.props.profileState.profile } />
         <div className="top-post-menu d-flex flex-row justify-content-center"></div>
-        <ProfilePosts  posts={ this.props.profileState.profile.posts }/>
+        
+        
+        {_profilePosts}
+    
       </div>
     )
   }

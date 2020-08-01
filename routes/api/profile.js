@@ -36,12 +36,26 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
           followersCount: user.followers ? user.followers.length : 0,
           followingCount: user.following ? user.following.length : 0
         };
-        Post.find({ postedBy: user._id }, ["_id", "photo"]).lean()
+        Post.find({ postedBy: user._id }, ["_id", "photo", "likes", "comments"]).lean()
+        .sort({ timePosted: -1 })//for latest records
+        .limit(20)//get only 20 posts
           .then(posts => {
 
             //posts exist for the username then get the count
             if (posts) {
               //If user has public account anyone can see posts
+              // console.log(posts.forEach(element => console.log(element.comments.length)));
+              posts.forEach(element => {
+                element.likesCount= element.likes.length;
+                delete element.likes;//for not showing likes details
+              })
+              posts.forEach(element => {
+                element.commentsCount= element.comments.length;
+                delete element.comments;//for not showing comments details
+              })
+
+                
+              // posts.forEach(element => console.log(element.likes.length));
               if (user.isPublic) {
                 data.posts = posts;
               } else {//private user

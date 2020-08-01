@@ -75,14 +75,15 @@ export class CreatePost extends Component {
 
 
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(nextProps) {
 
-    if (newProps.post.posts.length>0) {
+    const username= this.props.auth.user.username
+    if (nextProps.post.posts.length>0) {
       toast.success('Posted Successfully', this.state.toastopts);
-      this.props.history.push("/profile");
-    }else if (newProps.errors.errors) {
-      this.setState({ errors: newProps.errors.errors });
-      toast.error(newProps.errors.errors.photo, this.state.toastopts);
+      this.props.history.push(`/profile/${username}`);
+    }else if (nextProps.errors.errors) {
+      this.setState({ errors: nextProps.errors.errors });
+      toast.error(nextProps.errors.errors.photo, this.state.toastopts);
     }
 
   }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 // import CSS
 import './single-post.css';
+// import Component
 import PostComment from './PostComment';
-// import images
 
-class PostAction extends Component {
-  
+class PostActions extends Component {  
   state = {
     likes: 0
   };
@@ -17,12 +16,10 @@ class PostAction extends Component {
     });
   };
 
-
   render() {
-    return (
-      
+    return (      
         <div>
-          <div className="actions">
+          <div className="actions top-15">
             <button className="far fa-heart fa-2x action" onClick={this.addLike}></button>
             <i className="far fa-comment fa-2x action"></i>
             <i className="far fa-paper-plane fa-2x action"></i>
@@ -36,9 +33,8 @@ class PostAction extends Component {
           <div className="posted-date"></div>
               <PostComment></PostComment>
             </div>
-      
     )
   }
 }
 
-export default PostAction;
+export default PostActions;

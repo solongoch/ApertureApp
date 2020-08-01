@@ -3,15 +3,16 @@ import React, { Component } from 'react';
 import './single-post.css';
 // import images
 import PostCommentSection from './PostCommentSection';
-import PostAction from './PostActions';
+import PostActions from './PostActions';
 
 class PostSidebar extends Component {
   render() {
+    const {post} = this.props.post;
     return (
       
         <div className="post-details">
-          <PostCommentSection></PostCommentSection>
-          <PostAction></PostAction>
+          <PostCommentSection post={post}></PostCommentSection>
+          <PostActions post={post}></PostActions>
         </div>
       
     )

@@ -4,7 +4,8 @@ import {
   GET_PROFILE_BY_USERNAME,
   PROFILE_LOADING,
   UPLOAD_AVATAR,
-  GET_ERRORS
+  GET_ERRORS,
+  GET_FOLLOWING
 } from "./types";
 
 import axios from "axios";
@@ -96,21 +97,24 @@ export const deleteAccount = (history) => dispatch => {
   if (window.confirm('Are you sure you want to delete your account?')) {
     axios
       .delete('/api/remove')
-      .then(res => {history.push('/'); 
-      dispatch({
+      .then(res => {
+        history.push('/');
+        dispatch({
           type: SET_CURRENT_USER,
           payload: {}
-        })}
+        })
+      }
       )
       .catch(err => {
-        console.log(err) 
+        console.log(err)
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data
-        })}
-    );
-      
-};
+        })
+      }
+      );
+
+  };
 };
 
 //Change Password
@@ -126,6 +130,19 @@ export const changePassword = (changePass, history) => dispatch => {
         type: 'GET_ERRORS',
         payload: err.response.data
       }));
+}
+
+//Get Followings
+
+export const getFollowings = (username) => dispatch => {
+  axios.get(`/api/${username}/following`)
+    .then(res => {
+      dispatch({
+        type: GET_FOLLOWING,
+        payload: res.data
+      })
+    })
+    .catch(err => console.log(err.response.data));
 }
 
 // Profile loading

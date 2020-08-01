@@ -10,36 +10,27 @@ import ProfilePosts from './ProfilePosts';
 import './profile.css';
 
 class ProfilePage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      posts:[]
-    }
-  }
     
   componentDidMount() {
     this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
-  }
-  componentWillReceiveProps(nextProps){
-    if(nextProps.profileState.profile)
-    {
-      this.setState({posts: nextProps.profileState.profile.posts })
-    }
-
   }
 
   render() {
     if(this.props.profileState.profile){
 
       var _posts = this.props.profileState.profile.posts;
-      console.log("props",_posts);
       var _profilePosts;
-      if (_posts) {
+      if (_posts.length>0) {
         _profilePosts = <ProfilePosts posts={_posts} />
+      } else{
+        _profilePosts = (<div>
+              <h1 className="text-center"><i className="fa fa-camera"/></h1>
+              <h3 className="text-center"> No Posts Yet</h3> 
+        </div>) 
       }
     }
     
-    // console.log(_posts.length);
+
     return (
       <div className="profile">
         <ProfileHeader profile={ this.props.profileState.profile } />

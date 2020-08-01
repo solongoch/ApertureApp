@@ -30,6 +30,7 @@
 
 .actions {
   padding: 15px 0 0;
+  cursor: pointer;
 }
 
 .posted-date {

@@ -6,7 +6,6 @@ class ProfilePosts extends Component {
   constructor() {
     super();
     this.state = {
-
     }
   }
 
@@ -22,7 +21,7 @@ class ProfilePosts extends Component {
           <div className="post">
             <img className="image" src={posts[0].photo} alt="Post" />
             <div className="overlay">
-              <Link to="/single-post">
+              <Link to={`/post/${posts.postId}`}>
                 <div className="numbers">
                   <span className="right-15">
                     <i className="far fa-heart"></i> 987

@@ -4,12 +4,23 @@ import './single-post.css';
 // import Component
 import PostComment from './PostComment';
 
-class PostActions extends Component {
+class PostActions extends Component {  
+  state = {
+    likes: 0
+  };
+
+  addLike = () => {
+    let newCount = this.state.likes +1;
+    this.setState({
+      likes: newCount
+    });
+  };
+
   render() {
     return (      
         <div>
           <div className="actions top-15">
-            <i className="far fa-heart fa-2x action"></i>
+            <button className="far fa-heart fa-2x action" onClick={this.addLike}></button>
             <i className="far fa-comment fa-2x action"></i>
             <i className="far fa-paper-plane fa-2x action"></i>
             <i className="far fa-bookmark fa-2x action"></i>
@@ -17,11 +28,11 @@ class PostActions extends Component {
           </div>
           <div className="likes">
             {/* <img src={post} className="round-image image-22" /> */}
-            <span className="font-weight-bold">1234 likes</span>
+            <span className="font-weight-bold">{this.state.likes} likes</span>
           </div>
-          <div className="posted-date">May 23</div>
-            <PostComment></PostComment>
-          </div>      
+          <div className="posted-date"></div>
+              <PostComment></PostComment>
+            </div>
     )
   }
 }

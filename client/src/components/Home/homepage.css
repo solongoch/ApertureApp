@@ -31,8 +31,8 @@
   padding: 15px;
 }
 
-.actions {
-  margin-bottom: 5px;
+.post-footer > .actions {
+  margin: 0 0 5px;
 }
 
 .action {
@@ -61,6 +61,10 @@
   color: #262626;
   height: 23px;
   font-size: 12px;
+}
+
+.add-comment:focus {
+  outline: none;
 }
 
 #right-bar {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
-import Spinner from '../common/Spinner'
+import Spinner from '../common/Spinner';
 // import Action
 import { getHomepagePosts } from "../../actions/homeActions";
 // import Component

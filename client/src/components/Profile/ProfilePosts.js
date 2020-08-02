@@ -4,10 +4,9 @@ import './profileposts.css';
 
 class ProfilePosts extends Component {
   render() {
-
     const { posts } = this.props;
-    return (
 
+    return (
       <div className="profileposts">
         {posts.map(post => {
           return (
@@ -29,7 +28,6 @@ class ProfilePosts extends Component {
           )
         })}
       </div>
-
     )
   }
 }

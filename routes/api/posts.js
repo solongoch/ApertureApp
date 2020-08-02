@@ -97,7 +97,7 @@ router.get("/",
 // @access  Public and Private
 router.get("/:id", accessRouteWithOrWithoutToken, (req, res) => {
   Post.findById(req.params.id)
-    .populate("postedBy", ["_id", 'name', "isPublic", "followers"])
+    .populate("postedBy", ["_id", "avatar", "username", "isPublic", "followers"])
     .then(post => {
       // if there is no post with :id
       if (!post) {

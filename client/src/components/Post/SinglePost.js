@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+// import Action
+import { getSinglePost } from '../../actions/postActions';
 // import CSS
 import './single-post.css';
-// import images
-import post from '../../image/img-sq.jpg';
+// import Components
 import PostSidebar from './PostSidebar';
-
 import PostHeader from './PostHeader';
 
 class SinglePost extends Component {
+  componentDidMount() {
+    this.props.getSinglePost(this.props.match.params.postId, this.props.history)
+  }
+
   render() {
+    const { post }= this.props;
+    if (!post) {
+      return "Loading..."
+    }
     return (
       <div id="single-post-div">
         <div className="single-post">
-        <PostHeader></PostHeader>
           <div className="post-image">
-            <img src={post} alt="Post" />
+            <img src={post.photo} alt="Post" />
           </div>
         </div>
-        <PostSidebar></PostSidebar>
+        <div className="sidebar">
+          <PostHeader postedBy={post.postedBy} />
+          <PostSidebar post={post} />
+        </div>
       </div>
     )
   }
 }
 
-export default SinglePost;
+const mapStateToProps = (state) => ({
+  post: state.post.post
+});
+
+export default connect(mapStateToProps, { getSinglePost })(SinglePost);

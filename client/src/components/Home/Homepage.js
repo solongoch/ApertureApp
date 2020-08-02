@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import Spinner from '../common/Spinner'
 // import Action
 import { getHomepagePosts } from "../../actions/homeActions";
 // import Component
@@ -12,14 +13,14 @@ import "./homepage.css";
 
 class Homepage extends Component {
   componentDidMount() {
-    this.props.getHomepagePosts();
+    this.props.getHomepagePosts(this.props.history);
   }
 
   render() {
     const { user } = this.props.auth;
     const { posts } = this.props.posts;
-    if (posts.length === 0) {
-      this.props.history.push('/suggestion');
+    if (!posts) {
+      return (<Spinner />)
     }
     const postItem = posts.map(post => (     
       <div className="post-div d-flex flex-column" key={Math.random()}>

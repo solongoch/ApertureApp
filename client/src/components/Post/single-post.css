@@ -14,11 +14,13 @@
   position: relative;
 }
 
-.comment-div {
-  height: calc(100% - 215px);
+
+.post-details {
   border-top: 1px solid rgb(239, 239, 239);
+  background-color: #FFF;
+  height: calc(100% - 225px);
   overflow: auto;
-}
+}  
 
 .commentor-image {
   max-width: 32px;
@@ -100,7 +102,6 @@ form.add-comment-form, form.add-comment-form .form-control {
   }
 
   .post-details {
-    background-color: #FFF;
     width: 340px;
   }  
 }

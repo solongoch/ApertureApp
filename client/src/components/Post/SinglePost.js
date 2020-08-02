@@ -8,7 +8,6 @@ import './single-post.css';
 import PostSidebar from './PostSidebar';
 import PostHeader from './PostHeader';
 
-
 class SinglePost extends Component {
   componentDidMount() {
     this.props.getSinglePost(this.props.match.params.postId, this.props.history)

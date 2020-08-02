@@ -6,7 +6,7 @@ class Unfollow extends Component {
     if (!this.props._showUnfollow) {
       return null;
     }
-    const {_unfollowUser} = this.props;
+    const { _unfollowUser } = this.props;
     let user = _unfollowUser.user;
     return (
       <div className="mainWrapunfollow-div">
@@ -25,6 +25,8 @@ class Unfollow extends Component {
                   </div>
                   <div className="action-div">
                     <span onClick={this.props.hideUnfollow} className="link-unfollow col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 btn-unfollow text-center">Unfollow</span>
+                  </div>
+                  <div className="action-div">
                     <span onClick={this.props.hideUnfollow} className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</span>
                   </div>
                 </div>

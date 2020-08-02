@@ -56,7 +56,6 @@ export const deletePostById = (postId, username, history) => dispatch => {
   if (window.confirm("Are you sure you want to delete this post?")) {
     axios.delete(`/api/posts/${postId}`)
       .then(res => {
-        window.confirm("Are you sure you want to delete this post?");
         dispatch({
           type: DELETE_POST,
           payload: postId

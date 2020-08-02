@@ -24,7 +24,6 @@ class PostAction extends Component {
 
   // Calling deletePostById action
   // @input : PostId, username and history
-
   handleDeletePost = (postId) => {
     let username = this.props.auth.user.username;
     this.props.deletePostById(postId, username, this.props.history)
@@ -39,7 +38,7 @@ class PostAction extends Component {
       postedById = post.postedBy._id;
       postId = post._id
     }
-    const showThrashIcon = (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
+   const showThrashIcon = (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
     return (
       <div>
         <div className="actions">
@@ -48,7 +47,7 @@ class PostAction extends Component {
           <i className="far fa-paper-plane fa-2x action"></i>
           <i className="far fa-bookmark fa-2x action"></i>
           {/* Loggedin user only can delete the post(Show thrash icon) */}
-          {postedById === auth.user.id ? { showThrashIcon } : null}
+          {postedById === auth.user.id ?  showThrashIcon : null}
         </div>
         <div className="likes">
           {/* <img src={post} className="round-image image-22" /> */}

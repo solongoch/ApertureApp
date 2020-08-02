@@ -41,17 +41,14 @@ export default function (state = initialState, action) {
         ...state,
         followingLists: action.payload.Following
       };
-      case UNFOLLOW_USER:
-        {
-          console.log("action.payload",action.payload);
-          console.log("oldFollowingList",state.followingLists);
-          
-          return {
-            ...state,
-            followingLists: state.followingLists.filter(user => user.user._id !==action.payload)
-          };
+    case UNFOLLOW_USER:
+      {
+        return {
+          ...state,
+          followingLists: state.followingLists.filter(user => user.user._id !== action.payload)
+        };
 
-        }
+      }
     case GET_SUGGESTED_PROFILES:
       return {
         ...state,

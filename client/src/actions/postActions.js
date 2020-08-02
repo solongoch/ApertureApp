@@ -31,25 +31,26 @@ export const createPost = (newPost) => dispatch => {
 //Delete Post by PostId
 
 export const deletePostById = (postId, username, history) => dispatch => {
-  axios.delete(`/api/posts/${postId}`)
-    .then(res => {
-      window.confirm("Are you sure you want to delete this post?");
-      dispatch({
-        type: DELETE_POST,
-        payload: postId
-      });
-      window.alert("Post deleted...")
-      history.push(`/profile/${username}`);
-    })
-    // .then(res => history.push(`/profile/${username}`))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
+  if (window.confirm("Are you sure you want to delete this post?")) {
+    axios.delete(`/api/posts/${postId}`)
+      .then(res => {
+        window.confirm("Are you sure you want to delete this post?");
+        dispatch({
+          type: DELETE_POST,
+          payload: postId
+        });
+        window.alert("Post deleted...")
+        history.push(`/profile/${username}`);
       })
-    )
+      // .then(res => history.push(`/profile/${username}`))
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      )
+  }
 }
-
 //Get Posts
 export const getAllPosts = () => dispatch => {
   axios.get('/api/posts/')

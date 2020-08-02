@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import "./follow.css";
 import { Link } from "react-router-dom";
 import Unfollow from './Unfollow';
-import { getFollowings } from '../../actions/profileActions';
+import { getFollowings, unfollowUser } from '../../actions/profileActions';
 import { connect } from 'react-redux'
 
 
@@ -11,37 +11,38 @@ class Followings extends Component {
     super();
     this.state = {
       _showUnfollow: false,
-      followingLists:{}
+      followingLists: {},
+      _unfollowUser: {}
+
     }
   }
+//show unfollow User component on click of following button
+  showUnfollow = (user) => {
+    this.setState({ _showUnfollow: true });
+    this.setState({ _unfollowUser: user });
 
-  showUnfollow = () => {
-    this.setState({ _showUnfollow: true })
   }
+
+//hide unfollow User component on click of unfollow button in unfollow component
   hideUnfollow = () => {
+    //Calling Unfollowuser action
+    this.props.unfollowUser(this.state._unfollowUser.user._id)
     this.setState({ _showUnfollow: false });
   }
 
   componentDidMount() {
     this.props.getFollowings(this.props.auth.username)
   }
-  // componentWillReceiveProps(nextProps){
-  //   if(nextProps.profile)
-  //   {
-  //     this.setState({followingLists:nextProps.profile.profile})
-  //   }
 
-  // }
   render() {
     if (!this.props._showFollowings) {
       return null;
     }
-    const {followingLists} = this.props;
+    const { followingLists } = this.props;
+    const { _unfollowUser } = this.state;
 
-    if(followingLists.Following){
+    console.log("followingLists.." , followingLists);
 
-      console.log("hello",followingLists.Following);
-    }
     return (
       <div className='mainwrapper-div'>
         <div className='subwrapper-div'>
@@ -53,7 +54,7 @@ class Followings extends Component {
             <hr />
             <div className='scrolluser'>
               {
-                followingLists.Following.map((user) => {
+                followingLists.map((user) => {
                   return (
                     <div className='row' key={user.user._id}>
 
@@ -68,7 +69,7 @@ class Followings extends Component {
                       </div>
                       <div className='userinfo-div col-6 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
                         <Link
-                          to='/profile'
+                          to={`/profile/${user.user.username}`} target='_blank'
                           className='username-link'>
                           <span className="username"> {user.user.username} </span>
                         </Link>
@@ -76,17 +77,19 @@ class Followings extends Component {
                       </div>
                       <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
                         <button className='btn btn-primary-outline'
-                          onClick={this.showUnfollow}>
-                          Followings
-                        </button>
+                          onClick={this.showUnfollow.bind(this, user)}>
+                          Following
+                          </button>
                       </div>
                     </div>
                   )
                 })
 
               }
+              <Unfollow _showUnfollow={this.state._showUnfollow}
+                hideUnfollow={this.hideUnfollow} _unfollowUser={_unfollowUser}
+              />
             </div>
-            <Unfollow _showUnfollow={this.state._showUnfollow} hideUnfollow={this.hideUnfollow} />
           </div>
         </div>
       </div>
@@ -97,7 +100,7 @@ class Followings extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth.user,
-  followingLists : state.profile.followingLists
+  followingLists: state.profile.followingLists
 })
 
-export default connect(mapStateToProps, ({ getFollowings }))(Followings);
+export default connect(mapStateToProps, ({ getFollowings , unfollowUser }))(Followings);

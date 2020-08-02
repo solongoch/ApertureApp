@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logoImage from "../../image/avatar.png";
 import './unfollow.css';
 
 class Unfollow extends Component {
@@ -7,8 +6,9 @@ class Unfollow extends Component {
     if (!this.props._showUnfollow) {
       return null;
     }
+    const {_unfollowUser} = this.props;
+    let user = _unfollowUser.user;
     return (
-     
       <div className="mainWrapunfollow-div">
         <div className='subwrapperunfollow-div'>
           <div className="card unfollow-card mx-auto">
@@ -16,11 +16,11 @@ class Unfollow extends Component {
               <form className="following-form">
                 <div className="form-group">
                   <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">
-                    <img className="avatar-img-unfollow " src={logoImage} alt="Avatar" />
+                    <img className="avatar-img-unfollow " src={user.avatar} alt="Avatar" />
                   </div>
                   <div className="info-div col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6">
                     <p className="info-p">
-                      Unfollow @rambha_?
+                      Unfollow @{user.username} ?
                     </p>
                   </div>
                   <div className="action-div">
@@ -36,4 +36,7 @@ class Unfollow extends Component {
     )
   }
 }
+
+
+
 export default Unfollow;

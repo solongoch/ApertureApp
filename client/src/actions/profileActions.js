@@ -5,7 +5,8 @@ import {
   PROFILE_LOADING,
   UPLOAD_AVATAR,
   GET_ERRORS,
-  GET_FOLLOWING
+  GET_FOLLOWING,
+  UNFOLLOW_USER
 } from "./types";
 
 import axios from "axios";
@@ -145,6 +146,21 @@ export const getFollowings = (username) => dispatch => {
     .catch(err => console.log(err.response.data));
 }
 
+
+//Unfollow user
+
+export const unfollowUser = (userId) => dispatch => {
+  if (window.confirm('Are you sure you want to unfollow?',userId )) {
+    axios.put(`/api/${userId}/unfollow`)
+      .then(res => {
+        dispatch({
+          type: UNFOLLOW_USER,
+          payload: userId
+        })
+      })
+      .catch(err => console.log(err.response.data));
+  }
+}
 // Profile loading
 export const setProfileLoading = () => {
   return {

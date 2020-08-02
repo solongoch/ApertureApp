@@ -4,6 +4,7 @@ import {
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
   GET_FOLLOWING,
+  UNFOLLOW_USER,
   GET_SUGGESTED_PROFILES
 } from "../actions/types";
 
@@ -38,8 +39,19 @@ export default function (state = initialState, action) {
     case GET_FOLLOWING:
       return {
         ...state,
-        followingLists: action.payload
-      }
+        followingLists: action.payload.Following
+      };
+      case UNFOLLOW_USER:
+        {
+          console.log("action.payload",action.payload);
+          console.log("oldFollowingList",state.followingLists);
+          
+          return {
+            ...state,
+            followingLists: state.followingLists.filter(user => user.user._id !==action.payload)
+          };
+
+        }
     case GET_SUGGESTED_PROFILES:
       return {
         ...state,

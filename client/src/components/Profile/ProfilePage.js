@@ -10,35 +10,29 @@ import ProfilePosts from './ProfilePosts';
 import './profile.css';
 
 class ProfilePage extends Component {
-    
+
   componentDidMount() {
     this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
   }
 
   render() {
-    if(this.props.profileState.profile){
-
+    if (this.props.profileState.profile) {
       var _posts = this.props.profileState.profile.posts;
       var _profilePosts;
-      if (_posts.length>0) {
+      if (_posts.length > 0) {
         _profilePosts = <ProfilePosts posts={_posts} />
-      } else{
+      } else {
         _profilePosts = (<div>
-              <h1 className="text-center"><i className="fa fa-camera"/></h1>
-              <h3 className="text-center"> No Posts Yet</h3> 
-        </div>) 
+          <h1 className="text-center"><i className="fa fa-camera" /></h1>
+          <h3 className="text-center"> No Posts Yet</h3>
+        </div>)
       }
     }
-    
-
     return (
       <div className="profile">
-        <ProfileHeader profile={ this.props.profileState.profile } />
+        <ProfileHeader profile={this.props.profileState.profile} />
         <div className="top-post-menu d-flex flex-row justify-content-center"></div>
-        
-        
         {_profilePosts}
-    
       </div>
     )
   }

@@ -26,22 +26,25 @@ export const createPost = newPost => dispatch => {
 };
 
 // Get SinglePost
-export const getSinglePost = postId => dispatch => {
+export const getSinglePost = (postId, history) => dispatch => {
   // API call to MongoDB to get SinglePost
   axios
-    .get(`api/posts/${postId}`)
+    .get(`/api/posts/${postId}`)
     .then(res => {
       dispatch({
         type: GET_SINGLE_POST,
-        payload: res.data.post
+        payload: res.data
       });
     })
     .catch(err => {
+      if (err.response.status === 404) {
+        history.push("/not-found");
+      } else {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
-    });
+    }});
 };
 
 // Post Comment

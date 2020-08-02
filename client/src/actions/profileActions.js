@@ -107,7 +107,6 @@ export const deleteAccount = (history) => dispatch => {
       }
       )
       .catch(err => {
-        console.log(err)
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data
@@ -134,7 +133,6 @@ export const changePassword = (changePass, history) => dispatch => {
 }
 
 //Get Followings
-
 export const getFollowings = (username) => dispatch => {
   axios.get(`/api/${username}/following`)
     .then(res => {
@@ -148,7 +146,6 @@ export const getFollowings = (username) => dispatch => {
 
 
 //Unfollow user
-
 export const unfollowUser = (userId) => dispatch => {
   if (window.confirm('Are you sure you want to unfollow?',userId )) {
     axios.put(`/api/${userId}/unfollow`)

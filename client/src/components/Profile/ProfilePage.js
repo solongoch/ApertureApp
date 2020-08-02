@@ -15,8 +15,17 @@ class ProfilePage extends Component {
     this.props.getProfileByUsername(this.props.match.params.username, this.props.history);
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.profileState.profile)
+    {
+      this.setState({posts: nextProps.profileState.profile.posts })
+    }
+  }
+
+
   render() {
-    if (this.props.profileState.profile) {
+    
+    if(this.props.profileState.profile){
       var _posts = this.props.profileState.profile.posts;
       var _profilePosts;
       if (_posts.length > 0) {
@@ -30,8 +39,8 @@ class ProfilePage extends Component {
     }
     return (
       <div className="profile">
-        <ProfileHeader profile={this.props.profileState.profile} />
-        <div className="top-post-menu d-flex flex-row justify-content-center"></div>
+        <ProfileHeader profile={ this.props.profileState.profile } />
+        <div className="top-post-menu d-flex flex-row justify-content-center"></div>  
         {_profilePosts}
       </div>
     )

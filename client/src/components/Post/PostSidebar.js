@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 // import CSS
 import './single-post.css';
 // import Components
@@ -7,14 +8,34 @@ import PostActions from './PostActions';
 
 class PostSidebar extends Component {
   render() {
-    const {post} = this.props.post;
-    return (
-      
-        <div className="post-details">
-          <PostCommentSection post={post}></PostCommentSection>
-          <PostActions post={post}></PostActions>
+    const { post }= this.props;
+    const _caption = (post.caption) ?
+      (<div className="comment-div">
+        <div>
+          <Link to={`/profile/${post.postedBy.username}`}>
+            <img
+              className="round-image image-32 commentor-image"
+              src={post.postedBy.avatar}
+              alt="Post author"
+            />
+          </Link>
         </div>
-      
+        <div className="d-flex flex-column left-15">
+          <div>
+            <Link className="font-weight-bold" to="/profile">
+              {post.postedBy.username}
+            </Link>
+            <div className="comment-text">{post.caption}</div>
+          </div>
+        </div>
+      </div>) : null
+    console.log(post.comments)
+    return (  
+        <div className="post-details">
+          {_caption}  
+          <PostCommentSection commments={post.comments} />
+          <PostActions post={post} />
+        </div>      
     )
   }
 }

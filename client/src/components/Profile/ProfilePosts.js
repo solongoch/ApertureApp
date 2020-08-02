@@ -11,10 +11,9 @@ class ProfilePosts extends Component {
     this.props.getAllPosts();
   }
   render() {
-
     const { posts } = this.props;
-    return (
 
+    return (
       <div className="profileposts">
         {posts.map(post => {
           return (
@@ -36,7 +35,6 @@ class ProfilePosts extends Component {
           )
         })}
       </div>
-
     )
   }
 }

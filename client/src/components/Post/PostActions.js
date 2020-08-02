@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Moment from "react-moment";
 // import CSS
-import './single-post.css';
+import "./single-post.css";
 // import Component
-import PostComment from './PostComment';
-
+import PostComment from "./PostComment";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { deletePostById } from '../../actions/postActions';
@@ -33,13 +33,13 @@ class PostAction extends Component {
   render() {
 
     const { post, auth } = this.props
-    var postedById=null;
-    var postId=null;
+    var postedById = null;
+    var postId = null;
     if (post.postedBy) {
       postedById = post.postedBy._id;
       postId = post._id
     }
-
+    const showThrashIcon = (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
     return (
       <div>
         <div className="actions">
@@ -47,18 +47,28 @@ class PostAction extends Component {
           <i className="far fa-comment fa-2x action"></i>
           <i className="far fa-paper-plane fa-2x action"></i>
           <i className="far fa-bookmark fa-2x action"></i>
-
-          {
-            postedById === auth.user.id
-              ? (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this,postId)}  ></i>)
-              : null
-          }
+          {/* Loggedin user only can delete the post(Show thrash icon) */}
+          {postedById === auth.user.id ? { showThrashIcon } : null}
         </div>
         <div className="likes">
           {/* <img src={post} className="round-image image-22" /> */}
-          <span className="font-weight-bold">{this.state.likes} likes</span>
+          <span className="font-weight-bold">
+            {(() => {
+              const likes = post.likes.length;
+              switch (likes) {
+                case 0:
+                  return null;
+                case 1:
+                  return <span>1 like</span>;
+                default:
+                  return <span>{likes} likes</span>;
+              }
+            })()}
+          </span>
         </div>
-        <div className="posted-date"></div>
+        <div className="posted-date">
+          <Moment format="MMM D YYYY">{post.timePosted}</Moment>
+        </div>
         <PostComment></PostComment>
       </div>
 

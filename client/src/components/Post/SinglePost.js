@@ -1,34 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPost } from '../../actions/postActions';
+// import Action
+import { getSinglePost } from '../../actions/postActions';
 // import CSS
 import './single-post.css';
-// import images
+// import Components
 import PostSidebar from './PostSidebar';
-
 import PostHeader from './PostHeader';
 
 
 class SinglePost extends Component {
-
   componentDidMount() {
-    if (this.props.match.params.postId) {
-      let postId = this.props.match.params.postId;
-      this.props.getPost(postId);
-    }
+    this.props.getSinglePost(this.props.match.params.postId, this.props.history)
   }
 
   render() {
-    const { post } = this.props;
+    const { post }= this.props;
+    if (!post) {
+      return "Loading..."
+    }
     return (
       <div id="single-post-div">
         <div className="single-post">
-          <PostHeader post={post}></PostHeader>
           <div className="post-image">
             <img src={post.photo} alt="Post" />
           </div>
         </div>
-        <PostSidebar post={post}></PostSidebar>
+        <div className="sidebar">
+          <PostHeader postedBy={post.postedBy} />
+          <PostSidebar post={post} />
+        </div>
       </div>
     )
   }
@@ -36,6 +37,6 @@ class SinglePost extends Component {
 
 const mapStateToProps = (state) => ({
   post: state.post.post
-})
+});
 
-export default connect(mapStateToProps, { getPost })(SinglePost);
+export default connect(mapStateToProps, { getSinglePost })(SinglePost);

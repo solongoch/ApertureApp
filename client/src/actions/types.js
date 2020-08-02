@@ -17,4 +17,5 @@ export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 export const POST_LOADING = 'POST_LOADING';
 export const GET_HOMEPAGE_POSTS = 'GET_HOMEPAGE_POSTS';
+export const GET_SINGLE_POST = 'GET_SINGLE_POST';
 export const POST_COMMENT = 'POST_COMMENT';

@@ -24,7 +24,7 @@ export const createPost = (newPost) => dispatch => {
 // Post Comment
 export const sendComment = (comment) => dispatch => {
   axios
-    .post('/api/post/comment/${postid}', comment)
+    .post(`/api/post/comment/${postid}`, comment)
     .then(res => {
       dispatch({
         type: POST_COMMENT,

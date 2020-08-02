@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './single-post.css';
 // import Component
 import PostComment from './PostComment';
+import axios from 'axios';
 
 class PostActions extends Component {  
   state = {
@@ -14,6 +15,11 @@ class PostActions extends Component {
     this.setState({
       likes: newCount
     });
+
+    axios
+      .put(`/api/posts/${postid}/lu`)
+      .then(res => console.log(res))
+      .catch(err => console.log(err.response.data));
   };
 
   render() {

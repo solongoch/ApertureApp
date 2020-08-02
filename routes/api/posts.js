@@ -190,7 +190,9 @@ router.post(
           if(post){
             const newComment = {
               commentBody: req.body.commentBody,
-              commentedBy: req.user.id
+              commentedById: req.user.id,
+              commentedByUsername: req.user.username,
+              commentedByAvatar: req.user.avatar
             };
             post.comments.unshift(newComment);  // Add to comments array
             post.save().then((post) => res.json(post)); // Save

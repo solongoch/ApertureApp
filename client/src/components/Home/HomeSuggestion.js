@@ -14,22 +14,22 @@ class HomeSuggestion extends Component {
     if (!suggestions) {
       return null
     }
-    // const suggestedAccounts = suggestions.map(suggestion => {})
+   
     return (
       <div>
         <div className="d-flex justify-content-between">
           <span className="font-weight-bold">Suggestions For You</span>
           <Link to="/suggestion" className="font-weight-bold">See all</Link>
         </div>
-        {/* Map throught suggestions to get each profile */}
-        {suggestions.map(suggestion => 
-          (<div className="d-flex justify-content-between align-items-center" key={Math.random()}>
+        {/* Map through suggestions to get each profile */}
+        {suggestions.slice(0, 5).map(suggestion => 
+          (<div className="d-flex justify-content-between align-items-center" key={suggestion._id}>
             <div className="profile-section">
               <Link to="/">
                 <img className="round-image image-32" src={suggestion.avatar} alt="User" />
               </Link>
               <div>
-                <div className="font-weight-bold left-15"><Link to="/">{suggestion.username}</Link></div>
+                <div className="font-weight-bold left-15"><Link to={`/profile/${suggestion.username}`}>{suggestion.username}</Link></div>
                 <div className="make-gray left-15">Followed by {suggestion.followers.length} people</div>
               </div>
             </div>

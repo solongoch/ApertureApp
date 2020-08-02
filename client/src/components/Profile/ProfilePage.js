@@ -25,14 +25,11 @@ class ProfilePage extends Component {
     {
       this.setState({posts: nextProps.profileState.profile.posts })
     }
-
   }
 
   render() {
     if(this.props.profileState.profile){
-
       var _posts = this.props.profileState.profile.posts;
-      console.log("props",_posts);
       var _profilePosts;
       if (_posts) {
         _profilePosts = <ProfilePosts posts={_posts} />
@@ -43,11 +40,8 @@ class ProfilePage extends Component {
     return (
       <div className="profile">
         <ProfileHeader profile={ this.props.profileState.profile } />
-        <div className="top-post-menu d-flex flex-row justify-content-center"></div>
-        
-        
+        <div className="top-post-menu d-flex flex-row justify-content-center"></div>  
         {_profilePosts}
-    
       </div>
     )
   }

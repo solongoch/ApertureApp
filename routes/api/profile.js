@@ -22,11 +22,12 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
 
   //Check User exists 
   User.findOne(userName,
-    ["username", "name", "avatar", "bio", "website", "followers", "following", "isPublic"])
+    ["_id","username", "name", "avatar", "bio", "website", "followers", "following", "isPublic"])
     .lean()
     .then(user => {
       if (user) {
         const data = {
+          id:user._id,
           isPublic: user.isPublic,
           name: user.name,
           username: user.username,

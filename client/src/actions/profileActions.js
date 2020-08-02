@@ -2,10 +2,12 @@ import {
   SET_CURRENT_USER,
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
+  GET_SEARCH_BY_USERNAME,
   PROFILE_LOADING,
   UPLOAD_AVATAR,
   GET_ERRORS,
   GET_FOLLOWING,
+  FOLLOW_USER,
   UNFOLLOW_USER
 } from "./types";
 
@@ -36,6 +38,31 @@ export const getProfileByUsername = (username, history) => dispatch => {
     });
 };
 
+
+// Get profile by username
+export const getSearchByUsername = (username, history) => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/${username}`)
+    .then(res => {
+      dispatch({
+        type: GET_SEARCH_BY_USERNAME,
+        payload: res.data
+      });
+      history.push(`/search/${res.data.username}`);
+    })
+    .catch(err => {
+      // 404 ERROR. if user not found redirect to "/not-found"
+      if (err.response.status === 404) {
+        history.push("/not-found");
+      } else {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
+      }
+    });
+};
 
 
 // Get current profile
@@ -144,10 +171,21 @@ export const getFollowings = (username) => dispatch => {
     .catch(err => console.log(err.response.data));
 }
 
+//follow user
+export const followUser = (userId) => dispatch => {
+  axios.put(`/api/${userId}/follow`)
+    .then(res => {
+      dispatch({
+        type: FOLLOW_USER,
+        payload: userId
+      })
+    })
+    .catch(err => console.log(err.response.data));
+}
 
 //Unfollow user
 export const unfollowUser = (userId) => dispatch => {
-  if (window.confirm('Are you sure you want to unfollow?',userId )) {
+  if (window.confirm('Are you sure you want to unfollow?', userId)) {
     axios.put(`/api/${userId}/unfollow`)
       .then(res => {
         dispatch({

@@ -41,8 +41,6 @@ class Followings extends Component {
     const { followingLists } = this.props;
     const { _unfollowUser } = this.state;
 
-    console.log("followingLists.." , followingLists);
-
     return (
       <div className='mainwrapper-div'>
         <div className='subwrapper-div'>

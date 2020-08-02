@@ -42,6 +42,7 @@ class Homepage extends Component {
             {/* <div><Link to="/">Location</Link></div> */}
           </div>
         </div>
+
         {/* ACTUAL POST PHOTO */}
         <div className="post-image-div">
           <img className="post-image" src={post.photo} alt="Post" />
@@ -53,11 +54,11 @@ class Homepage extends Component {
             {/* LIKE */}
             <i className="far fa-heart fa-2x action"></i>
             {/* GO TO SINGLE POST PAGE */}
-            <Link to={`/post/${post._id}`} className="action"><i className="far fa-comment fa-2x"></i></Link>
+            <Link to={`/post/${post._id}`} className="action d-none"><i className="far fa-comment fa-2x"></i></Link>
             {/* SHARE */}
-            <i className="far fa-paper-plane fa-2x action"></i>
+            <i className="far fa-paper-plane fa-2x action d-none"></i>
             {/* SAVE */}
-            <i className="far fa-bookmark fa-2x action"></i>
+            <i className="far fa-bookmark fa-2x action d-none"></i>
           </div>
           {/* LIKES OF THIS POST */}
           <div className="font-weight-bold line">
@@ -91,8 +92,8 @@ class Homepage extends Component {
             (post.comments.map(comment => {
               return (
               <div className="line" key={Math.random()}>
-                <Link to={`/profile/${comment.commentedBy.username}`} className="font-weight-bold right-5">
-                  {comment.commentedBy.username}
+                <Link to={`/profile/${comment.commentedByUsername}`} className="font-weight-bold right-5">
+                  {comment.commentedByUsername}
                 </Link>
                 {comment.commentBody}
               </div> )}

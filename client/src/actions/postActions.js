@@ -51,6 +51,7 @@ export const deletePostById = (postId, username, history) => dispatch => {
       )
   }
 }
+
 //Get Posts
 export const getAllPosts = () => dispatch => {
   axios.get('/api/posts/')

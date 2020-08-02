@@ -18,6 +18,7 @@ class PostActions extends Component {
       likes: newCount
     });
 
+
     axios
       .put(`/api/posts/${postid}/lu`)
       .then(res => console.log(res))

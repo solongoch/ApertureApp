@@ -11,7 +11,6 @@ import axios from "axios";
 
 // Get profile by username
 export const getProfileByUsername = (username, history) => dispatch => {
-  dispatch(setProfileLoading());
   axios
     .get(`/api/profile/${username}`)
     .then(res => {

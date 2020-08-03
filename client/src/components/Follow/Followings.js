@@ -16,14 +16,14 @@ class Followings extends Component {
 
     }
   }
-//show unfollow User component on click of following button
+  //show unfollow User component on click of following button
   showUnfollow = (user) => {
     this.setState({ _showUnfollow: true });
     this.setState({ _unfollowUser: user });
 
   }
 
-//hide unfollow User component on click of unfollow button in unfollow component
+  //hide unfollow User component on click of unfollow button in unfollow component
   hideUnfollow = () => {
     //Calling Unfollowuser action
     this.props.unfollowUser(this.state._unfollowUser.user._id)
@@ -101,4 +101,4 @@ const mapStateToProps = state => ({
   followingLists: state.profile.followingLists
 })
 
-export default connect(mapStateToProps, ({ getFollowings , unfollowUser }))(Followings);
+export default connect(mapStateToProps, ({ getFollowings, unfollowUser }))(Followings);

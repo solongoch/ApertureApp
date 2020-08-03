@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 // import CSS
 import "./single-post.css";
-// import images
-import profilePhoto from "../../image/img-sq.jpg";
 
 class PostHeader extends Component {
   render() {

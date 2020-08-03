@@ -60,7 +60,7 @@ class ProfileSearchHeader extends Component {
               <div className="profile-username">{profile.username}</div>
               {/* Edit Profile */}
               <div className="blue-bg button font-weight-bold" style={{ "color": 'white' }}>
-                <Link onClick={this.handleFollow.bind(this, profile.id)}>Follow</Link>
+                <Link to="" onClick={this.handleFollow.bind(this, profile.id)}>Follow</Link>
               </div>
             </div>
             <ul className="counts d-flex flex-row">

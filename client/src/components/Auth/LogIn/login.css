@@ -91,12 +91,13 @@
   color: #0095f6;
 }
 
-div.error-style {
+div.error-style.invalid-feedback {
     text-align: left;
-    display: none;
+    /* display: none; */
     width: 100%;
     margin-top: 0.25rem;
-    font-size: 14px;
+    font-size: 16px;
+    margin-left: 1px;
   }
   
 @media (max-width: 900px) {

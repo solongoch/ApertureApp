@@ -3,15 +3,22 @@ import {
   PROFILE_LOADING,
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
+  GET_FOLLOWING,
+  GET_FOLLOWERS,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
+  CLEAR_CURRENT_PROFILE,
   GET_SUGGESTED_PROFILES
 } from "../actions/types";
 
 const initialState = {
   profile: "",
-  loading: false
+  loading: false,
+  followingLists: null,
+  followersLists: null
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case UPLOAD_AVATAR:
       return {
@@ -32,6 +39,37 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profile: action.payload
+      };
+    case GET_FOLLOWING:
+      return {
+        ...state,
+        followingLists: action.payload.Following
+      };
+    case GET_FOLLOWERS:
+      return {
+        ...state,
+        followersLists: action.payload.Followers
+      };
+    case FOLLOW_USER:
+      {
+        return {
+          ...state,
+          followingLists: [action.payload, ...state.followingLists]
+        };
+      }
+    case UNFOLLOW_USER:
+      {
+        return {
+          ...state,
+          followingLists: state.followingLists.filter(user => user.user._id !== action.payload)
+        };
+      }
+    case CLEAR_CURRENT_PROFILE:
+      return {
+        profile: '',
+        followingLists: null,
+        searchedUserProfile: null,
+        followersLists: null
       };
     case GET_SUGGESTED_PROFILES:
       return {

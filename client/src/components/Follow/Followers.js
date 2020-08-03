@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import "./follow.css";
 import { Link } from "react-router-dom";
-import users from './Data';
+import { getFollowers } from './../../actions/profileActions';
+import { connect } from 'react-redux';
+import isEmpty from '../../validation/is-empty';
 
 class Followers extends Component {
-  // constructor() {
-  //   super();
-  //   this.state={
-  //     showModal: false
-  //   }
-  //   this.handleOpenModal = this.handleOpenModal.bind(this);
-  //   this.handleCloseModal = this.handleCloseModal.bind(this);
-  // }
+  componentDidMount() {
+    if (!isEmpty(this.props.username)) {
+      this.props.getFollowers(this.props.username)
+
+    }
+  }
 
   render() {
     if (!this.props._showFollowers) {
       return null;
     }
+
+    const { followersLists } = this.props;
     return (
       <div className='mainwrapper-div'>
         <div className='subwrapper-div'>
@@ -30,26 +32,26 @@ class Followers extends Component {
             <hr />
             <div className='scrolluser'>
               {
-                users.map((user) => {
+                followersLists.map((user) => {
                   return (
-                    <div className='row' key={user.userId}>
+                    <div className='row' key={user.user._id}>
 
                       <div className='avatar-div col-2 col-sm-2 col-md-2 col-lg-2 col-xxs-2'>
-                        <Link to='/profile'>
+                        <Link to={`/profile/${user.user.username}`}>
                           <img
                             className='user-avatar'
-                            src={user.avatar}
+                            src={user.user.avatar}
                             alt='Avatar'
                           />
                         </Link>
                       </div>
                       <div className='userinfo-div col-6 col-sm-6 col-md-6 col-lg-6 col-xxs-6'>
                         <Link
-                          to='/profile'
+                          to={`/profile/${user.user.username}`}
                           className='username-link'>
-                          <span className="username"> {user.username} </span>
+                          <span className="username"> {user.user.username} </span>
                         </Link>
-                        <span className="name"> {user.name}  </span>
+                        <span className="name"> {user.user.name}  </span>
                       </div>
                       <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
                         <button className='btn mt-1  btn-sm btn-follow'>
@@ -69,4 +71,10 @@ class Followers extends Component {
     );
   }
 }
-export default Followers;
+
+const mapStateToProps = state => ({
+  auth: state.auth.user,
+  followersLists: state.profile.followersLists
+})
+
+export default connect(mapStateToProps, ({ getFollowers }))(Followers);

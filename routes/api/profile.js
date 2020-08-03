@@ -22,11 +22,12 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
 
   //Check User exists 
   User.findOne(userName,
-    ["username", "name", "avatar", "bio", "website", "followers", "following", "isPublic"])
+    ["_id","username", "name", "avatar", "bio", "website", "followers", "following", "isPublic"])
     .lean()
     .then(user => {
       if (user) {
         const data = {
+          id:user._id,
           isPublic: user.isPublic,
           name: user.name,
           username: user.username,
@@ -102,6 +103,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const user = {
+      id: req.user._id,
       name: req.user.name,
       username: req.user.username,
       email: req.user.email,
@@ -153,7 +155,6 @@ router.post(
           { new: true }
           ).then(updatedUser => {
             updatedUser = updatedUser.toObject();
-            delete updatedUser._id;
             delete updatedUser.password;
             delete updatedUser.followers;
             delete updatedUser.following;

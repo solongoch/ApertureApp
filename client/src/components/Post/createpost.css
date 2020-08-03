@@ -79,14 +79,15 @@ div.upload-image {
   justify-content: center;
   cursor: pointer;
   font-size: 60px;
-  color: #3897f6;
+  color: #007bff;
   padding-right: 5px;
+  opacity:1
 }
 
 .btn-submitpost {
   margin: 0;
   text-align: center;
-  width:80px;
+  width:150px;
   line-height: 15px;
 }
 .btn-submitpost.btn-primary.focus,

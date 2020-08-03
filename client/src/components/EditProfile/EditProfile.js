@@ -91,7 +91,6 @@ class EditProfile extends Component {
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
 
-      console.log("profile....", profile);
       // If profile field doesnt exist, make empty string
       profile.website = !isEmpty(profile.website) ? profile.website : '';
       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';

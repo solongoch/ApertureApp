@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import './profileposts.css';
+import {getAllPosts} from '../../actions/postActions';
+import {connect} from 'react-redux';
+
 
 class ProfilePosts extends Component {
+
+  componentDidMount(){
+    this.props.getAllPosts();
+  }
   render() {
     const { posts } = this.props;
 
@@ -32,4 +39,4 @@ class ProfilePosts extends Component {
   }
 }
 
-export default ProfilePosts;
+export default connect(null, {getAllPosts}) (ProfilePosts);

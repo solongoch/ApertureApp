@@ -1,10 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   CREATE_POST,
+  DELETE_POST,
   GET_SINGLE_POST,
+  GET_POSTS,
+  GET_ERRORS,
   POST_COMMENT,
-  GET_ERRORS
-} from "./types";
+  CLEAR_POSTS
+} from './types';
 
 //Create Post
 export const createPost = newPost => dispatch => {
@@ -40,17 +43,58 @@ export const getSinglePost = (postId, history) => dispatch => {
       if (err.response.status === 404) {
         history.push("/not-found");
       } else {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      });
-    }});
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
+      }
+    });
 };
 
+//Delete Post by PostId
+
+export const deletePostById = (postId, username, history) => dispatch => {
+  if (window.confirm("Are you sure you want to delete this post?")) {
+    axios.delete(`/api/posts/${postId}`)
+      .then(res => {
+        dispatch({
+          type: DELETE_POST,
+          payload: postId
+        });
+        window.alert("Post deleted...")
+        history.push(`/profile/${username}`);
+      })
+      // .then(res => history.push(`/profile/${username}`))
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      )
+  }
+}
+
+//Get Posts
+export const getAllPosts = () => dispatch => {
+  axios.get('/api/posts/')
+    .then(res => {
+      dispatch({
+        type: GET_POSTS,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_POSTS,
+        payload: null
+      })
+    })
+}
+
 // Post Comment
-export const sendComment = comment => dispatch => {
+export const sendComment = (postId, comment) => dispatch => {
   axios
-    .post("/api/post/comment/${postid}", comment)
+    .post(`/api/post/comment/${postId}`, comment)
     .then(res => {
       dispatch({
         type: POST_COMMENT,
@@ -63,4 +107,11 @@ export const sendComment = comment => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// Clear current profile
+export const clearPosts = () => {
+  return {
+    type: CLEAR_POSTS
+  };
 };

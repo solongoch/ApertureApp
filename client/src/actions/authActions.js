@@ -2,6 +2,8 @@ import { SET_CURRENT_USER, GET_ERRORS } from './types';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
+import { clearCurrentProfile } from "./profileActions";
+import { clearPosts } from "./postActions";
 
 //Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -53,6 +55,8 @@ export const logoutUser = (history) => dispatch => {
     type: SET_CURRENT_USER,
     payload: {}
   })
+  dispatch(clearCurrentProfile());
+  dispatch(clearPosts());
   history.push('/');
 }
 

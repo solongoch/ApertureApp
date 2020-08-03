@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import "./single-post.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { addComment } from "../../actions/postActions";
-import TextAreaFieldGroup from "../common/TextFieldGroup";
+import TextFieldGroup from "../common/TextFieldGroup";
 
 class PostComment extends Component {
   constructor(props) {
@@ -53,7 +52,7 @@ class PostComment extends Component {
           <TextFieldGroup
             placeholder="Add a comment..."
             name="comment"
-            value={this.state.commentBody}
+            value={this.state.text}
             onChange={this.onChange}
             error={errors.commentBody}
             info=""
@@ -80,7 +79,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { addComment }
-)(withRouter(PostComment));
+export default connect(mapStateToProps, { addComment })((PostComment));

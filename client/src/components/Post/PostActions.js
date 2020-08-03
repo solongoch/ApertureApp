@@ -38,7 +38,11 @@ class PostActions extends Component {
           <i className="far fa-comment fa-2x action"></i>
           {/* <i className="far fa-paper-plane fa-2x action"></i>
           <i className="far fa-bookmark fa-2x action"></i> */}
-          <i className="fa fa-trash fa-2x action"></i>
+          {
+            (post.postedBy._id !== this.props.auth.user.id) 
+            ? (<i className="fa fa-trash fa-2x action d-none"></i>) 
+            : (<i className="fa fa-trash fa-2x action"></i>)   
+          }       
         </div>
         <div className="likes">
           {/* <img src={post} className="round-image image-22" /> */}

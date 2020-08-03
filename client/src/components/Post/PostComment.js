@@ -38,6 +38,7 @@ class PostComment extends Component {
 
   this.props.addComment(postId, newComment);
   this.setState({ commentBody: ''});
+
   }
 
   onChange(e) {
@@ -47,20 +48,21 @@ class PostComment extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
-        <div className="form-group">
-        <TextAreaFieldGroup
-          placeholder="Add a comment..."
-          name="comment"
-          value={this.state.commentBody}
-          onChange={this.onChange}
-          error={errors.commentBody}
-        />
-        </div>
-        <button className="btn btn-primary col-12" type="submit">
-          Post Comment
-        </button>
-      </form>
+      <div className="add-comment-div">
+        <form className="add-comment-form" onSubmit={this.onSubmit}>
+          <TextFieldGroup
+            placeholder="Add a comment..."
+            name="comment"
+            value={this.state.commentBody}
+            onChange={this.onChange}
+            error={errors.commentBody}
+            info=""
+          />
+          <button className="btn btn-primary col-12" type="submit">
+            Post Comment
+          </button>
+        </form>
+      </div>
     );
   }
 }

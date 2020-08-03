@@ -4,6 +4,11 @@
   padding: 0;
   border: 0;
 }
+
+.App {
+  position: relative;
+}
+
 body {
   background-color: #fafafa;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -27,6 +32,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   margin-top: 32px;
+  padding-bottom: 4em; /* Footer length + 1em space */
 }
 
 /* External links */

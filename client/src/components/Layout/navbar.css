@@ -35,6 +35,10 @@ nav {
   margin-left: 48px;
 }
 
+#search:focus {
+  outline: none;
+}
+
 .menus-div {
   display: inline-flex;
   justify-content: flex-end;

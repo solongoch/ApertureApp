@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Spinner from '../common/Spinner';
 // import Action
 import { getSinglePost } from '../../actions/postActions';
 // import CSS
@@ -16,7 +17,7 @@ class SinglePost extends Component {
   render() {
     const { post }= this.props;
     if (!post) {
-      return "Loading..."
+      return (<Spinner />)
     }
     return (
       <div id="single-post-div">

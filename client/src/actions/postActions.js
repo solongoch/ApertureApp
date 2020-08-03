@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   CREATE_POST,
   GET_SINGLE_POST,
-  POST_COMMENT,
   GET_ERRORS
 } from "./types";
 
@@ -48,12 +47,12 @@ export const getSinglePost = (postId, history) => dispatch => {
 };
 
 // Post Comment
-export const sendComment = comment => dispatch => {
+export const sendComment = (postId, commentData) => dispatch => {
   axios
-    .post(`/api/post/comment/${postid}`, comment)
+    .post(`/api/post/comment/${postId}`, commentData)
     .then(res => {
       dispatch({
-        type: POST_COMMENT,
+        type: GET_SINGLE_POST,
         payload: res.data.post
       });
     })
@@ -64,3 +63,4 @@ export const sendComment = comment => dispatch => {
       })
     );
 };
+

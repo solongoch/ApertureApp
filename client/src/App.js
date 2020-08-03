@@ -81,6 +81,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/edit/:username" component={EditProfile} />
               </Switch>
+             
               <Switch>
                 <PrivateRoute exact path="/profile/:username/followings" component={Followings} />
               </Switch>
@@ -97,7 +98,7 @@ class App extends Component {
                 <PrivateRoute exact path="/create" component={CreatePost} />
               </Switch>
 
-            
+
             </div>
             <Footer />
           </div>

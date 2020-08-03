@@ -4,21 +4,27 @@ import {
   GET_PROFILE_BY_USERNAME,
   PROFILE_LOADING,
   UPLOAD_AVATAR,
-  GET_ERRORS
+  GET_ERRORS,
+  GET_FOLLOWING,
+  GET_FOLLOWERS,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
+  CLEAR_CURRENT_PROFILE
 } from "./types";
 
 import axios from "axios";
+import {logoutUser} from "./authActions";
 
 // Get profile by username
 export const getProfileByUsername = (username, history) => dispatch => {
   axios
     .get(`/api/profile/${username}`)
     .then(res => {
-      history.push(`/profile/${res.data.username}`)
       dispatch({
         type: GET_PROFILE_BY_USERNAME,
         payload: res.data
       });
+      history.push(`/profile/${res.data.username}`)
     })
     .catch(err => {
       // 404 ERROR. if user not found redirect to "/not-found"
@@ -32,6 +38,7 @@ export const getProfileByUsername = (username, history) => dispatch => {
       }
     });
 };
+
 
 
 
@@ -95,20 +102,24 @@ export const deleteAccount = (history) => dispatch => {
   if (window.confirm('Are you sure you want to delete your account?')) {
     axios
       .delete('/api/remove')
-      .then(res => {history.push('/'); 
-      dispatch({
+      .then(res => {
+        history.push('/');
+        dispatch({
           type: SET_CURRENT_USER,
           payload: {}
-        })}
+        })
+        dispatch(logoutUser());
+      }
       )
       .catch(err => {
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data
-        })}
-    );
-      
-};
+        })
+      }
+      );
+
+  };
 };
 
 //Change Password
@@ -125,6 +136,63 @@ export const changePassword = (changePass, history) => dispatch => {
         payload: err.response.data
       }));
 }
+
+//Get Followings
+export const getFollowings = (username) => dispatch => {
+  axios.get(`/api/${username}/following`)
+    .then(res => {
+      dispatch({
+        type: GET_FOLLOWING,
+        payload: res.data
+      })
+    })
+    .catch(err => console.log(err.response.data));
+}
+
+//Get Followings
+export const getFollowers = (username) => dispatch => {
+  axios.get(`/api/${username}/followers`)
+    .then(res => {
+      dispatch({
+        type: GET_FOLLOWERS,
+        payload: res.data
+      })
+    })
+    .catch(err => console.log(err.response.data));
+}
+
+//follow user
+export const followUser = (userId) => dispatch => {
+  axios.put(`/api/${userId}/follow`)
+    .then(res => {
+      dispatch({
+        type: FOLLOW_USER,
+        payload: userId
+      })
+    })
+    .catch(err => console.log(err.response.data));
+}
+
+//Unfollow user
+export const unfollowUser = (userId) => dispatch => {
+  if (window.confirm('Are you sure you want to unfollow?', userId)) {
+    axios.put(`/api/${userId}/unfollow`)
+      .then(res => {
+        dispatch({
+          type: UNFOLLOW_USER,
+          payload: userId
+        })
+      })
+      .catch(err => console.log(err.response.data));
+  }
+}
+
+// Clear current profile
+export const clearCurrentProfile = () => {
+  return {
+    type: CLEAR_CURRENT_PROFILE
+  };
+};
 
 // Profile loading
 export const setProfileLoading = () => {

@@ -85,7 +85,7 @@ router.post("/login", (req, res) => {
       if (!user) {
         return res.status(404).json({
           success: false,
-          message: "User not found"
+          loginId: "User not found"
         });
       }
       bcrypt
@@ -123,7 +123,7 @@ router.post("/login", (req, res) => {
         });
     })
     .catch(err =>
-      res.status(404).json({ success: false, message: err.message })
+      res.status(404).json({ success: false, loginId: err.message })
     );
 });
 

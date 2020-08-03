@@ -28,7 +28,8 @@ export class CreatePost extends Component {
         pauseOnHover: false,
         draggable: true,
         progress: 1
-      }
+      },
+      loading: false
     };
 
     this.handleSubmitPost = this.handleSubmitPost.bind(this);
@@ -52,15 +53,16 @@ export class CreatePost extends Component {
       this.setState({
         file,
         imagePreview: reader.result,
-        errors:{},
-        submitDisabled: !this.state.submitDisabled//share button is disabled before uploading image.
+        errors: {},
+        submitDisabled: !this.state.submitDisabled //share button is disabled before uploading image.
       });
     }
   }
-  
+
   handleSubmitPost(e) {
     e.preventDefault();
-    const { file } = this.state;
+    const { file, loading } = this.state;
+    this.setState({ loading: true }) //for refresh button inside button during uploading
     uploadImage(file)
       .then((res) => {
         this.setState({ photo: res.secure_url });
@@ -71,17 +73,16 @@ export class CreatePost extends Component {
         }
         this.props.createPost(newPost)
       });
+    this.setState({ submitDisabled: !this.state.submitDisabled });
   }
 
 
-
   componentWillReceiveProps(nextProps) {
-
-    const username= this.props.auth.user.username
-    if (nextProps.post.posts.length>0) {
+    const username = this.props.auth.user.username
+    if (nextProps.post.posts.length > 0) {
       toast.success('Posted Successfully', this.state.toastopts);
       this.props.history.push(`/profile/${username}`);
-    }else if (nextProps.errors.errors) {
+    } else if (nextProps.errors.errors) {
       this.setState({ errors: nextProps.errors.errors });
       toast.error(nextProps.errors.errors.photo, this.state.toastopts);
     }
@@ -90,14 +91,22 @@ export class CreatePost extends Component {
 
   render() {
     const { user } = this.props.auth
+    const { avatar } = this.props.profile;
+    let userAvatar = null;
     let previewImage = null;
-    let { imagePreview, errors, submitDisabled } = this.state;
+    let { imagePreview, errors, submitDisabled, loading } = this.state;
     if (imagePreview) {
       previewImage = (<img src={imagePreview} className="image-fluid" alt="UserImage" style={{ width: '100%' }} />);
     } else {
       previewImage = (<div className="previewText">Please select an Image for Preview</div>);
     }
 
+    if (avatar) {//Navbar avatar will change if user uploads the new avatar
+      userAvatar = (<img src={avatar} alt={user.username} className='userpost-avatar ' />);
+    } else {
+      userAvatar = (
+        <img src={user.avatar} alt={user.username} className='userpost-avatar ' />);
+    }
     return (
       <div className="card create-postcard shadow-lg col-11 col-sm-9 col-md-10 col-lg-10">
         <div className="card-header newpost-header">
@@ -110,7 +119,7 @@ export class CreatePost extends Component {
         <form className="createpost-form row" onSubmit={this.handleSubmitPost}>
           <div className="form-group createpost_formgrp">
             <div className="input-group mb-3">
-              <img src={user.avatar} alt="Avatar" className='userpost-avatar ' />
+              {userAvatar}
               <textarea rows='2'
                 placeholder="Write a caption..."
                 className={classNames('form-control  rounded caption col-11 col-sm-9 col-md-10 col-lg-10', { 'is-invalid': errors.caption })}
@@ -124,7 +133,13 @@ export class CreatePost extends Component {
                 <input type="file" hidden onChange={this.handleImageChange}
                   name='photo' className={classNames({ 'is-invalid': errors.photo })} />
               </label>
-              <button className="btn btn-primary shadow-none btn-submitpost" disabled={submitDisabled}>Share</button>
+              <button className="btn btn-primary shadow-none btn-submitpost" disabled={submitDisabled}>Share
+              {loading && <i className="fa fa-refresh fa-spin fa-xs ml-2" style={{ marginRight: "5px", fontSize: "14px" }} />}</button>
+
+
+              <Link to='/home' className='btn btn-primary shadow-none  ml-2 btn-submitpost'>
+                Cancel
+                </Link>
             </div>
           </div>
         </form>
@@ -139,7 +154,8 @@ export class CreatePost extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   post: state.post,
-  errors: state.errors
+  errors: state.errors,
+  profile: state.profile.profile
 })
 
 export default connect(mapStateToProps, { createPost })(CreatePost);

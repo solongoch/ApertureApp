@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
 // import Components
 import Followers from '../Follow/Followers';
@@ -17,15 +17,23 @@ class ProfileHeader extends Component {
 
   //to show and hide Following component 
   showFollowings = () => {
-    this.setState({ _showFollowings: true })
+    const { followingCount } = this.props.profile;
+    //display Following component only if user has followingCount > 0
+    if (followingCount > 0) {
+      this.setState({ _showFollowings: true });
+    }
   }
   hideFollowings = () => {
-    this.setState({ _showFollowings: false })
+    this.setState({ _showFollowings: false });
   }
 
   //to show and hide Followers component 
   showFollowers = () => {
-    this.setState({ _showFollowers: true })
+    const { followersCount } = this.props.profile;
+    //display Followers component only if user has followersCount > 0
+    if (followersCount > 0) {
+      this.setState({ _showFollowers: true })
+    }
   }
   hideFollowers = () => {
     this.setState({ _showFollowers: false })
@@ -64,10 +72,20 @@ class ProfileHeader extends Component {
             {/* Total number of following */}
             <li className="count" onClick={this.showFollowings}>
               <span className="font-weight-bold">{profile.followingCount}</span> followings
-              </li>
+            </li>
           </ul>
-          <Followers _showFollowers={this.state._showFollowers} followersClose={this.hideFollowers} />
-          <Followings _showFollowings={this.state._showFollowings} followingsClose={this.hideFollowings} />
+
+          {(profile.username && profile.followersCount > 0) &&
+            <Fragment>
+              <Followers _showFollowers={this.state._showFollowers} followersClose={this.hideFollowers}
+                username={profile.username} />
+            </Fragment>
+          }
+          {(profile.username && profile.followingCount > 0) &&
+            <Fragment>
+              <Followings _showFollowings={this.state._showFollowings} followingsClose={this.hideFollowings} username={profile.username} />
+            </Fragment>
+          }
           {/* Name */}
           <div className="font-weight-bold">{profile.name}</div>
           {/* Bio */}

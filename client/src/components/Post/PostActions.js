@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
-import { connect } from "react-redux";
 // import CSS
 import "./single-post.css";
 // import Component
 import PostComment from "./PostComment";
 import PropTypes from 'prop-types';
-import {addLike, removeLike} from '../../actions/postActions';
+import {addLike, removeLike, deletePostById} from '../../actions/postActions';
 
 class PostActions extends Component {
   onLikeClick(id) {
@@ -26,23 +25,33 @@ class PostActions extends Component {
     }
   }
 
+  // Calling deletePostById action
+  // @input : PostId, username and history
+  handleDeletePost = (postId) => {
+    let username = this.props.auth.user.username;
+    this.props.deletePostById(postId, username, this.props.history)
+  }
+
   render() {
-    const { post, auth } = this.props;
+
+    const { post, auth } = this.props
+    var postedById = null;
+    var postId = null;
+    if (post.postedBy) {
+      postedById = post.postedBy._id;
+      postId = post._id
+    }
+   const showThrashIcon = (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
+
     return (
-      <div className="post-actions">
+      <div>
         <div className="actions">
-          <button
-            className="far fa-heart fa-2x action"
-            onClick={this.addLike}
-          ></button>
+          <button className="far fa-heart fa-2x action" onClick={this.addLike}></button>
           <i className="far fa-comment fa-2x action"></i>
-          {/* <i className="far fa-paper-plane fa-2x action"></i>
-          <i className="far fa-bookmark fa-2x action"></i> */}
-          {
-            (post.postedBy._id !== this.props.auth.user.id) 
-            ? (<i className="fa fa-trash fa-2x action d-none"></i>) 
-            : (<i className="fa fa-trash fa-2x action"></i>)   
-          }       
+          <i className="far fa-paper-plane fa-2x action"></i>
+          <i className="far fa-bookmark fa-2x action"></i>
+          {/* Loggedin user only can delete the post(Show thrash icon) */}
+          {postedById === auth.user.id ?  showThrashIcon : null}
         </div>
         <div className="likes">
           {/* <img src={post} className="round-image image-22" /> */}
@@ -65,7 +74,8 @@ class PostActions extends Component {
         </div>
         <PostComment></PostComment>
       </div>
-    );
+
+    )
   }
 }
 
@@ -82,5 +92,6 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {addLike, removeLike}
+  {addLike, removeLike, deletePostById}
 )(PostActions);
+

@@ -29,11 +29,10 @@ class PostSidebar extends Component {
           </div>
         </div>
       </div>) : null
-    console.log(post.comments)
     return (  
         <div className="post-details">
           {_caption}  
-          <PostCommentSection commments={post.comments} />
+          <PostCommentSection comments={post.comments} />
           <PostActions post={post} />
         </div>      
     )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import Spinner from '../common/Spinner'
 // import Action
 import { getProfileByUsername } from '../../actions/profileActions';
 // import Components
@@ -28,8 +29,12 @@ class ProfilePage extends Component {
   }
 
   render() {
-    if(this.props.profileState.profile){
-      var _posts = this.props.profileState.profile.posts;
+    const { profile } = this.props.profileState;
+    if (!profile) {
+      return (<Spinner />)
+    }
+    if(profile){
+      var _posts = profile.posts;
       var _profilePosts;
       if (_posts) {
         _profilePosts = <ProfilePosts posts={_posts} />
@@ -39,7 +44,7 @@ class ProfilePage extends Component {
     // console.log(_posts.length);
     return (
       <div className="profile">
-        <ProfileHeader profile={ this.props.profileState.profile } />
+        <ProfileHeader profile={ profile } auth={ this.props.auth } />
         <div className="top-post-menu d-flex flex-row justify-content-center"></div>  
         {_profilePosts}
       </div>
@@ -48,7 +53,8 @@ class ProfilePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  profileState: state.profile
+  profileState: state.profile,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getProfileByUsername })(withRouter(ProfilePage));

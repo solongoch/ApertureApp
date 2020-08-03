@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import Spinner from '../common/Spinner'
 // import Action
 import { getSuggestedProfiles } from '../../actions/suggestionActions'
 
@@ -12,7 +13,7 @@ class HomeSuggestion extends Component {
   render() {
     const {suggestions} = this.props.profile;
     if (!suggestions) {
-      return null
+      return (<Spinner />)
     }
    
     return (

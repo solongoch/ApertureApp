@@ -5,7 +5,8 @@ import {
   GET_SINGLE_POST,
   GET_POSTS,
   GET_ERRORS,
-  POST_COMMENT
+  POST_COMMENT,
+  CLEAR_POSTS
 } from './types';
 
 //Create Post
@@ -106,4 +107,11 @@ export const sendComment = (postId, comment) => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// Clear current profile
+export const clearPosts = () => {
+  return {
+    type: CLEAR_POSTS
+  };
 };

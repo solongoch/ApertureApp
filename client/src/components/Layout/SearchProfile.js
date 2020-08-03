@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import isEmpty from '../../validation/is-empty';
 // import Action
-import { getSearchByUsername } from '../../actions/profileActions';
+import { getProfileByUsername } from '../../actions/profileActions';
 // import CSS
 import './navbar.css';
 
@@ -27,7 +27,7 @@ class searchProfile extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (!isEmpty(this.state.search)) {
-      this.props.getSearchByUsername(this.state.search, this.props.history);
+      this.props.getProfileByUsername(this.state.search, this.props.history);
     }
   }
 
@@ -49,4 +49,4 @@ class searchProfile extends Component {
   }
 }
 
-export default connect(null, { getSearchByUsername })(withRouter(searchProfile));
+export default connect(null, { getProfileByUsername })(withRouter(searchProfile));

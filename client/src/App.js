@@ -13,7 +13,6 @@ import Suggestion from './components/Suggestion/Suggestion';
 import EditProfile from './components/EditProfile/EditProfile';
 import ChangePassword from './components/EditProfile/ChangePassword';
 import ProfilePage from './components/Profile/ProfilePage';
-import ProfileSearchPage from './components/Profile/ProfileSearchPage';
 import CreatePost from './components/Post/CreatePost';
 import Followers from './components/Follow/Followers';
 import Followings from './components/Follow/Followings';
@@ -66,7 +65,7 @@ class App extends Component {
               <Route exact path="/" component={Landing} />
               <Route exact path='/signup' component={Signup} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/search/:username" component={ProfileSearchPage} />
+              <Route exact path="/profile/:username" component={ProfilePage} />
               <Route exact path="/not-found" component={NotFound} />
 
               {/* Add private routes here */}
@@ -82,9 +81,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/edit/:username" component={EditProfile} />
               </Switch>
-              <Switch>
-                <PrivateRoute exact path="/profile/:username" component={ProfilePage} />
-              </Switch>
+             
               <Switch>
                 <PrivateRoute exact path="/profile/:username/followings" component={Followings} />
               </Switch>

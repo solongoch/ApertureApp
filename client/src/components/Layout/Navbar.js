@@ -16,25 +16,15 @@ import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
 
-  constructor(params) {
-    super();
-    this.state = {
-      avatar: ''
-    }
-  }
+
   onLogoutClick(e) {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.profile) {
-      this.setState({ avatar: nextProps.profile.avatar })
-    }
-  }
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    const { avatar } = this.state;
+    const { avatar } = this.props.profile;
     let userAvatar = null;
 
     if (avatar) {//Navbar avatar will change if user uploads the new avatar

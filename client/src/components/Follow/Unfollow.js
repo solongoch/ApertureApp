@@ -27,7 +27,7 @@ class Unfollow extends Component {
                     <span onClick={this.props.hideUnfollow} className="link-unfollow col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 btn-unfollow text-center">Unfollow</span>
                   </div>
                   <div className="action-div">
-                    <span onClick={this.props.hideUnfollow} className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</span>
+                    <span onClick={this.props.cancelUnfollow} className="link-cancel col-12 col-sm-12 col-md-12 col-lg-12 col-xxs-6 text-center">Cancel</span>
                   </div>
                 </div>
               </form>

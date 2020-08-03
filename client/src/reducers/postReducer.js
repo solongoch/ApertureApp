@@ -3,7 +3,8 @@ import {
   DELETE_POST,
   GET_POSTS,
   GET_SINGLE_POST,
-  GET_HOMEPAGE_POSTS
+  GET_HOMEPAGE_POSTS,
+  CLEAR_POSTS
 } from '../actions/types';
 
 
@@ -39,6 +40,11 @@ export default function (state = initialState, action) {
         ...state,
         post: action.payload
       }
+      case CLEAR_POSTS:
+        return {
+          posts: [],
+          post: null
+        };
     default:
       return state;
   }

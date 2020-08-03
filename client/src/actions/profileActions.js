@@ -2,16 +2,18 @@ import {
   SET_CURRENT_USER,
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
-  GET_SEARCH_BY_USERNAME,
   PROFILE_LOADING,
   UPLOAD_AVATAR,
   GET_ERRORS,
   GET_FOLLOWING,
+  GET_FOLLOWERS,
   FOLLOW_USER,
-  UNFOLLOW_USER
+  UNFOLLOW_USER,
+  CLEAR_CURRENT_PROFILE
 } from "./types";
 
 import axios from "axios";
+import {logoutUser} from "./authActions";
 
 // Get profile by username
 export const getProfileByUsername = (username, history) => dispatch => {
@@ -19,11 +21,11 @@ export const getProfileByUsername = (username, history) => dispatch => {
   axios
     .get(`/api/profile/${username}`)
     .then(res => {
-      history.push(`/profile/${res.data.username}`)
       dispatch({
         type: GET_PROFILE_BY_USERNAME,
         payload: res.data
       });
+      history.push(`/profile/${res.data.username}`)
     })
     .catch(err => {
       // 404 ERROR. if user not found redirect to "/not-found"
@@ -39,30 +41,6 @@ export const getProfileByUsername = (username, history) => dispatch => {
 };
 
 
-// Get profile by username
-export const getSearchByUsername = (username, history) => dispatch => {
-  dispatch(setProfileLoading());
-  axios
-    .get(`/api/profile/${username}`)
-    .then(res => {
-      dispatch({
-        type: GET_SEARCH_BY_USERNAME,
-        payload: res.data
-      });
-      history.push(`/search/${res.data.username}`);
-    })
-    .catch(err => {
-      // 404 ERROR. if user not found redirect to "/not-found"
-      if (err.response.status === 404) {
-        history.push("/not-found");
-      } else {
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.response.data
-        });
-      }
-    });
-};
 
 
 // Get current profile
@@ -131,6 +109,7 @@ export const deleteAccount = (history) => dispatch => {
           type: SET_CURRENT_USER,
           payload: {}
         })
+        dispatch(logoutUser());
       }
       )
       .catch(err => {
@@ -171,6 +150,18 @@ export const getFollowings = (username) => dispatch => {
     .catch(err => console.log(err.response.data));
 }
 
+//Get Followings
+export const getFollowers = (username) => dispatch => {
+  axios.get(`/api/${username}/followers`)
+    .then(res => {
+      dispatch({
+        type: GET_FOLLOWERS,
+        payload: res.data
+      })
+    })
+    .catch(err => console.log(err.response.data));
+}
+
 //follow user
 export const followUser = (userId) => dispatch => {
   axios.put(`/api/${userId}/follow`)
@@ -196,6 +187,14 @@ export const unfollowUser = (userId) => dispatch => {
       .catch(err => console.log(err.response.data));
   }
 }
+
+// Clear current profile
+export const clearCurrentProfile = () => {
+  return {
+    type: CLEAR_CURRENT_PROFILE
+  };
+};
+
 // Profile loading
 export const setProfileLoading = () => {
   return {

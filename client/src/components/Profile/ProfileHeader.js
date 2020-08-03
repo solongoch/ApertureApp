@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
 // import Components
 import Followers from '../Follow/Followers';
@@ -20,11 +20,11 @@ class ProfileHeader extends Component {
     const { followingCount } = this.props.profile;
     //display Following component only if user has followingCount > 0
     if (followingCount > 0) {
-      this.setState({ _showFollowings: true })
+      this.setState({ _showFollowings: true });
     }
   }
   hideFollowings = () => {
-    this.setState({ _showFollowings: false })
+    this.setState({ _showFollowings: false });
   }
 
   //to show and hide Followers component 
@@ -68,8 +68,18 @@ class ProfileHeader extends Component {
               <span className="font-weight-bold">{profile.followingCount}</span> followings
             </li>
           </ul>
-          <Followers _showFollowers={this.state._showFollowers} followersClose={this.hideFollowers} />
-          <Followings _showFollowings={this.state._showFollowings} followingsClose={this.hideFollowings} />
+
+          {(profile.username && profile.followersCount > 0) &&
+            <Fragment>
+              <Followers _showFollowers={this.state._showFollowers} followersClose={this.hideFollowers}
+                username={profile.username} />
+            </Fragment>
+          }
+          {(profile.username && profile.followingCount > 0) &&
+            <Fragment>
+              <Followings _showFollowings={this.state._showFollowings} followingsClose={this.hideFollowings} username={profile.username} />
+            </Fragment>
+          }
           {/* Name */}
           <div className="font-weight-bold">{profile.name}</div>
           {/* Bio */}

@@ -11,7 +11,8 @@ class Uploadavatar extends Component {
       file: '',
       avatar: '',
       imagePreview: '',
-      submitDisabled: true
+      submitDisabled: true,
+      loading: false
     }
   }
   //Onchange of file upload icon
@@ -34,6 +35,7 @@ class Uploadavatar extends Component {
   submitUploadAvatar = (e) => {
     e.preventDefault();
     const { file } = this.state;
+    this.setState({loading: true}) //for refresh button inside button during uploading
     uploadImage(file)
       .then((res) => {
         this.setState({ avatar: res.secure_url });
@@ -43,15 +45,17 @@ class Uploadavatar extends Component {
         }
 
         this.props.uploadAvatar(newAvatar);
-        this.setState({submitDisabled: !this.state.submitDisabled})
+
+        this.setState({ submitDisabled: !this.state.submitDisabled });
+        this.setState({loading : false}) //hide refresh symbol inside button after upload
 
       })
   }
 
   render() {
-    const {avatar} = this.props;
+    const { avatar } = this.props;
     let img = null;
-    const { imagePreview, submitDisabled } = this.state
+    const { imagePreview, submitDisabled, loading } = this.state
     if (imagePreview) {
       img = <img src={imagePreview} className="createuser-avatar" alt="UserImage" />
     } else {
@@ -63,14 +67,16 @@ class Uploadavatar extends Component {
         {img}
         <h6 className="pt-1"><strong>Upload a different photo...</strong></h6>
         <form onSubmit={this.submitUploadAvatar}>
-          <label className="fa fa-file-image-o col-12">
+          <label className="fa fa-file-image-o col-12" style ={{color : '#007bff'}}>
             <input type="file"
               hidden onChange={this.handleUploadAvatar}
               name='avatar'
               className="form-input" />
           </label>
           {/* <div className="imgPreview">{previewImage}</div> */}
-          <button className="btn btn-primary btn-sm shadow-none" disabled={submitDisabled}>Change Avatar</button>
+          <button className="btn btn-primary btn-md shadow-none btn-chg-avatar" disabled={submitDisabled}>Change Avatar
+            {loading && <i className="fa fa-refresh fa-spin fa-xs" style={{ marginRight: "10px" , fontSize: "15px" }} />}
+          </button>
         </form>
       </div>
     )

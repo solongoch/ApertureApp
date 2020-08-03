@@ -16,7 +16,6 @@ import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
 
-
   onLogoutClick(e) {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
@@ -24,21 +23,6 @@ class Navbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    const { avatar, id } = this.props.profile;
-    let userAvatar = null;
-
-    if (avatar) {//Navbar avatar will change if user uploads the new avatar
-      if (user.id === id) {
-        console.log("In user.id",user.id);
-        console.log("id" , id);
-        userAvatar = (<img className="menu round-image image-22" src={avatar} alt={avatar} />);
-      }
-      else {
-        userAvatar = (<img className="menu round-image image-22" src={user.avatar} alt={user.name} />);
-      }
-    } else {
-      userAvatar = (<img className="menu round-image image-22" src={user.avatar} alt={user.name} />);
-    }
 
     // when user NOT logged in
     const guestMenus = (
@@ -53,9 +37,9 @@ class Navbar extends Component {
         </li>
       </ul>
     );
-
+  
     // when user logged in
-    const userMenus = (
+    const userMenus =(
       <ul className="navbar-nav">
         {/* CREATE POST button */}
         <li className="nav-item">
@@ -94,8 +78,7 @@ class Navbar extends Component {
         {/* DROPDOWN PROFILE menu button */}
         <li className="nav-item dropdown">
           <div className="nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {/* <img className="menu round-image image-22" src={user.avatar} alt={user.name} /> */}
-            {userAvatar}
+            <img className="menu round-image image-22" src={user.avatar} alt={user.name} />
           </div>
           <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             {/* MY PROFILE button */}
@@ -118,10 +101,10 @@ class Navbar extends Component {
 
           {/* Search */}
           <SearchComponent />
-
+          
           {/* Menus */}
           <div className="menus-div col-lg-4 col-md-4 col-sm-4 col-xs-8">
-            {isAuthenticated ? userMenus : guestMenus}
+            {isAuthenticated ? userMenus : guestMenus }
           </div>
         </nav>
       </header>
@@ -130,8 +113,7 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
-  profile: state.profile.profile
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));

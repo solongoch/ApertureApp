@@ -3,8 +3,8 @@ import "./single-post.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { sendComment } from "../../actions/postActions";
-import TextFieldGroup from "../common/TextFieldGroup";
+import { addComment } from "../../actions/postActions";
+import TextAreaFieldGroup from "../common/TextFieldGroup";
 
 class PostComment extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class PostComment extends Component {
       avatar: user.avatar
     };
 
-  this.props.sendComment(postId, newComment);
+  this.props.addComment(postId, newComment);
   this.setState({ commentBody: ''});
   }
 
@@ -47,15 +47,16 @@ class PostComment extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form className="add-comment-form" onSubmit={this.onSubmit}>
-        <TextFieldGroup
+      <form onSubmit={this.onSubmit}>
+        <div className="form-group">
+        <TextAreaFieldGroup
           placeholder="Add a comment..."
           name="comment"
           value={this.state.commentBody}
           onChange={this.onChange}
           error={errors.commentBody}
-          info=""
         />
+        </div>
         <button className="btn btn-primary col-12" type="submit">
           Post Comment
         </button>
@@ -79,5 +80,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { sendComment }
+  { addComment }
 )(withRouter(PostComment));

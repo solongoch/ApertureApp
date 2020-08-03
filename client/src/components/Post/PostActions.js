@@ -4,29 +4,30 @@ import { connect } from "react-redux";
 // import CSS
 import "./single-post.css";
 // import Component
-import axios from 'axios';
 import PostComment from "./PostComment";
+import PropTypes from 'prop-types';
+import {addLike, removeLike} from '../../actions/postActions';
 
 class PostActions extends Component {
-  state = {
-    likes: 0
-  };
+  onLikeClick(id) {
+    this.props.addLike(id);
+  }
 
-  addLike = () => {
-    let newCount = this.state.likes + 1;
-    this.setState({
-      likes: newCount
-    });
+  onUnlikeClick(id) {
+    this.props.removeLike(id);
+  }
 
-
-    axios
-      .put(`/api/posts/${postid}/lu`)
-      .then(res => console.log(res))
-      .catch(err => console.log(err.response.data));
-  };
+  findUserLike(likes) {
+    const { auth } = this.props;
+    if (likes.filter(like => like.user === auth.user.id).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   render() {
-    const { post } = this.props;
+    const { post, auth } = this.props;
     return (
       <div className="post-actions">
         <div className="actions">
@@ -64,11 +65,18 @@ class PostActions extends Component {
   }
 }
 
+PostActions.propTypes = {
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
 const mapStateToProps = state => ({
-  post: state.post.post
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  {}
+  {addLike, removeLike}
 )(PostActions);

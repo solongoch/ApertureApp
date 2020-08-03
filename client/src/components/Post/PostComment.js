@@ -26,9 +26,7 @@ class PostComment extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const comment = { commentBody: this.state.commentBody };
-
     // this.props.sendComment(postid);
   }
 
@@ -39,19 +37,21 @@ class PostComment extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form className="add-comment-form" onSubmit={this.onSubmit}>
-        <TextFieldGroup
-          placeholder="Add a comment..."
-          name="comment"
-          value={this.state.commentBody}
-          onChange={this.onChange}
-          error={errors.commentBody}
-          info=""
-        />
-        <button className="btn btn-primary col-12" type="submit">
-          Post Comment
-        </button>
-      </form>
+      <div className="add-comment-div">
+        <form className="add-comment-form" onSubmit={this.onSubmit}>
+          <TextFieldGroup
+            placeholder="Add a comment..."
+            name="comment"
+            value={this.state.commentBody}
+            onChange={this.onChange}
+            error={errors.commentBody}
+            info=""
+          />
+          <button className="btn btn-primary col-12" type="submit">
+            Post Comment
+          </button>
+        </form>
+      </div>
     );
   }
 }
@@ -64,5 +64,4 @@ const mapStateToProps = state => ({
   // errors: state.errors
 });
 
-export default connect(mapStateToProps, {sendComment})(withRouter(PostComment)
-);
+export default connect(mapStateToProps, { sendComment })(withRouter(PostComment));

@@ -6,7 +6,6 @@ export const getSuggestedProfiles = () => dispatch => {
   axios
     .get("/api/suggestion")
     .then(res => {
-      // history.push(`/profile/${res.data.username}`)
       dispatch({
         type: GET_SUGGESTED_PROFILES,
         payload: res.data

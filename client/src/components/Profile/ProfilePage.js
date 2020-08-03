@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import Spinner from '../common/Spinner'
 // import Action
 import { getProfileByUsername } from '../../actions/profileActions';
 // import Components
@@ -24,22 +25,25 @@ class ProfilePage extends Component {
 
 
   render() {
-    
-    if(this.props.profileState.profile){
-      var _posts = this.props.profileState.profile.posts;
+    const { profile } = this.props.profileState;
+    if (!profile) {
+      return (<Spinner />)
+    }
+    if(profile){
+      var _posts = profile.posts;
       var _profilePosts;
-      if (_posts.length > 0) {
+      if (_posts && _posts.length > 0) { //has post display ProfilePosts component
         _profilePosts = <ProfilePosts posts={_posts} />
-      } else {
+      } else { // else display no posts with camera icon 
         _profilePosts = (<div>
-          <h1 className="text-center"><i className="fa fa-camera" /></h1>
+          <h1 className="text-center"><i className="fa fa-camera" style ={{fontSize: "40px"}} /></h1>
           <h3 className="text-center"> No Posts Yet</h3>
         </div>)
       }
     }
     return (
       <div className="profile">
-        <ProfileHeader profile={ this.props.profileState.profile } />
+        <ProfileHeader profile={ profile } auth={ this.props.auth } />
         <div className="top-post-menu d-flex flex-row justify-content-center"></div>  
         {_profilePosts}
       </div>
@@ -48,7 +52,8 @@ class ProfilePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  profileState: state.profile
+  profileState: state.profile,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getProfileByUsername })(withRouter(ProfilePage));

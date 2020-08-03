@@ -50,11 +50,17 @@ class ProfileHeader extends Component {
             {/* Username */}
             <div className="profile-username">{profile.username}</div>
             {/* Edit Profile */}
-            <div className="white-bg button font-weight-bold">
-              <Link to={`/edit/${this.props.profile.username}`}>Edit Profile</Link>
-            </div>
-            {/* Settings (no functionality right now. TODO:) */}
-            <Link to="/"><i className="fas fa-cog fa-lg"></i></Link>
+            { (profile.username !== this.props.auth.user.username) ? null :
+              (
+                <div>
+                  <div className="white-bg button font-weight-bold">
+                    <Link to={`/edit/${profile.username}`}>Edit Profile</Link>
+                  </div>
+                  {/* Settings (no functionality right now. TODO:) */}
+                  {/* <Link to="/"><i className="fas fa-cog fa-lg"></i></Link> */}
+                </div>
+              )
+            }
           </div>
           <ul className="counts d-flex flex-row">
             {/* Total number of posts */}

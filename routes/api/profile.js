@@ -103,6 +103,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const user = {
+      id: req.user._id,
       name: req.user.name,
       username: req.user.username,
       email: req.user.email,
@@ -154,7 +155,6 @@ router.post(
           { new: true }
           ).then(updatedUser => {
             updatedUser = updatedUser.toObject();
-            delete updatedUser._id;
             delete updatedUser.password;
             delete updatedUser.followers;
             delete updatedUser.following;

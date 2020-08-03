@@ -27,9 +27,17 @@ class PostComment extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const comment = { commentBody: this.state.commentBody };
+    const { user } = this.props.auth;
+    const { postId } = this.props;
 
-    this.props.sendComment(postid);
+    const newComment = {
+      commentBody: this.state.commentBody,
+      username: user.username,
+      avatar: user.avatar
+    };
+
+  this.props.sendComment(postId, newComment);
+  this.setState({ commentBody: ''});
   }
 
   onChange(e) {
@@ -57,11 +65,16 @@ class PostComment extends Component {
 }
 
 PostComment.propTypes = {
-  // errors: PropTypes.object.isRequired
+
+  addComment: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  postId: PropTypes.string.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  // errors: state.errors
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(

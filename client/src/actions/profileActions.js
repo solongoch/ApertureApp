@@ -39,9 +39,6 @@ export const getProfileByUsername = (username, history) => dispatch => {
     });
 };
 
-
-
-
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
@@ -96,7 +93,6 @@ export const uploadAvatar = (newAvatar) => dispatch => {
     });
 }
 
-
 // Delete account & profile
 export const deleteAccount = (history) => dispatch => {
   if (window.confirm('Are you sure you want to delete your account?')) {
@@ -109,16 +105,13 @@ export const deleteAccount = (history) => dispatch => {
           payload: {}
         })
         dispatch(logoutUser());
-      }
-      )
+      })
       .catch(err => {
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data
         })
-      }
-      );
-
+      });
   };
 };
 
@@ -134,7 +127,8 @@ export const changePassword = (changePass, history) => dispatch => {
       dispatch({
         type: 'GET_ERRORS',
         payload: err.response.data
-      }));
+      })
+    );
 }
 
 //Get Followings

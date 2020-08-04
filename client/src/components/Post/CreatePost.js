@@ -135,11 +135,6 @@ export class CreatePost extends Component {
               </label>
               <button className="btn btn-primary shadow-none btn-submitpost" disabled={submitDisabled}>Share
               {loading && <i className="fa fa-refresh fa-spin fa-xs ml-2" style={{ marginRight: "5px", fontSize: "14px" }} />}</button>
-
-
-              <Link to='/home' className='btn btn-primary shadow-none  ml-2 btn-submitpost'>
-                Cancel
-                </Link>
             </div>
           </div>
         </form>

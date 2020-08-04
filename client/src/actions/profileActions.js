@@ -17,11 +17,11 @@ import axios from "axios";
 import {logoutUser} from "./authActions";
 
 // Get profile by username
-export const getProfileByUsername = (username, currentUsername,  history) => dispatch => {
+export const getProfileByUsername = (username, authUsername,  history) => dispatch => {
   axios
     .get(`/api/profile/${username}`)
     .then(res => {
-        if(username === currentUsername) {
+        if(username === authUsername) {
           dispatch({
             type: GET_PROFILE_BY_USERNAME,
             payload: res.data

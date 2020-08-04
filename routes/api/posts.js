@@ -187,21 +187,21 @@ router.post(
   
       Post.findById(req.params.id)
         .then((post) => {
-          if(post){
             const newComment = {
               commentBody: req.body.commentBody,
-              commentedById: req.user.id,
-              commentedByUsername: req.user.username,
-              commentedByAvatar: req.user.avatar
+              username: req.body.username,
+              avatar: req.body.avatar,
+              user: req.user.id,
             };
-            post.comments.unshift(newComment);  // Add to comments array
-            post.save().then((post) => res.json(post)); // Save
-          }else{
-            return res.status(404).json({ success:false, postnotfound: "No post found" });
 
-          }
-        })
-        .catch((err) => res.status(500).json({ success:false, error: err.message }));
+            // Add to comments array
+            post.comments.unshift(newComment);
+
+            // Save
+            post.save().then((post) => res.json(post));
+          })
+            
+        .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
     }
   );
   

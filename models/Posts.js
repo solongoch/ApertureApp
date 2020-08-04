@@ -10,9 +10,9 @@ const PostSchema = new Schema({
   comments: [
     {
       commentBody: { type: String, required: true },
-      commentedById: { type: Schema.Types.ObjectId, ref: "users" },
-      commentedByUsername: { type: String },
-      commentedByAvatar: { type: String },
+      user: { type: Schema.Types.ObjectId, ref: "users" },
+      username: { type: String },
+      avatar: { type: String },
       date: { type: Date, default: Date.now }
     }
   ],

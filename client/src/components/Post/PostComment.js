@@ -17,6 +17,7 @@ class PostComment extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -45,14 +46,15 @@ class PostComment extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const  {errors}  = this.state;
+    
     return (
       <div className="add-comment-div">
         <form className="add-comment-form" onSubmit={this.onSubmit}>
           <TextFieldGroup
             placeholder="Add a comment..."
-            name="comment"
-            value={this.state.text}
+            name="commentBody"
+            value={this.state.commentBody}
             onChange={this.onChange}
             error={errors.commentBody}
             info=""

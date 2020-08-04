@@ -5,7 +5,9 @@ import "./single-post.css";
 // import Component
 import PostComment from "./PostComment";
 import PropTypes from 'prop-types';
-import {addLike, removeLike, deletePostById} from '../../actions/postActions';
+import { connect } from "react-redux";
+import classnames from 'classnames';
+import {addLike, deletePostById} from '../../actions/postActions';
 
 class PostActions extends Component {
   onLikeClick(id) {
@@ -46,7 +48,19 @@ class PostActions extends Component {
     return (
       <div>
         <div className="actions">
-          <button className="far fa-heart fa-2x action" onClick={this.addLike}></button>
+          <button 
+            onClick={this.onLikeClick.bind(this, post._id)}
+            type="button"
+            className="btn btn-light mr-1"
+          >
+            <i
+              className={classnames('far fa-heart fa-2x action', {
+                'text-info': this.findUserLike(post.likes)
+              })}
+              />
+          </button>
+
+          
           <i className="far fa-comment fa-2x action"></i>
           <i className="far fa-paper-plane fa-2x action"></i>
           <i className="far fa-bookmark fa-2x action"></i>
@@ -72,7 +86,7 @@ class PostActions extends Component {
         <div className="posted-date">
           <Moment format="MMM D YYYY">{post.timePosted}</Moment>
         </div>
-        <PostComment></PostComment>
+        <PostComment postId={post._id}></PostComment>
       </div>
 
     )
@@ -81,7 +95,6 @@ class PostActions extends Component {
 
 PostActions.propTypes = {
   addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 }
@@ -92,6 +105,6 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {addLike, removeLike, deletePostById}
+  {addLike, deletePostById}
 )(PostActions);
 

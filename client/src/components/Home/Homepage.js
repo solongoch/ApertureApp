@@ -6,7 +6,7 @@ import Spinner from '../common/Spinner';
 // import Action
 import { getHomepagePosts } from "../../actions/homeActions";
 // import Component
-import AddComment from './AddComment';
+import PostComment from '../Post/PostComment';
 import HomeSuggestion from "./HomeSuggestion";
 // import CSS
 import "./homepage.css";
@@ -92,8 +92,8 @@ class Homepage extends Component {
             (post.comments.map(comment => {
               return (
               <div className="line" key={Math.random()}>
-                <Link to={`/profile/${comment.commentedByUsername}`} className="font-weight-bold right-5">
-                  {comment.commentedByUsername}
+                <Link to={`/profile/${comment.username}`} className="font-weight-bold right-5">
+                  {comment.username}
                 </Link>
                 {comment.commentBody}
               </div> )}
@@ -104,7 +104,7 @@ class Homepage extends Component {
             <Moment fromNow>{post.timePosted}</Moment>
           </div>
           {/* ADD COMMENT */}
-          <AddComment />
+          <PostComment />
         </div>
       </div>
     ));

@@ -204,61 +204,40 @@ router.post(
         .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
     }
   );
-  
-  // @route   DELETE api/posts/comment/:id/:comment_id
-  // @desc    Remove comment from post
-  // @input   postId and comment_id from request params
-  // @access  Private
-  router.delete(
-    "/comment/:postId/:commentId",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
 
-      const {postId,commentId} = req.params;
-      Post.findById(postId)
-        .then((post) => {
-          // Check if post exists
-          if(post){        
-            // Check if comment exists
-            if (post.comments.filter((comment) => 
-                comment._id.toString() === commentId).length === 0) 
-            {
-              return res
-                .status(404)
-                .json({ success: false, message: "Comment does not exist" });
-            }//chk if comment exists ends
-            
-            //Get CommentedBy for the given commentId to delete the comment
-            var getCommentedBy= "";
-            var removeIndex = 0;// index to delete the comment
-            post.comments.filter(function(comments) {
-              if(comments._id == commentId){
-                removeIndex= post.comments.indexOf(comments);//get index to slice
-                getCommentedBy= comments.commentedBy;//get commentedBy id from the array of {}
-              }
-            });
-              // comment can be deleted by postedBy or commentedBy
-            if (post.postedBy.toString() == req.user.id || getCommentedBy==req.user.id ) {
-                post.comments.splice(removeIndex, 1);// Splice comment out of array
-                post.save()
-                    .then((post) =>
-                        res.json({ success:true, message: "Comment deleted"})
-                    );
-            }else{
-                return res.status(401).json({ 
-                  success: false,
-                  message: "You are not authorized to delete this comment" 
-                });
-            }
-          }else{
-             return res.status(404).json({
-                success: false,
-                message: "No post found" });
-          }//post check ends
-        })
-        .catch((err) => {
-         return res.status(500).json({ success:false, error: err.message });
-        });//Post FindbyId ends
-  });//router.delete ends
+  // @route   DELETE api/posts/comment/:id/:comment_id
+// @desc    Remove comment from post
+// @access  Private
+router.delete(
+  "/comment/:id/:comment_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.findById(req.params.id)
+      .then((post) => {
+        // Check to see if comment exists
+        if (
+          post.comments.filter(
+            (comment) => comment._id.toString() === req.params.comment_id
+          ).length === 0
+        ) {
+          return res
+            .status(404)
+            .json({ commentnotexists: "Comment does not exist" });
+        }
+
+        // Get remove index
+        const removeIndex = post.comments
+          .map((item) => item._id.toString())
+          .indexOf(req.params.comment_id);
+
+        // Splice comment out of array
+        post.comments.splice(removeIndex, 1);
+
+        post.save().then((post) => res.json(post));
+      })
+      .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
+  }
+);
+  
 
 module.exports = router;

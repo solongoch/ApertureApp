@@ -46,7 +46,6 @@ class ProfilePage extends Component {
     }
     return (
       <Fragment>
-        {console.log("Render",profile)}
         <ProfileHeader profile={profile} auth={this.props.auth} />
         <div className="top-post-menu d-flex flex-row justify-content-center"></div>
         {_profilePosts}

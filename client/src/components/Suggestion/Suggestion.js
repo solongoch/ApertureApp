@@ -27,7 +27,7 @@ class Suggestion extends Component {
         <div className="suggestions">
           {/* Map through suggestions to get each profile */}
           {suggestions.map(suggestion => (
-            <div className="suggestion">
+            <div className="suggestion" key={suggestion._id}>
               <div className="post-header">
                 <Link to={`/profile/${suggestion.username}`}>
                   <img className="round-image image-50" src={suggestion.avatar} alt="User" />
@@ -40,6 +40,7 @@ class Suggestion extends Component {
                   <div className="make-gray left-15">Followed by {suggestion.followers.length} people</div>
                 </div>
               </div>
+              {/* Follow button */}
               <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
             </div>
           ))}

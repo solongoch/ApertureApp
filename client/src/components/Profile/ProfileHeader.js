@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
 // import Components
+import FollowOrEdit from './FollowOrEdit';
 import Followers from '../Follow/Followers';
 import Followings from '../Follow/Followings';
 // import CSS
@@ -49,18 +50,8 @@ class ProfileHeader extends Component {
           <div className="d-flex flex-row">
             {/* Username */}
             <div className="profile-username">{profile.username}</div>
-            {/* Edit Profile */}
-            { (profile.username !== this.props.auth.user.username) ? null :
-              (
-                <div>
-                  <div className="white-bg button font-weight-bold">
-                    <Link to={`/edit/${profile.username}`}>Edit Profile</Link>
-                  </div>
-                  {/* Settings (no functionality right now. TODO:) */}
-                  {/* <Link to="/"><i className="fas fa-cog fa-lg"></i></Link> */}
-                </div>
-              )
-            }
+            {/* Diplay Follow/Following Or Edit Profile button */}
+            <FollowOrEdit profile={ profile } auth={ this.props.auth } followers = { profile.followersList } />
           </div>
           <ul className="counts d-flex flex-row">
             {/* Total number of posts */}
@@ -98,4 +89,4 @@ class ProfileHeader extends Component {
   }
 }
 
-export default ProfileHeader;
+export default (ProfileHeader);

@@ -20,18 +20,17 @@ export class CreatePost extends Component {
       imagePreview: '',
       errors: {},
       submitDisabled: true,
-      toastopts: {
-        position: "bottom-center",
-        autoClose: false,
-        hideProgressBar: true,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: 1
-      },
       loading: false
     };
-
+    this.toastopts = {
+      position: "bottom-center",
+      autoClose: false,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: 1
+    }
     this.handleSubmitPost = this.handleSubmitPost.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleCaption = this.handleCaption.bind(this);
@@ -80,11 +79,11 @@ export class CreatePost extends Component {
   componentWillReceiveProps(nextProps) {
     const username = this.props.auth.user.username
     if (nextProps.post.posts.length > 0) {
-      toast.success('Posted Successfully', this.state.toastopts);
+      toast.success('Posted Successfully', this.toastopts);
       this.props.history.push(`/profile/${username}`);
     } else if (nextProps.errors.errors) {
       this.setState({ errors: nextProps.errors.errors });
-      toast.error(nextProps.errors.errors.photo, this.state.toastopts);
+      toast.error(nextProps.errors.errors.photo, this.toastopts);
     }
 
   }
@@ -135,11 +134,6 @@ export class CreatePost extends Component {
               </label>
               <button className="btn btn-primary shadow-none btn-submitpost" disabled={submitDisabled}>Share
               {loading && <i className="fa fa-refresh fa-spin fa-xs ml-2" style={{ marginRight: "5px", fontSize: "14px" }} />}</button>
-
-
-              <Link to='/home' className='btn btn-primary shadow-none  ml-2 btn-submitpost'>
-                Cancel
-                </Link>
             </div>
           </div>
         </form>

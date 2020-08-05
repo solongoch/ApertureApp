@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './changepassword.css';
 import { connect } from 'react-redux';
 import { changePassword } from '../../actions/profileActions';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import ChangePasswordInputField from './ChangePasswordInputField';
 
 class ChangePassword extends Component {
@@ -14,17 +14,13 @@ class ChangePassword extends Component {
       newpassword: '',
       confirmpassword: '',
       errors: {},
-      avatar: '',
-      username: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState({ [e.target.name]: e.target.value });
     if ((this.state.errors.hasOwnProperty([e.target.name]))) {
       this.clearError(e.target.name);
     }
@@ -52,14 +48,6 @@ class ChangePassword extends Component {
   }
 
 
-   //call after component is mounted in browser
-   componentDidMount() {
-    if (this.props.auth.user) {
-      let { avatar, username } = this.props.auth.user;
-      this.setState({ avatar: avatar });
-      this.setState({ username: username })
-    }
-  }
   //trigger whenever we get newProps 
   //Usage  assign this.props.errors to local setState.errors
   componentWillReceiveProps(nextProps) {
@@ -69,16 +57,26 @@ class ChangePassword extends Component {
   }
 
   render() {
-    const { errors, avatar, username } = this.state;
+    const { username } = this.props.auth.user;
+    const { oldpassword, newpassword, confirmpassword, errors } = this.state
+    const profileAvatar = this.props.profile.avatar;
+    let userAvatar = null;
+
+    if (profileAvatar) { //Navbar avatar will change if user uploads the new avatar  
+      userAvatar = (<img className="chgpwdavatar-img" src={profileAvatar} alt={username} />);
+    }
     return (
       <div className="container">
         <div className="chgpwd-container">
           <div className="row">
             <div className="card chgpwd-card">
+              <Link to={`/edit/${username}`} className="chgpwd-cancel">
+                <i className="fa fa-times " style={{ float: 'right', fontSize:'20px' }} aria-hidden="true"></i>
+              </Link>
               <form className="Chgpwd-form" onSubmit={this.onSubmit}>
                 <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
                   <div className="Chgpwd-avatar  ">
-                    <img className="chgpwdavatar-img" src={avatar} alt="Avatar" />
+                    {userAvatar}
                   </div>
                   <div className="username-div">
                     <h1 className="username-h1">{username}</h1>
@@ -91,8 +89,8 @@ class ChangePassword extends Component {
                   <ChangePasswordInputField
                     type="password"
                     name="oldpassword"
-                    placeholder="Current Password"
-                    value={this.state.oldpassword}
+                    placeholder="Old Password"
+                    value={oldpassword}
                     onChange={this.onChange}
                     error={errors.oldpassword}
                   />
@@ -105,7 +103,7 @@ class ChangePassword extends Component {
                     type="password"
                     name="newpassword"
                     placeholder="New Password"
-                    value={this.state.newpassword}
+                    value={newpassword}
                     onChange={this.onChange}
                     error={errors.newpassword}
                   />
@@ -118,7 +116,7 @@ class ChangePassword extends Component {
                     type="password"
                     name="confirmpassword"
                     placeholder="Confirm New Password"
-                    value={this.state.confirmpassword}
+                    value={confirmpassword}
                     onChange={this.onChange}
                   />
                 </div>
@@ -140,7 +138,8 @@ class ChangePassword extends Component {
 
 const mapStateToProps = (state) => ({
   errors: state.errors.errors,
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile.profile
 });
 
 export default connect(mapStateToProps, { changePassword })(withRouter(ChangePassword));

@@ -2,6 +2,7 @@ import {
   SET_CURRENT_USER,
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
+  GET_SEARCHED_PROFILE_BY_USERNAME,
   PROFILE_LOADING,
   UPLOAD_AVATAR,
   GET_ERRORS,
@@ -16,14 +17,21 @@ import axios from "axios";
 import {logoutUser} from "./authActions";
 
 // Get profile by username
-export const getProfileByUsername = (username, history) => dispatch => {
+export const getProfileByUsername = (username, authUsername,  history) => dispatch => {
   axios
     .get(`/api/profile/${username}`)
     .then(res => {
-      dispatch({
-        type: GET_PROFILE_BY_USERNAME,
-        payload: res.data
-      });
+        if(username === authUsername) {
+          dispatch({
+            type: GET_PROFILE_BY_USERNAME,
+            payload: res.data
+          });
+        }else {
+          dispatch({
+            type: GET_SEARCHED_PROFILE_BY_USERNAME,
+            payload: res.data
+          });
+        }
       history.push(`/profile/${res.data.username}`)
     })
     .catch(err => {
@@ -87,6 +95,7 @@ export const uploadAvatar = (newAvatar) => dispatch => {
         type: UPLOAD_AVATAR,
         payload: res.data
       })
+    
     })
     .catch(err => {
       dispatch({

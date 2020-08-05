@@ -8,14 +8,12 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import classnames from 'classnames';
 import {addLike, deletePostById} from '../../actions/postActions';
+import './postactions.css';
+import { withRouter } from 'react-router-dom';
 
 class PostActions extends Component {
   onLikeClick(id) {
     this.props.addLike(id);
-  }
-
-  onUnlikeClick(id) {
-    this.props.removeLike(id);
   }
 
   findUserLike(likes) {
@@ -51,7 +49,7 @@ class PostActions extends Component {
           <button 
             onClick={this.onLikeClick.bind(this, post._id)}
             type="button"
-            className="btn btn-light mr-1"
+            className="btn"
           >
             <i
               className={classnames('far fa-heart fa-2x action', {
@@ -60,10 +58,23 @@ class PostActions extends Component {
               />
           </button>
 
+          <button 
+            onClick={this.onLikeClick.bind(this, post._id)}
+            type="button"
+            className="btn"
+          >
+            <i
+              className={classnames('fas fa-heart fa-2x unlike', {
+                'text-info': this.findUserLike(post.likes)
+              })}
+              />
+          </button>
+
+
           
-          <i className="far fa-comment fa-2x action"></i>
+          {/* <i className="far fa-comment fa-2x action"></i>
           <i className="far fa-paper-plane fa-2x action"></i>
-          <i className="far fa-bookmark fa-2x action"></i>
+          <i className="far fa-bookmark fa-2x action"></i> */}
           {/* Loggedin user only can delete the post(Show thrash icon) */}
           {postedById === auth.user.id ?  showThrashIcon : null}
         </div>
@@ -103,8 +114,5 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  {addLike, deletePostById}
-)(PostActions);
+export default connect(mapStateToProps,{addLike, deletePostById})(withRouter(PostActions));
 

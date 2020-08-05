@@ -37,12 +37,13 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
           });
 });
 
+
 // @route   PUT api/posts/:postId/lu
 // @desc    Like and Dislike post
 // @input   Postid from request params
 // @access  Private
 
-router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/:postId/lu', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   //Chk post exists to like
   Post.findOne({ _id: req.params.postId })
@@ -50,15 +51,15 @@ router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req
     .then(post => {
       if (post) { //Post found 
           //Post already liked by user then remove the user from the likes []
-          if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
-            const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
+          if (post.likes.filter((like) => like.user.toString() === req.user.id).length > 0) {
+            const userIndex = post.likes.map(like => like.user.toString().indexOf(req.user.id));
             post.likes.splice(userIndex, 1);
             post.save()
               .then(data => res.json({ success: true, message: "User disliked a Post", likesCount: post.likes.length }))
               .catch(err => res.status(500).json({ success: false, message: err.message }));
           }
           else {//add user to likes []
-            post.likes.unshift({ likedBy: req.user.id });
+            post.likes.unshift({ user: req.user.id });
             post.save()
               .then(data => res.json({ success: true, message: "User liked a Post" ,likesCount: post.likes.length }))
               .catch(err => res.status(500).json({ success: false, message: err.message }));

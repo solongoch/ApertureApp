@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteComment } from '../../actions/postActions';
 import { Link } from "react-router-dom";
+import './single-post.css';
 
 class PostCommentItem extends Component {
     onDeleteClick(postId, commentId) {
@@ -29,14 +30,14 @@ render() {
               {comment.username}
             </Link>
             <div className="comment-text">
-                <p>{comment.commentBody}</p>
+                {comment.commentBody}
                 {comment.user === auth.user.id ? (
                     <button
                     onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                     type="button"
-                    className="btn btn-danger mr-1"
+                    className="btn btn-danger btn-delete-comment"
                     >
-                     <i className="fas fa-times" />   
+                     <i className="fas fa-times fa-xs " />   
                     </button>
                 ) : null}
                 </div>

@@ -126,10 +126,11 @@ export const deleteComment = (postId, commentId) => dispatch => {
     );
 };
 
+
 // Add Like
-export const addLike = id => dispatch => {
+export const addLike = postId => dispatch => {
   axios
-    .put(`/api/posts/${id}/lu`)
+    .post(`/api/posts/${postId}/lu`)
     .then(res => dispatch(getSinglePost()))
     .catch(err =>
       dispatch({
@@ -138,8 +139,6 @@ export const addLike = id => dispatch => {
       })
     );
 };
-
-
 
 // Clear current profile
 export const clearPosts = () => {

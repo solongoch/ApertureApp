@@ -43,7 +43,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
 // @input   Postid from request params
 // @access  Private
 
-router.post('/:postId/lu', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req, res) => {
 
   //Chk post exists to like
   Post.findOne({ _id: req.params.postId })

@@ -9,20 +9,17 @@ import {getSinglePost} from "../../actions/postActions";
 // import Component
 import PostComment from '../Post/PostComment';
 import HomeSuggestion from "./HomeSuggestion";
-import PropTypes from 'prop-types';
 // import CSS
 import "./homepage.css";
 
 class Homepage extends Component {
   componentDidMount() {
     this.props.getHomepagePosts(this.props.history);
-    this.props.getSinglePost(this.props.match.params.postId)
   }
 
   render() {
     const { user } = this.props.auth;
     const { posts } = this.props.posts;
-    const { postId } = this.props;
     if (!posts) {
       return (<Spinner />)
     }
@@ -145,9 +142,7 @@ class Homepage extends Component {
   }
 }
 
-Homepage.propTypes = {
-  postId: PropTypes.string.isRequired
-};
+
 
 const mapStateToProps = state => ({
   auth: state.auth,

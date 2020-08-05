@@ -23,6 +23,8 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
   //Check User exists 
   User.findOne(userName,
     ["_id","username", "name", "avatar", "bio", "website", "followers", "following", "isPublic"])
+    .populate("followers.user", ["username", "name", "avatar"])
+    .populate("following.user", ["username", "name", "avatar"])
     .lean()
     .then(user => {
       if (user) {
@@ -34,7 +36,9 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
           avatar: user.avatar,
           bio: user.bio,
           website: user.website,
+          followers: user.followers,
           followersCount: user.followers ? user.followers.length : 0,
+          followings:user.following,
           followingCount: user.following ? user.following.length : 0
         };
         Post.find({ postedBy: user._id }, ["_id", "photo", "likes", "comments"]).lean()

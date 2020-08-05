@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import Spinner from '../common/Spinner'
-// load CSS
-import './suggestion.css';
 // import Action
 import { getSuggestedProfiles } from '../../actions/suggestionActions'
+// import Component
+import Follow from '../Follow/Follow';
+// load CSS
+import './suggestion.css';
 
 class Suggestion extends Component {
   componentDidMount() {
@@ -41,7 +43,7 @@ class Suggestion extends Component {
                 </div>
               </div>
               {/* Follow button */}
-              <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
+              <Follow userId={suggestion._id}/>
             </div>
           ))}
         </div>

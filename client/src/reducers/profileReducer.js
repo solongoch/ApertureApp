@@ -14,8 +14,8 @@ import {
 const initialState = {
   profile: "",
   loading: false,
-  followingLists: null,
-  followersLists: null
+  followingLists: [],
+  followersLists: []
 };
 
 export default function (state = initialState, action) {

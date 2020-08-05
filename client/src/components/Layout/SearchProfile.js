@@ -27,7 +27,8 @@ class searchProfile extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (!isEmpty(this.state.search)) {
-      this.props.getProfileByUsername(this.state.search, this.props.history);
+      var currentUsername = this.props.auth.user.username;
+      this.props.getProfileByUsername(this.state.search, currentUsername, this.props.history);
     }
   }
 
@@ -49,4 +50,7 @@ class searchProfile extends Component {
   }
 }
 
-export default connect(null, { getProfileByUsername })(withRouter(searchProfile));
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+export default connect(mapStateToProps, { getProfileByUsername })(withRouter(searchProfile));

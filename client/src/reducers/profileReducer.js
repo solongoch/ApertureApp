@@ -3,6 +3,7 @@ import {
   PROFILE_LOADING,
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
+  GET_SEARCHED_PROFILE_BY_USERNAME,
   GET_FOLLOWING,
   GET_FOLLOWERS,
   FOLLOW_USER,
@@ -15,7 +16,8 @@ const initialState = {
   profile: "",
   loading: false,
   followingLists: [],
-  followersLists: []
+  followersLists: [],
+  searchedProfile : ''
 };
 
 export default function (state = initialState, action) {
@@ -39,6 +41,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profile: action.payload
+      };
+    case GET_SEARCHED_PROFILE_BY_USERNAME:
+      return {
+        ...state,
+        searchedProfile: action.payload
       };
     case GET_FOLLOWING:
       return {

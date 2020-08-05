@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
+//import toast
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import Components
 import FollowOrEdit from './FollowOrEdit';
 import Followers from '../Follow/Followers';
@@ -7,6 +10,7 @@ import Followings from '../Follow/Followings';
 // import CSS
 import './profile.css';
 
+toast.configure();
 class ProfileHeader extends Component {
   constructor() {
     super();
@@ -14,14 +18,29 @@ class ProfileHeader extends Component {
       _showFollowings: false,
       _showFollowers: false
     }
+    this.toastOpts = {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: 0,
+      };
   }
 
   //to show and hide Following component 
   showFollowings = () => {
     const { followingCount } = this.props.profile;
+    const { isAuthenticated } = this.props.auth
     //display Following component only if user has followingCount > 0
-    if (followingCount > 0) {
-      this.setState({ _showFollowings: true });
+    //Check is authenticated to show the following component
+    if (isAuthenticated) {
+      if (followingCount > 0) {
+        this.setState({ _showFollowings: true });
+      }
+    }else{
+      toast.info("Login to see more...", this.toastOpts)
     }
   }
   hideFollowings = () => {
@@ -31,9 +50,16 @@ class ProfileHeader extends Component {
   //to show and hide Followers component 
   showFollowers = () => {
     const { followersCount } = this.props.profile;
+    const { isAuthenticated } = this.props.auth
     //display Followers component only if user has followersCount > 0
-    if (followersCount > 0) {
-      this.setState({ _showFollowers: true })
+    //Check is authenticated to show the follower component
+    if (isAuthenticated) {
+      if (followersCount > 0) {
+        this.setState({ _showFollowers: true })
+      }
+    }
+    else{
+      toast.info("Login to see more...",this.toastOpts)
     }
   }
   hideFollowers = () => {
@@ -51,7 +77,7 @@ class ProfileHeader extends Component {
             {/* Username */}
             <div className="profile-username">{profile.username}</div>
             {/* Diplay Follow/Following Or Edit Profile button */}
-            <FollowOrEdit profile={ profile } auth={ this.props.auth } followers = { profile.followersList } />
+            <FollowOrEdit profile={profile} />
           </div>
           <ul className="counts d-flex flex-row">
             {/* Total number of posts */}

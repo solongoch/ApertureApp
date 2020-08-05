@@ -56,6 +56,7 @@ router.post('/:postId/lu', passport.authenticate('jwt', { session: false }), (re
             post.likes.splice(userIndex, 1);
             post.save()
               .then(data => res.json({ success: true, message: "User disliked a Post", likesCount: post.likes.length }))
+
               .catch(err => res.status(500).json({ success: false, message: err.message }));
           }
           else {//add user to likes []

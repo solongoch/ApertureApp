@@ -47,7 +47,7 @@ class PostActions extends Component {
       <div>
         <div className="actions">
           <button 
-            onClick={this.onLikeClick.bind(this, post._id)}
+            onClick={this.onLikeClick.bind(this, postId)}
             type="button"
             className="btn"
           >
@@ -59,7 +59,7 @@ class PostActions extends Component {
           </button>
 
           <button 
-            onClick={this.onLikeClick.bind(this, post._id)}
+            onClick={this.onLikeClick.bind(this, postId)}
             type="button"
             className="btn"
           >

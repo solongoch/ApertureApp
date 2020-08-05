@@ -189,6 +189,7 @@ router.post(
   
       Post.findById(req.params.id)
         .then((post) => {
+          if(post) {
             const newComment = {
               commentBody: req.body.commentBody,
               username: req.body.username,
@@ -198,12 +199,13 @@ router.post(
 
             // Add to comments array
             post.comments.unshift(newComment);
-
-            // Save
-            post.save().then((post) => res.json(post));
-          })
+            post.save().then((post) => res.json(post)); //Save
+          } else {
+            return res.status(404).json({ success: false, postnotfound: "No post found"});
+          }
+        })
             
-        .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
+        .catch((err) => res.status(500).json({ success:false, error: err.message }));
     }
   );
 

@@ -108,7 +108,7 @@ class Homepage extends Component {
             <Moment fromNow>{post.timePosted}</Moment>
           </div>
           {/* ADD COMMENT */}
-          <PostComment postId={postId}/>
+          <PostComment postId={post._id}/>
         </div>
       </div>
     ));

@@ -41,7 +41,14 @@
   border-top: 1px solid rgba(var(--i1d,38,38,38),1);
 }
 
-
+button.btn-follow {
+  line-height: 2px;
+  float: right;
+  height: 30px;
+  background-color:#0095F6;
+  border-color: #0095F6;
+  color: #fff;  
+}
 .numbers {
   color: #FFF;
   font-weight: 600;

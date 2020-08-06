@@ -28,6 +28,7 @@ import setAuthToken from './utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { SET_CURRENT_USER } from './actions/types';
 import { logoutUser } from './actions/authActions';
+import { getCurrentProfile } from './actions/profileActions';
 
 import PrivateRoute from './components/common/PrivateRoute';
 
@@ -51,8 +52,12 @@ if (localStorage.jwtToken) {
     store.dispatch(logoutUser());
     window.location.href = '/login';
   }
+  else {
+    /* to restore the currentUserProfile when user closes the browser and
+    JWT token is still valid in local storage */
+    store.dispatch(getCurrentProfile());
+  }
 }
-
 class App extends Component {
   render() {
     return (
@@ -81,7 +86,6 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/edit/:username" component={EditProfile} />
               </Switch>
-             
               <Switch>
                 <PrivateRoute exact path="/profile/:username/followings" component={Followings} />
               </Switch>
@@ -97,8 +101,6 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/create" component={CreatePost} />
               </Switch>
-
-
             </div>
             <Footer />
           </div>

@@ -34,8 +34,8 @@ class Followings extends Component {
   cancelUnfollow = () => {
     this.setState({ _showUnfollow: false });
   }
-  componentDidMount() {
 
+  componentDidMount() {
     this.props.getFollowings(this.props.username)
   }
 

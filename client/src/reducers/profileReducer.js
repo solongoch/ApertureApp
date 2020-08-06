@@ -61,8 +61,8 @@ export default function (state = initialState, action) {
       {
         return {
           ...state,
-          followingLists: [action.payload.userId, ...state.followingLists],
-          profile : {...state.profile , followersCount: action.payload.followersCount  }
+          followingLists: [action.payload, ...state.followingLists]
+         
         };
       }
     case UNFOLLOW_USER:

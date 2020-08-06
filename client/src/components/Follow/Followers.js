@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getFollowers } from './../../actions/profileActions';
 import { connect } from 'react-redux';
 import isEmpty from '../../validation/is-empty';
+import Follow from './Follow';
 
 class Followers extends Component {
   componentDidMount() {
@@ -18,11 +19,11 @@ class Followers extends Component {
       return null;
     }
 
-    const { followersLists, searchedFollowersLists} = this.props;
+    const { followersLists, searchedFollowersLists } = this.props;
     var _followerslists;
 
-    var checkUserFollowersLists = 
-  (this.props.username === this.props.auth.username) ? followersLists : searchedFollowersLists
+    var checkUserFollowersLists =
+      (this.props.username === this.props.auth.username) ? followersLists : searchedFollowersLists
 
 
     if (checkUserFollowersLists) {
@@ -61,11 +62,11 @@ class Followers extends Component {
                           <span className="name"> {user.user.name}  </span>
                         </div>
                         <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                          <button className='btn mt-1  btn-sm btn-follow'>
-                            {/* <Link to='/unfollow' className='link-unfollow'> */}
+                          {/* <button className='btn mt-1  btn-sm btn-follow'>
                             Follow
-                                  {/* </Link> */}
-                          </button>
+                          </button> */}
+
+                          <Follow userId={user.user._id} />
                         </div>
                       </div>
                     )
@@ -89,7 +90,7 @@ class Followers extends Component {
 const mapStateToProps = state => ({
   auth: state.auth.user,
   followersLists: state.profile.followersLists,
-  searchedFollowersLists : state.profile.searchedProfile.followers
+  searchedFollowersLists: state.profile.searchedProfile.followers
 })
 
 export default connect(mapStateToProps, ({ getFollowers }))(Followers);

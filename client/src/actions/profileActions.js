@@ -166,11 +166,13 @@ export const getFollowers = (username) => dispatch => {
 
 //follow user
 export const followUser = (userId) => dispatch => {
+  alert("API")
   axios.put(`/api/${userId}/follow`)
     .then(res => {
+      console.log(res);
       dispatch({
         type: FOLLOW_USER,
-        payload: res.data
+        payload: userId
       })
     })
     .catch(err => console.log(err.response.data));

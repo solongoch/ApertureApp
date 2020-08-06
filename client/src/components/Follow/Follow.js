@@ -10,12 +10,11 @@ class Follow extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick(e) {
+  onClick() {
     this.props.followUser(this.props.userId);
   }
 
   render() {
-    console.log(this.props.userId)
     return (
       <div>
         <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClick}>

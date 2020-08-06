@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+// import Component
+import Follow from '../Follow/Follow';
 
 class FollowOrEdit extends Component {
   render() {
@@ -22,17 +24,13 @@ class FollowOrEdit extends Component {
         )
     }
 
-    const userFollowersLists = profile.followers;
-    const profileBtnName = ((userFollowersLists.length !== 0)
-      ? (userFollowersLists.some(follower => follower.user.username === authUsername) ? 'Following' : 'Follow')
-      : 'Follow')
-
     // Follow OR Following button
-    profileBtn = (<div>
-      <button className="btn ml-3 btn-sm btn-follow" >
-        {/* Follow */}
-        {profileBtnName}
-      </button>
+    profileBtn = (
+    <div>
+      <Follow 
+        userId={this.props.searchedProfile.id} 
+        followers={this.props.searchedProfile.followers} 
+      />
     </div>)
 
     return (
@@ -44,7 +42,8 @@ class FollowOrEdit extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth.user
+  auth: state.auth.user,
+  searchedProfile: state.profile.searchedProfile
 });
 
 export default connect(mapStateToProps, null)(FollowOrEdit);

@@ -43,7 +43,7 @@ class PostActions extends Component {
       postedById = post.postedBy._id;
       postId = post._id
     }
-    const showThrashIcon = (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
+    const showThrashIcon = (<i className="fa fa-trash thrash-icon mt-2" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
 
     return (
       <div>
@@ -52,14 +52,11 @@ class PostActions extends Component {
           <button
             onClick={this.onLikeClick.bind(this, postId)}
             type="button"
-            className="btn"
-          >
-            <i
-              className={classnames('far fa-heart fa-2x', {
-                'fas fa-heart fa-2x unlike': this.findUserLike(post.likes)
-              })}
-            />
-          </button>
+            className={classnames('far fa-heart fa-2x like-heart', {
+              'fas fa-heart fa-2x unlike': this.findUserLike(post.likes)
+            })}
+          />
+           
 
           {/* <i className="far fa-comment fa-2x action"></i>
           <i className="far fa-paper-plane fa-2x action"></i>

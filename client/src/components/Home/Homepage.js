@@ -5,11 +5,13 @@ import Moment from 'react-moment';
 import Spinner from '../common/Spinner';
 // import Action
 import { getHomepagePosts } from "../../actions/homeActions";
+import {getSinglePost} from "../../actions/postActions";
 // import Component
-import AddComment from './AddComment';
+import PostComment from '../Post/PostComment';
 import HomeSuggestion from "./HomeSuggestion";
 // import CSS
 import "./homepage.css";
+import PostActions from "../Post/PostActions";
 
 class Homepage extends Component {
   componentDidMount() {
@@ -50,28 +52,7 @@ class Homepage extends Component {
         {/* POST FOOTER - Actions, Caption, Likes, Comments and Add comment form */}
         <div className="post-footer">
           {/* ACTIONS */}
-          <div className="actions">
-            {/* LIKE */}
-            <i className="far fa-heart fa-2x action"></i>
-            {/* GO TO SINGLE POST PAGE */}
-            <Link to={`/post/${post._id}`} className="action d-none"><i className="far fa-comment fa-2x"></i></Link>
-            {/* SHARE */}
-            <i className="far fa-paper-plane fa-2x action d-none"></i>
-            {/* SAVE */}
-            <i className="far fa-bookmark fa-2x action d-none"></i>
-          </div>
-          {/* LIKES OF THIS POST */}
-          <div className="font-weight-bold line">
-            <Link to="/likes">{(() =>{
-              const likes = post.likes.length;
-              switch (likes) {
-                case 0: return null;
-                case 1: return (<span>1 like</span>);
-                default:
-                  return (<span>{likes} likes</span>)
-              }}
-            )()}</Link>
-          </div>
+          <PostActions post={post}/>
           {/* POST CAPTION */}
           {(post.caption) ?
             <div className="line">
@@ -92,8 +73,8 @@ class Homepage extends Component {
             (post.comments.map(comment => {
               return (
               <div className="line" key={Math.random()}>
-                <Link to={`/profile/${comment.commentedByUsername}`} className="font-weight-bold right-5">
-                  {comment.commentedByUsername}
+                <Link to={`/profile/${comment.username}`} className="font-weight-bold right-5">
+                  {comment.username}
                 </Link>
                 {comment.commentBody}
               </div> )}
@@ -104,7 +85,7 @@ class Homepage extends Component {
             <Moment fromNow>{post.timePosted}</Moment>
           </div>
           {/* ADD COMMENT */}
-          <AddComment />
+          
         </div>
       </div>
     ));
@@ -141,9 +122,11 @@ class Homepage extends Component {
   }
 }
 
+
+
 const mapStateToProps = state => ({
   auth: state.auth,
   posts: state.post
 });
 
-export default connect(mapStateToProps, { getHomepagePosts })(Homepage);
+export default connect(mapStateToProps, { getHomepagePosts, getSinglePost })(Homepage);

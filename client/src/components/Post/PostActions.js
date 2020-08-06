@@ -12,6 +12,7 @@ import './postactions.css';
 import { withRouter } from 'react-router-dom';
 
 class PostActions extends Component {
+
   onLikeClick(id) {
     this.props.addLike(id);
   }
@@ -46,32 +47,19 @@ class PostActions extends Component {
     return (
       <div>
         <div className="actions">
-          <button 
-            onClick={this.onLikeClick.bind(this, postId)}
-            type="button"
-            className="btn"
-          >
-            <i
-              className={classnames('far fa-heart fa-2x action', {
-                'text-info': this.findUserLike(post.likes)
-              })}
-              />
-          </button>
-
-          <button 
-            onClick={this.onLikeClick.bind(this, postId)}
-            type="button"
-            className="btn"
-          >
-            <i
-              className={classnames('fas fa-heart fa-2x unlike', {
-                'text-info': this.findUserLike(post.likes)
-              })}
-              />
-          </button>
-
-
           
+          <button 
+            onClick={this.onLikeClick.bind(this, postId)}
+            type="button"
+            className="btn"
+          >
+            <i
+              className={classnames('far fa-heart fa-2x', {
+                'fas fa-heart fa-2x unlike': this.findUserLike(post.likes)
+              })}
+              />
+          </button>
+        
           {/* <i className="far fa-comment fa-2x action"></i>
           <i className="far fa-paper-plane fa-2x action"></i>
           <i className="far fa-bookmark fa-2x action"></i> */}
@@ -115,4 +103,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps,{addLike, deletePostById})(withRouter(PostActions));
-

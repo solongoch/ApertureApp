@@ -37,7 +37,7 @@ render() {
                     type="button"
                     className="btn btn-danger btn-delete-comment"
                     >
-                     <i className="fas fa-times fa-xs " />   
+                     <i className="fas fa-times fa-xs" />   
                     </button>
                 ) : null}
                 </div>

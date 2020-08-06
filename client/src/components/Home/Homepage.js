@@ -19,10 +19,16 @@ class Homepage extends Component {
   render() {
     const { user } = this.props.auth;
     const { posts } = this.props.posts;
+    const { avatar } = this.props.profile;
     if (!posts) {
       return (<Spinner />)
     }
-    const postItem = posts.map(post => (     
+    //If avatar is updated in EditProfile  then fetch it from profile else from auth.user.avatar
+    let userAvatar = (avatar)
+      ? (<img className="round-image image-50" src={avatar} alt={user.username} />)
+      : (<img className="round-image image-50" src={user.avatar} alt="User" />);
+
+    const postItem = posts.map(post => (
       <div className="post-div d-flex flex-column" key={Math.random()}>
         {/* POST HEADER - Avatar and Username */}
         <div className="post-header">
@@ -62,14 +68,15 @@ class Homepage extends Component {
           </div>
           {/* LIKES OF THIS POST */}
           <div className="font-weight-bold line">
-            <Link to="/likes">{(() =>{
+            <Link to="/likes">{(() => {
               const likes = post.likes.length;
               switch (likes) {
                 case 0: return null;
                 case 1: return (<span>1 like</span>);
                 default:
                   return (<span>{likes} likes</span>)
-              }}
+              }
+            }
             )()}</Link>
           </div>
           {/* POST CAPTION */}
@@ -78,12 +85,12 @@ class Homepage extends Component {
               <Link to={`/profile/${post.postedBy.username}`} className="font-weight-bold right-5">
                 {post.postedBy.username}
               </Link>
-                {post.caption}
+              {post.caption}
             </div>
             : null
           }
           {/* COMMENTS */}
-          {(post.comments.length !== 0) ? 
+          {(post.comments.length !== 0) ?
             // (<div className="line">
             //   <Link to="/" className="make-gray">
             //     View all {post.comments.length} comments
@@ -91,13 +98,14 @@ class Homepage extends Component {
             // </div>)
             (post.comments.map(comment => {
               return (
-              <div className="line" key={Math.random()}>
-                <Link to={`/profile/${comment.commentedByUsername}`} className="font-weight-bold right-5">
-                  {comment.commentedByUsername}
-                </Link>
-                {comment.commentBody}
-              </div> )}
-              ))
+                <div className="line" key={Math.random()}>
+                  <Link to={`/profile/${comment.commentedByUsername}`} className="font-weight-bold right-5">
+                    {comment.commentedByUsername}
+                  </Link>
+                  {comment.commentBody}
+                </div>)
+            }
+            ))
             : null
           }
           <div className="post-time line">
@@ -119,11 +127,8 @@ class Homepage extends Component {
         <div id="right-bar">
           <div className="profile-section">
             <Link to={`/profile/${user.username}`}>
-              <img
-                className="round-image image-50"
-                src={user.avatar}
-                alt="User"
-              />
+              {/* Avatar image */}
+              {userAvatar}
             </Link>
             <div className="left-15">
               <div className="font-weight-bold">
@@ -143,7 +148,8 @@ class Homepage extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  posts: state.post
+  posts: state.post,
+  profile: state.profile.profile
 });
 
 export default connect(mapStateToProps, { getHomepagePosts })(Homepage);

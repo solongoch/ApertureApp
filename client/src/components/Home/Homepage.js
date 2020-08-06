@@ -51,8 +51,7 @@ class Homepage extends Component {
         </div>
         {/* POST FOOTER - Actions, Caption, Likes, Comments and Add comment form */}
         <div className="post-footer">
-          {/* ACTIONS */}
-          <PostActions post={post}/>
+          
           {/* POST CAPTION */}
           {(post.caption) ?
             <div className="line">
@@ -85,6 +84,8 @@ class Homepage extends Component {
             <Moment fromNow>{post.timePosted}</Moment>
           </div>
           {/* ADD COMMENT */}
+          {/* ACTIONS */}
+          <PostActions post={post}/>
           
         </div>
       </div>

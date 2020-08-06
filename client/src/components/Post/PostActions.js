@@ -14,7 +14,7 @@ import { withRouter } from 'react-router-dom';
 class PostActions extends Component {
 
   onLikeClick(id) {
-    this.props.addLike(id);
+    this.props.addLike(id, this.props.history);
   }
 
   findUserLike(likes) {

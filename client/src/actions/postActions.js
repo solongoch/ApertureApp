@@ -128,10 +128,10 @@ export const deleteComment = (postId, commentId) => dispatch => {
 
 
 // Add Like
-export const addLike = postId => dispatch => {
+export const addLike = (postId, history) => dispatch => {
   axios
     .put(`/api/posts/${postId}/lu`)
-    .then(res => dispatch(getSinglePost()))
+    .then(res => dispatch(getSinglePost(postId, history)))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

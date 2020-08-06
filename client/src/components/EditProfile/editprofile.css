@@ -17,6 +17,13 @@
     margin-right: auto;
     object-fit: cover;
 }
+.readonly-username.form-control:disabled, .form-control[readonly]{
+    background-color:inherit;
+    border-color: none;
+}
+.readonly-username,.form-control:focus  {
+    border-color: none;
+}
 
 .uploadavatar-card {
     padding-top: 20px;

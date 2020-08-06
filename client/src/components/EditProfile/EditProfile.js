@@ -22,7 +22,8 @@ class EditProfile extends Component {
       mobile: '',
       gender: '',
       errors: {},
-      isEnabled: false
+      isEnabled: false,
+      loading: false
     }
 
     this.onChange = this.onChange.bind(this);
@@ -30,7 +31,7 @@ class EditProfile extends Component {
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value, isEnabled:true });
+    this.setState({ [e.target.name]: e.target.value, isEnabled: true });
     if ((this.state.errors.hasOwnProperty([e.target.name]))) {
       this.clearError(e.target.name);
     }
@@ -78,6 +79,7 @@ class EditProfile extends Component {
     };
 
     this.props.editProfile(profileData)
+    this.setState({ loading: true }) //hide refresh symbol inside button after upload
   }
 
   componentDidMount() {
@@ -109,14 +111,16 @@ class EditProfile extends Component {
         bio: profile.bio,
         mobile: profile.mobile,
         gender: profile.gender,
-        isEnabled:false
+        isEnabled: false,
+        loading: false
       })
 
     }
   }
 
   render() {
-    const { errors, name, username, email, avatar, bio, website, mobile, gender, isPublic, isEnabled } = this.state;
+    const { errors, name, username, email, avatar, bio, website, mobile,
+      gender, isPublic, isEnabled, loading } = this.state;
     return (
       <div className="create-profile">
         <div className="row">
@@ -152,13 +156,14 @@ class EditProfile extends Component {
                   <label htmlFor="username" className="pr-3">
                     <h5 className="mb-0">Username</h5>
                   </label>
-                  <TextFieldGroup
+                  <input
                     placeholder="Username"
                     name="username"
                     type="text"
                     value={username}
-                    onChange={this.onChange}
                     error={errors.username}
+                    readOnly
+                    className="form-control form-control-lg login-input shadow-none readonly-username"
                   />
                 </div>
 
@@ -253,6 +258,7 @@ class EditProfile extends Component {
                 <button className="btn btn-primary col-4 btn-createprofile"
                   type="submit"
                   disabled={!isEnabled}>Submit
+                   {loading && <i className="fa fa-refresh fa-spin ml-2" style={{ marginRight: "10px", fontSize: "15px" }} />}
                 </button>
               </form>
             </div>

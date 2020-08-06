@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import { connect } from 'react-redux';
+import Spinner from '../common/Spinner'
+// import Action
+import { getSuggestedProfiles } from '../../actions/suggestionActions'
+// import Component
+import Follow from '../Follow/Follow';
 // load CSS
 import './suggestion.css';
-// load images
-import profilePicture from '../../image/img-sq.jpg';
 
 class Suggestion extends Component {
-  constructor() {
-    super();
-    this.state = {
-    }
-
-    axios
-      .get('/api/suggestion')
-      .then(res => console.log(res))
-      .catch(err => console.log(err.response.data));
+  componentDidMount() {
+    this.props.getSuggestedProfiles();
   }
 
   render() {
+    const {suggestions} = this.props.profile;
+    if (!suggestions) {
+      return (<Spinner />)
+    }
+
     return (
       <div id="page-body">
         <div className="suggested-div">
@@ -26,153 +27,34 @@ class Suggestion extends Component {
         </div>
         {/* Follower suggestion */}
         <div className="suggestions">
-          {/* 1 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
+          {/* Map through suggestions to get each profile */}
+          {suggestions.map(suggestion => (
+            <div className="suggestion" key={suggestion._id}>
+              <div className="post-header">
+                <Link to={`/profile/${suggestion.username}`}>
+                  <img className="round-image image-50" src={suggestion.avatar} alt="User" />
+                </Link>
+                <div>
+                  <div className="username-div left-15 col-row-4 font-weight-bold">
+                    <Link to={`/profile/${suggestion.username}`}>{suggestion.username}</Link>
+                  </div>
+                  <div className="left-15 col-row-4">{suggestion.name}</div>
+                  <div className="make-gray left-15">Followed by {suggestion.followers.length} people</div>
+                </div>
               </div>
+              {/* Follow button */}
+              <Follow userId={suggestion._id}/>
             </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 2 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 3 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 4 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 5 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 6 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 7 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 8 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 9 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" />
-              </Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 10 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
-
-          {/* 11 */}
-          <div className="suggestion">
-            <div className="post-header">
-              <Link to="/"><img className="round-image image-50" src= {profilePicture} alt="User" /></Link>
-              <div>
-                <div className="username-div left-15 col-row-4"><Link to="/">Username</Link></div>
-                <div className="left-15 col-row-4"><Link to="/">Name</Link></div>
-                <div className="make-gray left-15">Followed by xyz + 14 more</div>
-              </div>
-            </div>
-            <Link className="log-in-button blue-bg button font-weight-bold follow" to="/">Follow</Link>
-          </div>
+          ))}
         </div>
       </div>
     );
   }
 }
 
-export default Suggestion;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { getSuggestedProfiles })(Suggestion);

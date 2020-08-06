@@ -3,19 +3,12 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
 class FollowOrEdit extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     followersList: []
-  //   }
-  // }
-
   render() {
     const { profile } = this.props;
     const authUsername = this.props.auth.username;
     let profileBtn;
+    
     if (profile.username === authUsername) {
-
       return profileBtn =
         (
           // Edit Profile button

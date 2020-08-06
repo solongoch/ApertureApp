@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const User = require("../../models/User");
 
-// @route   put api/follow/:userId
+// @route   put api/:userId/follow
 // @desc    Follow User
 // @input   Get Userid from req params of person whom user wants to follow.
 // @access  Private
@@ -27,21 +27,20 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
           .then(result => {
             User.findOne({ email: req.user.email }) 
               .then(user => {
-                if (user.following.filter(following =>
-                  following.user.toString() === userId).length > 0) {
+                if (user.following.some(following => following.user.toString() === userId)) {
                   return res.status(400).json({ alreadyfollow: "You already following the user" })
                 }
                 user.following.unshift({ user: userId });
-                user.save().then(user => res.json({
-                  success: true,
-                  message: "Followed"
-                }));
+                user.save().then(user => { 
+                  return res.json({
+                    success: true,
+                    message: `Followed ${userId}`
+                })});
               });
-
           })
           .catch(err => res.status(500).json({ message: err.msg }));
       } else {//no user found
-        return res.status(404).json({ success: false, message: 'There is no such profile' });
+        return res.status(404).json({ success: false, message: 'Profile not found' });
       }
     })
     .catch(err => {
@@ -49,7 +48,7 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
     });
 });
 
-// @route   put api/follow/:userId
+// @route   put api/:userId/unfollow
 // @desc    Unfollow User
 // @input   Get Userid from req params of person whom user wants to unfollow.
 // @access  Private
@@ -59,7 +58,7 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
   const userId = req.params.userId;
   // check if your id doesn't match the id of the user you want to follow
   if (req.user.id === userId) {
-    return res.status(400).json({ alreadyfollow: "You cannot unfollow follow yourself" })
+    return res.status(400).json({ alreadyfollow: "You cannot unfollow yourself" })
   }
   User.findById(userId)
     .then(user => {
@@ -85,7 +84,7 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
                       message: "Unfollowed"
                     });
                   } else {
-                    return res.status(400).json({ message: "You are not the following the user yet" });
+                    return res.status(400).json({ message: "You are not the following the user" });
                   }
                 })
             });

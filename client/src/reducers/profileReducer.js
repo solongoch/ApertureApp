@@ -15,8 +15,8 @@ import {
 const initialState = {
   profile: "",
   loading: false,
-  followingLists: null,
-  followersLists: null,
+  followingLists: [],
+  followersLists: [],
   searchedProfile : ''
 };
 

@@ -2,18 +2,16 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 // import CSS
 import "./single-post.css";
-// import images
-import profilePic from "../../image/img-sq.jpg";
 
 class PostCommentSection extends Component {
   render() {
-    const { comments }= this.props;
-    let commentItem;
-    console.log(comments)
-    if (!comments) { return null }
-    else {
-      commentItem = comments.map(comment => 
-      (
+    const { comments } = this.props;
+    
+    if (!comments) {
+      return null;
+    }
+
+    const commentItem = comments.map(comment => (
       <div className="comment-div" key={comment._id}>
         <div>
           <Link to={`/profile/${comment.commentedByUsername}`}>
@@ -33,14 +31,9 @@ class PostCommentSection extends Component {
           </div>
         </div>
       </div>
-      )
-    )
-    }
-    return (
-      <div className="comments">
-        {commentItem}
-      </div>
-    );
+    ));
+    
+    return <div className="comments">{commentItem}</div>;
   }
 }
 

@@ -18,9 +18,14 @@ class Followers extends Component {
       return null;
     }
 
-    const { followersLists } = this.props;
+    const { followersLists, searchedFollowersLists} = this.props;
     var _followerslists;
-    if (followersLists) {
+
+    var checkUserFollowersLists = 
+  (this.props.username === this.props.auth.username) ? followersLists : searchedFollowersLists
+
+
+    if (checkUserFollowersLists) {
       _followerslists = (
         <div className='mainwrapper-div'>
           <div className='subwrapper-div'>
@@ -34,7 +39,7 @@ class Followers extends Component {
               <hr />
               <div className='scrolluser'>
                 {
-                  followersLists.map((user) => {
+                  checkUserFollowersLists.map((user) => {
                     return (
                       <div className='row' key={user.user._id}>
 
@@ -83,7 +88,8 @@ class Followers extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth.user,
-  followersLists: state.profile.followersLists
+  followersLists: state.profile.followersLists,
+  searchedFollowersLists : state.profile.searchedProfile.followers
 })
 
 export default connect(mapStateToProps, ({ getFollowers }))(Followers);

@@ -43,11 +43,13 @@ class Followings extends Component {
     if (!this.props._showFollowings) {
       return null;
     }
-    const { followingLists } = this.props;
+    const { followingLists , searchedFollowingLists } = this.props;
     const { _unfollowUser } = this.state;
     var _followinglists;
-    if (followingLists) {
+var checkUserFollowingLists = 
+  (this.props.username === this.props.auth.username) ? followingLists : searchedFollowingLists
 
+    if (checkUserFollowingLists) {
       _followinglists = (
         <div className='mainwrapper-div'>
           <div className='subwrapper-div'>
@@ -59,7 +61,7 @@ class Followings extends Component {
               <hr />
               <div className='scrolluser'>
                 {
-                  followingLists.map((user) => {
+                  checkUserFollowingLists.map((user) => {
                     return (
                       <div className='row' key={user.user._id}>
 
@@ -114,7 +116,8 @@ class Followings extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth.user,
-  followingLists: state.profile.followingLists
+  followingLists: state.profile.followingLists,
+  searchedFollowingLists : state.profile.searchedProfile.followings
 })
 
 export default connect(mapStateToProps, ({ getFollowings, unfollowUser }))(Followings);

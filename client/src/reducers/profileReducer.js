@@ -61,14 +61,16 @@ export default function (state = initialState, action) {
       {
         return {
           ...state,
-          followingLists: [action.payload, ...state.followingLists]
+          followingLists: [action.payload.userId, ...state.followingLists],
+          profile : {...state.profile , followersCount: action.payload.followersCount  }
         };
       }
     case UNFOLLOW_USER:
       {
         return {
           ...state,
-          followingLists: state.followingLists.filter(user => user.user._id !== action.payload)
+          followingLists: state.followingLists.filter(user => user.user._id !== action.payload.userId),
+          profile : {...state.profile , followingCount: action.payload.followingCount  }
         };
       }
     case CLEAR_CURRENT_PROFILE:

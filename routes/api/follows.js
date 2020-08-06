@@ -25,17 +25,19 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
         user.followers.unshift({ user: req.user.id });//adding in follower[]
         user.save()
           .then(result => {
-            User.findOne({ email: req.user.email }) 
+            User.findOne({ email: req.user.email })
               .then(user => {
                 if (user.following.some(following => following.user.toString() === userId)) {
                   return res.status(400).json({ alreadyfollow: "You already following the user" })
                 }
                 user.following.unshift({ user: userId });
-                user.save().then(user => { 
+                user.save().then(user => {
                   return res.json({
-                    success: true,
+                    userId,
+                    followersCount: user.followers? user.followers.length : 0,
                     message: `Followed ${userId}`
-                })});
+                  })
+                });
               });
           })
           .catch(err => res.status(500).json({ message: err.msg }));
@@ -66,7 +68,7 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
         // check if the requested user is already in follower list then remove 
         if (user.followers.filter(follower =>
           follower.user.toString() === req.user.id).length > 0) {
-          const followerIndex = user.followers.map(follower => 
+          const followerIndex = user.followers.map(follower =>
             follower.user.toString().indexOf(req.userid));
           user.followers.splice(followerIndex, 1);
           user.save()
@@ -78,18 +80,26 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
                     const followingIndex = doc.following.map(follow =>
                       follow.user.toString().indexOf(req.userid));
                     doc.following.splice(followingIndex, 1);
-                    doc.save();
-                    return res.json({
-                      success: true,
-                      message: "Unfollowed"
+                    doc.save().then(doc => {
+                      // const data = {
+                      //   followingCount : doc.following ? doc.following.length : 0
+                      // } 
+                      return res.json({
+                        userId,
+                        followingCount: doc.following ? doc.following.length : 0,
+                        message: "Unfollowed"
+                      });
+
                     });
+
+
                   } else {
                     return res.status(400).json({ message: "You are not the following the user" });
                   }
                 })
             });
 
-        } else {     
+        } else {
           return res.status(400).json({ message: "You are not the following the user yet" });
         }
       } else {//no user founf to follow
@@ -112,7 +122,7 @@ router.get(
     User.findOne({ username: req.params.username }, ["_id", "followers"])
       .populate("followers.user", ["username", "name", "avatar"])
       .then(user => {
-        if(!user){
+        if (!user) {
           return res.status(404).json({ success: false, message: "User not found" });
         }
         const paramsId = user._id;
@@ -125,7 +135,7 @@ router.get(
           // user seeing followers of person who following
           req.user.following.some(obj => obj.user.toString() == paramsId.toString())
         ) {
-          return res.json({'Followers': user.followers});
+          return res.json({ 'Followers': user.followers });
         } else {
           // can't see followers list of person who didn't follow
           return res.json({ msg: "Do you want to follow?" });
@@ -148,7 +158,7 @@ router.get(
     User.findOne({ username: req.params.username }, ["_id", "following"])
       .populate("following.user", ["username", "name", "avatar"])
       .then(user => {
-        if(!user){
+        if (!user) {
           return res.status(404).json({ success: false, message: "User not found" });
         }
         const paramsId = user._id;
@@ -161,7 +171,7 @@ router.get(
           // user seeing following of person who following
           req.user.following.some(obj => obj.user.toString() == paramsId.toString())
         ) {
-          return res.json({'Following': user.following});
+          return res.json({ 'Following': user.following });
         } else {
           // can't see followers list of person who didn't follow
           return res.json({ msg: "Do you want to follow?" });

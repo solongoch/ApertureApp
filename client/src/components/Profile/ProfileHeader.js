@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { connect } from 'react-redux';
 //import toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,7 +11,6 @@ import Followings from '../Follow/Followings';
 // import CSS
 import './profile.css';
 // import Action
-import { getProfileByUsername } from '../../actions/profileActions';
 
 toast.configure();
 class ProfileHeader extends Component {
@@ -49,10 +47,6 @@ class ProfileHeader extends Component {
   }
   hideFollowings = () => {
     this.setState({ _showFollowings: false });
-    // console.log("history");
-    // window.location.reload(true);
-    var currentUsername = this.props.auth.user.username;
-    this.props.getProfileByUsername(this.props.profile.username, currentUsername, this.props.history);
   }
 
   //to show and hide Followers component 
@@ -64,10 +58,6 @@ class ProfileHeader extends Component {
     if (isAuthenticated) {
       if (followersCount > 0) {
         this.setState({ _showFollowers: true });
-        // console.log("history");
-        // window.location.reload(true);
-        var currentUsername = this.props.auth.user.username;
-        this.props.getProfileByUsername(this.props.profile.username, currentUsername, this.props.history);
       }
     }
     else {
@@ -127,6 +117,4 @@ class ProfileHeader extends Component {
   }
 }
 
-// export default withRouter(ProfileHeader);
-
-export default connect(null, { getProfileByUsername })(withRouter(ProfileHeader));
+export default ProfileHeader;

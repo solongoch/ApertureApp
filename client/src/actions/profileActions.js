@@ -170,7 +170,7 @@ export const followUser = (userId) => dispatch => {
     .then(res => {
       dispatch({
         type: FOLLOW_USER,
-        payload: userId
+        payload: res.data
       })
     })
     .catch(err => console.log(err.response.data));
@@ -183,7 +183,7 @@ export const unfollowUser = (userId) => dispatch => {
       .then(res => {
         dispatch({
           type: UNFOLLOW_USER,
-          payload: userId
+          payload: res.data
         })
       })
       .catch(err => console.log(err.response.data));

@@ -80,6 +80,11 @@ form.add-comment-form, form.add-comment-form .form-control {
   font-weight: 600;
 }
 
+.btn-delete-comment {
+  margin-left: 15px;
+  border-radius: 100px;
+}
+
 @media (min-width: 991px) {
   #single-post-div {
     width: 100%;

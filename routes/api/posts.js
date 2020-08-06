@@ -37,6 +37,7 @@ router.post('/create', passport.authenticate('jwt', { session: false }), (req, r
           });
 });
 
+
 // @route   PUT api/posts/:postId/lu
 // @desc    Like and Dislike post
 // @input   Postid from request params
@@ -50,15 +51,16 @@ router.put('/:postId/lu', passport.authenticate('jwt', { session: false }), (req
     .then(post => {
       if (post) { //Post found 
           //Post already liked by user then remove the user from the likes []
-          if (post.likes.filter((like) => like.likedBy.toString() === req.user.id).length > 0) {
-            const userIndex = post.likes.map(like => like.likedBy.toString().indexOf(req.user.id));
+          if (post.likes.filter((like) => like.user.toString() === req.user.id).length > 0) {
+            const userIndex = post.likes.map(like => like.user.toString().indexOf(req.user.id));
             post.likes.splice(userIndex, 1);
             post.save()
               .then(data => res.json({ success: true, message: "User disliked a Post", likesCount: post.likes.length }))
+
               .catch(err => res.status(500).json({ success: false, message: err.message }));
           }
           else {//add user to likes []
-            post.likes.unshift({ likedBy: req.user.id });
+            post.likes.unshift({ user: req.user.id });
             post.save()
               .then(data => res.json({ success: true, message: "User liked a Post" ,likesCount: post.likes.length }))
               .catch(err => res.status(500).json({ success: false, message: err.message }));
@@ -187,78 +189,59 @@ router.post(
   
       Post.findById(req.params.id)
         .then((post) => {
-          if(post){
+          if(post) {
             const newComment = {
               commentBody: req.body.commentBody,
-              commentedById: req.user.id,
-              commentedByUsername: req.user.username,
-              commentedByAvatar: req.user.avatar
+              username: req.body.username,
+              avatar: req.body.avatar,
+              user: req.user.id,
             };
-            post.comments.unshift(newComment);  // Add to comments array
-            post.save().then((post) => res.json(post)); // Save
-          }else{
-            return res.status(404).json({ success:false, postnotfound: "No post found" });
 
+            // Add to comments array
+            post.comments.unshift(newComment);
+            post.save().then((post) => res.json(post)); //Save
+          } else {
+            return res.status(404).json({ success: false, postnotfound: "No post found"});
           }
         })
+            
         .catch((err) => res.status(500).json({ success:false, error: err.message }));
     }
   );
-  
-  // @route   DELETE api/posts/comment/:id/:comment_id
-  // @desc    Remove comment from post
-  // @input   postId and comment_id from request params
-  // @access  Private
-  router.delete(
-    "/comment/:postId/:commentId",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
 
-      const {postId,commentId} = req.params;
-      Post.findById(postId)
-        .then((post) => {
-          // Check if post exists
-          if(post){        
-            // Check if comment exists
-            if (post.comments.filter((comment) => 
-                comment._id.toString() === commentId).length === 0) 
-            {
-              return res
-                .status(404)
-                .json({ success: false, message: "Comment does not exist" });
-            }//chk if comment exists ends
-            
-            //Get CommentedBy for the given commentId to delete the comment
-            var getCommentedBy= "";
-            var removeIndex = 0;// index to delete the comment
-            post.comments.filter(function(comments) {
-              if(comments._id == commentId){
-                removeIndex= post.comments.indexOf(comments);//get index to slice
-                getCommentedBy= comments.commentedBy;//get commentedBy id from the array of {}
-              }
-            });
-              // comment can be deleted by postedBy or commentedBy
-            if (post.postedBy.toString() == req.user.id || getCommentedBy==req.user.id ) {
-                post.comments.splice(removeIndex, 1);// Splice comment out of array
-                post.save()
-                    .then((post) =>
-                        res.json({ success:true, message: "Comment deleted"})
-                    );
-            }else{
-                return res.status(401).json({ 
-                  success: false,
-                  message: "You are not authorized to delete this comment" 
-                });
-            }
-          }else{
-             return res.status(404).json({
-                success: false,
-                message: "No post found" });
-          }//post check ends
-        })
-        .catch((err) => {
-         return res.status(500).json({ success:false, error: err.message });
-        });//Post FindbyId ends
-  });//router.delete ends
+  // @route   DELETE api/posts/comment/:id/:comment_id
+// @desc    Remove comment from post
+// @access  Private
+router.delete(
+  "/comment/:id/:comment_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.findById(req.params.id)
+      .then((post) => {
+        // Check to see if comment exists
+        if (
+          post.comments.filter(
+            (comment) => comment._id.toString() === req.params.comment_id
+          ).length === 0
+        ) {
+          return res
+            .status(404)
+            .json({ commentnotexists: "Comment does not exist" });
+        }
+
+        // Get remove index
+        const removeIndex = post.comments
+          .map((item) => item._id.toString())
+          .indexOf(req.params.comment_id);
+
+        // Splice comment out of array
+        post.comments.splice(removeIndex, 1);
+
+        post.save().then((post) => res.json(post));
+      })
+      .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
+  }
+);
+  
 
 module.exports = router;

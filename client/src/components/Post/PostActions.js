@@ -2,25 +2,30 @@ import React, { Component } from "react";
 import Moment from "react-moment";
 // import CSS
 import "./single-post.css";
+import './postactions.css';
 // import Component
 import PostComment from "./PostComment";
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import classnames from 'classnames';
 import { withRouter } from 'react-router-dom';
-import { deletePostById } from '../../actions/postActions';
+//import actions
+import { addLike, deletePostById } from '../../actions/postActions';
 
-class PostAction extends Component {
+class PostActions extends Component {
 
-  state = {
-    likes: 0,
-    errors: {}
-  };
+  onLikeClick(id) {
+    this.props.addLike(id, this.props.history);
+  }
 
-  addLike = () => {
-    let newCount = this.state.likes + 1;
-    this.setState({
-      likes: newCount
-    });
-  };
+  findUserLike(likes) {
+    const { auth } = this.props;
+    if (likes.filter(like => like.user === auth.user.id).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // Calling deletePostById action
   // @input : PostId, username and history
@@ -38,16 +43,29 @@ class PostAction extends Component {
       postedById = post.postedBy._id;
       postId = post._id
     }
-   const showThrashIcon = (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
+    const showThrashIcon = (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
+
     return (
       <div>
         <div className="actions">
-          <button className="far fa-heart fa-2x action" onClick={this.addLike}></button>
-          <i className="far fa-comment fa-2x action"></i>
+
+          <button
+            onClick={this.onLikeClick.bind(this, postId)}
+            type="button"
+            className="btn"
+          >
+            <i
+              className={classnames('far fa-heart fa-2x', {
+                'fas fa-heart fa-2x unlike': this.findUserLike(post.likes)
+              })}
+            />
+          </button>
+
+          {/* <i className="far fa-comment fa-2x action"></i>
           <i className="far fa-paper-plane fa-2x action"></i>
-          <i className="far fa-bookmark fa-2x action"></i>
+          <i className="far fa-bookmark fa-2x action"></i> */}
           {/* Loggedin user only can delete the post(Show thrash icon) */}
-          {postedById === auth.user.id ?  showThrashIcon : null}
+          {postedById === auth.user.id ? showThrashIcon : null}
         </div>
         <div className="likes">
           {/* <img src={post} className="round-image image-22" /> */}
@@ -68,16 +86,21 @@ class PostAction extends Component {
         <div className="posted-date">
           <Moment format="MMM D YYYY">{post.timePosted}</Moment>
         </div>
-        <PostComment></PostComment>
+        <PostComment postId={post._id}></PostComment>
       </div>
 
     )
   }
 }
 
+PostActions.propTypes = {
+  addLike: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
 const mapStateToProps = state => ({
-  auth: state.auth,
-  post: state.post.post
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { deletePostById })(withRouter(PostAction));
+export default connect(mapStateToProps, { addLike, deletePostById })(withRouter(PostActions));

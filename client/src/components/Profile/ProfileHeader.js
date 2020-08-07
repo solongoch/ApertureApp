@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
-//import toast
+import { connect } from 'react-redux';
+// import Toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import Actions
+import { getFollowers, getFollowings } from '../../actions/profileActions';
 // import Components
 import FollowOrEdit from './FollowOrEdit';
 import Followers from '../Follow/Followers';
@@ -66,8 +69,14 @@ class ProfileHeader extends Component {
     this.setState({ _showFollowers: false })
   }
 
+  componentDidMount() {
+    this.props.getFollowings(this.props.profile.username);
+    this.props.getFollowers(this.props.profile.username);
+  }
+
   render() {
-    const { profile } = this.props;
+    const { profile, followingList, followersList } = this.props;
+
     return (
       <div className="profile-info-header d-flex flex-row">
         {/* Avatar */}
@@ -84,11 +93,11 @@ class ProfileHeader extends Component {
             <li className="count"><span className="font-weight-bold">{profile.noOfPosts}</span> posts</li>
             {/* Total number of followers */}
             <li className="count" onClick={this.showFollowers}>
-              <span className="font-weight-bold">{profile.followersCount}</span> followers
+              <span className="font-weight-bold">{followersList.length}</span> followers
               </li>
             {/* Total number of following */}
             <li className="count" onClick={this.showFollowings}>
-              <span className="font-weight-bold">{profile.followingCount}</span> followings
+              <span className="font-weight-bold">{followingList.length}</span> followings
             </li>
           </ul>
 
@@ -115,4 +124,9 @@ class ProfileHeader extends Component {
   }
 }
 
-export default (ProfileHeader);
+const mapStateToProps = state => ({
+  followersList: state.profile.followersLists,
+  followingList: state.profile.followingLists
+})
+
+export default connect(mapStateToProps, {getFollowers, getFollowings})(ProfileHeader);

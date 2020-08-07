@@ -32,9 +32,13 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
                 myUser.following.unshift({ user: userId });
                 myUser.save().then(() => { 
                   return res.json({
-                    success: true,
-                    message: `Followed ${userId}`,
-                    user: user
+                    _id: '',
+                    user: {
+                      _id: user.id,
+                      name: user.name,
+                      username: user.username,
+                      avatar: user.avatar
+                    }
                 })});
               });
           })

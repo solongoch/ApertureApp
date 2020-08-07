@@ -1,15 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 // import Action
-import { followUser } from '../../actions/profileActions';
+import { followUser, getFollowings } from '../../actions/profileActions';
 
 class Follow extends Component {
   constructor() {
     super();
     this.state = {
+      textBtn: false
     };
     
     this.onClick = this.onClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getFollowings(this.props.auth.user.username);
   }
 
   onClick(e) {
@@ -17,27 +22,30 @@ class Follow extends Component {
   }
 
   render() {
-    const { followers, auth } = this.props;
-    const profileBtnName = ((followers.length !== 0)
-      ? (followers.some(follower => follower.user.username === auth.user.username) 
+    const { auth, userId } = this.props;
+    const followingList = this.props.profile.profile.following;
+    const profileBtnName = ((followingList.length !== 0)
+      ? (followingList.some(following => following.user === userId) 
         ? 'Following' 
         : 'Follow')
       : 'Follow');
-    console.log(this.props.userId);
 
     return (
-      (auth.isAuthenticated) ?
-      <div>
-        <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClick}>
-          {profileBtnName}
-        </button>
-      </div> : null
+      (auth.isAuthenticated) 
+      ?
+        <Fragment>
+          <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClick}>
+            {profileBtnName}
+          </button>
+        </Fragment> 
+      : null
     )
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 })
 
-export default connect(mapStateToProps, {followUser})(Follow);
+export default connect(mapStateToProps, {followUser, getFollowings})(Follow);

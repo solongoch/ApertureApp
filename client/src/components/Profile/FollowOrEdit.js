@@ -9,7 +9,7 @@ class FollowOrEdit extends Component {
     const { profile } = this.props;
     const authUsername = this.props.auth.username;
     let profileBtn;
-    
+
     if (profile.username === authUsername) {
       return profileBtn =
         (
@@ -29,7 +29,6 @@ class FollowOrEdit extends Component {
     <div>
       <Follow 
         userId={this.props.searchedProfile.id} 
-        followers={this.props.searchedProfile.followers} 
       />
     </div>)
 

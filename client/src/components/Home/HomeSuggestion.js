@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import Spinner from '../common/Spinner'
+import Spinner from '../common/Spinner';
+// import Component
+import Follow from '../Follow/Follow';
 // import Action
 import { getSuggestedProfiles } from '../../actions/suggestionActions'
 
@@ -34,7 +36,9 @@ class HomeSuggestion extends Component {
                 <div className="make-gray left-15">Followed by {suggestion.followers.length} people</div>
               </div>
             </div>
-            <div className="sign-up-button font-weight-bold follow">Follow</div>
+            <Follow
+              userId={suggestion._id}
+            />
           </div>)
         )}
       </div>

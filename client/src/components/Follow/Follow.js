@@ -6,9 +6,7 @@ import { followUser, unfollowUser, getFollowings } from '../../actions/profileAc
 class Follow extends Component {
   constructor() {
     super();
-    this.state = {
-      isFollow: false
-    };
+    this.state = {};
 
     this.onClickToFollow = this.onClickToFollow.bind(this);
     this.onClickToUnFollow = this.onClickToUnFollow.bind(this);
@@ -17,7 +15,6 @@ class Follow extends Component {
   componentDidMount() {
     this.props.getFollowings(this.props.auth.user.username);
   }
-
 
   onClickToFollow(e) {
     this.props.followUser(this.props.userId);
@@ -28,11 +25,8 @@ class Follow extends Component {
   }
 
   render() {
-    const { userId, auth } = this.props;
-
+    const { auth, userId } = this.props;
     const followingList = this.props.followingLists;
-
-
     //  Follow Button
     let followBtn = (
       <button className="btn ml-3 btn-sm btn-follow" onClick={this.onClickToFollow}>Follow</button>);
@@ -60,7 +54,6 @@ class Follow extends Component {
           {followButton}
         </Fragment>
         : null
-
     )
   }
 }

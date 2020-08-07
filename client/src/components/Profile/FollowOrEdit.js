@@ -27,16 +27,16 @@ class FollowOrEdit extends Component {
 
     // Follow OR Following button
     profileBtn = (
-    <div>
+    <Fragment>
       <Follow 
         userId={this.props.searchedProfile.id} 
       />
-    </div>)
+    </Fragment>)
 
     return (
-      <div>
+      <Fragment>
         {profileBtn}
-      </div>
+      </Fragment>
     )
   }
 }

@@ -11,12 +11,11 @@ import Follow from './Follow'
 class Followers extends Component {
   componentDidMount() {
     if (!isEmpty(this.props.username)) {
-      // this.props.getFollowers(this.props.username, this.props.auth.username, this.props.history)
       this.props.getFollowers(this.props.username)
     }
   }
 
-   render() {
+  render() {
     if (!this.props._showFollowers) {
       return null;
     }
@@ -39,9 +38,7 @@ class Followers extends Component {
             <div className='user-container'>
               <h5>Followers</h5>
               <span>
-                <span>
-                  <i onClick={this.props.followersClose} className="fa fa-times close" aria-hidden="true"></i>
-                </span>
+                <i onClick={this.props.followersClose} className="fa fa-times close" aria-hidden="true" />
               </span>
               <hr />
               <div className='scrolluser'>

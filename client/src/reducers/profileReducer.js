@@ -61,7 +61,7 @@ export default function (state = initialState, action) {
       {
         return {
           ...state,
-          followingLists: [action.payload, ...state.followingLists]     
+          followingLists: [action.payload, ...state.followingLists]
         };
       }
     case UNFOLLOW_USER:

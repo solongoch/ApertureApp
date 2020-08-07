@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import Spinner from '../common/Spinner'
+import Spinner from '../common/Spinner';
+import PropTypes from "prop-types";
 // import Action
 import { getSuggestedProfiles } from '../../actions/suggestionActions'
 
@@ -41,6 +42,12 @@ class HomeSuggestion extends Component {
     )
   }
 }
+
+HomeSuggestion.propTypes = {
+  getSuggestedProfiles: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

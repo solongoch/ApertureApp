@@ -9,6 +9,7 @@ import ProfileHeader from './ProfileHeader';
 import ProfilePosts from './ProfilePosts';
 // import CSS
 import './profile.css';
+import PropTypes from 'prop-types';
 
 class ProfilePage extends Component {
 
@@ -91,6 +92,12 @@ class ProfilePage extends Component {
     )
   }
 }
+
+ProfilePage.propTypes = {
+  getProfileByUsername: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profileState: PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => ({
   profileState: state.profile,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class FollowOrEdit extends Component {
   // constructor() {
@@ -49,6 +50,10 @@ class FollowOrEdit extends Component {
     )
   }
 }
+
+FollowOrEdit.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => ({
   auth: state.auth.user

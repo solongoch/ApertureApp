@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { changePassword } from '../../actions/profileActions';
 import { withRouter, Link } from 'react-router-dom';
 import ChangePasswordInputField from './ChangePasswordInputField';
+import PropTypes from "prop-types";
 
 class ChangePassword extends Component {
   constructor() {
@@ -135,6 +136,13 @@ class ChangePassword extends Component {
     );
   }
 }
+
+ChangePassword.propTypes = {
+  changePassword: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   errors: state.errors.errors,

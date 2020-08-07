@@ -7,11 +7,11 @@ import Spinner from '../common/Spinner';
 import { getHomepagePosts } from "../../actions/homeActions";
 import {getSinglePost} from "../../actions/postActions";
 // import Component
-import PostComment from '../Post/PostComment';
 import HomeSuggestion from "./HomeSuggestion";
 // import CSS
 import "./homepage.css";
 import PostActions from "../Post/PostActions";
+import PropTypes from "prop-types";
 
 class Homepage extends Component {
   componentDidMount() {
@@ -123,6 +123,12 @@ class Homepage extends Component {
   }
 }
 
+Homepage.propTypes = {
+  getHomepagePosts: PropTypes.func.isRequired,
+  getSinglePost: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  posts: PropTypes.object.isRequired
+};
 
 
 const mapStateToProps = state => ({

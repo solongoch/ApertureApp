@@ -3,7 +3,8 @@ import "./follow.css";
 import { Link } from "react-router-dom";
 import Unfollow from './Unfollow';
 import { getFollowings, unfollowUser } from '../../actions/profileActions';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 
 class Followings extends Component {
@@ -111,6 +112,12 @@ class Followings extends Component {
     );
   }
 }
+
+Followings.propTypes = {
+  getFollowings: PropTypes.func.isRequired,
+  unfollowUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth.user,

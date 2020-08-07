@@ -13,6 +13,7 @@ import findPeople from '../../image/find-people.svg';
 import findPeopleActive from '../../image/find-people-active.svg';
 // for logout
 import { logoutUser } from '../../actions/authActions';
+import PropTypes from "prop-types";
 
 class Navbar extends Component {
 
@@ -119,6 +120,11 @@ class Navbar extends Component {
     );
   }
 }
+
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => ({
   auth: state.auth,

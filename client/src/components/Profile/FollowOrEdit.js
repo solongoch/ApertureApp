@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 // import Component
 import Follow from '../Follow/Follow';
 
-// import Action
-import Follow from '../Follow/Follow';
-
 class FollowOrEdit extends Component {
 
   render() {

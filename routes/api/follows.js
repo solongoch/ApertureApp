@@ -35,6 +35,7 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
                   return res.json({
                     userId,
                     followersCount: user.followers? user.followers.length : 0,
+                    followingCount: user.following ? user.following.length : 0,
                     message: `Followed ${userId}`
                   })
                 });
@@ -87,12 +88,11 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
                       return res.json({
                         userId,
                         followingCount: doc.following ? doc.following.length : 0,
+                        followersCount: doc.followers? doc.followers.length : 0,
                         message: "Unfollowed"
                       });
 
                     });
-
-
                   } else {
                     return res.status(400).json({ message: "You are not the following the user" });
                   }

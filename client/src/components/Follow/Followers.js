@@ -66,7 +66,7 @@ class Followers extends Component {
                             Follow
                           </button> */}
 
-                          <Follow userId={user.user._id} />
+                          <Follow userId={user.user._id}  followers={checkUserFollowersLists}/>
                         </div>
                       </div>
                     )

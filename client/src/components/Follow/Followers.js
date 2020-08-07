@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import "./follow.css";
 import { Link } from "react-router-dom";
-import { getFollowers } from './../../actions/profileActions';
 import { connect } from 'react-redux';
 import isEmpty from '../../validation/is-empty';
-import Follow from './Follow';
+// import Actions
+import { getFollowers } from './../../actions/profileActions';
+// import Component
+import Follow from './Follow'
 
 class Followers extends Component {
   componentDidMount() {

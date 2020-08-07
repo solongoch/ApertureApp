@@ -15,11 +15,11 @@ class Suggestion extends Component {
   }
 
   render() {
-    const {suggestions} = this.props.profile;
+    const { suggestions } = this.props.profile;
     if (!suggestions) {
       return (<Spinner />)
     }
-
+    
     return (
       <div id="page-body">
         <div className="suggested-div">

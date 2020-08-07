@@ -50,12 +50,12 @@ export default function (state = initialState, action) {
     case GET_FOLLOWING:
       return {
         ...state,
-        followingLists: action.payload.Following
+        followingLists: action.payload.Following || []
       };
     case GET_FOLLOWERS:
       return {
         ...state,
-        followersLists: action.payload.Followers
+        followersLists: action.payload.Followers || []
       };
     case FOLLOW_USER:
       {

@@ -37,8 +37,7 @@ class SinglePost extends Component {
 }
 
 SinglePost.propTypes = {
-  getSinglePost: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  getSinglePost: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

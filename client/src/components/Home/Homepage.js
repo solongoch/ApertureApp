@@ -10,8 +10,9 @@ import {getSinglePost} from "../../actions/postActions";
 import HomeSuggestion from "./HomeSuggestion";
 // import CSS
 import "./homepage.css";
-import PostActions from "../Post/PostActions";
+import PostActionsHome from "./PostActionsHome";
 import PropTypes from "prop-types";
+import PostCommentSectionHome from "./PostCommentSectionHome";
 
 class Homepage extends Component {
   componentDidMount() {
@@ -63,29 +64,8 @@ class Homepage extends Component {
             : null
           }
           {/* COMMENTS */}
-          {(post.comments.length !== 0) ? 
-            // (<div className="line">
-            //   <Link to="/" className="make-gray">
-            //     View all {post.comments.length} comments
-            //   </Link>
-            // </div>)
-            (post.comments.map(comment => {
-              return (
-              <div className="line" key={Math.random()}>
-                <Link to={`/profile/${comment.username}`} className="font-weight-bold right-5">
-                  {comment.username}
-                </Link>
-                {comment.commentBody}
-              </div> )}
-              ))
-            : null
-          }
-          <div className="post-time line">
-            <Moment fromNow>{post.timePosted}</Moment>
-          </div>
-          {/* ADD COMMENT */}
-          {/* ACTIONS */}
-          <PostActions post={post}/>
+          <PostCommentSectionHome postId={post._id} comments={post.comments} />
+          <PostActionsHome post ={post}/>
           
         </div>
       </div>

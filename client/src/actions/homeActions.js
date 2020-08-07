@@ -21,3 +21,31 @@ export const getHomepagePosts = history => dispatch => {
       })
     );
 };
+
+// Add Like in homepage
+export const addLikeHome = (postId, history) => dispatch => {
+  axios
+    .put(`/api/posts/${postId}/lu`)
+    .then(res => dispatch(getHomepagePosts(postId, history)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete Comment in homepage
+export const deleteCommentHome = (postId, commentId, history) => dispatch => {
+  axios
+    .delete(`/api/posts/comment/${postId}/${commentId}`)
+    .then(res =>
+      dispatch(getHomepagePosts(commentId, history))
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};

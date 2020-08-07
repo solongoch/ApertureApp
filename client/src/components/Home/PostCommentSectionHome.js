@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import PostCommentItem from './PostCommentItem';
+import PostCommentItemHome from './PostCommentItemHome';
 
-class PostCommentSection extends Component {
+class PostCommentSectionHome extends Component {
   render() {
     const { comments, postId } = this.props;
 
     return comments.map(comment => (
-      <PostCommentItem key={comment._id} comment={comment} postId={postId} />
+      <PostCommentItemHome key={comment._id} comment={comment} postId={postId} />
     ));
   }
 }
 
-PostCommentSection.propTypes = {
+PostCommentSectionHome.propTypes = {
   comments: PropTypes.array.isRequired,
   postId: PropTypes.string.isRequired
 };
 
-export default PostCommentSection;
+export default PostCommentSectionHome;

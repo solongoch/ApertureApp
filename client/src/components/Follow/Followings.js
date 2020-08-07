@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Unfollow from './Unfollow';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { connect } from 'react-redux'
 // import Actions
 import { getFollowings, unfollowUser } from '../../actions/profileActions';
 // import Component

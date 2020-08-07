@@ -35,6 +35,19 @@ export const addLikeHome = (postId, history) => dispatch => {
     );
 };
 
+// Post Comment in homepage
+export const addCommentHome = (postId, commentData, history) => dispatch => {
+  axios
+    .post(`/api/posts/comment/${postId}`, commentData)
+    .then(res => dispatch(getHomepagePosts(postId, history)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Delete Comment in homepage
 export const deleteCommentHome = (postId, commentId, history) => dispatch => {
   axios

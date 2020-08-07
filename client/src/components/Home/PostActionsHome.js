@@ -3,7 +3,7 @@ import Moment from "react-moment";
 // import CSS
 import "../Post/single-post.css";
 // import Component
-import PostComment from "../Post/PostComment";
+import PostCommentHome from "./PostCommentHome";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import classnames from 'classnames';
@@ -86,7 +86,7 @@ class PostActionsHome extends Component {
         <div className="posted-date">
           <Moment format="MMM D YYYY">{post.timePosted}</Moment>
         </div>
-        <PostComment postId={post._id}></PostComment>
+        <PostCommentHome postId={post._id}></PostCommentHome>
       </div>
 
     )

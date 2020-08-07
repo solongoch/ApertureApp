@@ -36,7 +36,7 @@ class PostComment extends Component {
       avatar: user.avatar
     };
 
-  this.props.addComment(postId, newComment);
+  this.props.addComment(postId, newComment, this.props.history);
   this.setState({ commentBody: ''});
 
   }

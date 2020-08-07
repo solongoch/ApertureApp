@@ -32,6 +32,7 @@ class Follow extends Component {
       <button className="btn ml-3 btn-sm btn-follow" onClick={this.onClickToFollow}>Follow</button>);
     // Following Button
     let followingBtn = (
+      
       <button className="btn btn-sm btn-primary-outline" onClick={this.onClickToUnFollow}>Following</button>);
 
     let followButton = null;
@@ -39,7 +40,7 @@ class Follow extends Component {
     if (userId === auth.user.id) {
       followButton = (<Fragment></Fragment>)
     } else {
-      followButton = ((followingList.length !== 0)
+      followButton = ((followingList && followingList.length !== 0)
         ? (followingList.some(following => following.user._id === userId)
           ? followingBtn
           : followBtn)

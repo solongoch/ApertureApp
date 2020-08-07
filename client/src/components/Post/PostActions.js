@@ -52,11 +52,14 @@ class PostActions extends Component {
           <button
             onClick={this.onLikeClick.bind(this, postId)}
             type="button"
-            className={classnames('far fa-heart fa-2x like-heart', {
-              'fas fa-heart fa-2x unlike': this.findUserLike(post.likes)
-            })}
-          />
-           
+            className="btn"
+          >
+            <i
+              className={classnames('far fa-heart fa-2x like-heart', {
+                'fas fa-heart fa-2x unlike': this.findUserLike(post.likes)
+              })}
+            />
+          </button>
 
           {/* <i className="far fa-comment fa-2x action"></i>
           <i className="far fa-paper-plane fa-2x action"></i>

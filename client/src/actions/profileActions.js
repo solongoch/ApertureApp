@@ -171,7 +171,6 @@ export const followUser = userId => dispatch => {
   axios
     .put(`/api/${userId}/follow`)
     .then(res => {
-      console.log("followUserAction..",res.data);
       dispatch({
         type: FOLLOW_USER,
         payload: res.data

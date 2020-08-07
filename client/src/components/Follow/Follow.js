@@ -16,12 +16,6 @@ class Follow extends Component {
 
   componentDidMount() {
     this.props.getFollowings(this.props.auth.user.username);
-    // const { userId, followingList } = this.props;
-    // if (followingList.indexOf(userId) === -1) {
-    //   this.setState({ isFollow: false })
-    // } else {
-    //   this.setState({ isFollow: true })
-    // }
   }
 
 

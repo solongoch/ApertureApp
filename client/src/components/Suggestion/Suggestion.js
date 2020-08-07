@@ -43,7 +43,10 @@ class Suggestion extends Component {
                 </div>
               </div>
               {/* Follow button */}
-              <Follow userId={suggestion._id}/>
+              <Follow 
+                userId={suggestion._id}
+                followers={suggestion.followers}
+              />
             </div>
           ))}
         </div>

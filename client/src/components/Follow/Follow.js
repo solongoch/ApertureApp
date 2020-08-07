@@ -6,6 +6,8 @@ import { followUser } from '../../actions/profileActions';
 class Follow extends Component {
   constructor() {
     super();
+    this.state = {
+    };
     
     this.onClick = this.onClick.bind(this);
   }
@@ -15,14 +17,27 @@ class Follow extends Component {
   }
 
   render() {
+    const { followers, auth } = this.props;
+    const profileBtnName = ((followers.length !== 0)
+      ? (followers.some(follower => follower.user.username === auth.user.username) 
+        ? 'Following' 
+        : 'Follow')
+      : 'Follow');
+    console.log(this.props.userId);
+
     return (
+      (auth.isAuthenticated) ?
       <div>
         <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClick}>
-          Follow
+          {profileBtnName}
         </button>
-      </div>
+      </div> : null
     )
   }
 }
 
-export default connect(null, {followUser})(Follow);
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, {followUser})(Follow);

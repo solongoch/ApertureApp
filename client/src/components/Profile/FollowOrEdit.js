@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+// import Component
+import Follow from '../Follow/Follow';
 
 // import Action
 import Follow from '../Follow/Follow';
@@ -26,34 +28,26 @@ class FollowOrEdit extends Component {
         )
     }
 
-
-    //  Follow Button
-    let followBtn = (<Follow  userId={profile.id}> </Follow>)
-
-
-    // Following Button
-    let followingBtn = (<button className="btn ml-3 btn-sm btn-follow" > Following </button>)
-
-
-    const userFollowersLists = profile.followers;
-
-    // Chencl authUser is in Followers list if so Following else Follow
-    const profileBtnName = ((userFollowersLists.length !== 0)
-      ? (userFollowersLists.some(follower => follower.user.username === authUsername)
-        ? followingBtn : followBtn)
-      : followBtn);
-
     // Follow OR Following button
+    profileBtn = (
+    <div>
+      <Follow 
+        userId={this.props.searchedProfile.id} 
+        followers={this.props.searchedProfile.followers} 
+      />
+    </div>)
 
-
-    profileBtn = (<Fragment> {profileBtnName} </Fragment>);
-
-    return ( <Fragment> {profileBtn} </Fragment>);
+    return (
+      <div>
+        {profileBtn}
+      </div>
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth.user
+  auth: state.auth.user,
+  searchedProfile: state.profile.searchedProfile
 });
 
 export default connect(mapStateToProps, null)(FollowOrEdit);

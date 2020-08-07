@@ -17,12 +17,11 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
   User.findById(userId)
     .then(user => {
       if (user) {//user exists
-        // check if the requested user is already in follower list of other user then 
-
+        // check if the requested user is already in follower list of other user then
         if (user.followers.some(follower => follower.user.toString() === req.user.id)) {
           return res.status(400).json({ alreadyfollow: "You already followed the user" });
         }
-        user.followers.unshift({ user: req.user.id });//adding in follower[]
+        user.followers.unshift({ user: req.user.id }); // adding in follower[]
         user.save()
           .then(() => {
             User.findOne({ email: req.user.email }) 
@@ -65,17 +64,15 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
     .then(user => {
       if (user) {//user exists
         // check if the requested user is already in follower list then remove 
-        if (user.followers.filter(follower =>
-          follower.user.toString() === req.user.id).length > 0) {
+        if (user.followers.some(follower => follower.user.toString() === req.user.id)) {
           const followerIndex = user.followers.map(follower => 
             follower.user.toString().indexOf(req.userid));
-          user.followers.splice(followerIndex, 1);
+          user.followers.splice(followerIndex, 1); // remove user from follower[]
           user.save()
-            .then(data => {
+            .then(() => {
               User.findOne({ email: req.user.email })
                 .then(doc => { //check if unfollow user in following [] then remove
-                  if (doc.following.filter(follow =>
-                    follow.user.toString() === userId).length > 0) {
+                  if (doc.following.some(follow => follow.user.toString() === userId)) {
                     const followingIndex = doc.following.map(follow =>
                       follow.user.toString().indexOf(req.userid));
                     doc.following.splice(followingIndex, 1);
@@ -90,11 +87,10 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
                   }
                 })
             });
-
         } else {     
           return res.status(400).json({ message: "You are not the following the user yet" });
         }
-      } else {//no user founf to follow
+      } else { // no user found to follow
         return res.status(404).json({ success: false, message: 'There is no such profile' });
       }
     })

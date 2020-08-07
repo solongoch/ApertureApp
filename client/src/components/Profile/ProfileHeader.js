@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
+
 //import toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +10,7 @@ import Followers from '../Follow/Followers';
 import Followings from '../Follow/Followings';
 // import CSS
 import './profile.css';
+// import Action
 
 toast.configure();
 class ProfileHeader extends Component {
@@ -26,7 +28,7 @@ class ProfileHeader extends Component {
       pauseOnHover: true,
       draggable: false,
       progress: 0,
-      };
+    };
   }
 
   //to show and hide Following component 
@@ -39,7 +41,7 @@ class ProfileHeader extends Component {
       if (followingCount > 0) {
         this.setState({ _showFollowings: true });
       }
-    }else{
+    } else {
       toast.info("Login to see more...", this.toastOpts)
     }
   }
@@ -55,11 +57,11 @@ class ProfileHeader extends Component {
     //Check is authenticated to show the follower component
     if (isAuthenticated) {
       if (followersCount > 0) {
-        this.setState({ _showFollowers: true })
+        this.setState({ _showFollowers: true });
       }
     }
-    else{
-      toast.info("Login to see more...",this.toastOpts)
+    else {
+      toast.info("Login to see more...", this.toastOpts)
     }
   }
   hideFollowers = () => {
@@ -115,4 +117,4 @@ class ProfileHeader extends Component {
   }
 }
 
-export default (ProfileHeader);
+export default ProfileHeader;

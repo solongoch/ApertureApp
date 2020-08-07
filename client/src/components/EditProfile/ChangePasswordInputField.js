@@ -22,7 +22,7 @@ const ChangePasswordInputField = ({
         className={classNames("form-control shadow-none col-sm-7 col-md-7", { "is-invalid": error })}
         onChange={onChange}
       />
-      {error && (<div className="invalid-feedback error-style">{error}</div>)}
+      {error && (<div className="invalid-feedback error-stylechgpwd">{error}</div>)}
   </Fragment>
   );
 }

@@ -82,7 +82,7 @@ form.add-comment-form, form.add-comment-form .form-control {
 
 .btn-delete-comment {
   margin-left: 15px;
-  border-radius: 100px;
+  border-radius: 25px;
 }
 
 @media (min-width: 991px) {

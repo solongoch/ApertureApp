@@ -30,7 +30,13 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
                   return res.status(400).json({ alreadyfollow: "You already following the user" })
                 }
                 myUser.following.unshift({ user: userId });
-                myUser.save().then(() => { 
+                myUser.save().then(() => {
+
+                  //removed password from return response
+                  user= user.toObject();
+                  delete user.password                    
+                  delete user.__v;
+                 
                   return res.json({
                     success: true,
                     message: `Followed ${userId}`,
@@ -77,6 +83,11 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
                       follow.user.toString().indexOf(req.userid));
                     doc.following.splice(followingIndex, 1);
                     doc.save();
+                    //removed password from return response
+                    user= user.toObject();
+                    delete user.password                    
+                    delete user.__v;                   
+
                     return res.json({
                       success: true,
                       message: `Unfollowed ${userId}`,

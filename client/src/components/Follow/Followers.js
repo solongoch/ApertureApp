@@ -9,22 +9,26 @@ import Follow from './Follow';
 class Followers extends Component {
   componentDidMount() {
     if (!isEmpty(this.props.username)) {
+      // this.props.getFollowers(this.props.username, this.props.auth.username, this.props.history)
       this.props.getFollowers(this.props.username)
-
     }
   }
 
-  render() {
+   render() {
     if (!this.props._showFollowers) {
       return null;
     }
+    // followersLists
+    const { followersLists, searchedFollowersLists, auth, username } = this.props;
 
-    const { followersLists, searchedFollowersLists } = this.props;
-    var _followerslists;
+    //for other users(searched Term) followerslist
+    const searchedFollowersList = (searchedFollowersLists) ? searchedFollowersList.followers : null;
 
+    //click on logged in user followers component then followersLists for other users searchedFollowersList
     var checkUserFollowersLists =
-      (this.props.username === this.props.auth.username) ? followersLists : searchedFollowersLists
+      (username === auth.username) ? followersLists : searchedFollowersList
 
+    var _followerslists;
 
     if (checkUserFollowersLists) {
       _followerslists = (
@@ -66,7 +70,7 @@ class Followers extends Component {
                             Follow
                           </button> */}
 
-                          <Follow userId={user.user._id}  followers={checkUserFollowersLists}/>
+                          <Follow userId={user.user._id} />
                         </div>
                       </div>
                     )
@@ -90,7 +94,7 @@ class Followers extends Component {
 const mapStateToProps = state => ({
   auth: state.auth.user,
   followersLists: state.profile.followersLists,
-  searchedFollowersLists: state.profile.searchedProfile.followers
+  searchedFollowersLists: state.profile.searchedProfile
 })
 
 export default connect(mapStateToProps, ({ getFollowers }))(Followers);

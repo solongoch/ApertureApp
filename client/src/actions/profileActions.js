@@ -14,24 +14,24 @@ import {
 } from "./types";
 
 import axios from "axios";
-import {logoutUser} from "./authActions";
+import { logoutUser } from "./authActions";
 
 // Get profile by username
-export const getProfileByUsername = (username, authUsername,  history) => dispatch => {
+export const getProfileByUsername = (username, authUsername, history) => dispatch => {
   axios
     .get(`/api/profile/${username}`)
     .then(res => {
-        if(username === authUsername) {
-          dispatch({
-            type: GET_PROFILE_BY_USERNAME,
-            payload: res.data
-          });
-        }else {
-          dispatch({
-            type: GET_SEARCHED_PROFILE_BY_USERNAME,
-            payload: res.data
-          });
-        }
+      if (username === authUsername) {
+        dispatch({
+          type: GET_PROFILE_BY_USERNAME,
+          payload: res.data
+        });
+      } else {
+        dispatch({
+          type: GET_SEARCHED_PROFILE_BY_USERNAME,
+          payload: res.data
+        });
+      }
       history.push(`/profile/${res.data.username}`)
     })
     .catch(err => {
@@ -92,7 +92,7 @@ export const uploadAvatar = (newAvatar) => dispatch => {
         type: UPLOAD_AVATAR,
         payload: res.data
       })
-    
+
     })
     .catch(err => {
       dispatch({
@@ -147,7 +147,7 @@ export const getFollowings = (username) => dispatch => {
       dispatch({
         type: GET_FOLLOWING,
         payload: res.data
-      })
+      });
     })
     .catch(err => console.log(err.response.data));
 }
@@ -169,13 +169,22 @@ export const followUser = (userId) => dispatch => {
   alert("API")
   axios.put(`/api/${userId}/follow`)
     .then(res => {
-      console.log(res);
+      console.log("followUserAction..",res.data);
       dispatch({
         type: FOLLOW_USER,
-        payload: userId
-      })
+        payload: res.data
+      });
     })
-    .catch(err => console.log(err.response.data));
+    .catch(err => 
+      
+      {
+        console.log(err.response.data);
+        dispatch({
+          type: 'GET_ERRORS',
+          payload: err.response.data
+        })
+        
+      });
 }
 
 //Unfollow user
@@ -183,12 +192,23 @@ export const unfollowUser = (userId) => dispatch => {
   if (window.confirm('Are you sure you want to unfollow?', userId)) {
     axios.put(`/api/${userId}/unfollow`)
       .then(res => {
+        console.log("unfollowUserAction..",res);
         dispatch({
           type: UNFOLLOW_USER,
           payload: res.data
         })
       })
-      .catch(err => console.log(err.response.data));
+      .catch(err => 
+        {
+          console.log(err.response.data);
+          dispatch({
+            type: 'GET_ERRORS',
+            payload: err.response.data
+          })
+          
+        }
+      
+      );
   }
 }
 

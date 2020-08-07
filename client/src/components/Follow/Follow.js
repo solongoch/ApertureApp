@@ -17,19 +17,20 @@ class Follow extends Component {
   }
 
   render() {
-    const { followers, auth } = this.props;
+    const { userId, followingLists, auth } = this.props;
     //  Follow Button
-    let followBtn = (<button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClick}> Follow </button>);
+    let followBtn = (<button className="btn ml-3 btn-sm btn-follow"
+      onClick={this.onClick}> Follow </button>);
 
     // Following Button
-    let followingBtn = (<button className="btn ml-3 btn-sm btn-follow" > Following </button>)
+    let followingBtn = (<button className="btn btn-sm btn-primary-outline" > Following </button>)
 
-    const profileBtnName = ((followers.length !== 0)
-      ? (followers.some(follower => follower.user.username === auth.user.username)
+
+    const profileBtnName = ((followingLists && followingLists.length !== 0)
+      ? (followingLists.some(following => following.user._id === userId))
         ? followingBtn
-        : followBtn)
+        : followBtn
       : followBtn);
-    console.log(this.props.userId);
 
     return (
       (auth.isAuthenticated) ? <Fragment> {profileBtnName} </Fragment> : null
@@ -38,7 +39,9 @@ class Follow extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  followingLists: state.profile.followingLists,
+  errors: state.errors
 })
 
 export default connect(mapStateToProps, { followUser })(Follow);

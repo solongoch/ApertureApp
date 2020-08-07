@@ -34,8 +34,10 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
                 user.save().then(user => {
                   return res.json({
                     userId,
-                    followersCount: user.followers? user.followers.length : 0,
+                    followersCount: user.followers ? user.followers.length : 0,
                     followingCount: user.following ? user.following.length : 0,
+                    Followers: user.followers,
+                    Following: user.following,
                     message: `Followed ${userId}`
                   })
                 });
@@ -88,7 +90,9 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
                       return res.json({
                         userId,
                         followingCount: doc.following ? doc.following.length : 0,
-                        followersCount: doc.followers? doc.followers.length : 0,
+                        followersCount: doc.followers ? doc.followers.length : 0,
+                        Followers: user.followers,
+                        Following: user.following,
                         message: "Unfollowed"
                       });
 

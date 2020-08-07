@@ -45,9 +45,12 @@ class Followings extends Component {
     }
     const { followingLists , searchedFollowingLists } = this.props;
     const { _unfollowUser } = this.state;
+
+    //for other users(searched Term) followerslist
+    const searchedFollowingList = (searchedFollowingLists) ? searchedFollowingLists.followings : null;
     var _followinglists;
 var checkUserFollowingLists = 
-  (this.props.username === this.props.auth.username) ? followingLists : searchedFollowingLists
+  (this.props.username === this.props.auth.username) ? followingLists : searchedFollowingList
 
     if (checkUserFollowingLists) {
       _followinglists = (
@@ -117,7 +120,7 @@ var checkUserFollowingLists =
 const mapStateToProps = state => ({
   auth: state.auth.user,
   followingLists: state.profile.followingLists,
-  searchedFollowingLists : state.profile.searchedProfile.followings
+  searchedFollowingLists : state.profile.searchedProfile
 })
 
 export default connect(mapStateToProps, ({ getFollowings, unfollowUser }))(Followings);

@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import "./follow.css";
 import { Link } from "react-router-dom";
-import { getFollowers } from './../../actions/profileActions';
 import { connect } from 'react-redux';
 import isEmpty from '../../validation/is-empty';
+// import Actions
+import { getFollowers } from './../../actions/profileActions';
+// import Component
+import Follow from './Follow'
 
 class Followers extends Component {
   componentDidMount() {
     if (!isEmpty(this.props.username)) {
       this.props.getFollowers(this.props.username)
-
     }
   }
 
@@ -54,11 +56,7 @@ class Followers extends Component {
                         <span className="name"> {user.user.name}  </span>
                       </div>
                       <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                        <button className='btn mt-1  btn-sm btn-follow'>
-                          {/* <Link to='/unfollow' className='link-unfollow'> */}
-                            Follow
-                                  {/* </Link> */}
-                        </button>
+                        <Follow userId={user.user._id}/>
                       </div>
                     </div>
                   )

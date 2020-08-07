@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import "./follow.css";
 import { Link } from "react-router-dom";
 import Unfollow from './Unfollow';
-import { getFollowings, unfollowUser } from '../../actions/profileActions';
 import { connect } from 'react-redux'
+// import Actions
+import { getFollowings, unfollowUser } from '../../actions/profileActions';
+// import Component
+import Follow from './Follow';
+// import CSS
+import "./follow.css";
 
 
 class Followings extends Component {
@@ -81,10 +85,7 @@ class Followings extends Component {
                           <span className="name"> {user.user.name}  </span>
                         </div>
                         <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                          <button className='btn btn-primary-outline'
-                            onClick={this.showUnfollow.bind(this, user)}>
-                            Following
-                          </button>
+                          <Follow userId={user.user._id}/>
                         </div>
                       </div>
                     )

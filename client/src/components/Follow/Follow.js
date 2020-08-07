@@ -23,9 +23,9 @@ class Follow extends Component {
 
   render() {
     const { auth, userId } = this.props;
-    const followingList = this.props.profile.profile.following;
+    const followingList = this.props.followingLists;
     const profileBtnName = ((followingList.length !== 0)
-      ? (followingList.some(following => following.user === userId) 
+      ? (followingList.some(following => following.user._id === userId) 
         ? 'Following' 
         : 'Follow')
       : 'Follow');
@@ -45,7 +45,8 @@ class Follow extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  followingLists: state.profile.followingLists
 })
 
-export default connect(mapStateToProps, {followUser, getFollowings})(Follow);
+export default connect(mapStateToProps, {getFollowings, followUser})(Follow);

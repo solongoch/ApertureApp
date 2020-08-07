@@ -118,7 +118,7 @@ router.get(
       mobile: req.user.mobile,
       gender: req.user.gender,
       date: req.user.date,
-      following: req.user.following,
+      followings: req.user.following,
       followers: req.user.followers
     }
     return res.json(user);

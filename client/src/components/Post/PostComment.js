@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import "./single-post.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { sendComment } from "../../actions/postActions";
+import { addComment } from "../../actions/postActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 
 class PostComment extends Component {
@@ -18,6 +17,7 @@ class PostComment extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -26,8 +26,19 @@ class PostComment extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const comment = { commentBody: this.state.commentBody };
-    // this.props.sendComment(postid);
+
+    const { user } = this.props.auth;
+    const { postId } = this.props;
+
+    const newComment = {
+      commentBody: this.state.commentBody,
+      username: user.username,
+      avatar: user.avatar
+    };
+
+  this.props.addComment(postId, newComment);
+  this.setState({ commentBody: ''});
+
   }
 
   onChange(e) {
@@ -35,13 +46,14 @@ class PostComment extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const  {errors}  = this.state;
+    
     return (
       <div className="add-comment-div">
         <form className="add-comment-form" onSubmit={this.onSubmit}>
           <TextFieldGroup
             placeholder="Add a comment..."
-            name="comment"
+            name="commentBody"
             value={this.state.commentBody}
             onChange={this.onChange}
             error={errors.commentBody}
@@ -57,11 +69,17 @@ class PostComment extends Component {
 }
 
 PostComment.propTypes = {
-  // errors: PropTypes.object.isRequired
+
+  addComment: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  postId: PropTypes.string.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  // errors: state.errors
+  auth: state.auth,
+  errors: state.errors
 });
 
-export default connect(mapStateToProps, { sendComment })(withRouter(PostComment));
+
+export default connect(mapStateToProps, { addComment })((PostComment));

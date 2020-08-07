@@ -5,7 +5,6 @@ import {
   GET_SINGLE_POST,
   GET_POSTS,
   GET_ERRORS,
-  POST_COMMENT,
   CLEAR_POSTS
 } from './types';
 
@@ -92,15 +91,47 @@ export const getAllPosts = () => dispatch => {
 }
 
 // Post Comment
-export const sendComment = (postId, comment) => dispatch => {
+export const addComment = (postId, commentData) => dispatch => {
   axios
-    .post(`/api/post/comment/${postId}`, comment)
+    .post(`/api/posts/comment/${postId}`, commentData)
     .then(res => {
       dispatch({
-        type: POST_COMMENT,
+        type: GET_SINGLE_POST,
         payload: res.data.post
       });
     })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete Comment
+export const deleteComment = (postId, commentId) => dispatch => {
+  axios
+    .delete(`/api/posts/comment/${postId}/${commentId}`)
+    .then(res =>
+      dispatch({
+        type: GET_SINGLE_POST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+
+// Add Like
+export const addLike = (postId, history) => dispatch => {
+  axios
+    .put(`/api/posts/${postId}/lu`)
+    .then(res => dispatch(getSinglePost(postId, history)))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

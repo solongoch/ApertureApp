@@ -68,7 +68,7 @@ export default function (state = initialState, action) {
       {
         return {
           ...state,
-          followingLists: state.followingLists.filter(user => user.user._id !== action.payload.userId),
+          followingLists: state.followingLists.filter(user => user.user._id !== action.payload.user._id),
         };
       }
     case CLEAR_CURRENT_PROFILE:

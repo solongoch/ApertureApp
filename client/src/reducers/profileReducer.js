@@ -61,11 +61,7 @@ export default function (state = initialState, action) {
       {
         return {
           ...state,
-          profile: {
-            ...state.profile,
-            followingCount: action.payload.followingCount
-          }
-     
+          followingLists: [action.payload, ...state.followingLists]     
         };
       }
     case UNFOLLOW_USER:

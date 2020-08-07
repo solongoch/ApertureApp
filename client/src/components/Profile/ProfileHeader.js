@@ -121,4 +121,5 @@ ProfileHeader.propTypes = {
   profile: PropTypes.object.isRequired
 };
 
-export default ProfileHeader;
+
+export default (ProfileHeader);

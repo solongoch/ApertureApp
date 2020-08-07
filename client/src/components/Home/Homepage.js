@@ -100,7 +100,7 @@ class Homepage extends Component {
         {/* RIGHT BAR */}
         <div id="right-bar">
           <div className="profile-section">
-            <Link to="/">
+            <Link to={`/profile/${user.username}`}>
               <img
                 className="round-image image-50"
                 src={user.avatar}

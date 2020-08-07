@@ -38,12 +38,12 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
           website: user.website,
           followers: user.followers,
           followersCount: user.followers ? user.followers.length : 0,
-          followings:user.following,
+          followings: user.following,
           followingCount: user.following ? user.following.length : 0
         };
         Post.find({ postedBy: user._id }, ["_id", "photo", "likes", "comments"]).lean()
         .sort({ timePosted: -1 })//for latest records
-        .limit(20)//get only 20 posts
+        // .limit(20)//get only 20 posts
           .then(posts => {
 
             //posts exist for the username then get the count
@@ -117,7 +117,9 @@ router.get(
       bio: req.user.bio,
       mobile: req.user.mobile,
       gender: req.user.gender,
-      date: req.user.date
+      date: req.user.date,
+      followings: req.user.following,
+      followers: req.user.followers
     }
     return res.json(user);
   }

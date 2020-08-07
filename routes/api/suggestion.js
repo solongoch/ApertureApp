@@ -21,7 +21,6 @@ router.get(
       { name: 1, username: 1, avatar: 1, followers: 1 })
         // sort by followers number
         .sort({ followers: -1 })
-        .limit(10)
         .then(accounts => {
           return res.send(accounts);
         })

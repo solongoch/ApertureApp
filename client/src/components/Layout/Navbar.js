@@ -25,6 +25,7 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const { avatar } = this.props.profile;
+    const { pathname } = this.props.location;
     let userAvatar = null;
 
     if (avatar) { //Navbar avatar will change if user uploads the new avatar  
@@ -53,34 +54,44 @@ class Navbar extends Component {
         {/* CREATE POST button */}
         <li className="nav-item">
           <Link className="nav-link" to="/create">
-            {/* Active */}
-            {/* <i className="fas fa-plus-square fa-2x"></i> */}
-            {/* Not Active */}
-            <i className="far fa-plus-square fa-2x"></i>
+            {
+              (pathname === '/create')
+                ? <i className="fas fa-plus-square fa-2x"></i> 
+                : <i className="far fa-plus-square fa-2x"></i>
+            }
           </Link>
         </li>
 
         {/* HOME button */}
         <li className="nav-item">
           <Link className="nav-link" to="/home">
-            {/* <img className="menu" src={home} aria-label="Home" alt="Home button" /> */}
-            <img className="menu active" src={homeActive} aria-label="Home" alt="Active Home button" />
+            {
+              (pathname === '/home')
+                ? <img className="menu active" src={homeActive} aria-label="Home" alt="Active Home button" />
+                : <img className="menu" src={home} aria-label="Home" alt="Home button" />
+            }
           </Link>
         </li>
 
         {/* SUGGESTION button */}
         <li className="nav-item">
           <Link className="nav-link" to="/suggestion">
-            <img className="menu" src={findPeople} aria-label="Find People" alt="Suggestion button" />
-            {/* <img className="menu active" src={findPeopleActive} aria-label="Find People" alt="Active Suggestion button" /> */}
+            {
+              (pathname === '/suggestion')
+                ? <img className="menu active" src={findPeopleActive} aria-label="Find People" alt="Active Suggestion button" />
+                : <img className="menu" src={findPeople} aria-label="Find People" alt="Suggestion button" />
+            }
           </Link>
         </li>
 
         {/* NOTIFICATION button */}
         {/* <li className="nav-item">
-          <Link className="nav-link" to="/">
-            <i className="far fa-heart fa-2x"></i>
-            <i className="fas fa-heart fa-2x"></i>
+          <Link className="nav-link" to="/notification">
+            {
+              (pathname === '/notification')
+                ? <i className="fas fa-heart fa-2x"></i>
+                : <i className="far fa-heart fa-2x"></i>
+            }
           </Link>
         </li> */}
 

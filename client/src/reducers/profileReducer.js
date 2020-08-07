@@ -15,8 +15,8 @@ import {
 const initialState = {
   profile: "",
   loading: false,
-  followingLists: null,
-  followersLists: null,
+  followingLists: [],
+  followersLists: [],
   searchedProfile : ''
 };
 
@@ -50,12 +50,12 @@ export default function (state = initialState, action) {
     case GET_FOLLOWING:
       return {
         ...state,
-        followingLists: action.payload.Following
+        followingLists: action.payload.Following || []
       };
     case GET_FOLLOWERS:
       return {
         ...state,
-        followersLists: action.payload.Followers
+        followersLists: action.payload.Followers || []
       };
     case FOLLOW_USER:
       {
@@ -68,7 +68,7 @@ export default function (state = initialState, action) {
       {
         return {
           ...state,
-          followingLists: state.followingLists.filter(user => user.user._id !== action.payload)
+          followingLists: state.followingLists.filter(user => user.user._id !== action.payload.user._id)
         };
       }
     case CLEAR_CURRENT_PROFILE:

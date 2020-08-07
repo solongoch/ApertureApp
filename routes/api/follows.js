@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const User = require("../../models/User");
 
-// @route   put api/follow/:userId
+// @route   put api/:userId/follow
 // @desc    Follow User
 // @input   Get Userid from req params of person whom user wants to follow.
 // @access  Private
@@ -17,31 +17,30 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
   User.findById(userId)
     .then(user => {
       if (user) {//user exists
-        // check if the requested user is already in follower list of other user then 
-
+        // check if the requested user is already in follower list of other user then
         if (user.followers.some(follower => follower.user.toString() === req.user.id)) {
           return res.status(400).json({ alreadyfollow: "You already followed the user" });
         }
-        user.followers.unshift({ user: req.user.id });//adding in follower[]
+        user.followers.unshift({ user: req.user.id }); // adding in follower[]
         user.save()
-          .then(result => {
+          .then(() => {
             User.findOne({ email: req.user.email }) 
-              .then(user => {
-                if (user.following.filter(following =>
-                  following.user.toString() === userId).length > 0) {
+              .then(myUser => {
+                if (myUser.following.some(following => following.user.toString() === userId)) {
                   return res.status(400).json({ alreadyfollow: "You already following the user" })
                 }
-                user.following.unshift({ user: userId });
-                user.save().then(user => res.json({
-                  success: true,
-                  message: "Followed"
-                }));
+                myUser.following.unshift({ user: userId });
+                myUser.save().then(() => { 
+                  return res.json({
+                    success: true,
+                    message: `Followed ${userId}`,
+                    user: user
+                })});
               });
-
           })
           .catch(err => res.status(500).json({ message: err.msg }));
       } else {//no user found
-        return res.status(404).json({ success: false, message: 'There is no such profile' });
+        return res.status(404).json({ success: false, message: 'Profile not found' });
       }
     })
     .catch(err => {
@@ -49,7 +48,7 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
     });
 });
 
-// @route   put api/follow/:userId
+// @route   put api/:userId/unfollow
 // @desc    Unfollow User
 // @input   Get Userid from req params of person whom user wants to unfollow.
 // @access  Private
@@ -59,41 +58,39 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
   const userId = req.params.userId;
   // check if your id doesn't match the id of the user you want to follow
   if (req.user.id === userId) {
-    return res.status(400).json({ alreadyfollow: "You cannot unfollow follow yourself" })
+    return res.status(400).json({ alreadyfollow: "You cannot unfollow yourself" })
   }
   User.findById(userId)
     .then(user => {
       if (user) {//user exists
         // check if the requested user is already in follower list then remove 
-        if (user.followers.filter(follower =>
-          follower.user.toString() === req.user.id).length > 0) {
+        if (user.followers.some(follower => follower.user.toString() === req.user.id)) {
           const followerIndex = user.followers.map(follower => 
             follower.user.toString().indexOf(req.userid));
-          user.followers.splice(followerIndex, 1);
+          user.followers.splice(followerIndex, 1); // remove user from follower[]
           user.save()
-            .then(data => {
+            .then(() => {
               User.findOne({ email: req.user.email })
                 .then(doc => { //check if unfollow user in following [] then remove
-                  if (doc.following.filter(follow =>
-                    follow.user.toString() === userId).length > 0) {
+                  if (doc.following.some(follow => follow.user.toString() === userId)) {
                     const followingIndex = doc.following.map(follow =>
                       follow.user.toString().indexOf(req.userid));
                     doc.following.splice(followingIndex, 1);
                     doc.save();
                     return res.json({
                       success: true,
-                      message: "Unfollowed"
+                      message: `Unfollowed ${userId}`,
+                      user: user
                     });
                   } else {
-                    return res.status(400).json({ message: "You are not the following the user yet" });
+                    return res.status(400).json({ message: "You are not the following the user" });
                   }
                 })
             });
-
         } else {     
           return res.status(400).json({ message: "You are not the following the user yet" });
         }
-      } else {//no user founf to follow
+      } else { // no user found to follow
         return res.status(404).json({ success: false, message: 'There is no such profile' });
       }
     })

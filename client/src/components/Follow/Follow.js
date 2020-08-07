@@ -1,7 +1,7 @@
 import React, { Component, Fragment} from 'react';
 import { connect } from 'react-redux';
-// import Action
-import { followUser, unfollowUser, getFollowings } from '../../actions/profileActions';
+// import Actions
+import { followUser, unfollowUser, getAuthUserFollowings } from '../../actions/profileActions';
 
 class Follow extends Component {
   constructor() {
@@ -15,7 +15,7 @@ class Follow extends Component {
   }
 
   componentDidMount() {
-    this.props.getFollowings(this.props.auth.user.username);
+    this.props.getAuthUserFollowings(this.props.auth.user.username);
   }
 
   onClickToFollow(e) {
@@ -27,8 +27,9 @@ class Follow extends Component {
   }
 
   render() {
-    const { auth, userId } = this.props;
-    const followingList = this.props.followingLists;
+    const { auth, userId, myFollowingList } = this.props;
+    console.log('My Following List: ', this.props.myFollowingList)
+    console.log('UserId: ', userId)
     //  Follow Button
     let followBtn = (
       <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClickToFollow}>Follow</button>);
@@ -36,8 +37,8 @@ class Follow extends Component {
     let followingBtn = (
       <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClickToUnFollow}>Following</button>);
 
-    const followButton = ((followingList && followingList.length !== 0)
-      ? (followingList.some(following => following.user._id === userId)
+    const followButton = ((myFollowingList && myFollowingList.length !== 0)
+      ? (myFollowingList.some(following => following.user._id === userId)
         ? followingBtn
         : followBtn)
       : followBtn);
@@ -62,7 +63,7 @@ class Follow extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
-  followingLists: state.profile.followingLists
+  myFollowingList: state.profile.myFollowingList
 })
 
-export default connect(mapStateToProps, {getFollowings, followUser, unfollowUser})(Follow);
+export default connect(mapStateToProps, {getAuthUserFollowings, followUser, unfollowUser})(Follow);

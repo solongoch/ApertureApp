@@ -4,6 +4,7 @@ import {
   GET_PROFILE,
   GET_PROFILE_BY_USERNAME,
   GET_SEARCHED_PROFILE_BY_USERNAME,
+  GET_MY_FOLLOWING,
   GET_FOLLOWING,
   GET_FOLLOWERS,
   FOLLOW_USER,
@@ -17,10 +18,10 @@ const initialState = {
   loading: false,
   followingLists: [],
   followersLists: [],
-  searchedProfile : ''
+  searchedProfile: ""
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case UPLOAD_AVATAR:
       return {
@@ -47,6 +48,11 @@ export default function (state = initialState, action) {
         ...state,
         searchedProfile: action.payload
       };
+    case GET_MY_FOLLOWING:
+      return {
+        ...state,
+        myFollowingList: action.payload || []
+      };
     case GET_FOLLOWING:
       return {
         ...state,
@@ -57,23 +63,27 @@ export default function (state = initialState, action) {
         ...state,
         followersLists: action.payload.Followers || []
       };
-    case FOLLOW_USER:
-      {
-        return {
-          ...state,
-          followingLists: [action.payload, ...state.followingLists]
-        };
-      }
-    case UNFOLLOW_USER:
-      {
-        return {
-          ...state,
-          followingLists: state.followingLists.filter(user => user.user._id !== action.payload.user._id)
-        };
-      }
+    case FOLLOW_USER: {
+      return {
+        ...state,
+        myFollowingList: [action.payload, ...state.myFollowingList],
+        followingLists: [action.payload, ...state.followingLists]
+      };
+    }
+    case UNFOLLOW_USER: {
+      return {
+        ...state,
+        myFollowingList: state.myFollowingList.filter(
+          user => user.user._id !== action.payload.user._id
+        ),
+        followingLists: state.followingLists.filter(
+          user => user.user._id !== action.payload.user._id
+        ),
+      };
+    }
     case CLEAR_CURRENT_PROFILE:
       return {
-        profile: '',
+        profile: "",
         followingLists: null,
         searchedUserProfile: null,
         followersLists: null

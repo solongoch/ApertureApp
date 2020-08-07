@@ -6,6 +6,7 @@ import {
   PROFILE_LOADING,
   UPLOAD_AVATAR,
   GET_ERRORS,
+  GET_MY_FOLLOWING,
   GET_FOLLOWING,
   GET_FOLLOWERS,
   FOLLOW_USER,
@@ -140,7 +141,21 @@ export const changePassword = (changePass, history) => dispatch => {
     );
 };
 
-//Get Followings
+// Get logged in User's Followings
+export const getAuthUserFollowings = myUsername => dispatch => {
+  axios
+    .get(`/api/${myUsername}/following`)
+    .then(res => {
+      console.log(res.data)
+      dispatch({
+        type: GET_MY_FOLLOWING,
+        payload: res.data.Following
+      });
+    })
+    .catch(err => console.log(err));
+};
+
+// Get Followings
 export const getFollowings = username => dispatch => {
   axios
     .get(`/api/${username}/following`)
@@ -153,7 +168,7 @@ export const getFollowings = username => dispatch => {
     .catch(err => console.log(err));
 };
 
-//Get Followings
+// Get Followings
 export const getFollowers = username => dispatch => {
   axios
     .get(`/api/${username}/followers`)

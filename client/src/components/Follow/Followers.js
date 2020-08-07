@@ -24,7 +24,7 @@ class Followers extends Component {
     const { followersLists, searchedFollowersLists, auth, username } = this.props;
 
     //for other users(searched Term) followerslist
-    const searchedFollowersList = (searchedFollowersLists) ? searchedFollowersList.followers : null;
+    const searchedFollowersList = (searchedFollowersLists) ? searchedFollowersLists.followers : null;
 
     //click on logged in user followers component then followersLists for other users searchedFollowersList
     var checkUserFollowersLists =

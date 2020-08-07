@@ -186,7 +186,7 @@ export const unfollowUser = userId => dispatch => {
     axios
       .put(`/api/${userId}/unfollow`)
       .then(res => {
-        console.log("unfollowUserAction..",res);
+        console.log(res.data)
         dispatch({
           type: UNFOLLOW_USER,
           payload: res.data

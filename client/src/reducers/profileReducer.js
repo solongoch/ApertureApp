@@ -72,10 +72,6 @@ export default function (state = initialState, action) {
       {
         return {
           ...state,
-          profile: {
-            ...state.profile,
-            followingCount: action.payload.followingCount       
-          },
           followingLists: state.followingLists.filter(user => user.user._id !== action.payload.userId),
         };
       }

@@ -30,10 +30,13 @@ class searchProfile extends Component {
     if (!isEmpty(this.state.search)) {
       var currentUsername = this.props.auth.user.username;
       this.props.getProfileByUsername(this.state.search, currentUsername, this.props.history);
+      //after api call clear search box
+      this.setState({ search: '' })
     }
   }
 
   render() {
+    const { search } = this.state;
     return (
       <div className="search-div col-lg-4 col-md-4 col-sm-4">
         <form className="form-inline" onSubmit={this.onSubmit}>
@@ -43,6 +46,7 @@ class searchProfile extends Component {
             name="search"
             placeholder="Search"
             aria-label="Search"
+            value={search}
             onChange={this.onChange}
           />
         </form>

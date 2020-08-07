@@ -58,8 +58,7 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
                 element.commentsCount= element.comments.length;
                 delete element.comments;//for not showing comments details
               })
-
-                
+               
               // posts.forEach(element => console.log(element.likes.length));
               if (user.isPublic) {
                 data.posts = posts;

@@ -15,13 +15,16 @@ class ChangePassword extends Component {
       newpassword: '',
       confirmpassword: '',
       errors: {},
+      loading: false,
+      isEnabled: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+
+    this.setState({ [e.target.name]: e.target.value, isEnabled: true });
     if ((this.state.errors.hasOwnProperty([e.target.name]))) {
       this.clearError(e.target.name);
     }
@@ -46,12 +49,14 @@ class ChangePassword extends Component {
     };
     //trigger action
     this.props.changePassword(changePass, this.props.history);
+    this.setState({ loading: true , isEnabled: false })
   }
 
 
   //trigger whenever we get newProps 
   //Usage  assign this.props.errors to local setState.errors
   componentWillReceiveProps(nextProps) {
+    this.setState({ loading: false , isEnabled: false })
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -59,7 +64,7 @@ class ChangePassword extends Component {
 
   render() {
     const { username } = this.props.auth.user;
-    const { oldpassword, newpassword, confirmpassword, errors } = this.state
+    const { oldpassword, newpassword, confirmpassword, errors, loading, isEnabled } = this.state
     const profileAvatar = this.props.profile.avatar;
     let userAvatar = null;
 
@@ -72,7 +77,7 @@ class ChangePassword extends Component {
           <div className="row">
             <div className="card chgpwd-card">
               <Link to={`/edit/${username}`} className="chgpwd-cancel">
-                <i className="fa fa-times " style={{ float: 'right', fontSize:'20px' }} aria-hidden="true"></i>
+                <i className="fa fa-times " style={{ float: 'right', fontSize: '20px' }} aria-hidden="true"></i>
               </Link>
               <form className="Chgpwd-form" onSubmit={this.onSubmit}>
                 <div className="form-group chgpwduser-div col-sm-12 col-md-12 col-lg-12">
@@ -125,7 +130,9 @@ class ChangePassword extends Component {
                 <div className="form-row">
                   <div className="form-group col-sm-12 col-md-12 col-lg-12">
                     <button type="submit"
-                      className="btn mt-3 btn-primary submit-btn">Change Password</button>
+                      className="btn mt-3 btn-primary submit-btn" disabled={!isEnabled}>Change Password
+                       {loading && <i className="fa fa-refresh fa-spin ml-2" style={{ marginRight: "10px", fontSize: "15px" }} />}
+                    </button>
                   </div>
                 </div>
               </form>

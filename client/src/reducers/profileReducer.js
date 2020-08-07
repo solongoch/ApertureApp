@@ -17,7 +17,7 @@ const initialState = {
   loading: false,
   followingLists: [],
   followersLists: [],
-  searchedProfile : ''
+  searchedProfile: ''
 };
 
 export default function (state = initialState, action) {
@@ -68,7 +68,7 @@ export default function (state = initialState, action) {
       {
         return {
           ...state,
-          followingLists: state.followingLists.filter(user => user.user._id !== action.payload.user._id)
+          followingLists: state.followingLists.filter(user => user.user._id !== action.payload.user._id),
         };
       }
     case CLEAR_CURRENT_PROFILE:

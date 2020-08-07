@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import Moment from 'react-moment';
 import Spinner from '../common/Spinner';
 // import Action
 import { getHomepagePosts } from "../../actions/homeActions";
@@ -22,10 +21,16 @@ class Homepage extends Component {
   render() {
     const { user } = this.props.auth;
     const { posts } = this.props.posts;
+    const { avatar } = this.props.profile;
     if (!posts) {
       return (<Spinner />)
     }
-    const postItem = posts.map(post => (     
+    //If avatar is updated in EditProfile  then fetch it from profile else from auth.user.avatar
+    let userAvatar = (avatar)
+      ? (<img className="round-image image-50" src={avatar} alt={user.username} />)
+      : (<img className="round-image image-50" src={user.avatar} alt="User" />);
+
+    const postItem = posts.map(post => (
       <div className="post-div d-flex flex-column" key={Math.random()}>
         {/* POST HEADER - Avatar and Username */}
         <div className="post-header">
@@ -59,14 +64,13 @@ class Homepage extends Component {
               <Link to={`/profile/${post.postedBy.username}`} className="font-weight-bold right-5">
                 {post.postedBy.username}
               </Link>
-                {post.caption}
+              {post.caption}
             </div>
             : null
           }
           {/* COMMENTS */}
           <PostCommentSectionHome postId={post._id} comments={post.comments} />
-          <PostActionsHome post ={post}/>
-          
+          <PostActionsHome post ={post}/>  
         </div>
       </div>
     ));
@@ -81,11 +85,8 @@ class Homepage extends Component {
         <div id="right-bar">
           <div className="profile-section">
             <Link to={`/profile/${user.username}`}>
-              <img
-                className="round-image image-50"
-                src={user.avatar}
-                alt="User"
-              />
+              {/* Avatar image */}
+              {userAvatar}
             </Link>
             <div className="left-15">
               <div className="font-weight-bold">
@@ -113,7 +114,8 @@ Homepage.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  posts: state.post
+  posts: state.post,
+  profile: state.profile.profile
 });
 
 export default connect(mapStateToProps, { getHomepagePosts, getSinglePost })(Homepage);

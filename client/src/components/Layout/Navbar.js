@@ -26,13 +26,12 @@ class Navbar extends Component {
     const { isAuthenticated, user } = this.props.auth;
     const { avatar } = this.props.profile;
     const { pathname } = this.props.location;
-    let userAvatar = null;
 
-    if (avatar) { //Navbar avatar will change if user uploads the new avatar  
-      userAvatar = (<img className="menu round-image image-22" src={avatar} alt={avatar} />);
-    } else {
-      userAvatar = (<img className="menu round-image image-22" src={user.avatar} alt={user.name} />);
-    }
+    //If avatar is updated in EditProfile  then fetch it from profile else from auth.user.avatar
+    let userAvatar = (avatar)
+      ? (<img className="menu round-image image-22" src={avatar} alt={avatar} />)
+      : (<img className="menu round-image image-22" src={user.avatar} alt={user.name} />);
+
 
     // when user NOT logged in
     const guestMenus = (
@@ -56,7 +55,7 @@ class Navbar extends Component {
           <Link className="nav-link" to="/create">
             {
               (pathname === '/create')
-                ? <i className="fas fa-plus-square fa-2x"></i> 
+                ? <i className="fas fa-plus-square fa-2x"></i>
                 : <i className="far fa-plus-square fa-2x"></i>
             }
           </Link>

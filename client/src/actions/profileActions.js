@@ -150,7 +150,7 @@ export const getFollowings = username => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => console.log(err.response.data));
+    .catch(err => console.log(err));
 };
 
 //Get Followings
@@ -166,20 +166,20 @@ export const getFollowers = username => dispatch => {
     .catch(err => console.log(err.response.data));
 };
 
-//follow user
+// Follow user
 export const followUser = userId => dispatch => {
   axios
     .put(`/api/${userId}/follow`)
     .then(res => {
       dispatch({
         type: FOLLOW_USER,
-        payload: userId
+        payload: res.data
       });
     })
     .catch(err => console.log(err.response.data));
 };
 
-//Unfollow user
+// Unfollow user
 export const unfollowUser = userId => dispatch => {
   if (window.confirm("Are you sure you want to unfollow?", userId)) {
     axios
@@ -187,7 +187,7 @@ export const unfollowUser = userId => dispatch => {
       .then(res => {
         dispatch({
           type: UNFOLLOW_USER,
-          payload: userId
+          payload: res.data
         });
       })
       .catch(err => console.log(err.response.data));

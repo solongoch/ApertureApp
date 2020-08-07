@@ -10,14 +10,14 @@ class Follow extends Component {
       textBtn: false
     };
     
-    this.onClick = this.onClick.bind(this);
+    this.onClickToFollow = this.onClickToFollow.bind(this);
   }
 
   componentDidMount() {
     this.props.getFollowings(this.props.auth.user.username);
   }
 
-  onClick(e) {
+  onClickToFollow(e) {
     this.props.followUser(this.props.userId);
   }
 
@@ -34,7 +34,7 @@ class Follow extends Component {
       (auth.isAuthenticated) 
       ?
         <Fragment>
-          <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClick}>
+          <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClickToFollow}>
             {profileBtnName}
           </button>
         </Fragment> 

@@ -24,17 +24,18 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
         }
         user.followers.unshift({ user: req.user.id });//adding in follower[]
         user.save()
-          .then(result => {
+          .then(() => {
             User.findOne({ email: req.user.email }) 
-              .then(user => {
-                if (user.following.some(following => following.user.toString() === userId)) {
+              .then(myUser => {
+                if (myUser.following.some(following => following.user.toString() === userId)) {
                   return res.status(400).json({ alreadyfollow: "You already following the user" })
                 }
-                user.following.unshift({ user: userId });
-                user.save().then(user => { 
+                myUser.following.unshift({ user: userId });
+                myUser.save().then(() => { 
                   return res.json({
                     success: true,
-                    message: `Followed ${userId}`
+                    message: `Followed ${userId}`,
+                    user: user
                 })});
               });
           })
@@ -81,7 +82,8 @@ router.put('/:userId/unfollow', passport.authenticate('jwt', { session: false })
                     doc.save();
                     return res.json({
                       success: true,
-                      message: "Unfollowed"
+                      message: `Unfollowed ${userId}`,
+                      user: user
                     });
                   } else {
                     return res.status(400).json({ message: "You are not the following the user" });

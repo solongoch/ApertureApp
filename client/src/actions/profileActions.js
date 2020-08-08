@@ -181,7 +181,6 @@ export const followUser = userId => dispatch => {
 
 // Unfollow user
 export const unfollowUser = userId => dispatch => {
-  if (window.confirm("Are you sure you want to unfollow?", userId)) {
     axios
       .put(`/api/${userId}/unfollow`)
       .then(res => {
@@ -192,7 +191,6 @@ export const unfollowUser = userId => dispatch => {
         });
       })
       .catch(err => console.log(err.response.data));
-  }
 };
 
 // Clear current profile

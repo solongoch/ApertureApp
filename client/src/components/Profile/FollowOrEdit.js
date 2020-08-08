@@ -12,6 +12,13 @@ class FollowOrEdit extends Component {
     const authUsername = this.props.auth.username;
     let profileBtn;
 
+    //otherUserProfile{} is the I/P props to Follow component
+    var otherUserProfile = {
+      _id: profile.id,
+      username: profile.username,
+      avatar: profile.avatar
+    };
+
     if (profile.username === authUsername) {
       return profileBtn =
         (
@@ -28,11 +35,11 @@ class FollowOrEdit extends Component {
 
     // Follow OR Following button
     profileBtn = (
-    <Fragment>
-      <Follow 
-        userId={this.props.searchedProfile.id} 
-      />
-    </Fragment>)
+      <Fragment>
+        <Follow
+          user={otherUserProfile}
+        />
+      </Fragment>)
 
     return (
       <Fragment>

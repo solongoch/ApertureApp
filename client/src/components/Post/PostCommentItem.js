@@ -35,7 +35,7 @@ class PostCommentItem extends Component {
                 ? (<button
                   onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                   type="button"
-                  className="btn btn-danger btn-delete-comment fas fa-times" 
+                  className="btn btn-danger btn-delete-comment fas fa-times shadow-none" 
                   style={{padding : '3px 6px' , fontSize: '14px' }}
                 />)
                 : null}

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 // import Component
 import Follow from '../Follow/Follow';
 
@@ -40,6 +41,10 @@ class FollowOrEdit extends Component {
     )
   }
 }
+
+FollowOrEdit.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => ({
   auth: state.auth.user,

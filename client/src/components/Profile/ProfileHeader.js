@@ -10,6 +10,8 @@ import Followers from '../Follow/Followers';
 import Followings from '../Follow/Followings';
 // import CSS
 import './profile.css';
+import PropTypes from 'prop-types';
+
 // import Action
 
 toast.configure();
@@ -116,5 +118,13 @@ class ProfileHeader extends Component {
     )
   }
 }
+
+
+ProfileHeader.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
+};
+
+
 
 export default ProfileHeader;

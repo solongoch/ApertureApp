@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import uploadImage from '../utils';
 import { connect } from 'react-redux';
 import { uploadAvatar } from './../../actions/profileActions';
+import PropTypes from "prop-types";
 // 
 
 class Uploadavatar extends Component {
@@ -82,6 +83,13 @@ class Uploadavatar extends Component {
     )
   }
 }
+
+Uploadavatar.propTypes = {
+  uploadAvatar: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
 
 const mapStateToProps = state => ({
   auth: state.auth,

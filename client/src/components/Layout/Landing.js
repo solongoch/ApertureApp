@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './landing.css'
 import Logo from '../../image/aperturelogo.png';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 class Landing extends Component {
   render() {
@@ -24,6 +25,10 @@ class Landing extends Component {
     )
   }
 }
+
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

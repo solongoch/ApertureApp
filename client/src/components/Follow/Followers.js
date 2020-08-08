@@ -3,10 +3,11 @@ import "./follow.css";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import isEmpty from '../../validation/is-empty';
+import PropTypes from "prop-types";
 // import Actions
 import { getFollowers } from './../../actions/profileActions';
 // import Component
-import Follow from './Follow'
+import Follow from './Follow';
 
 class Followers extends Component {
   componentDidMount() {
@@ -89,6 +90,12 @@ class Followers extends Component {
     );
   }
 }
+
+Followers.propTypes = {
+  getFollowers: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
 
 const mapStateToProps = state => ({
   auth: state.auth.user,

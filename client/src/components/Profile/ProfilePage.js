@@ -8,6 +8,8 @@ import { getProfileByUsername } from "../../actions/profileActions";
 import ProfileHeader from "./ProfileHeader";
 import ProfilePosts from "./ProfilePosts";
 // import CSS
+import './profile.css';
+import PropTypes from 'prop-types';
 import "./profile.css";
 
 class ProfilePage extends Component {
@@ -102,7 +104,15 @@ class ProfilePage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+
+ProfilePage.propTypes = {
+  getProfileByUsername: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profileState: PropTypes.object.isRequired
+};
+
+
+const mapStateToProps = (state) => ({
   profileState: state.profile,
   auth: state.auth
 });

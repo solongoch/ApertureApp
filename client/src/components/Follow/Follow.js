@@ -33,6 +33,7 @@ class Follow extends Component {
       <button className="btn ml-3 btn-sm btn-follow" onClick={this.onClickToFollow}>Follow</button>);
     // Following Button
     let followingBtn = (
+      
       <button className="btn btn-sm btn-primary-outline" onClick={this.onClickToUnFollow}>Following</button>);
 
     let followButton = null;

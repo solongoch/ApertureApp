@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './unfollow.css';
+import PropTypes from "prop-types";
 
 class Unfollow extends Component {
   render() {
@@ -39,6 +40,9 @@ class Unfollow extends Component {
   }
 }
 
+Unfollow.propTypes = {
+  _unfollowUser: PropTypes.object.isRequired
+};
 
 
 export default Unfollow;

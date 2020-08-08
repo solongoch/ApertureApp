@@ -7,6 +7,7 @@ import GoogleBadge from '../../../image/googleplay.png';
 import './signup.css';
 import SignupInputField from './SignupInputField';
 import SignupPasswordField from './SignupPasswordField';
+import PropTypes from "prop-types";
 
 //import connect used to talk to the redux store 
 import { connect } from 'react-redux';
@@ -187,6 +188,11 @@ class Signup extends Component {
     );
   }
 }
+
+Signup.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+};
 
 //state:redux state (Assign redux state.errors to this.props.errors)
 const mapStateToProps = (state) => ({

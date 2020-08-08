@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./single-post.css";
+import "../Post/single-post.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addComment } from "../../actions/postActions";
+import { addCommentHome } from "../../actions/homeActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 
-class PostComment extends Component {
+class PostCommentHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ class PostComment extends Component {
       avatar: user.avatar
     };
 
-  this.props.addComment(postId, newComment, this.props.history);
+  this.props.addCommentHome(postId, newComment, this.props.history);
   this.setState({ commentBody: ''});
 
   }
@@ -60,7 +60,7 @@ class PostComment extends Component {
             info=""
           />
           <button className="btn btn-primary col-12" type="submit">
-            Post Comment
+            Add comment...
           </button>
         </form>
       </div>
@@ -68,9 +68,9 @@ class PostComment extends Component {
   }
 }
 
-PostComment.propTypes = {
+PostCommentHome.propTypes = {
 
-  addComment: PropTypes.func.isRequired,
+  addCommentHome: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired
@@ -82,4 +82,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { addComment })((PostComment));
+export default connect(mapStateToProps, { addCommentHome })((PostCommentHome));

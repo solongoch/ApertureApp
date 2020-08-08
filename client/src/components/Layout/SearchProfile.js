@@ -6,6 +6,7 @@ import isEmpty from '../../validation/is-empty';
 import { getProfileByUsername } from '../../actions/profileActions';
 // import CSS
 import './navbar.css';
+import PropTypes from "prop-types";
 
 class searchProfile extends Component {
   constructor() {
@@ -53,6 +54,12 @@ class searchProfile extends Component {
     )
   }
 }
+
+
+searchProfile.propTypes = {
+  getProfileByUsername: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

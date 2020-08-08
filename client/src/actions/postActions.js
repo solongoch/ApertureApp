@@ -91,15 +91,10 @@ export const getAllPosts = () => dispatch => {
 }
 
 // Post Comment
-export const addComment = (postId, commentData) => dispatch => {
+export const addComment = (postId, commentData, history) => dispatch => {
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
-    .then(res => {
-      dispatch({
-        type: GET_SINGLE_POST,
-        payload: res.data.post
-      });
-    })
+    .then(res => dispatch(getSinglePost(postId, history)))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

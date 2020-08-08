@@ -91,21 +91,17 @@ export class CreatePost extends Component {
   render() {
     const { user } = this.props.auth
     const { avatar } = this.props.profile;
-    let userAvatar = null;
-    let previewImage = null;
     let { imagePreview, errors, submitDisabled, loading } = this.state;
-    if (imagePreview) {
-      previewImage = (<img src={imagePreview} className="image-fluid" alt="UserImage" style={{ width: '100%' }} />);
-    } else {
-      previewImage = (<div className="previewText">Please select an Image for Preview</div>);
-    }
+    //For preview image 
+    let previewImage = (imagePreview)
+      ? (<img src={imagePreview} className="image-fluid" alt="UserImage" style={{ width: '100%' }} />)
+      : (<div className="previewText">Please select an Image for Preview</div>);
 
-    if (avatar) {//Navbar avatar will change if user uploads the new avatar
-      userAvatar = (<img src={avatar} alt={user.username} className='userpost-avatar ' />);
-    } else {
-      userAvatar = (
-        <img src={user.avatar} alt={user.username} className='userpost-avatar ' />);
-    }
+    //If avatar is updated in EditProfile  then fetch it from profile else from auth.user.avatar
+    let userAvatar = (avatar)
+      ? (<img src={avatar} alt={user.username} className='userpost-avatar ' />)
+      : (<img src={user.avatar} alt={user.username} className='userpost-avatar ' />);
+
     return (
       <div className="card create-postcard shadow-lg col-11 col-sm-9 col-md-10 col-lg-10">
         <div className="card-header newpost-header">

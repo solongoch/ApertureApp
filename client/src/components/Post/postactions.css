@@ -1,8 +1,8 @@
-.fa-heart {
+.like-heart.fa-heart {
     padding: 5px;
     margin-right: 5px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
-    border-radius: 50px;
+    /* box-shadow: 0 2px 8px rgba(0,0,0,.1); */
+    border-radius:25px;
     background-color: #fafafa;
 }
 
@@ -10,7 +10,7 @@
     transition: .4s;
 }
 
-.fa-heart:hover {
+.like-heart.fa-heart:hover {
     color: #f50057;
 }
 
@@ -20,4 +20,9 @@
 
 .text-info {
     color: #f50057;
+}
+.thrash-icon.fa.fa-trash{
+    font-size: 22px;
+    float: right;
+    vertical-align: middle;
 }

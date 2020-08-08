@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import Moment from "react-moment";
 // import CSS
 import "./single-post.css";
+import './postactions.css';
 // import Component
 import PostComment from "./PostComment";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import classnames from 'classnames';
-import {addLike, deletePostById} from '../../actions/postActions';
-import './postactions.css';
 import { withRouter } from 'react-router-dom';
+//import actions
+import { addLike, deletePostById } from '../../actions/postActions';
 
 class PostActions extends Component {
 
@@ -42,29 +43,29 @@ class PostActions extends Component {
       postedById = post.postedBy._id;
       postId = post._id
     }
-   const showThrashIcon = (<i className="fa fa-trash fa-2x action" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
+    const showThrashIcon = (<i className="fa fa-trash thrash-icon mt-2" onClick={this.handleDeletePost.bind(this, postId)}  ></i>);
 
     return (
       <div>
         <div className="actions">
-          
-          <button 
+
+          <button
             onClick={this.onLikeClick.bind(this, postId)}
             type="button"
             className="btn"
           >
             <i
-              className={classnames('far fa-heart fa-2x', {
+              className={classnames('far fa-heart fa-2x like-heart', {
                 'fas fa-heart fa-2x unlike': this.findUserLike(post.likes)
               })}
-              />
+            />
           </button>
-        
+
           {/* <i className="far fa-comment fa-2x action"></i>
           <i className="far fa-paper-plane fa-2x action"></i>
           <i className="far fa-bookmark fa-2x action"></i> */}
           {/* Loggedin user only can delete the post(Show thrash icon) */}
-          {postedById === auth.user.id ?  showThrashIcon : null}
+          {postedById === auth.user.id ? showThrashIcon : null}
         </div>
         <div className="likes">
           {/* <img src={post} className="round-image image-22" /> */}
@@ -102,4 +103,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps,{addLike, deletePostById})(withRouter(PostActions));
+export default connect(mapStateToProps, { addLike, deletePostById })(withRouter(PostActions));

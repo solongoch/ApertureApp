@@ -1,4 +1,4 @@
-import React, { Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 // import Actions
 import { followUser, unfollowUser, getAuthUserFollowings } from '../../actions/profileActions';
@@ -6,10 +6,8 @@ import { followUser, unfollowUser, getAuthUserFollowings } from '../../actions/p
 class Follow extends Component {
   constructor() {
     super();
-    this.state = {
-      textBtn: false
-    };
-    
+    this.state = {};
+
     this.onClickToFollow = this.onClickToFollow.bind(this);
     this.onClickToUnFollow = this.onClickToUnFollow.bind(this);
   }
@@ -32,30 +30,27 @@ class Follow extends Component {
     console.log('UserId: ', userId)
     //  Follow Button
     let followBtn = (
-      <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClickToFollow}>Follow</button>);
+      <button className="btn ml-3 btn-sm btn-follow" onClick={this.onClickToFollow}>Follow</button>);
     // Following Button
     let followingBtn = (
-      <button className="log-in-button blue-bg button font-weight-bold follow" onClick={this.onClickToUnFollow}>Following</button>);
+      <button className="btn btn-sm btn-primary-outline" onClick={this.onClickToUnFollow}>Following</button>);
 
-    const followButton = ((myFollowingList && myFollowingList.length !== 0)
-      ? (myFollowingList.some(following => following.user._id === userId)
-        ? followingBtn
-        : followBtn)
-      : followBtn);
-
-    // const profileBtnName = ((followingList.length !== 0)
-    //   ? (followingList.some(following => following.user._id === userId) 
-    //     ? 'Following' 
-    //     : 'Follow')
-    //   : 'Follow');
+    let followButton = null;
+    //If followers follows the authuser then display null
+    if (userId === auth.user.id) {
+      followButton = (<Fragment></Fragment>)
+    } else {
+      followButton = ((myFollowingList && myFollowingList.length !== 0)
+        ? (myFollowingList.some(following => following.user._id === userId)
+          ? followingBtn
+          : followBtn)
+        : followBtn);
+    }
 
     return (
-      (auth.isAuthenticated) 
-      ?
-        <Fragment>
-          {followButton}
-        </Fragment> 
-      : null
+      (auth.isAuthenticated)
+        ? <Fragment>{followButton}</Fragment>
+        : null
     )
   }
 }

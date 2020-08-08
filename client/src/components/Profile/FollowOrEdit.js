@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 // import Component
 import Follow from '../Follow/Follow';
 
 class FollowOrEdit extends Component {
+
   render() {
     const { profile } = this.props;
     const authUsername = this.props.auth.username;
@@ -26,16 +27,16 @@ class FollowOrEdit extends Component {
 
     // Follow OR Following button
     profileBtn = (
-    <div>
+    <Fragment>
       <Follow 
         userId={this.props.searchedProfile.id} 
       />
-    </div>)
+    </Fragment>)
 
     return (
-      <div>
+      <Fragment>
         {profileBtn}
-      </div>
+      </Fragment>
     )
   }
 }

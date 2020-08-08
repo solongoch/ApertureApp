@@ -59,6 +59,7 @@ export default function (state = initialState, action) {
       };
     case FOLLOW_USER:
       {
+        console.log(action.payload);
         return {
           ...state,
           followingLists: [action.payload, ...state.followingLists]

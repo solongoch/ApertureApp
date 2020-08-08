@@ -2,19 +2,23 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import PostCommentItem from './PostCommentItem';
 
-class PostCommentSectionTest extends Component {
+class PostCommentSection extends Component {
   render() {
-    const { comments, postId } = this.props;
+    const { comments, postId, postedBy } = this.props;
 
     return comments.map(comment => (
-      <PostCommentItem key={comment._id} comment={comment} postId={postId} />
+      <PostCommentItem key={comment._id}
+        comment={comment}
+        postId={postId}
+        postedBy={postedBy}
+      />
     ));
   }
 }
 
-PostCommentSectionTest.propTypes = {
+PostCommentSection.propTypes = {
   comments: PropTypes.array.isRequired,
   postId: PropTypes.string.isRequired
 };
 
-export default PostCommentSectionTest;
+export default PostCommentSection;

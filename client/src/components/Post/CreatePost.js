@@ -20,17 +20,19 @@ export class CreatePost extends Component {
       imagePreview: '',
       errors: {},
       submitDisabled: true,
-      loading: false
+      loading: false,
+      toastopts : {
+        position: "bottom-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: 1
+      }
+
     };
-    this.toastopts = {
-      position: "bottom-center",
-      autoClose: false,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: true,
-      progress: 1
-    }
+    
     this.handleSubmitPost = this.handleSubmitPost.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleCaption = this.handleCaption.bind(this);
@@ -60,7 +62,7 @@ export class CreatePost extends Component {
 
   handleSubmitPost(e) {
     e.preventDefault();
-    const { file, loading } = this.state;
+    const { file } = this.state;
     this.setState({ loading: true }) //for refresh button inside button during uploading
     uploadImage(file)
       .then((res) => {

@@ -11,7 +11,7 @@ class PostCommentItem extends Component {
   }
 
   render() {
-    const { comment, postId, auth } = this.props;
+    const { comment, postId, auth , postedBy } = this.props;
 
     return (
       <div className="comment-div">
@@ -31,7 +31,7 @@ class PostCommentItem extends Component {
             </Link>
             <div className="comment-text">
               {comment.commentBody}
-              {comment.user === auth.user.id
+              {(comment.user === auth.user.id || postedBy === auth.user.id)
                 ? (<button
                   onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                   type="button"

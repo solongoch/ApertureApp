@@ -8,6 +8,7 @@ import DeleteProfile from './DeleteProfile';
 import { getCurrentProfile, editProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/is-empty';
 import TextFieldGroup from '../common/TextFieldGroup';
+import PropTypes from "prop-types";
 
 class EditProfile extends Component {
   constructor() {
@@ -269,6 +270,14 @@ class EditProfile extends Component {
     );
   }
 }
+
+EditProfile.propTypes = {
+  editProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

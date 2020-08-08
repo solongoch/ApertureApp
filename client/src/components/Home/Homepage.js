@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import Moment from 'react-moment';
 import Spinner from '../common/Spinner';
 // import Action
 import { getHomepagePosts } from "../../actions/homeActions";
 import {getSinglePost} from "../../actions/postActions";
 // import Component
-import PostComment from '../Post/PostComment';
 import HomeSuggestion from "./HomeSuggestion";
 // import CSS
 import "./homepage.css";
-import PostActions from "../Post/PostActions";
+import PostActionsHome from "./PostActionsHome";
+import PropTypes from "prop-types";
+import PostCommentSectionHome from "./PostCommentSectionHome";
 
 class Homepage extends Component {
   componentDidMount() {
@@ -57,8 +57,7 @@ class Homepage extends Component {
         </div>
         {/* POST FOOTER - Actions, Caption, Likes, Comments and Add comment form */}
         <div className="post-footer">
-          {/* ACTIONS */}
-          <PostActions post={post}/>
+          
           {/* POST CAPTION */}
           {(post.caption) ?
             <div className="line">
@@ -70,28 +69,8 @@ class Homepage extends Component {
             : null
           }
           {/* COMMENTS */}
-          {(post.comments.length !== 0) ?
-            // (<div className="line">
-            //   <Link to="/" className="make-gray">
-            //     View all {post.comments.length} comments
-            //   </Link>
-            // </div>)
-            (post.comments.map(comment => {
-              return (
-              <div className="line" key={Math.random()}>
-                <Link to={`/profile/${comment.username}`} className="font-weight-bold right-5">
-                  {comment.username}
-                </Link>
-                {comment.commentBody}
-              </div> )}
-              ))
-            : null
-          }
-          <div className="post-time line">
-            <Moment fromNow>{post.timePosted}</Moment>
-          </div>
-          {/* ADD COMMENT */}
-          
+          <PostCommentSectionHome postId={post._id} comments={post.comments} />
+          <PostActionsHome post ={post}/>  
         </div>
       </div>
     ));
@@ -125,6 +104,12 @@ class Homepage extends Component {
   }
 }
 
+Homepage.propTypes = {
+  getHomepagePosts: PropTypes.func.isRequired,
+  getSinglePost: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  posts: PropTypes.object.isRequired
+};
 
 
 const mapStateToProps = state => ({

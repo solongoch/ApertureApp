@@ -8,6 +8,7 @@ import './single-post.css';
 // import Components
 import PostSidebar from './PostSidebar';
 import PostHeader from './PostHeader';
+import PropTypes from 'prop-types';
 
 class SinglePost extends Component {
   componentDidMount() {
@@ -34,6 +35,10 @@ class SinglePost extends Component {
     )
   }
 }
+
+SinglePost.propTypes = {
+  getSinglePost: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => ({
   post: state.post.post

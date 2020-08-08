@@ -36,11 +36,11 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
                   user= user.toObject();
                   delete user.password                    
                   delete user.__v;
-                 
+                  
                   return res.json({
                     _id: '',
                     user: {
-                      _id: user.id,
+                      _id: user._id,
                       name: user.name,
                       username: user.username,
                       avatar: user.avatar

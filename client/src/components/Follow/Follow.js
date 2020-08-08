@@ -17,11 +17,11 @@ class Follow extends Component {
   }
 
   onClickToFollow(e) {
-    this.props.followUser(this.props.userId);
+    this.props.followUser(this.props.userId, this.props.myUser);
   }
 
   onClickToUnFollow(e) {
-    this.props.unfollowUser(this.props.userId);
+    this.props.unfollowUser(this.props.userId, this.props.auth.user.id);
   }
 
   render() {
@@ -58,7 +58,16 @@ class Follow extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
-  myFollowingList: state.profile.myFollowingList
+  myFollowingList: state.profile.myFollowingList,
+  myUser: {
+    _id: '',
+    user: {
+      _id: state.auth.user.id,
+      name: state.auth.user.name,
+      username: state.auth.user.username,
+      avatar: state.auth.user.avatar
+    }
+  }
 })
 
 export default connect(mapStateToProps, {getAuthUserFollowings, followUser, unfollowUser})(Follow);

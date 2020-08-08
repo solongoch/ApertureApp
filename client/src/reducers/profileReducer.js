@@ -67,7 +67,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         myFollowingList: [action.payload, ...state.myFollowingList],
-        followingLists: [action.payload, ...state.followingLists]
+        followersLists: [action.myUser, ...state.followersLists]
       };
     }
     case UNFOLLOW_USER: {
@@ -76,8 +76,8 @@ export default function(state = initialState, action) {
         myFollowingList: state.myFollowingList.filter(
           user => user.user._id !== action.payload.user._id
         ),
-        followingLists: state.followingLists.filter(
-          user => user.user._id !== action.payload.user._id
+        followersLists: state.followersLists.filter(
+          user => user.user._id !== action.payload.myId
         ),
       };
     }

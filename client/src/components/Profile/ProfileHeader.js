@@ -70,11 +70,6 @@ class ProfileHeader extends Component {
     this.setState({ _showFollowers: false })
   }
 
-  componentDidMount() {
-    this.props.getFollowings(this.props.profile.username);
-    this.props.getFollowers(this.props.profile.username);
-  }
-
   render() {
     const { profile, followingList, followersList } = this.props;
 

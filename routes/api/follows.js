@@ -32,16 +32,14 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
                 myUser.following.unshift({ user: userId });
                 myUser.save().then(() => {
 
-                  //removed password from return response
-                  user= user.toObject();
-                  delete user.password                    
-                  delete user.__v;
-                 
-                  return res.json({
-                    success: true,
-                    message: `Followed ${userId}`,
-                    user: user
-                })});
+                 //removed password from return response
+                 user = {
+                  _id: user._id,
+                  name: user.name,
+                  username: user.username,
+                  avatar:user.avatar
+                }                 
+                return res.json({user})});
               });
           })
           .catch(err => res.status(500).json({ message: err.msg }));

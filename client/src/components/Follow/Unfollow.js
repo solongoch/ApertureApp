@@ -8,7 +8,7 @@ class Unfollow extends Component {
       return null;
     }
     const { _unfollowUser } = this.props;
-    let user = _unfollowUser;
+    let user = _unfollowUser.user;
     return (
       <div className="mainWrapunfollow-div">
         <div className='subwrapperunfollow-div'>

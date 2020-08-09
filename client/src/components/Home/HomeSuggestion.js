@@ -37,9 +37,8 @@ class HomeSuggestion extends Component {
                 <div className="make-gray left-15">Followed by {suggestion.followers.length} people</div>
               </div>
             </div>
-            {/* Follow component takes suggestion object as props */}
             <Follow
-              user={suggestion}
+              userId={suggestion._id}
             />
           </div>)
         )}

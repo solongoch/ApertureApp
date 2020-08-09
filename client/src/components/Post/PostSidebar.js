@@ -32,7 +32,7 @@ class PostSidebar extends Component {
     return (  
         <div className="post-details">
           {_caption}  
-          <PostCommentSection postId={post._id} comments={post.comments} />
+          <PostCommentSection postId={post._id} comments={post.comments} postedBy={post.postedBy._id} />
           <PostActions post ={post} />
         </div>      
     )

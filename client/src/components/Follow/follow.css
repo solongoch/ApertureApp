@@ -16,7 +16,6 @@ div.row {
 
 .mainwrapper-div {
   position: fixed;
-
   height: 100%;
   margin: 0;
   top: 0;
@@ -151,9 +150,6 @@ button:focus {
   outline: 0;
 }
 
-.link-unfollow {
-  color: #262626;
-}
 
 @media (min-width:375px) and (max-width: 576px) {
   .col-sm-2, .col-sm-6, .col-sm-3 {

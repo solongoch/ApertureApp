@@ -10,9 +10,9 @@
     transition: .4s;
 }
 
-.like-heart.fa-heart:hover {
+/* .like-heart.fa-heart:hover {
     color: #f50057;
-}
+} */
 
 .unlike {
     color: #f50057;

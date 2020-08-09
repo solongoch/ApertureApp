@@ -164,7 +164,7 @@ router.delete(
           }
 
           // delete ':id' post
-          post.remove().then(() => res.json({ success: true , message: "Post deleted" }));
+          post.remove().then((post) => res.json({ success: true , message: "Post deleted", post}));
         })
         .catch(err => res.status(500).json({success: false, error: err.message}));
     });
@@ -190,19 +190,24 @@ router.post(
       Post.findById(req.params.id)
         .then((post) => {
           if(post) {
-            const newComment = {
-              commentBody: req.body.commentBody,
-              username: req.body.username,
-              avatar: req.body.avatar,
-              user: req.user.id,
-            };
+            User.findById( req.user.id)
+            .then(profile => {
+              const newComment = {
+                commentBody: req.body.commentBody,
+                username: profile.username,
+                avatar: profile.avatar,
+                user: profile.id,
+              };
+  
+              // Add to comments array
+              post.comments.unshift(newComment);
+              post.save().then((post) => res.json(post)); //Save
 
-            // Add to comments array
-            post.comments.unshift(newComment);
-            post.save().then((post) => res.json(post)); //Save
-          } else {
+            })
+          }  else {
             return res.status(404).json({ success: false, postnotfound: "No post found"});
           }
+        
         })
             
         .catch((err) => res.status(500).json({ success:false, error: err.message }));
@@ -217,6 +222,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Post.findById(req.params.id)
+    .populate("postedBy", ["_id", "avatar", "username"])
       .then((post) => {
         // Check to see if comment exists
         if (

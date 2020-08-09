@@ -4,10 +4,14 @@ import PostCommentItem from './PostCommentItem';
 
 class PostCommentSection extends Component {
   render() {
-    const { comments, postId } = this.props;
+    const { comments, postId, postedBy } = this.props;
 
     return comments.map(comment => (
-      <PostCommentItem key={comment._id} comment={comment} postId={postId} />
+      <PostCommentItem key={comment._id}
+        comment={comment}
+        postId={postId}
+        postedBy={postedBy}
+      />
     ));
   }
 }

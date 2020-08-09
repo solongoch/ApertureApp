@@ -31,15 +31,17 @@ render() {
             </Link>
             <div className="comment-text">
                 {comment.commentBody}
-                {comment.user === auth.user.id ? (
+                {comment.user === auth.user.id
+                 ? (
                     <button
-                    onClick={this.onDeleteClick.bind(this, postId, comment._id)}
-                    type="button"
-                    className="btn btn-danger btn-delete-comment"
-                    >
-                     <i className="fas fa-times fa-xs" />   
-                    </button>
-                ) : null}
+                      onClick={this.onDeleteClick.bind(this, postId, comment._id)}
+                      type="button"
+                      className="btn btn-danger btn-delete-comment fas fa-times shadow-none" 
+                      style={{padding : '3px 6px' , fontSize: '14px' }} 
+                    />
+                  )
+                 : null
+                }
                 </div>
           </div>
         </div>

@@ -72,8 +72,8 @@ var checkUserFollowingLists =
                           <span className="name"> {user.user.name}  </span>
                         </div>
                         <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                           {/* Follow component takes user.user object as props */}
-                          <Follow user={user.user}/>
+                           {/* Follow component takes user.id as props */}
+                           <Follow userId={user.user._id}/>
                         </div>
                       </div>
                     )

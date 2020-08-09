@@ -63,7 +63,7 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
               } else {//private user
                 if (req.isAuthenticated()) {
                   // check logged in user(req.user) is following the user OR
-                  if ((user.followers.some(follower => follower.user._id == req.user.id)) ||
+                  if (user.followers.some(follower => follower.user._id == req.user.id) ||
                     // req.user can see his own post (user's own post)
                     (user._id == req.user.id)) {
                     data.posts = posts;

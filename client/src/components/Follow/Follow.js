@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-// import Action
-import { followUser, unfollowUser, getFollowings } from '../../actions/profileActions';
+// import Actions
+import { followUser, unfollowUser, getAuthUserFollowings } from '../../actions/profileActions';
 
 class Follow extends Component {
   constructor() {
@@ -13,47 +13,43 @@ class Follow extends Component {
   }
 
   componentDidMount() {
-    this.props.getFollowings(this.props.auth.user.username);
+    this.props.getAuthUserFollowings(this.props.auth.user.username);
   }
 
   onClickToFollow(e) {
-    this.props.followUser(this.props.userId);
+    this.props.followUser(this.props.userId, this.props.myUser);
   }
 
   onClickToUnFollow(e) {
-    this.props.unfollowUser(this.props.userId);
+    this.props.unfollowUser(this.props.userId, this.props.myUser);
   }
 
   render() {
-    const { auth, userId } = this.props;
-    const followingList = this.props.followingLists;
+    const { auth, userId, myFollowingList } = this.props;
+    let followButton = null;
+    
     //  Follow Button
     let followBtn = (
       <button className="btn ml-3 btn-sm btn-follow" onClick={this.onClickToFollow}>Follow</button>);
+
     // Following Button
-    let followingBtn = (
-      
+    let followingBtn = (      
       <button className="btn ml-2 btn-sm btn-primary-outline" onClick={this.onClickToUnFollow}>Following</button>);
 
-    let followButton = null;
     //If followers follows the authuser then display null
     if (userId === auth.user.id) {
       followButton = (<Fragment></Fragment>)
     } else {
-      followButton = ((followingList && followingList.length !== 0)
-        ? (followingList.some(following => following.user._id === userId)
+      followButton = ((myFollowingList && myFollowingList.length !== 0)
+        ? (myFollowingList.some(following => following.user._id === userId)
           ? followingBtn
           : followBtn)
         : followBtn);
     }
 
-
     return (
       (auth.isAuthenticated)
-        ?
-        <Fragment>
-          {followButton}
-        </Fragment>
+        ? <Fragment>{followButton}</Fragment>
         : null
     )
   }
@@ -62,7 +58,16 @@ class Follow extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
-  followingLists: state.profile.followingLists
+  myFollowingList: state.profile.myFollowingList,
+  myUser: {
+    _id: '',
+    user: {
+      _id: state.auth.user.id,
+      name: state.auth.user.name,
+      username: state.auth.user.username,
+      avatar: state.auth.user.avatar
+    }
+  }
 })
 
-export default connect(mapStateToProps, { getFollowings, followUser, unfollowUser })(Follow);
+export default connect(mapStateToProps, {getAuthUserFollowings, followUser, unfollowUser})(Follow);

@@ -6,6 +6,7 @@ import {
   PROFILE_LOADING,
   UPLOAD_AVATAR,
   GET_ERRORS,
+  GET_MY_FOLLOWING,
   GET_FOLLOWING,
   GET_FOLLOWERS,
   FOLLOW_USER,
@@ -32,6 +33,8 @@ export const getProfileByUsername = (username, authUsername, history) => dispatc
           payload: res.data
         });
       }
+      dispatch(getFollowers(username));
+      dispatch(getFollowings(username));
       history.push(`/profile/${res.data.username}`);
     })
     .catch(err => {
@@ -136,7 +139,20 @@ export const changePassword = (changePass, history) => dispatch => {
     );
 };
 
-//Get Followings
+// Get logged in User's Followings
+export const getAuthUserFollowings = myUsername => dispatch => {
+  axios
+    .get(`/api/${myUsername}/following`)
+    .then(res => {
+      dispatch({
+        type: GET_MY_FOLLOWING,
+        payload: res.data.Following
+      });
+    })
+    .catch(err => console.log(err));
+};
+
+// Get Followings
 export const getFollowings = username => dispatch => {
   axios
     .get(`/api/${username}/following`)
@@ -149,7 +165,7 @@ export const getFollowings = username => dispatch => {
     .catch(err => console.log(err));
 };
 
-//Get Followings
+// Get Followings
 export const getFollowers = username => dispatch => {
   axios
     .get(`/api/${username}/followers`)
@@ -163,28 +179,29 @@ export const getFollowers = username => dispatch => {
 };
 
 // Follow user
-export const followUser = userId => dispatch => {
+export const followUser = (userId, myUser) => dispatch => {
   axios
     .put(`/api/${userId}/follow`)
     .then(res => {
       dispatch({
         type: FOLLOW_USER,
-        payload: res.data
+        payload: res.data,
+        myUser
       });
     })
     .catch(err => console.log(err.response.data));
 };
 
 // Unfollow user
-export const unfollowUser = userId => dispatch => {
+export const unfollowUser = (userId, myUser) => dispatch => {
   if (window.confirm("Are you sure you want to unfollow?", userId)) {
     axios
       .put(`/api/${userId}/unfollow`)
       .then(res => {
-        console.log(res.data)
         dispatch({
           type: UNFOLLOW_USER,
-          payload: res.data
+          payload: {...res.data},
+          myUser
         });
       })
       .catch(err => console.log(err.response.data));

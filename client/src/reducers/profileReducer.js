@@ -14,11 +14,12 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  profile: "",
   loading: false,
+  myFollowingList: [],
   followingLists: [],
   followersLists: [],
-  searchedProfile: ""
+  profile: {},
+  searchedProfile: {}
 };
 
 export default function(state = initialState, action) {
@@ -102,12 +103,7 @@ export default function(state = initialState, action) {
       };
     }
     case CLEAR_CURRENT_PROFILE:
-      return {
-        profile: "",
-        followingLists: null,
-        searchedUserProfile: null,
-        followersLists: null
-      };
+      return initialState;
     case GET_SUGGESTED_PROFILES:
       return {
         ...state,

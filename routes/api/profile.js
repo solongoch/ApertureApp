@@ -72,9 +72,9 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
                     data.noOfPosts = posts.length;
                     return res.json(data);
                   }
-                }//For Private route ends
+                } // For Private route ends
               }
-              //get the count of posts posted by username 
+              // get the count of posts posted by username 
               data.noOfPosts = posts.length;
               return res.json(data);
             }

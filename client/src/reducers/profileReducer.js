@@ -64,12 +64,6 @@ export default function(state = initialState, action) {
         followersLists: action.payload.Followers || []
       };
     case FOLLOW_USER: {
-      console.log("Reducer action.myUser.user._id: ", action.myUser.user._id)
-      console.log("Reducer state.profile.id: ", state.profile.id)
-      console.log("Reducer action.payload.user._id: ", action.payload.user._id)
-      console.log("Reducer state.searchedProfile.id: ", state.searchedProfile.id)
-      console.log(state.searchedProfile.id === action.payload.user._id)
-      console.log(action.myUser.user._id === state.profile.id)
       return {
         ...state,
         myFollowingList: [action.payload, ...state.myFollowingList],

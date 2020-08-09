@@ -69,7 +69,7 @@ class Homepage extends Component {
             : null
           }
           {/* COMMENTS */}
-          <PostCommentSectionHome postId={post._id} comments={post.comments} />
+          <PostCommentSectionHome postId={post._id} comments={post.comments} postedBy={post.postedBy._id} />
           <PostActionsHome post ={post}/>  
         </div>
       </div>

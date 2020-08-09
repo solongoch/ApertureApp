@@ -42,7 +42,7 @@ class Suggestion extends Component {
                   <div className="make-gray left-15">Followed by {suggestion.followers.length} people</div>
                 </div>
               </div>
-              {/* Follow button */}
+               {/* Follow Button */}
               <Follow 
                 userId={suggestion._id}
               />

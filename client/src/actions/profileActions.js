@@ -112,16 +112,12 @@ export const deleteAccount = history => dispatch => {
       .delete("/api/remove")
       .then(res => {
         history.push("/");
-        dispatch({
-          type: SET_CURRENT_USER,
-          payload: {}
-        });
         dispatch(logoutUser());
       })
       .catch(err => {
         dispatch({
           type: GET_ERRORS,
-          payload: err.response.data
+          payload: {},
         });
       });
   }

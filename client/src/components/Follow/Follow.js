@@ -21,22 +21,21 @@ class Follow extends Component {
   }
 
   onClickToUnFollow(e) {
-    this.props.unfollowUser(this.props.userId, this.props.auth.user.id);
+    this.props.unfollowUser(this.props.userId, this.props.myUser);
   }
 
   render() {
     const { auth, userId, myFollowingList } = this.props;
-    console.log('My Following List: ', this.props.myFollowingList)
-    console.log('UserId: ', userId)
+    let followButton = null;
+    
     //  Follow Button
     let followBtn = (
       <button className="btn ml-3 btn-sm btn-follow" onClick={this.onClickToFollow}>Follow</button>);
+
     // Following Button
-    let followingBtn = (
-      
+    let followingBtn = (      
       <button className="btn btn-sm btn-primary-outline" onClick={this.onClickToUnFollow}>Following</button>);
 
-    let followButton = null;
     //If followers follows the authuser then display null
     if (userId === auth.user.id) {
       followButton = (<Fragment></Fragment>)

@@ -64,10 +64,27 @@ export default function(state = initialState, action) {
         followersLists: action.payload.Followers || []
       };
     case FOLLOW_USER: {
+      console.log("Reducer action.myUser.user._id: ", action.myUser.user._id)
+      console.log("Reducer state.profile.id: ", state.profile.id)
+      console.log("Reducer action.payload.user._id: ", action.payload.user._id)
+      console.log("Reducer state.searchedProfile.id: ", state.searchedProfile.id)
+      console.log(state.searchedProfile.id === action.payload.user._id)
+      console.log(action.myUser.user._id === state.profile.id)
       return {
         ...state,
         myFollowingList: [action.payload, ...state.myFollowingList],
-        followersLists: [action.myUser, ...state.followersLists]
+        followersLists: 
+          (state.searchedProfile.id === action.payload.user._id) 
+            ? [action.myUser, ...state.followersLists]
+            : (action.myUser.user._id === state.profile.id)
+              ? state.followersLists
+              : [action.myUser, ...state.followersLists],
+        followingLists:
+          (state.searchedProfile.id === action.payload.user._id) 
+            ? state.followingLists
+            : (action.myUser.user._id === state.profile.id)
+              ? [action.payload, ...state.followingLists]
+              : state.followingLists
       };
     }
     case UNFOLLOW_USER: {
@@ -76,9 +93,18 @@ export default function(state = initialState, action) {
         myFollowingList: state.myFollowingList.filter(
           user => user.user._id !== action.payload.user._id
         ),
-        followersLists: state.followersLists.filter(
-          user => user.user._id !== action.payload.myId
-        ),
+        followersLists:
+          (state.searchedProfile.id === action.payload.user._id) 
+            ? state.followersLists.filter(user => user.user._id !== action.myUser.user._id)
+            : (action.myUser.user._id === state.profile.id)
+              ? state.followersLists
+              : state.followersLists.filter(user => user.user._id !== action.myUser.user._id),
+        followingLists:
+          (state.searchedProfile.id === action.payload.user._id) 
+            ? state.followingLists
+            : (action.myUser.user._id === state.profile.id)
+              ? state.followingLists.filter(user => user.user._id !== action.payload.user._id)
+              : state.followingLists
       };
     }
     case CLEAR_CURRENT_PROFILE:

@@ -148,7 +148,6 @@ export const getAuthUserFollowings = myUsername => dispatch => {
   axios
     .get(`/api/${myUsername}/following`)
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: GET_MY_FOLLOWING,
         payload: res.data.Following
@@ -198,15 +197,15 @@ export const followUser = (userId, myUser) => dispatch => {
 };
 
 // Unfollow user
-export const unfollowUser = (userId, myId) => dispatch => {
+export const unfollowUser = (userId, myUser) => dispatch => {
   if (window.confirm("Are you sure you want to unfollow?", userId)) {
     axios
       .put(`/api/${userId}/unfollow`)
       .then(res => {
-        console.log(res.data)
         dispatch({
           type: UNFOLLOW_USER,
-          payload: {...res.data, myId}
+          payload: {...res.data},
+          myUser
         });
       })
       .catch(err => console.log(err.response.data));

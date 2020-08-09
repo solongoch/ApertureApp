@@ -30,13 +30,7 @@ router.put('/:userId/follow', passport.authenticate('jwt', { session: false }), 
                   return res.status(400).json({ alreadyfollow: "You already following the user" })
                 }
                 myUser.following.unshift({ user: userId });
-                myUser.save().then(() => {
-
-                  //removed password from return response
-                  user= user.toObject();
-                  delete user.password                    
-                  delete user.__v;
-                  
+                myUser.save().then(() => {                  
                   return res.json({
                     _id: '',
                     user: {
@@ -122,7 +116,7 @@ router.get(
   "/:username/followers",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ username: req.params.username }, ["_id", "followers"])
+    User.findOne({ username: req.params.username }, ["_id", "followers", "isPublic"])
       .populate("followers.user", ["username", "name", "avatar"])
       .then(user => {
         if(!user){
@@ -131,17 +125,28 @@ router.get(
         const paramsId = user._id;
         // empty followers array
         if (user.followers.length < 1) { // Note: on instagram "followers" is not clickable
-          return res.status(404).json({ success: false, message: "No Followers" });
+          return res.json({ 
+            'Followers': user.followers,
+            success: false, 
+            message: "No Followers" 
+          });
         } else if (
           // user seeing own followers list OR
           req.params.username === req.user.username ||
+          // if user account isPublic
+          user.isPublic ||
           // user seeing followers of person who following
-          req.user.following.some(obj => obj.user.toString() == paramsId.toString())
+          ((!user.isPublic) && req.user.following.some(obj => obj.user.toString() == paramsId.toString()))
         ) {
-          return res.json({'Followers': user.followers});
+          return res.json({
+            'Followers': user.followers
+          });
         } else {
           // can't see followers list of person who didn't follow
-          return res.json({ msg: "Do you want to follow?" });
+          return res.json({
+            'Followers': user.followers,
+            msg: "Do you want to follow?" 
+          });
         }
       })
       .catch(err => {
@@ -158,7 +163,7 @@ router.get(
   "/:username/following",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ username: req.params.username }, ["_id", "following"])
+    User.findOne({ username: req.params.username }, ["_id", "following", "isPublic"])
       .populate("following.user", ["username", "name", "avatar"])
       .then(user => {
         if(!user){
@@ -167,17 +172,26 @@ router.get(
         const paramsId = user._id;
         // empty following array
         if (user.following.length < 1) { // Note: on instagram "following" is not clickable
-          return res.status(404).json({ success: false, message: "No Following" });
+          return res.json({
+            'Following': user.following,
+            success: false, 
+            message: "No Following"
+          });
         } else if (
           // user seeing own following list OR
           req.params.username === req.user.username ||
+          // if user account isPublic
+          user.isPublic ||
           // user seeing following of person who following
-          req.user.following.some(obj => obj.user.toString() == paramsId.toString())
+          ((!user.isPublic) && req.user.following.some(obj => obj.user.toString() == paramsId.toString()))
         ) {
-          return res.json({'Following': user.following});
+          return res.json({ 'Following': user.following });
         } else {
           // can't see followers list of person who didn't follow
-          return res.json({ msg: "Do you want to follow?" });
+          return res.json({
+            'Following': user.following,
+            msg: "Do you want to follow?" 
+          });
         }
       })
       .catch(err => {

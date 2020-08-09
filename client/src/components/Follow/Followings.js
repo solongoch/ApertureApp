@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-
+import Unfollow from './Unfollow';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 // import Actions
@@ -21,6 +21,24 @@ class Followings extends Component {
 
     }
   }
+  //show unfollow User component on click of following button
+  showUnfollow = (user) => {
+    this.setState({ _showUnfollow: true });
+    this.setState({ _unfollowUser: user });
+
+  }
+
+  //hide unfollow User component on click of unfollow button in unfollow component
+  hideUnfollow = () => {
+    //Calling Unfollowuser action
+    this.props.unfollowUser(this.state._unfollowUser.user._id)
+    this.setState({ _showUnfollow: false });
+  }
+
+  //back to following component on click of cancel btn in unfollow component 
+  cancelUnfollow = () => {
+    this.setState({ _showUnfollow: false });
+  }
 
   componentDidMount() {
     this.props.getFollowings(this.props.username)
@@ -31,6 +49,7 @@ class Followings extends Component {
       return null;
     }
     const { followingLists , searchedFollowingLists } = this.props;
+    const { _unfollowUser } = this.state;
 
     //for other users(searched Term) followerslist
     const searchedFollowingList = (searchedFollowingLists) ? searchedFollowingLists.followings : null;
@@ -72,14 +91,17 @@ var checkUserFollowingLists =
                           <span className="name"> {user.user.name}  </span>
                         </div>
                         <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xxs-3'>
-                           {/* Follow component takes user.id as props */}
-                           <Follow userId={user.user._id}/>
+                          <Follow userId={user.user._id}/>
                         </div>
                       </div>
                     )
                   })
 
                 }
+                <Unfollow _showUnfollow={this.state._showUnfollow}
+                  hideUnfollow={this.hideUnfollow} _unfollowUser={_unfollowUser}
+                  cancelUnfollow={this.cancelUnfollow}
+                />
               </div>
             </div>
           </div>

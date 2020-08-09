@@ -4,8 +4,9 @@
 }
 
 .post-image > img {
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
+  height: 500px;
 }
 
 .sidebar {
@@ -42,7 +43,7 @@
   width: 100%;
 }
 
-.actions, .likes, .posted-date {
+.actions, .likes {
   margin: 5px 15px;
 }
 
@@ -91,6 +92,7 @@ form.add-comment-form, form.add-comment-form .form-control {
     border: 1px solid rgb(239, 239, 239);
     display: flex;
     flex-direction: row;
+    max-height: 500px;
   }
 
   .single-post {

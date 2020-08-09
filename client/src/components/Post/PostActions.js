@@ -82,9 +82,9 @@ class PostActions extends Component {
               }
             })()}
           </span>
-        </div>
-        <div className="posted-date">
+          <p className="posted-date mt-1">
           <Moment format="MMM D YYYY">{post.timePosted}</Moment>
+          </p>
         </div>
         <PostComment postId={post._id}></PostComment>
       </div>

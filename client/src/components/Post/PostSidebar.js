@@ -30,11 +30,13 @@ class PostSidebar extends Component {
         </div>
       </div>) : null
     return (  
+      <>
         <div className="post-details">
           {_caption}  
           <PostCommentSection postId={post._id} comments={post.comments} postedBy={post.postedBy._id} />
+        </div>
           <PostActions post ={post} />
-        </div>      
+     </>
     )
   }
 }

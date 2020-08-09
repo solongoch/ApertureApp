@@ -63,7 +63,7 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
               } else {//private user
                 if (req.isAuthenticated()) {
                   // check logged in user(req.user) is following the user OR
-                  if (user.followers.some(follower => follower.user == req.user.id) ||
+                  if ((user.followers.some(follower => follower.user._id == req.user.id)) ||
                     // req.user can see his own post (user's own post)
                     (user._id == req.user.id)) {
                     data.posts = posts;
@@ -72,9 +72,9 @@ router.get('/:username', accessRouteWithOrWithoutToken, (req, res) => {
                     data.noOfPosts = posts.length;
                     return res.json(data);
                   }
-                }//For Private route ends
+                } // For Private route ends
               }
-              //get the count of posts posted by username 
+              // get the count of posts posted by username 
               data.noOfPosts = posts.length;
               return res.json(data);
             }

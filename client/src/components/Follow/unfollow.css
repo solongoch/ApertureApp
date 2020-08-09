@@ -1,12 +1,14 @@
-.mainWrapunfollow-div{ 
-   height: 100%;
-  position: fixed;
+.mainWrapunfollow-div{  height: 100%;
+  padding-top: 50px;
   margin: 0;
   top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, .5);
-  z-index: 2;
+  position: absolute;
+  background-color: rgba(0,0,0,.5);
+  outline:0;
+  height: 100%;
 }
 .subwrapperunfollow-div {
   display: flex;

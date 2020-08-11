@@ -3,7 +3,7 @@ import './editprofile.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import { getCurrentProfile, deleteAccount, unfollowUser } from '../../actions/profileActions';
 
 class DeleteProfile extends Component {
   componentDidMount() {
@@ -11,6 +11,8 @@ class DeleteProfile extends Component {
   }
 
   onDeleteClick(e) {
+    const { followings } = this.props.profile;
+    followings.map(following => this.props.unfollowUser(following.user, this.props.myUser))
     this.props.deleteAccount(this.props.history);
   }
 
@@ -58,10 +60,16 @@ DeleteProfile.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile,
-  auth: state.auth
+  profile: state.profile.profile,
+  auth: state.auth,
+  myUser: {
+    user: {
+      _id: state.auth.user.id,
+      name: state.auth.user.name,
+      username: state.auth.user.username,
+      avatar: state.auth.user.avatar
+    }
+  }
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(withRouter(DeleteProfile)
-);
-
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, unfollowUser })(withRouter(DeleteProfile));
